@@ -1,0 +1,14 @@
+type Lead @table(name: "leads") {
+  id: UUID! @default(expr: "uuidV4()")
+  sourcePage: String! @col(dataType: "varchar(80)")
+  sourcePath: String @col(dataType: "varchar(160)")
+  formType: String! @col(dataType: "varchar(80)")
+  name: String! @col(dataType: "varchar(160)")
+  contact: String! @col(dataType: "varchar(220)")
+  company: String @col(dataType: "varchar(220)")
+  message: String
+  interestedService: String @col(dataType: "varchar(140)")
+  status: String! @default(value: "new") @col(dataType: "varchar(40)")
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp
+}

@@ -2496,3 +2496,29 @@ textarea {
 .social-page .featured-plan-button:hover {
   color: #1e40af !important;
 }
+
+.admin-page h1,
+.admin-page h2,
+.admin-page h3 {
+  max-width: none;
+  color: #ffffff !important;
+  letter-spacing: 0;
+}
+
+.admin-page h1 {
+  margin-bottom: 0;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.admin-page h2 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.admin-page h3 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}

@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { FormEvent, useState } from "react";
+import { submitLead } from "./submitLead";
 
 type FormState = {
   name: string;
@@ -39,17 +40,13 @@ function validate(values: FormState) {
     errors.budget = "Selecciona un rango para proponerte un plan realista.";
   }
 
-  if (values.challenge.trim().length < 20) {
-    errors.challenge = "Danos un poco mas de contexto: objetivo, bloqueo o canal prioritario.";
-  }
-
   return errors;
 }
 
 export function LeadForm() {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
 
   function updateField(field: keyof FormState, value: string) {
     const next = { ...values, [field]: value };
@@ -59,7 +56,7 @@ export function LeadForm() {
     }
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -70,11 +67,23 @@ export function LeadForm() {
     }
 
     setStatus("sending");
-    window.setTimeout(() => {
+    try {
+      await submitLead({
+        sourcePage: "Home",
+        sourcePath: window.location.pathname,
+        formType: "Auditoria gratuita",
+        name: values.name,
+        contact: values.email,
+        company: values.company,
+        interestedService: "Auditoria inicial",
+        message: `Inversion mensual estimada: ${values.budget}\n\nQue quiere mejorar:\n${values.challenge}`,
+      });
       setStatus("sent");
       setValues(initialState);
       setErrors({});
-    }, 800);
+    } catch {
+      setStatus("failed");
+    }
   }
 
   return (
@@ -173,6 +182,7 @@ export function LeadForm() {
         </button>
         <p className="form-status" role="status" aria-live="polite">
           {status === "sent" ? "Enviado con exito. Te responderemos con los siguientes pasos." : ""}
+          {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
         </p>
       </form>
     </section>

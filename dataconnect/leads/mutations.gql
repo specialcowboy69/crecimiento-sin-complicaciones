@@ -1,0 +1,31 @@
+mutation CreateLead(
+  $sourcePage: String!
+  $sourcePath: String
+  $formType: String!
+  $name: String!
+  $contact: String!
+  $company: String
+  $message: String
+  $interestedService: String
+) @auth(level: PUBLIC, insecureReason: "Anyone can submit a contact form lead from the public website.") {
+  lead_insert(
+    data: {
+      sourcePage: $sourcePage
+      sourcePath: $sourcePath
+      formType: $formType
+      name: $name
+      contact: $contact
+      company: $company
+      message: $message
+      interestedService: $interestedService
+    }
+  )
+}
+
+mutation UpdateLeadStatus($id: UUID!, $status: String!) @auth(level: NO_ACCESS) {
+  lead_update(key: { id: $id }, data: { status: $status, updatedAt_expr: "request.time" })
+}
+
+mutation DeleteLead($id: UUID!) @auth(level: NO_ACCESS) {
+  lead_delete(key: { id: $id })
+}

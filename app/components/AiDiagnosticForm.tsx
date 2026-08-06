@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { submitLead } from "./submitLead";
 
 type FormState = {
   name: string;
@@ -39,17 +40,13 @@ function validate(values: FormState) {
     errors.company = "Indica tu empresa o sitio web.";
   }
 
-  if (values.process.trim().length < 20) {
-    errors.process = "Cuéntanos brevemente que proceso te gustaria automatizar.";
-  }
-
   return errors;
 }
 
 export function AiDiagnosticForm() {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
 
   function updateField(field: keyof FormState, value: string) {
     const next = { ...values, [field]: value };
@@ -60,7 +57,7 @@ export function AiDiagnosticForm() {
     }
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -71,11 +68,23 @@ export function AiDiagnosticForm() {
     }
 
     setStatus("sending");
-    window.setTimeout(() => {
+    try {
+      await submitLead({
+        sourcePage: "Soluciones IA",
+        sourcePath: window.location.pathname,
+        formType: "Diagnostico IA",
+        name: values.name,
+        contact: `${values.email} / ${values.phone}`,
+        company: values.company,
+        interestedService: "Automatizacion con IA",
+        message: values.process,
+      });
       setStatus("sent");
       setValues(initialState);
       setErrors({});
-    }, 800);
+    } catch {
+      setStatus("failed");
+    }
   }
 
   return (
@@ -165,6 +174,7 @@ export function AiDiagnosticForm() {
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
         {status === "sent" ? "Solicitud registrada. Te responderemos con los siguientes pasos." : ""}
+        {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
       </p>
     </form>
   );

@@ -1,0 +1,33 @@
+query ListLeads @auth(level: NO_ACCESS) {
+  leads(orderBy: [{ createdAt: DESC }]) {
+    id
+    sourcePage
+    sourcePath
+    formType
+    name
+    contact
+    company
+    message
+    interestedService
+    status
+    createdAt
+    updatedAt
+  }
+}
+
+query ListLeadsBySource($sourcePage: String!) @auth(level: NO_ACCESS) {
+  leads(where: { sourcePage: { eq: $sourcePage } }, orderBy: [{ createdAt: DESC }]) {
+    id
+    sourcePage
+    sourcePath
+    formType
+    name
+    contact
+    company
+    message
+    interestedService
+    status
+    createdAt
+    updatedAt
+  }
+}

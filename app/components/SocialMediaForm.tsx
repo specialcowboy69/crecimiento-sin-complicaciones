@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { submitLead } from "./submitLead";
 
 type FocusNetwork = "instagram" | "tiktok" | "linkedin" | "facebook" | "youtube" | "no-se";
 
@@ -41,7 +42,7 @@ function validate(values: FormState) {
 export function SocialMediaForm() {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
 
   function updateField(field: keyof FormState, value: string) {
     const next = { ...values, [field]: value };
@@ -52,7 +53,7 @@ export function SocialMediaForm() {
     }
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -63,11 +64,23 @@ export function SocialMediaForm() {
     }
 
     setStatus("sending");
-    window.setTimeout(() => {
+    try {
+      await submitLead({
+        sourcePage: "Gestion de redes sociales",
+        sourcePath: window.location.pathname,
+        formType: "Propuesta redes",
+        name: values.name,
+        contact: values.contact,
+        company: values.profile,
+        interestedService: values.focusNetwork,
+        message: `Perfil o web actual: ${values.profile}\nRed prioritaria: ${values.focusNetwork}`,
+      });
       setStatus("sent");
       setValues(initialState);
       setErrors({});
-    }, 800);
+    } catch {
+      setStatus("failed");
+    }
   }
 
   return (
@@ -137,6 +150,7 @@ export function SocialMediaForm() {
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
         {status === "sent" ? "Solicitud registrada. Revisaremos tus perfiles y te responderemos en menos de 24 horas." : ""}
+        {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
       </p>
     </form>
   );

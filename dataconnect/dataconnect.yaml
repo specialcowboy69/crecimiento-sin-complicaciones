@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: leads
+location: europe-west1
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: leads
+      cloudSql:
+        instanceId: leads-fdc
+connectorDirs:
+  - "./leads"
