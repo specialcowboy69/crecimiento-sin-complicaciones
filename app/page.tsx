@@ -138,7 +138,7 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">Friccion cero + alta conversion + storytelling</p>
-            <h1 id="hero-title">Crecimiento sin complicaciones para startups y equipos de marketing</h1>
+            <h1 id="hero-title">Crecimiento sin complicaciones para startups, pymes y negocios</h1>
             <p>
               Construimos funnels SEO y paid media que atraen trafico cualificado, explican tu valor con claridad y convierten visitas en conversaciones comerciales.
             </p>
