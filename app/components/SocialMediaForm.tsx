@@ -25,11 +25,11 @@ function validate(values: FormState) {
   const errors: Errors = {};
 
   if (values.name.trim().length < 2) {
-    errors.name = "Indica tu nombre para saber con quien hablamos.";
+    errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
   if (values.contact.trim().length < 6) {
-    errors.contact = "Introduce un email o telefono valido.";
+    errors.contact = "Introduce un email o teléfono válido.";
   }
 
   if (!values.focusNetwork) {
@@ -66,9 +66,9 @@ export function SocialMediaForm() {
     setStatus("sending");
     try {
       await submitLead({
-        sourcePage: "Gestion de redes sociales",
+        sourcePage: "Gestión de redes sociales",
         sourcePath: window.location.pathname,
-        formType: "Propuesta redes",
+        formType: "Auditoría gratuita",
         name: values.name,
         contact: values.contact,
         company: values.profile,
@@ -100,7 +100,7 @@ export function SocialMediaForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-contact">
-        Email o telefono
+        Email o teléfono
         <input
           id="social-contact"
           name="contact"
@@ -134,23 +134,23 @@ export function SocialMediaForm() {
           aria-invalid={Boolean(errors.focusNetwork)}
           aria-describedby={errors.focusNetwork ? "social-network-error" : undefined}
         >
-          <option value="">Selecciona una opcion</option>
+          <option value="">Selecciona una opción</option>
           <option value="instagram">Instagram</option>
           <option value="tiktok">TikTok</option>
           <option value="linkedin">LinkedIn</option>
           <option value="facebook">Facebook</option>
           <option value="youtube">YouTube Shorts</option>
-          <option value="no-se">No lo se todavia</option>
+          <option value="no-se">No lo sé todavía</option>
         </select>
         {errors.focusNetwork ? <span className="text-sm font-semibold text-red-300" id="social-network-error">{errors.focusNetwork}</span> : null}
       </label>
 
       <button className="min-h-12 rounded-lg bg-blue-600 px-6 py-3 font-black text-white shadow-lg shadow-blue-950/40 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Enviando..." : "Solicitar propuesta gratuita"}
+        {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
         {status === "sent" ? "Solicitud registrada. Revisaremos tus perfiles y te responderemos en menos de 24 horas." : ""}
-        {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
+        {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
       </p>
     </form>
   );

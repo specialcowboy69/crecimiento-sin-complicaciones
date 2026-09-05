@@ -42,12 +42,12 @@ const cases = [
     sector: "E-commerce de comida saludable",
     challengeTitle: "Dejar de depender al 100% de Facebook Ads",
     challenge:
-      "EcoBite tenia un CAC demasiado alto y necesitaba una fuente de trafico sostenible a largo plazo.",
-    solution: "Auditoria tecnica + estrategia SEO de contenidos",
+      "EcoBite tenía un CAC demasiado alto y necesitaba una fuente de tráfico sostenible a largo plazo.",
+    solution: "Auditoría técnica + estrategia SEO de contenidos",
     metrics: [
-      { value: "+320%", label: "Crecimiento en trafico organico" },
-      { value: "-45%", label: "Reduccion del coste de adquisicion" },
-      { value: "Top 3", label: "Posicion en Google para su palabra clave principal" },
+      { value: "+320%", label: "Crecimiento en tráfico orgánico" },
+      { value: "-45%", label: "Reducción del coste de adquisición" },
+      { value: "Top 3", label: "Posición en Google para su palabra clave principal" },
     ],
     quote:
       "Pasamos de comprar cada visita a construir un canal que ahora trabaja para nosotros cada semana.",
@@ -58,15 +58,15 @@ const cases = [
     sector: "Startup fintech",
     challengeTitle: "Explicar mejor un producto complejo",
     challenge:
-      "Recibian muchas visitas, pero los usuarios no entendian la propuesta y casi nadie agendaba una demo.",
-    solution: "Rediseno UI/UX y optimizacion del funnel de conversion",
+      "Recibían muchas visitas, pero los usuarios no entendían la propuesta y casi nadie agendaba una demo.",
+    solution: "Rediseño UI/UX y optimización del funnel de conversión",
     metrics: [
-      { value: "3x", label: "Multiplicacion de demos agendadas" },
-      { value: "+115%", label: "Aumento en la tasa de conversion" },
-      { value: "-60%", label: "Disminucion de la tasa de rebote" },
+      { value: "3x", label: "Multiplicación de demos agendadas" },
+      { value: "+115%", label: "Aumento en la tasa de conversión" },
+      { value: "-60%", label: "Disminución de la tasa de rebote" },
     ],
     quote:
-      "La web dejo de ser una explicacion dificil y se convirtio en una conversacion comercial clara.",
+      "La web dejó de ser una explicación difícil y se convirtió en una conversación comercial clara.",
     author: "Directora de Marketing de Finova App",
   },
   {
@@ -74,15 +74,15 @@ const cases = [
     sector: "Tienda B2B de mobiliario",
     challengeTitle: "Escalar Black Friday sin quemar presupuesto",
     challenge:
-      "Querian crecer en Google Ads, pero necesitaban asegurar retorno antes de subir la inversion.",
-    solution: "Reestructuracion de campanas en Google Ads + retargeting dinamico",
+      "Querían crecer en Google Ads, pero necesitaban asegurar retorno antes de subir la inversión.",
+    solution: "Reestructuración de campañas en Google Ads + retargeting dinámico",
     metrics: [
-      { value: "5.2x", label: "ROAS - retorno de inversion publicitaria" },
+      { value: "5.2x", label: "ROAS - retorno de inversión publicitaria" },
       { value: "+85%", label: "Aumento de ingresos interanual" },
       { value: "12.000 EUR", label: "Ahorro en presupuesto mal optimizado" },
     ],
     quote:
-      "Por primera vez escalamos una campana grande con control real sobre el retorno.",
+      "Por primera vez escalamos una campaña grande con control real sobre el retorno.",
     author: "CMO de Lumina Interiors",
   },
 ];
@@ -114,7 +114,7 @@ export function CaseCarousel() {
   }
 
   return (
-    <div className="case-carousel" aria-roledescription="carrusel" aria-label="Casos de exito destacados">
+    <div className="case-carousel" aria-roledescription="carrusel" aria-label="Casos de éxito destacados">
       <div className="case-track" ref={trackRef} onScroll={onScroll} tabIndex={0}>
         {cases.map((item, index) => (
           <article className="case-slide" key={item.company} aria-label={`${index + 1} de ${cases.length}: ${item.company}`}>
@@ -130,10 +130,10 @@ export function CaseCarousel() {
               <p className="case-kicker">El reto</p>
               <h3>{item.challengeTitle}</h3>
               <p>{item.challenge}</p>
-              <p className="case-solution"><b>Solucion:</b> {item.solution}</p>
+              <p className="case-solution"><b>Solución:</b> {item.solution}</p>
             </div>
 
-            <dl className="case-metrics" aria-label={`Metricas principales de ${item.company}`}>
+            <dl className="case-metrics" aria-label={`Métricas principales de ${item.company}`}>
               {item.metrics.map((metric) => (
                 <div key={metric.label}>
                   <dt>{metric.value}</dt>
@@ -154,7 +154,7 @@ export function CaseCarousel() {
         <button className="button secondary" type="button" onClick={() => scrollToCase(activeIndex - 1)} disabled={activeIndex === 0}>
           Anterior
         </button>
-        <div className="case-dots" role="tablist" aria-label="Seleccionar caso de exito">
+        <div className="case-dots" role="tablist" aria-label="Seleccionar caso de éxito">
           {cases.map((item, index) => (
             <button
               key={item.company}
