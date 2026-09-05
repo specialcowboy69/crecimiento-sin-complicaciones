@@ -35,15 +35,15 @@ const plans: PricingPlan[] = [
       },
       {
         title: "SEO básico",
-        detail: "Optimizacion On-Page y configuracion de Google Search y Google Analytics.",
+        detail: "Optimización On-Page y configuración de Google Search y Google Analytics.",
       },
       {
-        title: "Gestion de redes",
+        title: "Gestión de redes",
         detail: "Realizamos un plan de redes sociales personalizado para tu marca.",
       },
       {
         title: "Automatización IA básica",
-        detail: "Automatizacion de procesos de la empresa.",
+        detail: "Automatización de procesos de la empresa.",
       },
       {
         title: "Campañas SEM",
@@ -81,11 +81,11 @@ const plans: PricingPlan[] = [
       {
         title: "SEO avanzado",
         detail:
-          "Analisis y seguimiento de palabras clave, generacion de contenido para el blog, Posicionamiento avanzado para atraer clientes cualificados.",
+          "Análisis y seguimiento de palabras clave, generación de contenido para el blog, posicionamiento avanzado para atraer clientes cualificados.",
       },
       {
-        title: "Gestion de redes avanzada",
-        detail: "Creacion de contenido para redes sociales.",
+        title: "Gestión de redes avanzada",
+        detail: "Creación de contenido para redes sociales.",
       },
       {
         title: "Chatbot inteligente",

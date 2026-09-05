@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { Logo } from "../../components/Logo";
 import { PageLinksNav } from "../../components/PageLinksNav";
 
@@ -53,7 +54,7 @@ const jsonLd = [
     provider: {
       "@type": "Organization",
       name: "Crecimiento sin complicaciones",
-      url: "https://crecimientosincomplicaciones.com",
+      url: "https://www.crecimientosincomplicaciones.com",
     },
     areaServed: "ES",
     description:
@@ -69,7 +70,7 @@ const jsonLd = [
       name: "Auditoría de Arquitectura SEO",
       category: "SEO técnico",
       availability: "https://schema.org/InStock",
-      url: "https://crecimientosincomplicaciones.com/servicios/seo-tecnico-arquitectura-entidades",
+      url: "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
     },
   },
   {
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
   description:
     "Construimos arquitecturas por entidades, silos transaccionales y clústeres editoriales para atraer clientes con intención real de compra.",
   alternates: {
-    canonical: "/servicios/seo-tecnico-arquitectura-entidades",
+    canonical: "/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
   },
   robots: {
     index: false,
@@ -101,7 +102,7 @@ export const metadata: Metadata = {
     title: "SEO Técnico y Arquitectura de Contenidos",
     description:
       "Atrae clientes, no solo visitas, con arquitectura por entidades, SEO técnico y clústeres editoriales.",
-    url: "/servicios/seo-tecnico-arquitectura-entidades",
+    url: "/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
     type: "website",
@@ -123,17 +124,24 @@ export default function SeoArchitecturePage() {
             <Logo variant="light" />
           </Link>
           <div className="nav-links">
-            <Link href="/#servicios">Servicios</Link>
+            <Link href="/agencia-marketing-digital">Marketing digital</Link>
             <a href="#metodologia">Metodología</a>
             <a href="#faq">FAQ</a>
           </div>
-          <a className="button primary nav-cta" href="#auditoria-arquitectura">
-            Auditoría SEO
-          </a>
+          <div className="mobile-header-links" aria-label="Enlaces rápidos">
+            <a href="#metodologia">Método</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div className="nav-actions">
+            <LandingServicesMenu currentPath="/agencia-marketing-digital/seo-tecnico-arquitectura-entidades" />
+            <a className="button primary nav-cta" href="#auditoria-arquitectura">
+              Auditoría SEO
+            </a>
+          </div>
         </nav>
       </header>
 
-      <PageLinksNav currentPath="/servicios/seo-tecnico-arquitectura-entidades" variant="light" />
+      <PageLinksNav currentPath="/agencia-marketing-digital/seo-tecnico-arquitectura-entidades" variant="light" />
 
       <main className="service-page">
         <section className="service-hero" aria-labelledby="service-hero-title">

@@ -15,8 +15,8 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
-import { PageLinksNav } from "../components/PageLinksNav";
 import { SocialMediaForm } from "../components/SocialMediaForm";
 
 const includes = [
@@ -27,23 +27,23 @@ const includes = [
   },
   {
     icon: Clapperboard,
-    title: "Creacion y edicion de video",
-    text: "Editamos Reels, TikToks y Shorts con estructura clara, ritmo visual y llamadas a la accion.",
+    title: "Creación y edición de vídeo",
+    text: "Editamos Reels, TikToks y Shorts con estructura clara, ritmo visual y llamadas a la acción.",
   },
   {
     icon: Palette,
-    title: "Diseno grafico y carruseles",
+    title: "Diseño gráfico y carruseles",
     text: "Creamos portadas, piezas educativas y creatividades coherentes con la imagen de tu marca.",
   },
   {
     icon: PenLine,
     title: "Copywriting para redes",
-    text: "Redactamos textos, hooks y llamadas a la accion para que cada pieza tenga un objetivo.",
+    text: "Redactamos textos, hooks y llamadas a la acción para que cada pieza tenga un objetivo.",
   },
   {
     icon: MessageCircle,
     title: "Community management",
-    text: "Monitorizamos comentarios y mensajes directos para cuidar la conversacion con clientes potenciales.",
+    text: "Monitorizamos comentarios y mensajes directos para cuidar la conversación con clientes potenciales.",
   },
   {
     icon: BarChart3,
@@ -59,13 +59,13 @@ const contentFormats = [
     icon: PlaySquare,
   },
   {
-    title: "Videos de producto o servicio",
+    title: "Vídeos de producto o servicio",
     text: "Contenido vertical para mostrar lo que vendes con claridad, ritmo y enfoque comercial.",
     icon: Clapperboard,
   },
   {
     title: "Carruseles para Instagram y LinkedIn",
-    text: "Contenido visual escaneable para posicionarte como opcion profesional en tu sector.",
+    text: "Contenido visual escaneable para posicionarte como opción profesional en tu sector.",
     icon: Layers,
   },
   {
@@ -84,22 +84,22 @@ const plans = [
     cadence: "/mes",
     features: [
       "5 publicaciones por semana",
-      "Imagen estatica y carruseles",
+      "Imagen estática y carruseles",
       "Copywriting y hashtags",
-      "Redaccion y programacion",
+      "Redacción y programación",
       "Informe trimestral",
     ],
   },
   {
     name: "Plan Crecimiento",
-    subtitle: "Mas popular",
-    description: "Para empresas que quieren sumar video, comunidad y medicion mensual.",
+    subtitle: "Más popular",
+    description: "Para empresas que quieren sumar vídeo, comunidad y medición mensual.",
     price: "400€",
     cadence: "/mes",
     features: [
       "3-4 publicaciones por semana",
-      "2-4 Reels o videos cortos al mes",
-      "Planificacion de Stories semanales",
+      "2-4 Reels o vídeos cortos al mes",
+      "Planificación de Stories semanales",
       "Community management: DMs y comentarios",
       "Informe mensual de rendimiento",
     ],
@@ -107,15 +107,15 @@ const plans = [
   },
   {
     name: "Plan A Medida",
-    subtitle: "Produccion y estrategia avanzada",
-    description: "Para marcas que necesitan produccion audiovisual, varios canales o campanas de pago.",
+    subtitle: "Producción y estrategia avanzada",
+    description: "Para marcas que necesitan producción audiovisual, varios canales o campañas de pago.",
     price: "Personalizado / a consultar",
     features: [
       "Contenido diario multi-canal",
-      "Produccion de video presencial",
+      "Producción de vídeo presencial",
       "Estrategia en Instagram, TikTok y LinkedIn",
-      "Gestion avanzada de Meta Ads",
-      "Consultoria estrategica semanal",
+      "Gestión avanzada de Meta Ads",
+      "Consultoría estratégica semanal",
     ],
   },
 ];
@@ -129,44 +129,44 @@ const process = [
   },
   {
     step: "02",
-    title: "Creacion y edicion",
-    text: "Disenamos piezas visuales, redactamos textos y editamos los videos necesarios.",
+    title: "Creación y edición",
+    text: "Diseñamos piezas visuales, redactamos textos y editamos los vídeos necesarios.",
     icon: Sparkles,
   },
   {
     step: "03",
-    title: "Revision y aprobacion",
+    title: "Revisión y aprobación",
     text: "Te enviamos el calendario mensual para aprobar contenidos antes de publicar.",
     icon: ShieldCheck,
   },
   {
     step: "04",
-    title: "Publicacion y seguimiento",
-    text: "Programamos contenidos, atendemos la comunidad y revisamos que esta funcionando.",
+    title: "Publicación y seguimiento",
+    text: "Programamos contenidos, atendemos la comunidad y revisamos qué está funcionando.",
     icon: Send,
   },
 ];
 
 const faqs = [
   {
-    question: "Tengo que proporcionar yo las fotos y videos?",
+    question: "¿Tengo que proporcionar yo las fotos y vídeos?",
     answer:
-      "Podemos trabajar con material que ya tengas, crear piezas a partir de recursos profesionales o coordinar sesiones de grabacion segun el plan seleccionado.",
+      "Podemos trabajar con material que ya tengas, crear piezas a partir de recursos profesionales o coordinar sesiones de grabación según el plan seleccionado.",
   },
   {
-    question: "En que redes sociales podeis trabajar?",
+    question: "¿En qué redes sociales podéis trabajar?",
     answer:
-      "Trabajamos principalmente con Instagram, TikTok, Facebook, LinkedIn y YouTube Shorts, eligiendo las plataformas donde realmente esta tu cliente potencial.",
+      "Trabajamos principalmente con Instagram, TikTok, Facebook, LinkedIn y YouTube Shorts, eligiendo las plataformas donde realmente está tu cliente potencial.",
   },
   {
-    question: "Hay compromiso de permanencia?",
+    question: "¿Hay compromiso de permanencia?",
     answer:
-      "Recomendamos un minimo de 3 meses para consolidar estrategia y medir aprendizajes, pero evitamos permanencias abusivas.",
+      "Recomendamos un mínimo de 3 meses para consolidar estrategia y medir aprendizajes, pero evitamos permanencias abusivas.",
   },
   {
-    question: "Como os doy acceso a mis cuentas de forma segura?",
+    question: "¿Cómo os doy acceso a mis cuentas de forma segura?",
     answer:
-      "Te guiaremos para darnos acceso como administradores o gestores mediante Meta Business Suite u otras herramientas seguras, sin compartir contrasenas personales.",
+      "Te guiaremos para darnos acceso como administradores o gestores mediante Meta Business Suite u otras herramientas seguras, sin compartir contraseñas personales.",
   },
 ];
 
@@ -174,16 +174,16 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Gestion de redes sociales para empresas",
-    serviceType: ["SocialMediaManagement", "Creacion de contenido", "Edicion de video"],
+    name: "Gestión de redes sociales para empresas",
+    serviceType: ["SocialMediaManagement", "Creación de contenido", "Edición de vídeo"],
     provider: {
       "@type": "Organization",
       name: "Crecimiento sin complicaciones",
-      url: "https://crecimientosincomplicaciones.com",
+      url: "https://www.crecimientosincomplicaciones.com",
     },
     areaServed: "ES",
     description:
-      "Servicio de gestion de redes sociales, creacion de contenido y edicion de video para empresas.",
+      "Servicio de gestión de redes sociales, creación de contenido y edición de vídeo para empresas.",
     makesOffer: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
@@ -206,9 +206,9 @@ const jsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Gestion de Redes Sociales",
+  title: "Gestión de Redes Sociales",
   description:
-    "Gestionamos tus redes sociales y creamos contenido en video para Instagram, TikTok, LinkedIn y YouTube Shorts. Solicita una propuesta gratuita.",
+    "Gestionamos tus redes sociales y creamos contenido en vídeo para Instagram, TikTok, LinkedIn y YouTube Shorts. Solicita una auditoría gratuita.",
   keywords: [
     "gestion redes sociales empresas",
     "agencia redes sociales",
@@ -219,7 +219,7 @@ export const metadata: Metadata = {
     canonical: "/gestion-redes-sociales-empresas",
   },
   openGraph: {
-    title: "Gestion de Redes Sociales y Video para Empresas",
+    title: "Gestión de Redes Sociales y Vídeo para Empresas",
     description:
       "Estrategia mensual, calendario de contenidos, Reels, carruseles, community management e informes claros.",
     url: "/gestion-redes-sociales-empresas",
@@ -243,11 +243,11 @@ export default function SocialMediaPage() {
         }}
       />
 
-      <div className="social-page min-h-screen bg-slate-950 text-slate-50">
+      <div className="social-page landing-light min-h-screen bg-slate-950 text-slate-50">
         <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
-          <nav className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8" aria-label="Navegacion principal">
+          <nav className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
             <Link className="logo-link text-slate-50" href="/" aria-label="Crecimiento sin complicaciones, inicio">
-              <Logo variant="dark" />
+              <Logo variant="light" />
             </Link>
             <div className="hidden items-center gap-2 text-sm font-semibold text-slate-300 md:flex">
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#incluye">Incluye</a>
@@ -255,37 +255,43 @@ export default function SocialMediaPage() {
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#planes">Planes</a>
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#faq">FAQ</a>
             </div>
-            <a className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#propuesta-redes">
-              Propuesta gratis
-            </a>
+            <div className="mobile-header-links" aria-label="Enlaces rápidos">
+              <a href="#incluye">Incluye</a>
+              <a href="#planes">Planes</a>
+            </div>
+            <div className="flex items-center gap-3">
+              <LandingServicesMenu currentPath="/gestion-redes-sociales-empresas" />
+              <a className="landing-top-cta inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#propuesta-redes">
+                <span className="hidden sm:inline">Auditoría gratuita</span>
+                <span className="sm:hidden">Auditoría</span>
+              </a>
+            </div>
           </nav>
         </header>
-
-        <PageLinksNav currentPath="/gestion-redes-sociales-empresas" />
 
         <main>
           <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24">
             <div>
               <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
-                REDES SOCIALES + VIDEO VERTICAL
+                REDES SOCIALES + VÍDEO VERTICAL
               </p>
-              <h1 className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] !text-white sm:text-5xl lg:text-6xl">
-                Gestionamos tus redes sociales y creamos contenido en video para atraer clientes
+              <h1 className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] text-slate-900 sm:text-5xl lg:text-6xl">
+                Gestionamos tus redes sociales y creamos contenido en vídeo para atraer clientes
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Disenamos la estrategia mensual, editamos Reels y piezas visuales, publicamos con calendario y cuidamos
-                la conversacion con tu comunidad para que no tengas que improvisar cada semana.
+                Diseñamos la estrategia mensual, editamos Reels y piezas visuales, publicamos con calendario y cuidamos
+                la conversación con tu comunidad para que no tengas que improvisar cada semana.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#propuesta-redes">
-                  Solicitar propuesta gratuita
+                  Solicitar auditoría gratuita
                 </a>
                 <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="#formatos">
                   Ver formatos de contenido {"->"}
                 </a>
               </div>
               <dl className="mt-10 grid gap-3 sm:grid-cols-3">
-                {["Calendario mensual", "Reels y carruseles", "Aprobacion antes de publicar"].map((item) => (
+                {["Calendario mensual", "Reels y carruseles", "Aprobación antes de publicar"].map((item) => (
                   <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10" key={item}>
                     <dt className="text-sm font-black uppercase text-blue-300">Incluido</dt>
                     <dd className="mt-2 text-base font-bold leading-6 text-slate-100">{item}</dd>
@@ -321,8 +327,8 @@ export default function SocialMediaPage() {
                     <div className="flex items-center gap-3">
                       <PlaySquare className="h-9 w-9 text-blue-400" aria-hidden="true" strokeWidth={1.8} />
                       <div>
-                        <p className="text-sm font-black text-white">Video editado</p>
-                        <p className="text-xs font-semibold text-slate-400">Hook, subtitulos y CTA revisados</p>
+                        <p className="text-sm font-black text-white">Vídeo editado</p>
+                        <p className="text-xs font-semibold text-slate-400">Hook, subtítulos y CTA revisados</p>
                       </div>
                     </div>
                     <div className="mt-4 h-2 rounded-full bg-slate-800">
@@ -330,7 +336,7 @@ export default function SocialMediaPage() {
                     </div>
                   </div>
                   <div className="mt-4 grid gap-2">
-                    {["Calendario aprobado", "Copies preparados", "Publicacion programada"].map((item) => (
+                    {["Calendario aprobado", "Copies preparados", "Publicación programada"].map((item) => (
                       <div className="flex items-center justify-between rounded-lg bg-slate-950 px-4 py-3 ring-1 ring-slate-800" key={item}>
                         <span className="text-sm font-bold text-slate-200">{item}</span>
                         <CheckCircle2 className="h-5 w-5 text-emerald-300" aria-hidden="true" />
@@ -345,23 +351,23 @@ export default function SocialMediaPage() {
           <section className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="problem-title">
             <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Antes vs despues</p>
-                <h2 id="problem-title" className="text-3xl font-black !text-white sm:text-4xl">
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Antes vs después</p>
+                <h2 id="problem-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Publicar por publicar no hace crecer una marca
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  La diferencia esta en tener estrategia, constancia, contenido bien editado y seguimiento.
+                  La diferencia está en tener estrategia, constancia, contenido bien editado y seguimiento.
                 </p>
               </div>
               <div className="grid gap-5 md:grid-cols-2">
                 <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800">
-                  <h3 className="text-xl font-black !text-white">Gestion a ratos</h3>
+                  <h3 className="text-xl font-black text-slate-900">Gestión a ratos</h3>
                   <ul className="mt-5 grid gap-3 text-sm leading-6 text-slate-300">
                     {[
                       "Publicaciones improvisadas sin calendario.",
-                      "Disenos o videos que no transmiten confianza.",
-                      "Mensajes y comentarios sin responder durante dias.",
-                      "No sabes si el esfuerzo esta generando oportunidades.",
+                      "Diseños o vídeos que no transmiten confianza.",
+                      "Mensajes y comentarios sin responder durante días.",
+                      "No sabes si el esfuerzo está generando oportunidades.",
                     ].map((item) => (
                       <li className="flex gap-3" key={item}>
                         <span className="mt-2 h-2 w-2 flex-none rounded-full bg-red-300" />
@@ -371,13 +377,13 @@ export default function SocialMediaPage() {
                   </ul>
                 </article>
                 <article className="rounded-lg bg-white/5 p-6 ring-1 ring-blue-500/30">
-                  <h3 className="text-xl font-black !text-white">Gestion profesional</h3>
+                  <h3 className="text-xl font-black text-slate-900">Gestión profesional</h3>
                   <ul className="mt-5 grid gap-3 text-sm leading-6 text-slate-200">
                     {[
-                      "Plan mensual aprobado con antelacion.",
-                      "Videos y graficos adaptados a tu marca.",
-                      "Atencion activa a dudas de clientes potenciales.",
-                      "Informes claros para saber que mejorar.",
+                      "Plan mensual aprobado con antelación.",
+                      "Vídeos y gráficos adaptados a tu marca.",
+                      "Atención activa a dudas de clientes potenciales.",
+                      "Informes claros para saber qué mejorar.",
                     ].map((item) => (
                       <li className="flex gap-3" key={item}>
                         <CheckIcon />
@@ -393,11 +399,11 @@ export default function SocialMediaPage() {
           <section id="incluye" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="include-title">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Servicio integral</p>
-              <h2 id="include-title" className="text-3xl font-black !text-white sm:text-4xl">
-                Todo lo que incluye la gestion de redes sociales
+              <h2 id="include-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                Todo lo que incluye la gestión de redes sociales
               </h2>
               <p className="mt-4 text-lg leading-8 text-slate-300">
-                Nos ocupamos de la parte estrategica, visual y operativa para que tus redes mantengan una presencia profesional.
+                Nos ocupamos de la parte estratégica, visual y operativa para que tus redes mantengan una presencia profesional.
               </p>
             </div>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -406,7 +412,7 @@ export default function SocialMediaPage() {
                   <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
                     <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
                   </span>
-                  <h3 className="!mt-7 text-xl font-black !text-white">{item.title}</h3>
+                  <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
                   <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
                 </article>
               ))}
@@ -417,11 +423,11 @@ export default function SocialMediaPage() {
             <div className="mx-auto max-w-7xl">
               <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Contenido que podemos crear</p>
-                <h2 id="formats-title" className="text-3xl font-black !text-white sm:text-4xl">
+                <h2 id="formats-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Formatos pensados para explicar, vender y mantener actividad
                 </h2>
                 <p className="mt-4 text-lg leading-8 text-slate-300">
-                  Hasta tener casos documentados con datos reales, preferimos ensenar el tipo de piezas que podemos producir para tu marca.
+                  Hasta tener casos documentados con datos reales, preferimos enseñar el tipo de piezas que podemos producir para tu marca.
                 </p>
               </div>
               <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -433,7 +439,7 @@ export default function SocialMediaPage() {
                       <span className="mb-5 grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
                         <Icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
                       </span>
-                      <h3 className="text-lg font-black !text-white">{format.title}</h3>
+                      <h3 className="text-lg font-black text-slate-900">{format.title}</h3>
                       <p className="mt-3 text-sm leading-[1.65] text-slate-300">{format.text}</p>
                     </article>
                   );
@@ -445,15 +451,15 @@ export default function SocialMediaPage() {
           <section id="planes" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="plans-title">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Planes</p>
-              <h2 id="plans-title" className="text-3xl font-black !text-white sm:text-4xl">
-                Planes de gestion de redes sociales adaptados a tu empresa
+              <h2 id="plans-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                Planes de gestión de redes sociales adaptados a tu empresa
               </h2>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {plans.map((plan) => (
                 <article className={`flex h-full flex-col rounded-lg p-6 ring-1 ${plan.recommended ? "scale-[1.02] bg-blue-600 text-white shadow-2xl shadow-blue-950/40 ring-blue-300/40" : "bg-white/5 ring-white/10"}`} key={plan.name}>
-                  {plan.recommended ? <p className="mb-4 w-fit rounded-full bg-white px-3 py-1 text-xs font-black uppercase text-blue-700">MAS POPULAR</p> : null}
-                  <h3 className="text-2xl font-black !text-white">{plan.name}</h3>
+                  {plan.recommended ? <p className="mb-4 w-fit rounded-full bg-white px-3 py-1 text-xs font-black uppercase text-blue-700">MÁS POPULAR</p> : null}
+                  <h3 className="text-2xl font-black text-slate-900">{plan.name}</h3>
                   <p className={`mt-2 font-bold ${plan.recommended ? "text-blue-100" : "text-blue-300"}`}>{plan.subtitle}</p>
                   <div className="mt-5">
                     {plan.cadence ? (
@@ -478,7 +484,7 @@ export default function SocialMediaPage() {
                   </ul>
                   <div className="mt-auto pt-8">
                     <a className={`inline-flex min-h-12 w-full items-center justify-center rounded-lg px-5 py-3 font-black ${plan.recommended ? "featured-plan-button bg-white text-blue-700 hover:bg-blue-50" : "bg-blue-600 text-white hover:bg-blue-500"}`} href="#propuesta-redes">
-                      {plan.recommended ? "Elegir Plan Crecimiento" : plan.name === "Plan A Medida" ? "Solicitar presupuesto" : "Elegir Plan Presencia"}
+                      Solicitar auditoría gratuita
                     </a>
                   </div>
                 </article>
@@ -489,9 +495,9 @@ export default function SocialMediaPage() {
           <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="process-title">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Metodologia</p>
-                <h2 id="process-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Asi trabajamos contigo mes a mes
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Metodología</p>
+                <h2 id="process-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Así trabajamos contigo mes a mes
                 </h2>
               </div>
               <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -503,7 +509,7 @@ export default function SocialMediaPage() {
                       </span>
                       <span className="rounded-full bg-slate-800 px-3 py-1 text-xs font-black text-slate-200">{step.step}</span>
                     </div>
-                    <h3 className="!mt-8 text-xl font-black !text-white">{step.title}</h3>
+                    <h3 className="!mt-8 text-xl font-black text-slate-900">{step.title}</h3>
                     <p className="mt-3 text-sm leading-[1.65] text-slate-300">{step.text}</p>
                   </article>
                 ))}
@@ -514,14 +520,14 @@ export default function SocialMediaPage() {
           <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="faq-title">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">FAQ</p>
-              <h2 id="faq-title" className="text-3xl font-black !text-white sm:text-4xl">
-                Preguntas frecuentes sobre gestion de redes sociales
+              <h2 id="faq-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                Preguntas frecuentes sobre gestión de redes sociales
               </h2>
             </div>
             <div className="mt-10 grid gap-4">
               {faqs.map((faq) => (
                 <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
-                  <summary className="cursor-pointer text-lg font-black !text-white">{faq.question}</summary>
+                  <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
                   <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
                 </details>
               ))}
@@ -531,15 +537,15 @@ export default function SocialMediaPage() {
           <section id="propuesta-redes" className="border-t border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="proposal-title">
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Propuesta gratuita</p>
-                <h2 id="proposal-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Empezamos a impulsar tus redes sociales?
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
+                <h2 id="proposal-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  ¿Empezamos a impulsar tus redes sociales?
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Solicita una propuesta sin compromiso. Revisaremos tus perfiles actuales y te diremos como podemos ayudarte a publicar con mas claridad, constancia y criterio.
+                  Solicita una auditoría sin compromiso. Revisaremos tus perfiles actuales y te diremos cómo podemos ayudarte a publicar con más claridad, constancia y criterio.
                 </p>
                 <div className="mt-8 grid gap-3">
-                  {["Revision inicial de tus perfiles", "Recomendacion de canales prioritarios", "Propuesta de calendario y formatos"].map((item) => (
+                  {["Revisión inicial de tus perfiles", "Recomendación de canales prioritarios", "Propuesta de calendario y formatos"].map((item) => (
                     <p className="flex gap-3 text-slate-200" key={item}>
                       <CheckIcon />
                       <span>{item}</span>

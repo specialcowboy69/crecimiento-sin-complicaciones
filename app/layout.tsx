@@ -1,9 +1,10 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Script from "next/script";
+import { SITE_URL } from "./lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://crecimientosincomplicaciones.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Crecimiento sin complicaciones | Agencia SEO y Ads",
     template: "%s | Crecimiento sin complicaciones",

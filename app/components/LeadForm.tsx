@@ -7,17 +7,25 @@ type FormState = {
   name: string;
   email: string;
   company: string;
-  budget: string;
   challenge: string;
 };
 
 type Errors = Partial<Record<keyof FormState, string>>;
 
+type LeadFormProps = {
+  sourcePage?: string;
+  interestedService?: string;
+  title?: string;
+  description?: string;
+  points?: string[];
+  buttonLabel?: string;
+  id?: string;
+};
+
 const initialState: FormState = {
   name: "",
   email: "",
   company: "",
-  budget: "",
   challenge: "",
 };
 
@@ -29,21 +37,25 @@ function validate(values: FormState) {
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = "Por favor, introduce un email corporativo valido.";
+    errors.email = "Por favor, introduce un email corporativo válido.";
   }
 
   if (values.company.trim().length < 2) {
     errors.company = "Cuéntanos la empresa o proyecto que quieres hacer crecer.";
   }
 
-  if (!values.budget) {
-    errors.budget = "Selecciona un rango para proponerte un plan realista.";
-  }
-
   return errors;
 }
 
-export function LeadForm() {
+export function LeadForm({
+  sourcePage = "Home",
+  interestedService = "Auditoría inicial",
+  title = "Detectamos el cuello de botella antes de venderte nada",
+  description = "En 48 horas recibes una lectura clara de oportunidades SEO, fugas de conversión y prioridades de adquisición.",
+  points = ["Mapa de oportunidades", "3 quick wins", "Estimación de impacto"],
+  buttonLabel = "Quiero mi auditoría",
+  id = "auditoria",
+}: LeadFormProps = {}) {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
@@ -69,14 +81,14 @@ export function LeadForm() {
     setStatus("sending");
     try {
       await submitLead({
-        sourcePage: "Home",
+        sourcePage,
         sourcePath: window.location.pathname,
-        formType: "Auditoria gratuita",
+        formType: "Auditoría gratuita",
         name: values.name,
         contact: values.email,
         company: values.company,
-        interestedService: "Auditoria inicial",
-        message: `Inversion mensual estimada: ${values.budget}\n\nQue quiere mejorar:\n${values.challenge}`,
+        interestedService,
+        message: `Qué quiere mejorar:\n${values.challenge}`,
       });
       setStatus("sent");
       setValues(initialState);
@@ -87,29 +99,29 @@ export function LeadForm() {
   }
 
   return (
-    <section className="section contact-section" id="auditoria" aria-labelledby="contact-title">
+    <section className="section contact-section" id={id} aria-labelledby="contact-title">
       <div className="contact-copy">
-        <p className="eyebrow">Auditoria gratuita</p>
-        <h2 id="contact-title">Detectamos el cuello de botella antes de venderte nada</h2>
-        <p>
-          En 48 horas recibes una lectura clara de oportunidades SEO, fugas de conversion y prioridades de adquisicion.
-        </p>
-        <div className="contact-points" aria-label="Que incluye la auditoria">
-          <span>Mapa de oportunidades</span>
-          <span>3 quick wins</span>
-          <span>Estimacion de impacto</span>
+        <p className="eyebrow">Auditoría gratuita</p>
+        <h2 id="contact-title">{title}</h2>
+        <p>{description}</p>
+        <div className="contact-points" aria-label="Qué incluye la auditoría">
+          {points.map((point) => (
+            <span key={point}>{point}</span>
+          ))}
         </div>
       </div>
 
       <form className="lead-form" onSubmit={onSubmit} noValidate>
         <div className="field">
-          <label htmlFor="name">Nombre</label>
+          <label htmlFor="name">Nombre*</label>
           <input
             id="name"
             name="name"
+            required
             value={values.name}
             onChange={(event) => updateField("name", event.target.value)}
             aria-invalid={Boolean(errors.name)}
+            aria-required="true"
             aria-describedby={errors.name ? "name-error" : undefined}
             autoComplete="name"
           />
@@ -117,54 +129,40 @@ export function LeadForm() {
         </div>
 
         <div className="field">
-          <label htmlFor="email">Email corporativo</label>
+          <label htmlFor="email">Email corporativo*</label>
           <input
             id="email"
             name="email"
             type="email"
+            required
             value={values.email}
             onChange={(event) => updateField("email", event.target.value)}
             aria-invalid={Boolean(errors.email)}
+            aria-required="true"
             aria-describedby={errors.email ? "email-error" : undefined}
             autoComplete="email"
           />
           {errors.email ? <p id="email-error" className="error">{errors.email}</p> : null}
         </div>
 
-        <div className="field">
-          <label htmlFor="company">Empresa</label>
+        <div className="field full">
+          <label htmlFor="company">Empresa*</label>
           <input
             id="company"
             name="company"
+            required
             value={values.company}
             onChange={(event) => updateField("company", event.target.value)}
             aria-invalid={Boolean(errors.company)}
+            aria-required="true"
             aria-describedby={errors.company ? "company-error" : undefined}
             autoComplete="organization"
           />
           {errors.company ? <p id="company-error" className="error">{errors.company}</p> : null}
         </div>
 
-        <div className="field">
-          <label htmlFor="budget">Inversion mensual estimada</label>
-          <select
-            id="budget"
-            name="budget"
-            value={values.budget}
-            onChange={(event) => updateField("budget", event.target.value)}
-            aria-invalid={Boolean(errors.budget)}
-            aria-describedby={errors.budget ? "budget-error" : undefined}
-          >
-            <option value="">Selecciona un rango</option>
-            <option value="1500-3000">1.500 EUR - 3.000 EUR</option>
-            <option value="3000-6000">3.000 EUR - 6.000 EUR</option>
-            <option value="6000-plus">Mas de 6.000 EUR</option>
-          </select>
-          {errors.budget ? <p id="budget-error" className="error">{errors.budget}</p> : null}
-        </div>
-
         <div className="field full">
-          <label htmlFor="challenge">Que quieres mejorar</label>
+          <label htmlFor="challenge">Qué quieres mejorar</label>
           <textarea
             id="challenge"
             name="challenge"
@@ -178,11 +176,11 @@ export function LeadForm() {
         </div>
 
         <button className="button primary form-submit" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? "Enviando..." : "Quiero mi auditoria"}
+          {status === "sending" ? "Enviando..." : buttonLabel}
         </button>
         <p className="form-status" role="status" aria-live="polite">
-          {status === "sent" ? "Enviado con exito. Te responderemos con los siguientes pasos." : ""}
-          {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
+          {status === "sent" ? "Enviado con éxito. Te responderemos con los siguientes pasos." : ""}
+          {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
         </p>
       </form>
     </section>

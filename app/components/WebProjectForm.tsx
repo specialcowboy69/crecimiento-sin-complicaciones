@@ -25,11 +25,11 @@ function validate(values: FormState) {
   const errors: Errors = {};
 
   if (values.name.trim().length < 2) {
-    errors.name = "Indica tu nombre para saber con quien hablamos.";
+    errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
   if (values.contact.trim().length < 6) {
-    errors.contact = "Introduce un email o telefono valido.";
+    errors.contact = "Introduce un email o teléfono válido.";
   }
 
   if (!values.siteType) {
@@ -66,9 +66,9 @@ export function WebProjectForm() {
     setStatus("sending");
     try {
       await submitLead({
-        sourcePage: "Diseno web",
+        sourcePage: "Diseño web",
         sourcePath: window.location.pathname,
-        formType: "Solicitud web",
+        formType: "Auditoría gratuita",
         name: values.name,
         contact: values.contact,
         company: values.company,
@@ -100,7 +100,7 @@ export function WebProjectForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="web-contact">
-        Email o telefono
+        Email o teléfono
         <input
           id="web-contact"
           name="contact"
@@ -134,21 +134,21 @@ export function WebProjectForm() {
           aria-invalid={Boolean(errors.siteType)}
           aria-describedby={errors.siteType ? "web-type-error" : undefined}
         >
-          <option value="">Selecciona una opcion</option>
+          <option value="">Selecciona una opción</option>
           <option value="corporativa">Web corporativa</option>
           <option value="tienda">Tienda online</option>
-          <option value="rediseno">Rediseno de web actual</option>
-          <option value="no-se">No lo se todavia</option>
+          <option value="rediseno">Rediseño de web actual</option>
+          <option value="no-se">No lo sé todavía</option>
         </select>
         {errors.siteType ? <span className="text-sm font-semibold text-red-300" id="web-type-error">{errors.siteType}</span> : null}
       </label>
 
       <button className="min-h-12 rounded-lg bg-blue-600 px-6 py-3 font-black text-white shadow-lg shadow-blue-950/40 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2" type="submit" disabled={status === "sending"}>
-        {status === "sending" ? "Enviando..." : "Enviar y solicitar asesoria gratuita"}
+        {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
         {status === "sent" ? "Solicitud registrada. Te responderemos en menos de 24 horas." : ""}
-        {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
+        {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
       </p>
     </form>
   );

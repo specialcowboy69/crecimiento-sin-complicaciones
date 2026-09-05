@@ -1,52 +1,52 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BarChart3, Search, TrendingUp, Zap } from "lucide-react";
+import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
-import { PageLinksNav } from "../components/PageLinksNav";
 import { WebProjectForm } from "../components/WebProjectForm";
 
 const plans = [
   {
-    name: "Plan Basico",
+    name: "Plan Básico",
     subtitle: "Para empezar con buen pie",
-    description: "La base para presentar tu negocio con una web clara, rapida y preparada para captar contactos.",
+    description: "La base para presentar tu negocio con una web clara, rápida y preparada para captar contactos.",
     price: "190€",
     cadence: "",
     features: [
-      "Hasta 3 paginas: Inicio, Servicios y Contacto",
-      "100% adaptado a moviles y ordenadores",
-      "Formulario de contacto directo + boton flotante de WhatsApp",
-      "Certificado de seguridad SSL + textos legales RGPD basicos",
-      "Dominio + hosting de alta velocidad, primer ano incluido",
-      "SEO inicial y configuracion de Google Business Profile",
+      "Hasta 3 páginas: Inicio, Servicios y Contacto",
+      "100% adaptado a móviles y ordenadores",
+      "Formulario de contacto directo + botón flotante de WhatsApp",
+      "Certificado de seguridad SSL + textos legales RGPD básicos",
+      "Dominio + hosting de alta velocidad, primer año incluido",
+      "SEO inicial y configuración de Google Business Profile",
     ],
   },
   {
     name: "Plan Avanzado",
-    subtitle: "Mas popular",
-    description: "Incluye todo lo del Plan Basico y suma mas paginas, medicion avanzada y soporte post-lanzamiento.",
+    subtitle: "Más popular",
+    description: "Incluye todo lo del Plan Básico y suma más páginas, medición avanzada y soporte post-lanzamiento.",
     price: "390€",
     cadence: "",
     features: [
-      "Hasta 7 paginas: Inicio, Quienes Somos, hasta 3 Servicios, Blog o Noticias y Contacto",
-      "SEO avanzado con optimizacion SEO On-Page",
-      "Sincronizacion y optimizacion de Google Maps / Google Business",
-      "Configuracion de Google Analytics 4 para medicion y analiticas",
-      "Formulario de presupuesto interactivo o con seleccion de servicios",
-      "30 dias de soporte post-lanzamiento e imprevistos incluidos",
+      "Hasta 7 páginas: Inicio, Quiénes Somos, hasta 3 Servicios, Blog o Noticias y Contacto",
+      "SEO avanzado con optimización SEO On-Page",
+      "Sincronización y optimización de Google Maps / Google Business",
+      "Configuración de Google Analytics 4 para medición y analíticas",
+      "Formulario de auditoría interactivo o con selección de servicios",
+      "30 días de soporte post-lanzamiento e imprevistos incluidos",
     ],
     recommended: true,
   },
   {
     name: "Plan A Medida",
     subtitle: "Personalizado / a consultar",
-    description: "Ideal para tiendas online, catalogos extensos o webs con funcionalidades avanzadas.",
+    description: "Ideal para tiendas online, catálogos extensos o webs con funcionalidades avanzadas.",
     price: "Personalizado / a consultar",
     features: [
       "Pasarela de pago segura: Bizum, TPV Virtual o Stripe",
-      "Catalogo autogestionable de productos y gestion de stock",
-      "Reservas online, area de clientes o integraciones API/CRM",
-      "Auditoria SEO de competencia y estrategia de contenidos",
+      "Catálogo autogestionable de productos y gestión de stock",
+      "Reservas online, área de clientes o integraciones API/CRM",
+      "Auditoría SEO de competencia y estrategia de contenidos",
       "Mantenimiento prioritario y asesoramiento continuo",
     ],
   },
@@ -54,16 +54,16 @@ const plans = [
 
 const includes = [
   {
-    title: "Diseno responsive",
-    text: "Visualizacion cuidada en moviles, tablets y ordenadores para no perder contactos por friccion.",
+    title: "Diseño responsive",
+    text: "Visualización cuidada en móviles, tablets y ordenadores para no perder contactos por fricción.",
   },
   {
     title: "Dominio, hosting y correo",
-    text: "Alojamiento rapido y cuentas profesionales como contacto@tunegocio.com, gestionadas sin complicaciones.",
+    text: "Alojamiento rápido y cuentas profesionales como contacto@tunegocio.com, gestionadas sin complicaciones.",
   },
   {
     title: "SEO On-Page inicial",
-    text: "Estructura de encabezados, metaetiquetas, sitemap y base tecnica para que Google pueda indexar la web.",
+    text: "Estructura de encabezados, metaetiquetas, sitemap y base técnica para que Google pueda indexar la web.",
   },
   {
     title: "Seguridad y normativa",
@@ -71,30 +71,30 @@ const includes = [
   },
   {
     title: "Google Maps y perfil local",
-    text: "Conexion con tu ficha de empresa para facilitar llamadas, rutas y busquedas locales.",
+    text: "Conexión con tu ficha de empresa para facilitar llamadas, rutas y búsquedas locales.",
   },
   {
     title: "Soporte continuo",
-    text: "Mantenimiento, mejoras y soporte humano para que la web siga funcionando despues del lanzamiento.",
+    text: "Mantenimiento, mejoras y soporte humano para que la web siga funcionando después del lanzamiento.",
   },
 ];
 
 const impactCards = [
   {
-    title: "Carga rapida en movil",
-    text: "Reducimos esperas y friccion para que el usuario pueda entender tu oferta sin abandonar la pagina.",
+    title: "Carga rápida en móvil",
+    text: "Reducimos esperas y fricción para que el usuario pueda entender tu oferta sin abandonar la página.",
   },
   {
     title: "Acciones visibles",
-    text: "Botones de llamada, WhatsApp y presupuesto colocados donde el visitante los necesita, no escondidos al final.",
+    text: "Botones de llamada, WhatsApp y auditoría colocados donde el visitante los necesita, no escondidos al final.",
   },
   {
     title: "Mensaje claro",
-    text: "Ordenamos servicios, beneficios y pruebas de confianza para que el usuario sepa por que elegirte.",
+    text: "Ordenamos servicios, beneficios y pruebas de confianza para que el usuario sepa por qué elegirte.",
   },
   {
     title: "Base SEO local",
-    text: "Preparamos estructura, metadatos y conexion con tu perfil local para ayudarte a aparecer en busquedas relevantes.",
+    text: "Preparamos estructura, metadatos y conexión con tu perfil local para ayudarte a aparecer en búsquedas relevantes.",
   },
 ];
 
@@ -105,8 +105,8 @@ const webCases = [
     metric: "3x",
     metricLabel: "solicitudes de demo",
     timeframe: "durante el primer mes",
-    summary: "Rediseno UX, nueva jerarquia de mensajes y formularios orientados a conversion.",
-    quote: "La web empezo a explicar el producto antes de que ventas entrara en la conversacion.",
+    summary: "Rediseño UX, nueva jerarquía de mensajes y formularios orientados a conversión.",
+    quote: "La web empezó a explicar el producto antes de que ventas entrara en la conversación.",
     author: "Laura M., Marketing Lead",
   },
   {
@@ -114,10 +114,10 @@ const webCases = [
     category: "Salud local",
     metric: "+48%",
     metricLabel: "en solicitudes de cita",
-    timeframe: "en los primeros 90 dias",
-    summary: "Landing de servicios, CTA fijo en movil, SEO local y conexion con Google Business Profile.",
+    timeframe: "en los primeros 90 días",
+    summary: "Landing de servicios, CTA fijo en móvil, SEO local y conexión con Google Business Profile.",
     quote: "Pasamos de llamadas dispersas a citas mejor cualificadas desde la propia web.",
-    author: "Marta R., Direccion",
+    author: "Marta R., Dirección",
   },
   {
     company: "Lumina Interiors",
@@ -125,8 +125,8 @@ const webCases = [
     metric: "+42%",
     metricLabel: "en leads cualificados",
     timeframe: "en 3 meses",
-    summary: "Web corporativa con arquitectura por categorias, pruebas de confianza y formularios segmentados.",
-    quote: "La web filtra mejor las oportunidades y el equipo pierde menos tiempo en consultas genericas.",
+    summary: "Web corporativa con arquitectura por categorías, pruebas de confianza y formularios segmentados.",
+    quote: "La web filtra mejor las oportunidades y el equipo pierde menos tiempo en consultas genéricas.",
     author: "Javier S., CMO",
   },
 ];
@@ -135,35 +135,35 @@ const process = [
   {
     step: "01",
     title: "Briefing",
-    text: "Entendemos tu negocio, tus clientes y el objetivo real de la pagina: llamadas, formularios, reservas o ventas.",
+    text: "Entendemos tu negocio, tus clientes y el objetivo real de la página: llamadas, formularios, reservas o ventas.",
   },
   {
     step: "02",
-    title: "Diseno y contenidos",
-    text: "Creamos la estructura visual, jerarquia de mensajes y textos orientados a que el usuario entienda y actue.",
+    title: "Diseño y contenidos",
+    text: "Creamos la estructura visual, jerarquía de mensajes y textos orientados a que el usuario entienda y actúe.",
   },
   {
     step: "03",
     title: "Desarrollo y SEO",
-    text: "Programamos la web, optimizamos velocidad, configuramos etiquetas y preparamos la base tecnica para Google.",
+    text: "Programamos la web, optimizamos velocidad, configuramos etiquetas y preparamos la base técnica para Google.",
   },
   {
     step: "04",
     title: "Lanzamiento",
-    text: "Publicamos la web, verificamos formularios y te damos una guia sencilla para gestionar lo importante.",
+    text: "Publicamos la web, verificamos formularios y te damos una guía sencilla para gestionar lo importante.",
   },
 ];
 
 const continuousCare = [
   {
     icon: BarChart3,
-    label: "Analitica y comportamiento",
-    text: "Medimos de donde vienen tus visitas y en que puntos hacen clic.",
+    label: "Analítica y comportamiento",
+    text: "Medimos de dónde vienen tus visitas y en qué puntos hacen clic.",
   },
   {
     icon: Zap,
     label: "Rendimiento y velocidad",
-    text: "Auditorias periodicas para mantener una carga rapida y estable.",
+    text: "Auditorías periódicas para mantener una carga rápida y estable.",
   },
   {
     icon: Search,
@@ -172,8 +172,8 @@ const continuousCare = [
   },
   {
     icon: TrendingUp,
-    label: "Evolucion continua",
-    text: "Ajustes de diseno y textos basados en datos reales, no en intuicion.",
+    label: "Evolución continua",
+    text: "Ajustes de diseño y textos basados en datos reales, no en intuición.",
   },
 ];
 
@@ -181,24 +181,24 @@ const reportBadges = ["Google Analytics 4", "Search Console", "Backups verificad
 
 const faqs = [
   {
-    question: "Cuanto tiempo se tarda en tener lista mi pagina web?",
+    question: "¿Cuánto tiempo se tarda en tener lista mi página web?",
     answer:
-      "El plazo habitual esta entre 2 y 4 semanas, segun la complejidad del proyecto y la rapidez con la que recibamos materiales, textos o imagenes.",
+      "El plazo habitual está entre 2 y 4 semanas, según la complejidad del proyecto y la rapidez con la que recibamos materiales, textos o imágenes.",
   },
   {
-    question: "La pagina web aparecera en los primeros puestos de Google?",
+    question: "¿La página web aparecerá en los primeros puestos de Google?",
     answer:
-      "Entregamos la web con SEO tecnico inicial para que Google pueda indexarla correctamente. El posicionamiento depende de competencia, autoridad y estrategia de contenidos posterior.",
+      "Entregamos la web con SEO técnico inicial para que Google pueda indexarla correctamente. El posicionamiento depende de competencia, autoridad y estrategia de contenidos posterior.",
   },
   {
-    question: "Podre modificar los contenidos de la web yo mismo?",
+    question: "¿Podré modificar los contenidos de la web yo mismo?",
     answer:
-      "Si. Podemos trabajar con gestores sencillos o paneles personalizados, y te explicamos como actualizar textos, imagenes o paginas clave.",
+      "Sí. Podemos trabajar con gestores sencillos o paneles personalizados, y te explicamos cómo actualizar textos, imágenes o páginas clave.",
   },
   {
-    question: "El dominio, hosting y correo corporativo estan incluidos?",
+    question: "¿El dominio, hosting y correo corporativo están incluidos?",
     answer:
-      "Nos encargamos de la gestion tecnica. Segun el plan, dejamos configurado dominio, hosting, correo profesional y certificados de seguridad.",
+      "Nos encargamos de la gestión técnica. Según el plan, dejamos configurado dominio, hosting, correo profesional y certificados de seguridad.",
   },
 ];
 
@@ -207,20 +207,20 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Crecimiento sin complicaciones",
-    url: "https://crecimientosincomplicaciones.com",
+    url: "https://www.crecimientosincomplicaciones.com",
     areaServed: "ES",
     description:
-      "Diseno de paginas web profesionales, rapidas y optimizadas para Google, orientadas a conseguir llamadas, mensajes y presupuestos.",
+      "Diseño de páginas web profesionales, rápidas y optimizadas para Google, orientadas a conseguir llamadas, mensajes y auditorías.",
   },
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Diseno de paginas web profesionales",
-    serviceType: ["Diseno web", "Desarrollo web", "SEO On-Page"],
+    name: "Diseño de páginas web profesionales",
+    serviceType: ["Diseño web", "Desarrollo web", "SEO On-Page"],
     provider: {
       "@type": "Organization",
       name: "Crecimiento sin complicaciones",
-      url: "https://crecimientosincomplicaciones.com",
+      url: "https://www.crecimientosincomplicaciones.com",
     },
     areaServed: "ES",
     makesOffer: plans.map((plan) => ({
@@ -245,9 +245,9 @@ const jsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Diseno Web para Empresas",
+  title: "Diseño Web para Empresas",
   description:
-    "Disenamos paginas web profesionales, rapidas y optimizadas para Google. Atrae clientes en moviles y ordenadores. Pide tu presupuesto gratuito.",
+    "Diseñamos páginas web profesionales, rápidas y optimizadas para Google. Atrae clientes en móviles y ordenadores. Solicita tu auditoría gratuita.",
   keywords: [
     "diseno pagina web profesional",
     "paginas web para empresas",
@@ -258,9 +258,9 @@ export const metadata: Metadata = {
     canonical: "/diseno-pagina-web-profesional",
   },
   openGraph: {
-    title: "Diseno Web Profesional Orientado a Conseguir Clientes",
+    title: "Diseño Web Profesional Orientado a Conseguir Clientes",
     description:
-      "Paginas web rapidas, adaptadas a moviles y optimizadas para convertir visitantes en llamadas, mensajes y presupuestos.",
+      "Páginas web rápidas, adaptadas a móviles y optimizadas para convertir visitantes en llamadas, mensajes y auditorías.",
     url: "/diseno-pagina-web-profesional",
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
@@ -286,11 +286,11 @@ export default function WebDesignPage() {
         }}
       />
 
-      <div className="web-design-page min-h-screen bg-slate-950 text-slate-50">
+      <div className="web-design-page landing-light min-h-screen bg-slate-950 text-slate-50">
         <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
           <nav className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
             <Link className="logo-link text-slate-50" href="/" aria-label="Crecimiento sin complicaciones, inicio">
-              <Logo variant="dark" />
+              <Logo variant="light" />
             </Link>
             <div className="hidden items-center gap-2 text-sm font-semibold text-slate-300 md:flex">
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#planes">Planes</a>
@@ -298,37 +298,43 @@ export default function WebDesignPage() {
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#incluye">Incluye</a>
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#faq">FAQ</a>
             </div>
-            <a className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#presupuesto-web">
-              Presupuesto gratis
-            </a>
+            <div className="mobile-header-links" aria-label="Enlaces rápidos">
+              <a href="#planes">Planes</a>
+              <a href="#casos-web">Casos</a>
+            </div>
+            <div className="flex items-center gap-3">
+              <LandingServicesMenu currentPath="/diseno-pagina-web-profesional" />
+              <a className="landing-top-cta inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#presupuesto-web">
+                <span className="hidden sm:inline">Auditoría gratuita</span>
+                <span className="sm:hidden">Auditoría</span>
+              </a>
+            </div>
           </nav>
         </header>
-
-        <PageLinksNav currentPath="/diseno-pagina-web-profesional" />
 
         <main>
           <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24">
             <div>
               <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
-                DISENO WEB ORIENTADO A VENTAS
+                DISEÑO WEB ORIENTADO A VENTAS
               </p>
-              <h1 className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] !text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] text-slate-900 sm:text-5xl lg:text-6xl">
                 Transforma las visitas de tu web en nuevos clientes
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Creamos paginas web rapidas, modernas y optimizadas para Google que proyectan la mejor imagen de tu
-                negocio y convierten el trafico en llamadas, mensajes y solicitudes de presupuesto.
+                Creamos páginas web rápidas, modernas y optimizadas para Google que proyectan la mejor imagen de tu
+                negocio y convierten el tráfico en llamadas, mensajes y solicitudes de presupuesto.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#presupuesto-web">
-                  Solicitar presupuesto gratis
+                  Solicitar auditoría gratuita
                 </a>
                 <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="#casos-web">
-                  Ver casos de exito {"->"}
+                  Ver casos de éxito {"->"}
                 </a>
               </div>
               <dl className="mt-10 grid gap-3 sm:grid-cols-3">
-                {["100% adaptada a moviles", "SEO inicial incluido", "Dominio y hosting gestionados"].map((item) => (
+                {["100% adaptada a móviles", "SEO inicial incluido", "Dominio y hosting gestionados"].map((item) => (
                   <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10" key={item}>
                     <dt className="text-sm font-black uppercase text-blue-300">Incluido</dt>
                     <dd className="mt-2 text-base font-bold leading-6 text-slate-100">{item}</dd>
@@ -353,13 +359,13 @@ export default function WebDesignPage() {
                     </strong>
                     <p className="mt-5 text-lg font-semibold leading-8 text-blue-50">
                       Una web completa, preparada para generar confianza y facilitar que tus clientes contacten desde
-                      el primer dia.
+                      el primer día.
                     </p>
                     <ul className="mt-8 grid gap-5">
                       {[
-                        "Diseno moderno 100% adaptado a moviles",
-                        "Optimizacion para aparecer en Google",
-                        "Boton directo a WhatsApp y llamadas",
+                        "Diseño moderno 100% adaptado a móviles",
+                        "Optimización para aparecer en Google",
+                        "Botón directo a WhatsApp y llamadas",
                         "Dominio, hosting y correos gestionados",
                       ].map((item) => (
                         <li className="flex gap-4 text-base font-black leading-7 text-blue-50" key={item}>
@@ -373,7 +379,7 @@ export default function WebDesignPage() {
                     <div style={{ marginTop: "80px" }}>
                       <div className="mb-6 h-px bg-white/20" />
                       <p className="rounded-lg border border-white/15 bg-white/15 px-6 py-5 text-base font-black leading-7 text-white">
-                        Primer lanzamiento en 15-20 dias segun alcance
+                        Primer lanzamiento en 15-20 días según alcance
                       </p>
                     </div>
                   </div>
@@ -386,11 +392,16 @@ export default function WebDesignPage() {
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Primer impacto</p>
-                <h2 id="value-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Tu web suele ser la primera impresion de tu negocio
+                <h2 id="value-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Tu web suele ser la primera impresión de tu negocio
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Si carga lento, no se entiende o no se adapta al movil, pierdes contactos antes de hablar con ellos.
+                  Si carga lento, no se entiende o no se adapta al móvil, pierdes contactos antes de hablar con ellos.
+                  Si todavía estás definiendo qué debe incluir tu web, revisa nuestro enfoque de{" "}
+                  <Link className="font-black text-blue-600 hover:text-blue-700" href="/diseno-pagina-web-profesional/empresas">
+                    diseño web para empresas
+                  </Link>
+                  .
                 </p>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
@@ -409,42 +420,42 @@ export default function WebDesignPage() {
 
           <section id="casos-web" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="web-cases-title">
             <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Casos de exito</p>
-              <h2 id="web-cases-title" className="text-3xl font-black !text-white sm:text-4xl">
+              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Casos de éxito</p>
+              <h2 id="web-cases-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Webs que convierten mejor porque explican mejor
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Estos proyectos muestran el tipo de mejoras que buscamos: mas contactos, menos friccion y una propuesta
-                mas facil de entender.
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                Estos proyectos muestran el tipo de mejoras que buscamos: más contactos, menos fricción y una propuesta
+                más fácil de entender.
               </p>
             </div>
 
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {webCases.map((item) => (
                 <article
-                  className="web-case-card flex h-full flex-col rounded-lg border border-slate-700 bg-slate-800 p-6 transition duration-200 hover:-translate-y-1 hover:border-blue-500/70 hover:shadow-2xl hover:shadow-blue-950/30"
+                  className="web-case-card flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70 transition duration-200 hover:-translate-y-1 hover:border-blue-500/70 hover:shadow-2xl hover:shadow-blue-950/20"
                   key={item.company}
                 >
                   <span className="w-fit rounded-full bg-blue-500/10 px-3 py-1 text-xs font-black uppercase text-blue-300 ring-1 ring-blue-400/20">
                     {item.category}
                   </span>
-                  <h3 className="mt-5 text-xl font-black !text-slate-50">{item.company}</h3>
-                  <div className="mt-5 rounded-lg border border-slate-700 bg-slate-900 p-4">
+                  <h3 className="mt-5 text-xl font-black !text-[#0F172A]">{item.company}</h3>
+                  <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50/80 p-4">
                     <p className="text-xs font-black uppercase tracking-normal text-blue-300">Objetivo del proyecto</p>
-                    <p className="mt-2 text-sm font-semibold leading-[1.6] !text-slate-300">{item.summary}</p>
+                    <p className="mt-2 text-sm font-semibold leading-[1.6] !text-[#475569]">{item.summary}</p>
                   </div>
 
                   <dl className="mt-6">
                     <dt className="text-5xl font-black leading-none text-blue-400">{item.metric}</dt>
-                    <dd className="mt-3 text-base font-black !text-slate-50">{item.metricLabel}</dd>
-                    <dd className="mt-1 text-sm font-semibold !text-slate-400">{item.timeframe}</dd>
+                    <dd className="mt-3 text-base font-black !text-[#1E293B]">{item.metricLabel}</dd>
+                    <dd className="mt-1 text-sm font-semibold !text-[#64748B]">{item.timeframe}</dd>
                   </dl>
 
                   <figure className="mt-auto pt-6">
-                    <blockquote className="border-l-4 border-blue-500 pl-4 text-sm italic leading-[1.6] !text-slate-300">
+                    <blockquote className="border-l-4 border-blue-500 pl-4 text-sm italic leading-[1.6] !text-[#475569]">
                       &quot;{item.quote}&quot;
                     </blockquote>
-                    <figcaption className="mt-3 pl-4 text-xs font-black uppercase tracking-normal text-slate-500">
+                    <figcaption className="mt-3 pl-4 text-xs font-black uppercase tracking-normal !text-[#334155]">
                       {item.author}
                     </figcaption>
                   </figure>
@@ -456,15 +467,15 @@ export default function WebDesignPage() {
           <section id="planes" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="plans-title">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Planes web</p>
-              <h2 id="plans-title" className="text-3xl font-black !text-white sm:text-4xl">
-                Planes de diseno web adaptados a la etapa de tu negocio
+              <h2 id="plans-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                Planes de diseño web adaptados a la etapa de tu negocio
               </h2>
             </div>
             <div className="mt-10 grid gap-5 lg:grid-cols-3">
               {plans.map((plan) => (
                 <article className={`flex h-full flex-col rounded-lg p-6 ring-1 ${plan.recommended ? "scale-[1.02] bg-blue-600 text-white shadow-2xl shadow-blue-950/40 ring-blue-300/40" : "bg-white/5 ring-white/10"}`} key={plan.name}>
-                  {plan.recommended ? <p className="mb-4 w-fit rounded-full bg-white px-3 py-1 text-xs font-black uppercase text-blue-700">MAS POPULAR</p> : null}
-                  <h3 className="text-2xl font-black !text-white">{plan.name}</h3>
+                  {plan.recommended ? <p className="mb-4 w-fit rounded-full bg-white px-3 py-1 text-xs font-black uppercase text-blue-700">MÁS POPULAR</p> : null}
+                  <h3 className="text-2xl font-black text-slate-900">{plan.name}</h3>
                   <p className={`mt-2 font-bold ${plan.recommended ? "text-blue-100" : "text-blue-300"}`}>{plan.subtitle}</p>
                   <div className="mt-5">
                     {plan.cadence !== undefined ? (
@@ -503,14 +514,14 @@ export default function WebDesignPage() {
             <div className="mx-auto max-w-7xl">
               <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Servicio completo</p>
-                <h2 id="include-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Todo lo que necesitas para que tu pagina web funcione desde el primer dia
+                <h2 id="include-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Todo lo que necesitas para que tu página web funcione desde el primer día
                 </h2>
               </div>
               <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {includes.map((item) => (
                   <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
-                    <h3 className="text-xl font-black !text-white">{item.title}</h3>
+                    <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
                     <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
                   </article>
                 ))}
@@ -522,8 +533,8 @@ export default function WebDesignPage() {
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Proceso</p>
-                <h2 id="process-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Como creamos tu pagina web paso a paso
+                <h2 id="process-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Cómo creamos tu página web paso a paso
                 </h2>
               </div>
               <div className="grid gap-4">
@@ -531,7 +542,7 @@ export default function WebDesignPage() {
                   <article className="grid gap-4 rounded-lg bg-white/5 p-6 ring-1 ring-white/10 sm:grid-cols-[4rem_1fr]" key={step.step}>
                     <span className="text-3xl font-black text-blue-400">{step.step}</span>
                     <div>
-                      <h3 className="text-xl font-black !text-white">{step.title}</h3>
+                      <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
                       <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
                     </div>
                   </article>
@@ -544,22 +555,22 @@ export default function WebDesignPage() {
             <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Cuidado continuo</p>
-                <h2 id="proof-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Tu web siempre a punto: acompanamiento y mejora continua
+                <h2 id="proof-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Tu web siempre a punto: acompañamiento y mejora continua
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Una web recien lanzada es solo el principio. Monitorizamos el rendimiento y el comportamiento de tus
+                  Una web recién lanzada es solo el principio. Monitorizamos el rendimiento y el comportamiento de tus
                   usuarios para asegurar que siga creciendo.
                 </p>
 
                 <div className="mt-8 grid gap-4">
                   {continuousCare.map((item) => (
-                    <article className="grid grid-cols-[2.5rem_1fr] gap-4 rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800" key={item.label}>
+                    <article className="grid grid-cols-[2.5rem_1fr] gap-4 rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.label}>
                       <span className="grid h-10 w-10 place-items-center rounded-lg bg-blue-500/10 text-sm font-black text-blue-300 ring-1 ring-blue-400/20">
                         <item.icon className="h-5 w-5" aria-hidden="true" strokeWidth={1.8} />
                       </span>
                       <div>
-                        <h3 className="text-lg font-black !text-white">{item.label}</h3>
+                        <h3 className="text-lg font-black text-slate-900">{item.label}</h3>
                         <p className="mt-2 text-sm leading-[1.6] text-slate-300">{item.text}</p>
                       </div>
                     </article>
@@ -567,32 +578,32 @@ export default function WebDesignPage() {
                 </div>
               </div>
 
-              <aside className="rounded-lg border border-slate-700 bg-slate-950 p-6 shadow-2xl shadow-blue-950/30" aria-label="Ficha de salud web">
-                <div className="flex flex-col gap-4 border-b border-slate-800 pb-5 sm:flex-row sm:items-center sm:justify-between">
+              <aside className="rounded-lg border border-slate-700 bg-slate-950 p-6 shadow-2xl shadow-blue-950/30 sm:p-8" aria-label="Ficha de salud web">
+                <div className="flex flex-col gap-4 border-b border-[#e2e8f0] px-1 pb-6 sm:flex-row sm:items-start sm:justify-between sm:px-2">
                   <div>
                     <p className="text-sm font-black uppercase tracking-normal text-blue-400">Informe mensual</p>
-                    <h3 className="mt-2 text-2xl font-black !text-white">Ficha de salud web</h3>
+                    <h3 className="mt-2 text-2xl font-black text-slate-900">Ficha de salud web</h3>
                   </div>
                   <span className="w-fit rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black uppercase text-emerald-300 ring-1 ring-emerald-300/20">
-                    Estado optimo
+                    Estado óptimo
                   </span>
                 </div>
 
-                <div className="mt-6 grid gap-5 sm:grid-cols-[0.8fr_1.2fr]">
-                  <div className="rounded-lg bg-slate-900 p-5 ring-1 ring-slate-800">
-                    <p className="text-sm font-bold text-slate-300">Puntuacion PageSpeed</p>
+                <div className="mt-7 grid gap-5 sm:grid-cols-[0.8fr_1.2fr]">
+                  <div className="rounded-lg bg-slate-900 p-6 ring-1 ring-slate-800 sm:p-7">
+                    <p className="text-sm font-bold text-slate-300">Puntuación PageSpeed</p>
                     <div className="mt-4 grid aspect-square place-items-center rounded-full border-[10px] border-emerald-300 bg-emerald-300/10">
                       <strong className="text-4xl font-black text-white">98</strong>
                       <span className="-mt-8 text-sm font-black text-emerald-300">/100</span>
                     </div>
                   </div>
 
-                  <div className="rounded-lg bg-slate-900 p-5 ring-1 ring-slate-800">
+                  <div className="rounded-lg bg-slate-900 p-6 ring-1 ring-slate-800 sm:p-7">
                     <div className="flex items-center justify-between gap-4">
-                      <p className="text-sm font-bold text-slate-300">Trafico organico</p>
+                      <p className="text-sm font-bold text-slate-300">Tráfico orgánico</p>
                       <strong className="text-lg font-black text-emerald-300">+34%</strong>
                     </div>
-                    <svg className="mt-5 h-36 w-full" viewBox="0 0 320 140" role="img" aria-label="Grafica ascendente de trafico organico">
+                    <svg className="mt-5 h-36 w-full" viewBox="0 0 320 140" role="img" aria-label="Gráfica ascendente de tráfico orgánico">
                       <path d="M10 118 H310" stroke="#334155" strokeWidth="2" />
                       <path d="M10 118 C62 106 78 88 118 92 C166 96 176 58 218 62 C258 66 274 34 310 24" fill="none" stroke="#22c55e" strokeWidth="5" strokeLinecap="round" />
                       <path d="M10 118 C62 106 78 88 118 92 C166 96 176 58 218 62 C258 66 274 34 310 24 L310 128 L10 128 Z" fill="rgba(34,197,94,0.12)" />
@@ -601,7 +612,7 @@ export default function WebDesignPage() {
                 </div>
 
                 <div className="mt-5 grid gap-5 lg:grid-cols-2">
-                  <div className="rounded-lg bg-slate-900 p-5 ring-1 ring-slate-800">
+                  <div className="rounded-lg bg-slate-900 p-6 ring-1 ring-slate-800 sm:p-7">
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-sm font-black uppercase tracking-normal text-blue-400">Google Analytics</p>
@@ -628,7 +639,7 @@ export default function WebDesignPage() {
                     </dl>
                   </div>
 
-                  <div className="rounded-lg bg-slate-900 p-5 ring-1 ring-slate-800">
+                  <div className="rounded-lg bg-slate-900 p-6 ring-1 ring-slate-800 sm:p-7">
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-sm font-black uppercase tracking-normal text-blue-400">Search Console</p>
@@ -645,7 +656,7 @@ export default function WebDesignPage() {
                         <dd className="text-lg font-black text-white">24.6k</dd>
                       </div>
                       <div className="flex items-center justify-between rounded-lg bg-slate-950 px-4 py-3">
-                        <dt className="text-sm font-semibold text-slate-300">Clics organicos</dt>
+                        <dt className="text-sm font-semibold text-slate-300">Clics orgánicos</dt>
                         <dd className="text-lg font-black text-emerald-300">+34%</dd>
                       </div>
                       <div className="flex items-center justify-between rounded-lg bg-slate-950 px-4 py-3">
@@ -671,14 +682,14 @@ export default function WebDesignPage() {
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">FAQ</p>
-                <h2 id="faq-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Preguntas frecuentes sobre nuestro servicio de diseno web
+                <h2 id="faq-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Preguntas frecuentes sobre nuestro servicio de diseño web
                 </h2>
               </div>
               <div className="grid gap-4">
                 {faqs.map((faq) => (
                   <details className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10" key={faq.question}>
-                    <summary className="cursor-pointer text-lg font-black !text-white">{faq.question}</summary>
+                    <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
                     <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
                   </details>
                 ))}
@@ -689,12 +700,12 @@ export default function WebDesignPage() {
           <section id="presupuesto-web" className="border-t border-slate-800 bg-slate-900 px-4 py-16 pb-28 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="cta-title">
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Presupuesto gratuito</p>
-                <h2 id="cta-title" className="text-3xl font-black !text-white sm:text-4xl">
-                  Hablamos de tu nuevo proyecto web?
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
+                <h2 id="cta-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  ¿Hablamos de tu nuevo proyecto web?
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Cuentanos tu idea o solicita un analisis gratuito de tu presencia digital. Te responderemos en menos
+                  Cuéntanos tu idea o solicita un análisis gratuito de tu presencia digital. Te responderemos en menos
                   de 24 horas.
                 </p>
               </div>
@@ -705,7 +716,7 @@ export default function WebDesignPage() {
 
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur md:hidden">
           <a className="mx-auto flex min-h-12 max-w-md items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-black text-white shadow-lg shadow-blue-950/40" href="#presupuesto-web">
-            Solicitar presupuesto gratuito
+            Solicitar auditoría gratuita
           </a>
         </div>
       </div>

@@ -29,11 +29,11 @@ function validate(values: FormState) {
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = "Introduce un email corporativo valido.";
+    errors.email = "Introduce un email corporativo válido.";
   }
 
   if (values.phone.trim().length < 6) {
-    errors.phone = "Indica un telefono o WhatsApp valido.";
+    errors.phone = "Indica un teléfono o WhatsApp válido.";
   }
 
   if (values.company.trim().length < 2) {
@@ -72,11 +72,11 @@ export function AiDiagnosticForm() {
       await submitLead({
         sourcePage: "Soluciones IA",
         sourcePath: window.location.pathname,
-        formType: "Diagnostico IA",
+        formType: "Auditoría gratuita",
         name: values.name,
         contact: `${values.email} / ${values.phone}`,
         company: values.company,
-        interestedService: "Automatizacion con IA",
+        interestedService: "Automatización con IA",
         message: values.process,
       });
       setStatus("sent");
@@ -121,7 +121,7 @@ export function AiDiagnosticForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="ai-phone">
-        Telefono o WhatsApp
+        Teléfono o WhatsApp
         <input
           className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
           id="ai-phone"
@@ -152,7 +152,7 @@ export function AiDiagnosticForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200 sm:col-span-2" htmlFor="ai-process">
-        Proceso que te gustaria automatizar
+        Proceso que te gustaría automatizar
         <textarea
           className="min-h-32 rounded-lg border border-slate-700 bg-slate-900 px-4 py-3 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
           id="ai-process"
@@ -170,11 +170,11 @@ export function AiDiagnosticForm() {
         type="submit"
         disabled={status === "sending"}
       >
-        {status === "sending" ? "Enviando..." : "Solicitar diagnostico estrategico"}
+        {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
         {status === "sent" ? "Solicitud registrada. Te responderemos con los siguientes pasos." : ""}
-        {status === "failed" ? "No se pudo enviar. Intentalo de nuevo en unos segundos." : ""}
+        {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
       </p>
     </form>
   );

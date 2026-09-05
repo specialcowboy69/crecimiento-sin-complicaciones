@@ -2,7 +2,12 @@ import Link from "next/link";
 
 const pages = [
   { href: "/", label: "Inicio" },
-  { href: "/diseno-pagina-web-profesional", label: "Diseno web" },
+  { href: "/agencia-marketing-digital", label: "Marketing digital" },
+  { href: "/agencia-marketing-digital/google-ads", label: "Google Ads" },
+  { href: "/diseno-landing-pages", label: "Landing pages" },
+  { href: "/seo", label: "SEO" },
+  { href: "/seo-para-pymes", label: "SEO pymes" },
+  { href: "/diseno-pagina-web-profesional", label: "Diseño web" },
   { href: "/gestion-redes-sociales-empresas", label: "Redes sociales" },
   { href: "/soluciones-inteligencia-artificial-empresas", label: "IA empresas" },
 ];
@@ -18,10 +23,10 @@ export function PageLinksNav({ currentPath, variant = "dark" }: PageLinksNavProp
 
   return (
     <nav
-      className={`border-b px-4 py-4 sm:px-6 lg:px-8 ${
+      className={`hidden border-b px-4 py-4 md:block sm:px-6 lg:px-8 ${
         isDark ? "border-slate-800 bg-slate-950" : "border-slate-200 bg-slate-50"
       }`}
-      aria-label="Paginas principales"
+      aria-label="Páginas principales"
     >
       <div className="mx-auto flex max-w-7xl justify-center">
         <div className="flex flex-wrap justify-center gap-2">
