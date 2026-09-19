@@ -7,6 +7,7 @@ const routes = [
   { path: "/agencia-marketing-digital/google-ads", priority: 0.85 },
   { path: "/diseno-landing-pages", priority: 0.85 },
   { path: "/seo", priority: 0.9 },
+  { path: "/seo/local", priority: 0.85 },
   { path: "/seo/madrid", priority: 0.85 },
   { path: "/seo/barcelona", priority: 0.85 },
   { path: "/seo/valencia", priority: 0.85 },

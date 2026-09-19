@@ -16,9 +16,11 @@ Before changing headers, navigation, dropdowns, CTAs in the header, or mobile na
 
 Before changing forms, lead payloads, `formType`, `sourcePage`, validation, or admin lead display, read `docs/forms-and-leads.md`.
 
+Before changing production domains, DNS, CDN, Cloudflare, Vercel hosting, canonical host, or deployment settings, read `docs/deployment.md`.
+
 Treat the current site architecture as intentional:
 
-- `/` is the diagnostic entry page. It is not a service catalog.
+- `/` is the commercial home page with services, cases, pricing, diagnostic section and `Auditoría gratuita` conversion. It is allowed to introduce the main service catalog.
 - `/agencia-marketing-digital` is the commercial service hub and replaces the old `/servicios` hub.
 - `/agencia-marketing-digital/*` contains the former service detail pages migrated from `/servicios/*`.
 - `/seo` is the national SEO money page.

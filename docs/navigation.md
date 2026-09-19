@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-09-05
+**Last updated:** 2026-09-16
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -23,21 +23,21 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 
 ## Home Header
 
-The home is a diagnostic entry page, not the service catalog.
+The home is the main commercial entry page. It can introduce the service catalog, show proof/cases, pricing and drive toward the audit form.
 
 Desktop home header:
 
 - Logo.
-- Optional direct link: `Cómo funciona`.
-- `Más servicios` dropdown.
-- Optional CTA: `Solicitar diagnóstico inicial`.
+- Direct section anchors such as `Servicios`, `Casos`, `Precios` and `Diagnóstico`.
+- Services dropdown using `LandingServicesMenu`; the current home label can be `Nuestros servicios` or another short services label.
+- No `Auditoría gratuita` CTA in the header; the audit CTA should live in the hero and conversion sections.
 
 Mobile home header:
 
 - Logo.
-- `Más servicios` only.
-- No direct `Cómo funciona` link.
-- No `Solicitar diagnóstico inicial` CTA in the header.
+- Services dropdown only when space is tight.
+- No direct section anchors if they make the header cramped.
+- No `Auditoría gratuita` CTA in the header.
 
 The home `Más servicios` dropdown should show only principal services:
 

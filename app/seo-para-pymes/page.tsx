@@ -490,8 +490,11 @@ export default function SeoForPymesPage() {
                   SEO local para pymes que venden en una zona concreta
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Si tus clientes están en una ciudad o provincia concreta, trabajamos páginas locales, búsquedas por
-                  servicio y señales de confianza para que Google entienda dónde y para quién eres relevante.
+                  Si tus clientes están en una ciudad o provincia concreta, trabajamos una{" "}
+                  <Link className="font-black text-blue-600 hover:text-blue-700" href="/seo/local">
+                    estrategia de SEO local
+                  </Link>{" "}
+                  con páginas, búsquedas por servicio, Perfil de Empresa y señales de confianza para que Google entienda dónde y para quién eres relevante.
                 </p>
               </div>
               <div className="grid content-start gap-4 sm:grid-cols-2">

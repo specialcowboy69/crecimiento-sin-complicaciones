@@ -72,7 +72,8 @@ Estructura actual recomendada:
 Reglas:
 
 - No incluir `Auditoría gratuita` en el header de la home.
-- La home puede usar `Diagnóstico inicial` como oferta propia. En móvil, su header debe quedarse en logo + `Más servicios`.
+- La home usa `Auditoría gratuita` como oferta de conversión en hero/secciones/formulario, pero no como CTA visible en el header.
+- En móvil, el header de la home debe quedarse en logo + desplegable de servicios cuando los enlaces directos no quepan con comodidad.
 - El CTA principal debe vivir en el hero y en secciones de conversión.
 - Los enlaces centrales deben tener peso visual suficiente.
 - En móvil, priorizar claridad y evitar que el header ocupe demasiado alto.
@@ -96,9 +97,7 @@ Usar siempre esta forma en páginas comerciales, con tilde y sin variantes como:
 - Auditoría gratis
 - Diagnóstico gratuito
 
-Excepción:
-
-- La home usa `Diagnóstico inicial` y puede usar el CTA `Solicitar diagnóstico inicial`.
+La home también usa `Auditoría gratuita`; mantener el CTA fuera del header y ubicarlo en hero, diagnóstico/sección de proceso y formulario.
 
 CTAs recomendados:
 
