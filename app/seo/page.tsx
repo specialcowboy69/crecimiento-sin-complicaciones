@@ -85,6 +85,11 @@ const audiences = [
 
 const relatedSeoLinks = [
   {
+    href: "/seo/local",
+    title: "SEO local para negocios",
+    text: "Coordinamos tu perfil de Google, el contenido, las reseñas y el SEO de tu web para facilitar que te encuentren y contacten en tu zona.",
+  },
+  {
     href: "/seo-para-pymes",
     title: "SEO para pymes",
     text: "Una página específica para empresas pequeñas que necesitan priorizar captación, SEO local y acciones claras.",

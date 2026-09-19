@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-09-05
+**Last updated:** 2026-09-16
 
 ## Strategic Context
 
@@ -21,6 +21,7 @@ Central strategy folder:
 - `app/agencia-marketing-digital/*`: migrated service detail pages.
 - `app/diseno-landing-pages/page.tsx`: landing-page design service page replacing the legacy CRO/Landing Systems URL.
 - `app/seo/page.tsx`: national SEO money page.
+- `app/seo/local/page.tsx`: local SEO service page for Google Business Profile, reviews, website SEO and connected local content.
 - `app/seo-para-pymes/page.tsx`: SEO for SMEs intermediate page.
 - `app/seo/*/page.tsx`: local SEO pages.
 - `app/diseno-pagina-web-profesional/page.tsx`: money page for web design.
@@ -47,10 +48,11 @@ Central strategy folder:
 
 ## Current Pillars
 
-- Diagnóstico inicial on `/`.
+- Commercial home on `/` with services, cases, pricing and `Auditoría gratuita`.
 - Agencia de marketing digital on `/agencia-marketing-digital`.
 - Diseño web profesional on `/diseno-pagina-web-profesional`.
 - SEO nacional on `/seo`.
+- SEO local service on `/seo/local`.
 - SEO para pymes on `/seo-para-pymes`.
 - Local SEO pages under `/seo/{city}`.
 - Gestión de redes sociales.

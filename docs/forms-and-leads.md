@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-09-05
+**Last updated:** 2026-09-16
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -29,8 +29,8 @@ Admin review lives in `app/admin/leads/AdminLeadsPanel.tsx` and groups leads by 
 
 Use:
 
-- `Diagnóstico inicial` for the home diagnostic form only.
-- `Auditoría gratuita` for commercial service pages and SEO/web/social/IA forms.
+- `Auditoría gratuita` for the home and commercial service pages, including SEO/web/social/IA forms.
+- `Diagnóstico inicial` only if a future dedicated diagnostic form is intentionally reintroduced and documented before implementation.
 
 Do not create near-duplicates such as:
 
@@ -45,39 +45,28 @@ If a new funnel genuinely needs a new `formType`, document it here before implem
 
 | Component | Primary Use | `formType` | Notes |
 | --- | --- | --- | --- |
-| `HomeDiagnosticForm` | Home `/` | `Diagnóstico inicial` | First-step diagnostic. Does not assume the user knows the service. |
-| `LeadForm` | Generic commercial pages | `Auditoría gratuita` | Configurable `sourcePage`, `interestedService`, copy and anchor id. |
+| `LeadForm` | Home `/` and generic commercial pages | `Auditoría gratuita` | Configurable `sourcePage`, `interestedService`, copy and anchor id. Defaults to `sourcePage: "Home"`. |
+| `LocalSeoAuditForm` | `/seo/local` | `Auditoría gratuita` | SEO-local specific form. Requires name, email, business and locality; accepts optional web, Google profile or social link. |
 | `SeoAuditForm` | `/seo`, `/seo-para-pymes`, `/seo/{city}` | `Auditoría gratuita` | SEO-specific goals and `defaultService`. |
 | `WebProjectForm` | Web design money/cluster pages | `Auditoría gratuita` | Service interest comes from selected site type. |
 | `SocialMediaForm` | Social media management page | `Auditoría gratuita` | Service interest comes from selected network/focus. |
 | `AiDiagnosticForm` | IA/automation page | `Auditoría gratuita` | Service interest is automation with IA. |
 | `PaidGrowthCalculatorForm` | Legacy SEM/Paid Growth page | Not currently routed | Calculator-style form, review before reuse. |
 
-## Home Diagnostic Form
+## Home Audit Form
 
-The home is intentionally different from service pages.
+The home is a commercial entry page with services, cases, pricing and a diagnostic section. Its conversion remains `Auditoría gratuita` through `LeadForm`.
 
 Purpose:
 
-- Help users who do not know whether SEO, Ads, CRO, web, social or IA should come first.
-- Collect enough context to orient the next step.
-- Avoid presenting the page as a service catalog.
-
-Required visible fields:
-
-- `Nombre*`
-- `Empresa*`
-- `Email*`
-- `Web opcional`
-- `¿Qué quieres conseguir?*`
-- `¿Qué crees que está bloqueando la captación?*`
+- Capture users who are comparing growth, SEO, Ads, web, CRO, social or IA support.
+- Let the page introduce the service catalog before sending the user to the audit form.
+- Keep the home lead grouped as `sourcePage: "Home"` unless the form is intentionally replaced.
 
 CTA:
 
-- `Solicitar diagnóstico inicial` for header/hero/process links.
-- `Quiero aclarar mi siguiente paso` for the form submit button.
-
-Do not rename this funnel to `Auditoría gratuita`.
+- `Solicitar auditoría gratuita` for the hero and conversion links.
+- Keep `Auditoría gratuita` as the form offer and `formType`.
 
 ## Commercial Audit Forms
 
@@ -107,6 +96,7 @@ Current examples:
 
 - `Home`
 - `Agencia SEO`
+- `SEO local`
 - `SEO para pymes`
 - `SEO Madrid`
 - `SEO Barcelona`
@@ -115,6 +105,7 @@ Current examples:
 - `SEO Alicante`
 - `SEO Málaga`
 - `Agencia de marketing digital`
+- `Agencia Google Ads`
 - `Diseño de landing pages`
 - `Diseño web`
 - `Gestión de redes sociales`

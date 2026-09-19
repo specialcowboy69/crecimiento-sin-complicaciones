@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-09-05
+**Last updated:** 2026-09-16
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -11,17 +11,18 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 - Use short, descriptive, lowercase URLs with hyphens.
 - If a URL is replaced, add or keep a 301 redirect and update internal links, canonicals and sitemap entries.
 - Do not add planned pages to visible navigation until the route exists.
-- Public service pages should convert toward `Auditoría gratuita`, except the home, which converts toward `Diagnóstico inicial`.
+- Public commercial pages, including the home, should convert toward `Auditoría gratuita` unless a page explicitly defines a different approved funnel.
 
 ## Current Public Hierarchy
 
 ```text
-/  Diagnóstico inicial
+/  Home comercial: servicios, casos, precios y auditoría
 ├── /agencia-marketing-digital
 │   ├── /agencia-marketing-digital/google-ads
 │   └── /agencia-marketing-digital/seo-tecnico-arquitectura-entidades
 ├── /diseno-landing-pages
 ├── /seo
+│   ├── /seo/local
 │   ├── /seo/madrid
 │   ├── /seo/barcelona
 │   ├── /seo/valencia
@@ -52,11 +53,12 @@ Internal/admin routes:
 
 | URL | Priority | Type |
 | --- | --- | --- |
-| `/` | `1` | Diagnostic entry |
+| `/` | `1` | Commercial home |
 | `/agencia-marketing-digital` | `0.9` | Marketing hub |
 | `/agencia-marketing-digital/google-ads` | `0.85` | Google Ads service page |
 | `/diseno-landing-pages` | `0.85` | Landing pages service page |
 | `/seo` | `0.9` | SEO money page |
+| `/seo/local` | `0.85` | SEO local service page |
 | `/seo/madrid` | `0.85` | Local SEO |
 | `/seo/barcelona` | `0.85` | Local SEO |
 | `/seo/valencia` | `0.85` | Local SEO |
@@ -100,6 +102,7 @@ Approved route relationships for SEO pages:
 
 ```text
 /seo
+  -> /seo/local
   -> /seo-para-pymes
   -> /seo/madrid
   -> /seo/barcelona
@@ -109,8 +112,13 @@ Approved route relationships for SEO pages:
   -> /seo/malaga
   -> /agencia-marketing-digital/seo-tecnico-arquitectura-entidades
 
+/seo/local
+  -> /seo
+  -> /diseno-pagina-web-profesional
+
 /seo-para-pymes
   -> /seo
+  -> /seo/local
   -> /seo/madrid
   -> /seo/barcelona
   -> /seo/valencia
@@ -180,6 +188,7 @@ If any target route does not exist, stop and report it instead of inventing a re
 `/agencia-marketing-digital` is the commercial hub replacing the old `/servicios` page. It can link to:
 
 - `/seo`
+- `/seo/local`
 - `/diseno-pagina-web-profesional`
 - `/gestion-redes-sociales-empresas`
 - `/soluciones-inteligencia-artificial-empresas`

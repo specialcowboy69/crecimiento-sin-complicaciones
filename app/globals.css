@@ -2741,6 +2741,11 @@ textarea {
   color: var(--muted) !important;
 }
 
+.landing-light .local-guarantee-text {
+  color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(15, 23, 42, 0.28);
+}
+
 .landing-light .text-blue-400,
 .landing-light .text-blue-300,
 .landing-light [class*="text-blue-400"],

@@ -8,6 +8,7 @@ import {
   Gauge,
   Globe2,
   LineChart,
+  MapPin,
   Megaphone,
   MousePointerClick,
   Network,
@@ -30,6 +31,13 @@ const services = [
     href: "/seo",
     cta: "Ver agencia SEO",
     icon: Search,
+  },
+  {
+    title: "SEO local y Google Maps",
+    text: "Perfil de Empresa, reseñas, web local y contenido coordinado para negocios que atienden en una zona concreta.",
+    href: "/seo/local",
+    cta: "Ver SEO local",
+    icon: MapPin,
   },
   {
     title: "Diseño web profesional",

@@ -1,7 +1,7 @@
 # Product Marketing Context
 
-**Document version:** v1
-**Last updated:** 2026-09-01
+**Document version:** v1.1
+**Last updated:** 2026-09-16
 
 ## Product Overview
 **One-liner:**
@@ -179,11 +179,12 @@ Pendiente validar si son reales antes de usarlos fuera de la web actual.
 Captar leads cualificados para servicios de marketing, web, SEO, paid growth, redes sociales e IA.
 
 **Conversion action:**
-La home convierte hacia `Diagnóstico inicial`. Las páginas comerciales convierten hacia `Auditoría gratuita` o formulario de propuesta.
+La home y las páginas comerciales convierten hacia `Auditoría gratuita` o formulario de propuesta.
 
 **Current metrics:**
 No documentadas.
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v1.1 (2026-09-16) - La home se mantiene como entrada comercial con servicios, casos, precios y auditoría gratuita.
 - v1 (2026-08-26) - Contexto inicial autodraft a partir de las paginas actuales del repo.
