@@ -3,6 +3,7 @@ import Link from "next/link";
 const pages = [
   { href: "/", label: "Inicio" },
   { href: "/agencia-marketing-digital", label: "Marketing digital" },
+  { href: "/sobre-nosotros", label: "Sobre nosotros" },
   { href: "/agencia-marketing-digital/google-ads", label: "Google Ads" },
   { href: "/diseno-landing-pages", label: "Landing pages" },
   { href: "/seo", label: "SEO" },

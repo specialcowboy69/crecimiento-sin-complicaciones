@@ -278,8 +278,11 @@ export default function Home() {
       </main>
 
       <footer className="footer">
-        <p>© 2026 Crecimiento sin complicaciones. Agencia SEO, SEM y CRO.</p>
-        <a href="#inicio">Volver arriba</a>
+        <p>© 2026 Crecimiento sin complicaciones. Agencia SEO, Google Ads, diseño web y automatizaciones.</p>
+        <div className="flex flex-wrap gap-4">
+          <a href="/sobre-nosotros">Sobre nosotros</a>
+          <a href="#inicio">Volver arriba</a>
+        </div>
       </footer>
     </>
   );
