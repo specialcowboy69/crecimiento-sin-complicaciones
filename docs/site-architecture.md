@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-09-21
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -20,6 +20,7 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 ├── /agencia-marketing-digital
 │   ├── /agencia-marketing-digital/google-ads
 │   └── /agencia-marketing-digital/seo-tecnico-arquitectura-entidades
+├── /sobre-nosotros
 ├── /diseno-landing-pages
 ├── /seo
 │   ├── /seo/local
@@ -36,6 +37,8 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 ├── /gestion-redes-sociales-empresas
 └── /soluciones-inteligencia-artificial-empresas
 ```
+
+`/sobre-nosotros`: public entity and trust page with service area, services, proof boundaries and audit CTA.
 
 Internal/admin routes:
 
@@ -55,6 +58,7 @@ Internal/admin routes:
 | --- | --- | --- |
 | `/` | `1` | Commercial home |
 | `/agencia-marketing-digital` | `0.9` | Marketing hub |
+| `/sobre-nosotros` | `0.75` | Entity/trust page |
 | `/agencia-marketing-digital/google-ads` | `0.85` | Google Ads service page |
 | `/diseno-landing-pages` | `0.85` | Landing pages service page |
 | `/seo` | `0.9` | SEO money page |
@@ -71,6 +75,8 @@ Internal/admin routes:
 | `/diseno-pagina-web-profesional/valencia` | `0.85` | Web design local |
 | `/gestion-redes-sociales-empresas` | `0.9` | Service money page |
 | `/soluciones-inteligencia-artificial-empresas` | `0.9` | Service money page |
+
+Sitemap entries intentionally omit `lastModified` until the project maintains real per-route modification dates. Do not restore `lastModified: new Date()` because it makes every page appear updated on every build.
 
 `/agencia-marketing-digital/google-ads` is indexable and included because it replaces the legacy SEM/Paid Growth page with a distinct Google Ads intent. `/diseno-landing-pages` is indexable and included because it replaces the legacy CRO/Landing Systems page with a clearer landing-page design intent. Review intent, uniqueness and indexability before adding other detail pages from `/agencia-marketing-digital/*`.
 
@@ -219,6 +225,8 @@ Known planned route:
 Do not link to the Sevilla page until the route exists.
 
 ## Link Audit Checklist
+
+Public indexable service pages should include `BreadcrumbList` JSON-LD that matches the documented hierarchy. The root layout renders global `Organization` and `WebSite` schema, so page-level schema should reference the same entity instead of inventing separate local businesses or unsupported ratings.
 
 Before closing a route or navigation change:
 
