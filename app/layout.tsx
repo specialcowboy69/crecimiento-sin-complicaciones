@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { SITE_URL } from "./lib/site";
+import { SCHEMA_CONTEXT, organizationJsonLd, webSiteJsonLd } from "./lib/structuredData";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,6 +31,11 @@ export const metadata: Metadata = {
   },
 };
 
+const globalJsonLd = {
+  "@context": SCHEMA_CONTEXT,
+  "@graph": [organizationJsonLd(), webSiteJsonLd()],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +43,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(globalJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+        {children}
+      </body>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN" />
       <Script id="google-analytics">
         {`
