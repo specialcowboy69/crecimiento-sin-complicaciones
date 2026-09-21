@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { Logo } from "../../components/Logo";
 import { PageLinksNav } from "../../components/PageLinksNav";
+import { breadcrumbJsonLd } from "../../lib/structuredData";
 
 const faqs = [
   {
@@ -84,6 +85,17 @@ const jsonLd = [
         text: faq.answer,
       },
     })),
+  },
+  {
+    ...breadcrumbJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Agencia de marketing digital", path: "/agencia-marketing-digital" },
+      {
+        name: "SEO técnico y arquitectura de entidades",
+        path: "/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
+      },
+    ]),
+    "@type": "BreadcrumbList",
   },
 ];
 

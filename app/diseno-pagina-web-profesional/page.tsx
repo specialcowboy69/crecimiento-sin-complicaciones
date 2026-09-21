@@ -4,6 +4,7 @@ import { BarChart3, Search, TrendingUp, Zap } from "lucide-react";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { WebProjectForm } from "../components/WebProjectForm";
+import { breadcrumbJsonLd } from "../lib/structuredData";
 
 const plans = [
   {
@@ -241,6 +242,13 @@ const jsonLd = [
         text: faq.answer,
       },
     })),
+  },
+  {
+    ...breadcrumbJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Diseño web profesional", path: "/diseno-pagina-web-profesional" },
+    ]),
+    "@type": "BreadcrumbList",
   },
 ];
 

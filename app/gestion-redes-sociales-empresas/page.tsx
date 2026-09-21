@@ -18,6 +18,7 @@ import {
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { SocialMediaForm } from "../components/SocialMediaForm";
+import { breadcrumbJsonLd } from "../lib/structuredData";
 
 const includes = [
   {
@@ -202,6 +203,13 @@ const jsonLd = [
         text: faq.answer,
       },
     })),
+  },
+  {
+    ...breadcrumbJsonLd([
+      { name: "Inicio", path: "/" },
+      { name: "Redes sociales para empresas", path: "/gestion-redes-sociales-empresas" },
+    ]),
+    "@type": "BreadcrumbList",
   },
 ];
 

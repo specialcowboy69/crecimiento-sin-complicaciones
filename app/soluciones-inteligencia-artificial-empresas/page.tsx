@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AiDiagnosticForm } from "../components/AiDiagnosticForm";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
+import { breadcrumbJsonLd } from "../lib/structuredData";
 
 const platforms = [
   "OpenAI",
@@ -164,6 +165,16 @@ const jsonLd = [
         text: faq.answer,
       },
     })),
+  },
+  {
+    ...breadcrumbJsonLd([
+      { name: "Inicio", path: "/" },
+      {
+        name: "Soluciones de inteligencia artificial para empresas",
+        path: "/soluciones-inteligencia-artificial-empresas",
+      },
+    ]),
+    "@type": "BreadcrumbList",
   },
 ];
 
