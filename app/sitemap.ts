@@ -4,6 +4,7 @@ import { absoluteUrl } from "./lib/site";
 const routes = [
   { path: "/", priority: 1 },
   { path: "/agencia-marketing-digital", priority: 0.9 },
+  { path: "/sobre-nosotros", priority: 0.75 },
   { path: "/agencia-marketing-digital/google-ads", priority: 0.85 },
   { path: "/diseno-landing-pages", priority: 0.85 },
   { path: "/seo", priority: 0.9 },
@@ -25,7 +26,6 @@ const routes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: absoluteUrl(route.path),
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: route.priority,
   }));
