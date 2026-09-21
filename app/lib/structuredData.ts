@@ -58,6 +58,7 @@ export function webSiteJsonLd() {
 
 export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {
+    "@context": SCHEMA_CONTEXT,
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",

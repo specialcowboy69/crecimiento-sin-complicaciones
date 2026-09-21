@@ -84,6 +84,7 @@ test("shared structured data helpers define stable organization and breadcrumb i
   assert.match(helper, /export function breadcrumbJsonLd/);
   assert.match(helper, /"@id": ORGANIZATION_ID/);
   assert.match(helper, /"@id": WEBSITE_ID/);
+  assert.match(helper, /"@context": SCHEMA_CONTEXT/);
   assert.match(helper, /https:\/\/schema\.org/);
   assert.match(helper, /Crecimiento sin complicaciones/);
   assert.match(helper, /areaServed/);
