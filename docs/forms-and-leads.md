@@ -123,6 +123,10 @@ If a page changes title but not business source, prefer keeping the same `source
 - Use privacy copy when the form asks for more context.
 - Keep Spanish accents correct in labels, errors and success messages.
 
+## Privacy Notice
+
+Every active form in the Current Forms table must render `FormPrivacyNotice` immediately before its submit button. The shared notice explains that the submitted data is used to answer the request and links to `/politica-de-privacidad`. It does not add a required checkbox and must not alter the `submitLead` payload, `formType`, `sourcePage` or `sourcePath` conventions.
+
 ## QA Checklist
 
 Before closing form changes:

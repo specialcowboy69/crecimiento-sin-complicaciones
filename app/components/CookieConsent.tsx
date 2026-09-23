@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import Script from "next/script";
 
 const COOKIE_CONSENT_NAME = "cookie_consent";
@@ -154,6 +155,10 @@ export function CookieConsent() {
           <p>
             Usamos Vercel Analytics para medir visitas de forma agregada y sin cookies. Solo con tu permiso activamos
             Google Analytics para obtener analítica detallada. Puedes cambiar tu elección cuando quieras.
+          </p>
+          <p className="cookie-consent-legal">
+            Consulta la <Link href="/politica-de-cookies">Política de cookies</Link> y la{" "}
+            <Link href="/politica-de-privacidad">Política de privacidad</Link>.
           </p>
           <div className="cookie-consent-actions">
             <button type="button" className="cookie-consent-button" onClick={rejectAnalytics}>

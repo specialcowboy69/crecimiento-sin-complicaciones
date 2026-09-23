@@ -50,6 +50,10 @@ Internal/admin routes:
 /sitemap.xml
 ```
 
+## Public legal routes
+
+`/politica-de-cookies` and `/politica-de-privacidad` are public information routes. Both use canonical URLs without trailing slashes and `noindex, follow` metadata. They are deliberately omitted from `app/sitemap.ts` because the sitemap is reserved for indexable commercial pages. The cookie banner and the lead-form privacy notice provide their inbound links.
+
 ## Sitemap Routes
 
 `app/sitemap.ts` currently includes:

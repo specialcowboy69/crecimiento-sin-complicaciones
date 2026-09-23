@@ -10,6 +10,10 @@ async function read(relativePath) {
   return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 
+async function readIfExists(relativePath) {
+  return existsSync(path.join(repoRoot, relativePath)) ? read(relativePath) : "";
+}
+
 test("Vercel analytics mounts globally but excludes admin routes", async () => {
   const packageJson = await read("package.json");
   const layout = await read("app/layout.tsx");
@@ -74,4 +78,40 @@ test("cookie consent synchronizes its stored preference without effect state wri
   assert.match(consent, /const CONSENT_CHANGE_EVENT = "cookie-consent-change"/);
   assert.match(consent, /window\.addEventListener\(CONSENT_CHANGE_EVENT/);
   assert.doesNotMatch(consent, /useEffect/);
+});
+
+test("policy routes, form notices, and sitemap policy stay explicit", async () => {
+  const cookiesPolicy = await readIfExists("app/politica-de-cookies/page.tsx");
+  const privacyPolicy = await readIfExists("app/politica-de-privacidad/page.tsx");
+  const notice = await readIfExists("app/components/FormPrivacyNotice.tsx");
+  const consent = await read("app/components/CookieConsent.tsx");
+  const sitemap = await read("app/sitemap.ts");
+
+  assert.match(cookiesPolicy, /robots: \{ index: false, follow: true \}/);
+  assert.match(cookiesPolicy, /cookie_consent/);
+  assert.match(cookiesPolicy, /Google Analytics/);
+  assert.match(cookiesPolicy, /Vercel Analytics/);
+  assert.match(privacyPolicy, /Crecimiento sin complicaciones S\.U\./);
+  assert.match(privacyPolicy, /51092147-W/);
+  assert.match(privacyPolicy, /info@crecimientosincomplicaciones\.com/);
+  assert.match(privacyPolicy, /12 meses/);
+  assert.match(privacyPolicy, /Firebase Data Connect/);
+  assert.match(notice, /\/politica-de-privacidad/);
+  assert.match(consent, /\/politica-de-cookies/);
+  assert.match(consent, /\/politica-de-privacidad/);
+  assert.doesNotMatch(sitemap, /politica-de-cookies|politica-de-privacidad/);
+});
+
+test("every active lead form renders the shared privacy notice", async () => {
+  for (const file of [
+    "app/components/LeadForm.tsx",
+    "app/components/LocalSeoAuditForm.tsx",
+    "app/components/SeoAuditForm.tsx",
+    "app/components/WebProjectForm.tsx",
+    "app/components/SocialMediaForm.tsx",
+    "app/components/AiDiagnosticForm.tsx",
+  ]) {
+    const source = await read(file);
+    assert.match(source, /FormPrivacyNotice/, `${file} must render FormPrivacyNotice`);
+  }
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { submitLead } from "./submitLead";
 
 type FocusNetwork = "instagram" | "tiktok" | "linkedin" | "facebook" | "youtube" | "no-se";
@@ -145,6 +146,7 @@ export function SocialMediaForm() {
         {errors.focusNetwork ? <span className="text-sm font-semibold text-red-300" id="social-network-error">{errors.focusNetwork}</span> : null}
       </label>
 
+      <FormPrivacyNotice className="text-slate-400 sm:col-span-2" />
       <button className="min-h-12 rounded-lg bg-blue-600 px-6 py-3 font-black text-white shadow-lg shadow-blue-950/40 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2" type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
