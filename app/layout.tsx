@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
+import { CookieConsent } from "./components/CookieConsent";
 import { VercelAnalytics } from "./components/VercelAnalytics";
 import { SITE_URL } from "./lib/site";
 import { SCHEMA_CONTEXT, organizationJsonLd, webSiteJsonLd } from "./lib/structuredData";
@@ -53,16 +53,8 @@ export default function RootLayout({
         />
         {children}
         <VercelAnalytics />
+        <CookieConsent />
       </body>
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN" />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-VECVHEZ2DN');
-        `}
-      </Script>
     </html>
   );
 }

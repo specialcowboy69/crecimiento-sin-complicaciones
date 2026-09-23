@@ -39,3 +39,39 @@ test("successful lead analytics uses a non-PII allowlist", async () => {
   assert.doesNotMatch(submitLead, /track\([^]*payload\.company/);
   assert.doesNotMatch(submitLead, /track\([^]*payload\.message/);
 });
+
+test("GA4 is no longer mounted unconditionally in the root layout", async () => {
+  const layout = await read("app/layout.tsx");
+
+  assert.doesNotMatch(layout, /googletagmanager\.com\/gtag\/js/);
+  assert.doesNotMatch(layout, /id="google-analytics"/);
+  assert.match(layout, /import \{ CookieConsent \} from "\.\/components\/CookieConsent"/);
+  assert.match(layout, /<CookieConsent \/>/);
+});
+
+test("cookie consent defaults GA4 off and exposes equal visitor choices", async () => {
+  const consentPath = path.join(repoRoot, "app/components/CookieConsent.tsx");
+  const consent = existsSync(consentPath) ? await read("app/components/CookieConsent.tsx") : "";
+
+  assert.match(consent, /const COOKIE_CONSENT_NAME = "cookie_consent"/);
+  assert.match(consent, /const COOKIE_CONSENT_ACCEPTED = "v1:accepted"/);
+  assert.match(consent, /const COOKIE_CONSENT_REJECTED = "v1:rejected"/);
+  assert.match(consent, />\s*Rechazar\s*</);
+  assert.match(consent, />\s*Aceptar analítica\s*</);
+  assert.match(consent, />\s*Configurar\s*</);
+  assert.match(consent, /analytics_storage: "denied"/);
+  assert.match(consent, /analytics_storage: "granted"/);
+  assert.match(consent, /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-VECVHEZ2DN/);
+  assert.match(consent, />\s*Gestionar cookies\s*</);
+  assert.match(consent, /name === "_ga" \|\| name\.startsWith\("_ga_"\)/);
+  assert.match(consent, /window\.location\.reload\(\)/);
+});
+
+test("cookie consent synchronizes its stored preference without effect state writes", async () => {
+  const consent = await read("app/components/CookieConsent.tsx");
+
+  assert.match(consent, /useSyncExternalStore/);
+  assert.match(consent, /const CONSENT_CHANGE_EVENT = "cookie-consent-change"/);
+  assert.match(consent, /window\.addEventListener\(CONSENT_CHANGE_EVENT/);
+  assert.doesNotMatch(consent, /useEffect/);
+});

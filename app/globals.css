@@ -3125,3 +3125,115 @@ textarea {
   font-size: 1.25rem;
   line-height: 1.25;
 }
+
+.cookie-consent {
+  position: fixed;
+  inset: auto 16px 16px;
+  z-index: 50;
+  width: min(720px, calc(100% - 32px));
+  margin-inline: auto;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cookie-consent h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1.2rem;
+}
+
+.cookie-consent p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.cookie-consent-actions,
+.cookie-preferences-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cookie-consent-button,
+.cookie-consent-link,
+.cookie-preferences-button {
+  min-height: 44px;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px 14px;
+  color: var(--foreground);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.cookie-consent-button:hover,
+.cookie-consent-link:hover,
+.cookie-preferences-button:hover {
+  border-color: var(--primary);
+  background: #eff6ff;
+  color: var(--primary-dark);
+}
+
+.cookie-preferences-button {
+  position: fixed;
+  right: 16px;
+  bottom: 76px;
+  z-index: 40;
+  box-shadow: var(--shadow-soft);
+}
+
+.cookie-preferences {
+  max-width: 560px;
+}
+
+.cookie-preference-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+  border: 1px solid var(--soft);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.cookie-preference-row input {
+  width: 18px;
+  min-height: 18px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+}
+
+.cookie-preference-row span {
+  display: grid;
+  gap: 4px;
+}
+
+.cookie-preference-row small {
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+@media (max-width: 680px) {
+  .cookie-consent {
+    inset: auto 12px 12px;
+    width: calc(100% - 24px);
+    padding: 20px;
+  }
+
+  .cookie-consent-actions > button,
+  .cookie-preferences-actions > button {
+    flex: 1 1 100%;
+  }
+
+  .cookie-preferences-button {
+    right: 12px;
+    bottom: 82px;
+  }
+}
