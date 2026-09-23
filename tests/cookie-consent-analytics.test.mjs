@@ -75,6 +75,9 @@ test("cookie consent synchronizes its stored preference without effect state wri
   const consent = await read("app/components/CookieConsent.tsx");
 
   assert.match(consent, /useSyncExternalStore/);
+  assert.match(consent, /useLayoutEffect/);
+  assert.match(consent, /initialDialogActionRef\.current\?\.focus\(\)/);
+  assert.match(consent, /preferencesAnalyticsRef\.current\?\.focus\(\)/);
   assert.match(consent, /const CONSENT_CHANGE_EVENT = "cookie-consent-change"/);
   assert.match(consent, /window\.addEventListener\(CONSENT_CHANGE_EVENT/);
   assert.doesNotMatch(consent, /useEffect/);
@@ -90,6 +93,9 @@ test("policy routes, form notices, and sitemap policy stay explicit", async () =
   assert.match(cookiesPolicy, /robots: \{ index: false, follow: true \}/);
   assert.match(cookiesPolicy, /cookie_consent/);
   assert.match(cookiesPolicy, /Google Analytics/);
+  assert.match(cookiesPolicy, /_ga/);
+  assert.match(cookiesPolicy, /_ga_VECVHEZ2DN/);
+  assert.match(cookiesPolicy, /2 años/);
   assert.match(cookiesPolicy, /Vercel Analytics/);
   assert.match(privacyPolicy, /Crecimiento sin complicaciones S\.U\./);
   assert.match(privacyPolicy, /51092147-W/);

@@ -36,6 +36,11 @@ export default function CookiePolicyPage() {
           analítica en el panel de configuración. Si rechazas esta categoría, no descargamos ni configuramos Google
           Analytics.
         </p>
+        <p>
+          Cuando aceptas, Google Analytics crea las cookies propias <code>_ga</code> y{" "}
+          <code>_ga_VECVHEZ2DN</code>. Su duración predeterminada es de 2 años: la primera distingue visitantes y la
+          segunda conserva el estado de la sesión.
+        </p>
 
         <h2>Cómo cambiar tu elección</h2>
         <p>

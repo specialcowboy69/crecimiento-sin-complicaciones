@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -70,6 +70,23 @@ export function CookieConsent() {
   const consent = useSyncExternalStore(subscribeToConsentChanges, readConsent, getServerConsent);
   const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const initialDialogActionRef = useRef<HTMLButtonElement>(null);
+  const preferencesButtonRef = useRef<HTMLButtonElement>(null);
+  const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
+
+  useLayoutEffect(() => {
+    if (consent === null && !showPreferences) {
+      initialDialogActionRef.current?.focus();
+      return;
+    }
+
+    if (showPreferences) {
+      preferencesAnalyticsRef.current?.focus();
+      return;
+    }
+
+    preferencesButtonRef.current?.focus();
+  }, [consent, showPreferences]);
 
   function acceptAnalytics() {
     persistConsent(COOKIE_CONSENT_ACCEPTED);
@@ -140,6 +157,7 @@ export function CookieConsent() {
       {consent !== null ? (
         <button
           type="button"
+          ref={preferencesButtonRef}
           className="cookie-preferences-button"
           onClick={openPreferences}
           aria-haspopup="dialog"
@@ -161,7 +179,7 @@ export function CookieConsent() {
             <Link href="/politica-de-privacidad">Política de privacidad</Link>.
           </p>
           <div className="cookie-consent-actions">
-            <button type="button" className="cookie-consent-button" onClick={rejectAnalytics}>
+            <button ref={initialDialogActionRef} type="button" className="cookie-consent-button" onClick={rejectAnalytics}>
               Rechazar
             </button>
             <button type="button" className="cookie-consent-button" onClick={acceptAnalytics}>
@@ -187,6 +205,7 @@ export function CookieConsent() {
           </label>
           <label className="cookie-preference-row">
             <input
+              ref={preferencesAnalyticsRef}
               type="checkbox"
               checked={analyticsEnabled}
               onChange={(event) => setAnalyticsEnabled(event.target.checked)}
