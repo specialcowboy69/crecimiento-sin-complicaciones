@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
+import { GA_COOKIE_ROOT_DOMAIN, getGoogleAnalyticsCookieDomains } from "../app/components/cookieConsentCookies.mjs";
 
 const repoRoot = process.cwd();
 
@@ -68,7 +69,20 @@ test("cookie consent defaults GA4 off and exposes equal visitor choices", async 
   assert.match(consent, /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-VECVHEZ2DN/);
   assert.match(consent, />\s*Gestionar cookies\s*</);
   assert.match(consent, /name === "_ga" \|\| name\.startsWith\("_ga_"\)/);
+  assert.match(consent, /for \(const domain of getGoogleAnalyticsCookieDomains\(window\.location\.hostname\)\)/);
   assert.match(consent, /window\.location\.reload\(\)/);
+});
+
+test("GA cookie cleanup covers the public parent domain without affecting other hosts", () => {
+  assert.equal(GA_COOKIE_ROOT_DOMAIN, "crecimientosincomplicaciones.com");
+  assert.deepEqual(getGoogleAnalyticsCookieDomains("www.crecimientosincomplicaciones.com"), [
+    "www.crecimientosincomplicaciones.com",
+    "crecimientosincomplicaciones.com",
+  ]);
+  assert.deepEqual(getGoogleAnalyticsCookieDomains("crecimientosincomplicaciones.com"), [
+    "crecimientosincomplicaciones.com",
+  ]);
+  assert.deepEqual(getGoogleAnalyticsCookieDomains("localhost"), ["localhost"]);
 });
 
 test("cookie consent synchronizes its stored preference without effect state writes", async () => {

@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import { getGoogleAnalyticsCookieDomains } from "./cookieConsentCookies.mjs";
 
 const COOKIE_CONSENT_NAME = "cookie_consent";
 const COOKIE_CONSENT_ACCEPTED = "v1:accepted";
@@ -62,7 +63,10 @@ function clearGoogleAnalyticsCookies() {
 
   for (const name of cookieNames) {
     document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;
-    document.cookie = `${name}=; Path=/; Domain=${window.location.hostname}; Max-Age=0; SameSite=Lax`;
+
+    for (const domain of getGoogleAnalyticsCookieDomains(window.location.hostname)) {
+      document.cookie = `${name}=; Path=/; Domain=${domain}; Max-Age=0; SameSite=Lax`;
+    }
   }
 }
 
@@ -73,6 +77,7 @@ export function CookieConsent() {
   const initialDialogActionRef = useRef<HTMLButtonElement>(null);
   const preferencesButtonRef = useRef<HTMLButtonElement>(null);
   const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
+  const shouldRestorePreferencesFocusRef = useRef(false);
 
   useLayoutEffect(() => {
     if (consent === null && !showPreferences) {
@@ -85,10 +90,14 @@ export function CookieConsent() {
       return;
     }
 
-    preferencesButtonRef.current?.focus();
+    if (shouldRestorePreferencesFocusRef.current) {
+      preferencesButtonRef.current?.focus();
+      shouldRestorePreferencesFocusRef.current = false;
+    }
   }, [consent, showPreferences]);
 
   function acceptAnalytics() {
+    shouldRestorePreferencesFocusRef.current = true;
     persistConsent(COOKIE_CONSENT_ACCEPTED);
     notifyConsentChange();
     setAnalyticsEnabled(true);
@@ -98,6 +107,7 @@ export function CookieConsent() {
   function rejectAnalytics() {
     const hadAcceptedAnalytics = consent === "accepted";
 
+    shouldRestorePreferencesFocusRef.current = true;
     persistConsent(COOKIE_CONSENT_REJECTED);
     notifyConsentChange();
     setAnalyticsEnabled(false);
@@ -113,6 +123,11 @@ export function CookieConsent() {
   function openPreferences() {
     setAnalyticsEnabled(consent === "accepted");
     setShowPreferences(true);
+  }
+
+  function closePreferences() {
+    shouldRestorePreferencesFocusRef.current = true;
+    setShowPreferences(false);
   }
 
   function savePreferences() {
@@ -219,7 +234,7 @@ export function CookieConsent() {
             <button type="button" className="cookie-consent-button" onClick={savePreferences}>
               Guardar elección
             </button>
-            <button type="button" className="cookie-consent-link" onClick={() => setShowPreferences(false)}>
+            <button type="button" className="cookie-consent-link" onClick={closePreferences}>
               Cancelar
             </button>
           </div>
