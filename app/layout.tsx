@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { VercelAnalytics } from "./components/VercelAnalytics";
 import { SITE_URL } from "./lib/site";
 import { SCHEMA_CONTEXT, organizationJsonLd, webSiteJsonLd } from "./lib/structuredData";
 import "./globals.css";
@@ -51,6 +52,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <VercelAnalytics />
       </body>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN" />
       <Script id="google-analytics">
