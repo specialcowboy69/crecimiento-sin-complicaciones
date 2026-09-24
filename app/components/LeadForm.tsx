@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { FormEvent, useState } from "react";
+import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { submitLead } from "./submitLead";
 
 type FormState = {
@@ -175,6 +176,7 @@ export function LeadForm({
           {errors.challenge ? <p id="challenge-error" className="error">{errors.challenge}</p> : null}
         </div>
 
+        <FormPrivacyNotice />
         <button className="button primary form-submit" type="submit" disabled={status === "sending"}>
           {status === "sending" ? "Enviando..." : buttonLabel}
         </button>
