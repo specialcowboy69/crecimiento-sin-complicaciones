@@ -140,6 +140,8 @@ Allowed event properties are:
 
 Never include `name`, `contact`, `company`, `message`, website/profile URLs, or any other free-text or personal data in an analytics event. Keep the event after the successful response so failed submissions are not counted as leads. If the event name or its property inventory changes, update `docs/analytics-and-consent.md` in the same change.
 
+When both optional analytics and advertising-measurement consent are granted, a successful submission from exactly `/seo/local` also sends the GA4 event `lead_seo_local_submitted`. It has no event parameters and is the only lead event intended to be imported into Google Ads for the SEO-local campaign. Do not emit it from another route, on validation, on a button click, or after a failed API response.
+
 ## QA Checklist
 
 Before closing form changes:
@@ -148,6 +150,7 @@ Before closing form changes:
 - Submit path still calls `/api/leads`.
 - Payload includes correct `sourcePage`, `sourcePath`, `formType`, `name` and `contact`.
 - A successful submission emits only the documented non-personal `lead_form_submitted` properties; a failed submission does not emit it.
+- With both optional consents granted, a successful `/seo/local` lead emits one parameter-free `lead_seo_local_submitted` GA4 event; other forms do not.
 - Admin panel can still display `formType`, `company`, `interestedService` and `message`.
 - Mobile fields do not overflow.
 - `npm run lint` passes.

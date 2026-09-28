@@ -3,7 +3,9 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
-import { GA_COOKIE_ROOT_DOMAIN, getGoogleAnalyticsCookieDomains } from "../app/components/cookieConsentCookies.mjs";
+import * as cookieConsentCookies from "../app/components/cookieConsentCookies.mjs";
+
+const { GA_COOKIE_ROOT_DOMAIN, getGoogleAnalyticsCookieDomains } = cookieConsentCookies;
 
 const repoRoot = process.cwd();
 
@@ -54,21 +56,24 @@ test("GA4 is no longer mounted unconditionally in the root layout", async () => 
   assert.match(layout, /<CookieConsent \/>/);
 });
 
-test("cookie consent defaults GA4 off and exposes equal visitor choices", async () => {
+test("cookie consent defaults optional measurement off and exposes equal visitor choices", async () => {
   const consentPath = path.join(repoRoot, "app/components/CookieConsent.tsx");
   const consent = existsSync(consentPath) ? await read("app/components/CookieConsent.tsx") : "";
 
-  assert.match(consent, /const COOKIE_CONSENT_NAME = "cookie_consent"/);
-  assert.match(consent, /const COOKIE_CONSENT_ACCEPTED = "v1:accepted"/);
-  assert.match(consent, /const COOKIE_CONSENT_REJECTED = "v1:rejected"/);
+  assert.match(consent, /parseCookieConsentPreferences/);
+  assert.match(consent, /serializeCookieConsentPreferences/);
   assert.match(consent, />\s*Rechazar\s*</);
-  assert.match(consent, />\s*Aceptar analítica\s*</);
+  assert.match(consent, />\s*Aceptar todas\s*</);
   assert.match(consent, />\s*Configurar\s*</);
   assert.match(consent, /analytics_storage: "denied"/);
-  assert.match(consent, /analytics_storage: "granted"/);
+  assert.match(consent, /analytics_storage: consent\.analytics \? "granted" : "denied"/);
+  assert.match(consent, /ad_storage: consent\.advertising \? "granted" : "denied"/);
+  assert.match(consent, /ad_user_data: consent\.advertising \? "granted" : "denied"/);
+  assert.match(consent, /ad_personalization: "denied"/);
   assert.match(consent, /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-VECVHEZ2DN/);
   assert.match(consent, />\s*Gestionar cookies\s*</);
   assert.match(consent, /name === "_ga" \|\| name\.startsWith\("_ga_"\)/);
+  assert.match(consent, /name\.startsWith\("_gcl_"\)/);
   assert.match(consent, /for \(const domain of getGoogleAnalyticsCookieDomains\(window\.location\.hostname\)\)/);
   assert.match(consent, /window\.location\.reload\(\)/);
 });
@@ -83,6 +88,48 @@ test("GA cookie cleanup covers the public parent domain without affecting other 
     "crecimientosincomplicaciones.com",
   ]);
   assert.deepEqual(getGoogleAnalyticsCookieDomains("localhost"), ["localhost"]);
+});
+
+test("Google Ads records a local SEO lead only with explicit analytics and advertising consent", () => {
+  const { parseCookieConsentPreferences, sendGoogleAdsSeoLocalLeadEvent } = cookieConsentCookies;
+
+  assert.deepEqual(parseCookieConsentPreferences?.("v1:accepted"), {
+    analytics: true,
+    advertising: false,
+  });
+  assert.deepEqual(parseCookieConsentPreferences?.("v2:analytics=granted&advertising=granted"), {
+    analytics: true,
+    advertising: true,
+  });
+
+  const calls = [];
+  assert.equal(
+    sendGoogleAdsSeoLocalLeadEvent?.({
+      cookieHeader: "session=active; cookie_consent=v2:analytics=granted&advertising=granted",
+      sourcePath: "/seo/local",
+      gtag: (...args) => calls.push(args),
+    }),
+    true,
+  );
+  assert.deepEqual(calls, [["event", "lead_seo_local_submitted"]]);
+
+  assert.equal(
+    sendGoogleAdsSeoLocalLeadEvent?.({
+      cookieHeader: "cookie_consent=v2:analytics=granted&advertising=denied",
+      sourcePath: "/seo/local",
+      gtag: (...args) => calls.push(args),
+    }),
+    false,
+  );
+  assert.equal(
+    sendGoogleAdsSeoLocalLeadEvent?.({
+      cookieHeader: "cookie_consent=v2:analytics=granted&advertising=granted",
+      sourcePath: "/seo",
+      gtag: (...args) => calls.push(args),
+    }),
+    false,
+  );
+  assert.deepEqual(calls, [["event", "lead_seo_local_submitted"]]);
 });
 
 test("cookie consent synchronizes its stored preference without effect state writes", async () => {
@@ -107,6 +154,8 @@ test("policy routes, form notices, and sitemap policy stay explicit", async () =
   assert.match(cookiesPolicy, /robots: \{ index: false, follow: true \}/);
   assert.match(cookiesPolicy, /cookie_consent/);
   assert.match(cookiesPolicy, /Google Analytics/);
+  assert.match(cookiesPolicy, /Google Ads/);
+  assert.match(cookiesPolicy, /sin personalización ni remarketing/);
   assert.match(cookiesPolicy, /_ga/);
   assert.match(cookiesPolicy, /_ga_VECVHEZ2DN/);
   assert.match(cookiesPolicy, /2 años/);

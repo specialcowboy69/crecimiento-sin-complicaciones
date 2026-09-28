@@ -22,8 +22,8 @@ export default function CookiePolicyPage() {
         <p className="eyebrow">Información legal</p>
         <h1>Política de cookies</h1>
         <p>
-          Esta web utiliza la cookie técnica <code>cookie_consent</code> para recordar tu elección sobre la analítica.
-          Dura 12 meses, tiene la finalidad exclusiva de conservar esa preferencia y no se usa para publicidad.
+          Esta web utiliza la cookie técnica <code>cookie_consent</code> para recordar tu elección sobre analítica y
+          medición publicitaria. Dura 12 meses y tiene la finalidad exclusiva de conservar esas preferencias.
         </p>
 
         <h2>Medición de visitas</h2>
@@ -32,9 +32,8 @@ export default function CookiePolicyPage() {
           sin cookies y no depende de que aceptes la analítica opcional.
         </p>
         <p>
-          Google Analytics solo se carga cuando eliges <strong>Aceptar analítica</strong> o activas la categoría de
-          analítica en el panel de configuración. Si rechazas esta categoría, no descargamos ni configuramos Google
-          Analytics.
+          Google Analytics solo se carga cuando activas la categoría de analítica. Si la rechazas, no descargamos ni
+          configuramos Google Analytics.
         </p>
         <p>
           Cuando aceptas, Google Analytics crea las cookies propias <code>_ga</code> y{" "}
@@ -42,11 +41,22 @@ export default function CookiePolicyPage() {
           segunda conserva el estado de la sesión.
         </p>
 
+        <h2>Medición publicitaria</h2>
+        <p>
+          Si activas también la categoría <strong>Publicidad y medición</strong>, usamos las señales de consentimiento
+          de Google para atribuir a Google Ads una solicitud enviada correctamente desde la página de SEO local. Esta
+          medición no incluye el nombre, email, teléfono, empresa ni el mensaje del formulario.
+        </p>
+        <p>
+          Esta configuración funciona sin personalización ni remarketing, y tampoco utiliza conversiones mejoradas. Si
+          rechazas la categoría publicitaria, mantenemos esta medición desactivada.
+        </p>
+
         <h2>Cómo cambiar tu elección</h2>
         <p>
-          Puedes abrir <strong>Gestionar cookies</strong> en cualquier momento para aceptar o rechazar la analítica.
-          Si revocas una aceptación previa, eliminamos las cookies de Google Analytics accesibles desde este sitio y
-          recargamos la página sin activar la herramienta.
+          Puedes abrir <strong>Gestionar cookies</strong> en cualquier momento para cambiar tus preferencias. Si
+          revocas una aceptación previa, eliminamos las cookies de Google Analytics y de medición publicitaria
+          accesibles desde este sitio y recargamos la página con la nueva elección.
         </p>
 
         <h2>Más información</h2>
