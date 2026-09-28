@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-09-28
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -127,6 +127,19 @@ If a page changes title but not business source, prefer keeping the same `source
 
 Every active form in the Current Forms table must render `FormPrivacyNotice` immediately before its submit button. The shared notice explains that the submitted data is used to answer the request and links to `/politica-de-privacidad`. It does not add a required checkbox and must not alter the `submitLead` payload, `formType`, `sourcePage` or `sourcePath` conventions.
 
+## Analytics Conversion Event
+
+After `/api/leads` returns successfully, `submitLead` sends the Vercel Analytics event `lead_form_submitted`. It is a product-measurement event, not a copy of the lead payload.
+
+Allowed event properties are:
+
+- `source_page`
+- `source_path`
+- `form_type`
+- `interested_service`, only when supplied
+
+Never include `name`, `contact`, `company`, `message`, website/profile URLs, or any other free-text or personal data in an analytics event. Keep the event after the successful response so failed submissions are not counted as leads. If the event name or its property inventory changes, update `docs/analytics-and-consent.md` in the same change.
+
 ## QA Checklist
 
 Before closing form changes:
@@ -134,6 +147,7 @@ Before closing form changes:
 - Submit invalid form and verify visible errors.
 - Submit path still calls `/api/leads`.
 - Payload includes correct `sourcePage`, `sourcePath`, `formType`, `name` and `contact`.
+- A successful submission emits only the documented non-personal `lead_form_submitted` properties; a failed submission does not emit it.
 - Admin panel can still display `formType`, `company`, `interestedService` and `message`.
 - Mobile fields do not overflow.
 - `npm run lint` passes.

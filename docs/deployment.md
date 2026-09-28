@@ -1,6 +1,6 @@
 # Deployment And Domains
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-09-28
 
 This document records production hosting, canonical host and domain redirect behavior for `pagina-agencia`.
 
@@ -72,3 +72,11 @@ If redirects return to `2`, check:
 - The rule match is host-only, not `URI Full` wildcard.
 - `Always Use HTTPS` is off.
 - No earlier Cloudflare Page Rule or Redirect Rule is forcing `http` to `https` before apex-to-www.
+
+## Analytics And Consent Production Checks
+
+- `VercelAnalytics` is mounted in the root layout. It records aggregate, cookie-free visit data and filters `/admin` from collection.
+- `CookieConsent` owns the optional Google Analytics (GA4) integration. GA4 must never be added directly to `app/layout.tsx` or another shared component, because it may load only after the visitor accepts analytics cookies.
+- Before treating analytics as live, deploy the version containing `@vercel/analytics`, confirm that the Vercel project has Analytics enabled, and verify that the dashboard receives production traffic. Installing the package or seeing a local development build is not evidence that production data is arriving.
+- Test the production canonical host, `https://www.crecimientosincomplicaciones.com`, in a fresh browser profile. Check the accept, reject and later-revocation paths described in `docs/analytics-and-consent.md`.
+- If the production hostname changes, review the Google Analytics cookie cleanup domains in `app/components/cookieConsentCookies.mjs` before deployment. Cookie revocation must cover the active host and the apex/root domain where GA cookies may have been written.
