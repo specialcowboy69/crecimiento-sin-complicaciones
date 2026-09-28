@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-09-21
+**Last updated:** 2026-09-28
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -52,7 +52,7 @@ Internal/admin routes:
 
 ## Public legal routes
 
-`/politica-de-cookies` and `/politica-de-privacidad` are public information routes. Both use canonical URLs without trailing slashes and `noindex, follow` metadata. They are deliberately omitted from `app/sitemap.ts` because the sitemap is reserved for indexable commercial pages. The cookie banner and the lead-form privacy notice provide their inbound links.
+`/politica-de-cookies` and `/politica-de-privacidad` are public information routes. Both use canonical URLs without trailing slashes and `noindex, follow` metadata. They are deliberately omitted from `app/sitemap.ts` because the sitemap is reserved for indexable commercial pages. The cookie banner and the lead-form privacy notice provide their inbound links. The operational behavior behind the consent interface is documented in `docs/analytics-and-consent.md`; keep the public policy pages aligned with that behavior.
 
 ## Sitemap Routes
 

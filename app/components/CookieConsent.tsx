@@ -3,15 +3,23 @@
 import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { getGoogleAnalyticsCookieDomains } from "./cookieConsentCookies.mjs";
+import {
+  COOKIE_CONSENT_NAME,
+  getCookieConsentValue,
+  getGoogleAnalyticsCookieDomains,
+  parseCookieConsentPreferences,
+  serializeCookieConsentPreferences,
+} from "./cookieConsentCookies.mjs";
 
-const COOKIE_CONSENT_NAME = "cookie_consent";
-const COOKIE_CONSENT_ACCEPTED = "v1:accepted";
-const COOKIE_CONSENT_REJECTED = "v1:rejected";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 const CONSENT_CHANGE_EVENT = "cookie-consent-change";
 
-type ConsentChoice = "accepted" | "rejected" | null;
+type ConsentPreferences = {
+  analytics: boolean;
+  advertising: boolean;
+};
+
+type ConsentChoice = ConsentPreferences | null;
 
 declare global {
   interface Window {
@@ -20,21 +28,25 @@ declare global {
   }
 }
 
+const deniedGoogleConsent = {
+  ad_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
+  analytics_storage: "denied",
+};
+
+function toGoogleConsentState(consent: ConsentPreferences) {
+  return {
+    ad_storage: consent.advertising ? "granted" : "denied",
+    ad_user_data: consent.advertising ? "granted" : "denied",
+    ad_personalization: "denied",
+    analytics_storage: consent.analytics ? "granted" : "denied",
+  };
+}
+
 function readConsent(): ConsentChoice {
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((cookie) => cookie.startsWith(`${COOKIE_CONSENT_NAME}=`))
-    ?.split("=")[1];
-
-  if (cookieValue === COOKIE_CONSENT_ACCEPTED) {
-    return "accepted";
-  }
-
-  if (cookieValue === COOKIE_CONSENT_REJECTED) {
-    return "rejected";
-  }
-
-  return null;
+  const cookieValue = getCookieConsentValue(document.cookie);
+  return cookieValue === undefined ? null : parseCookieConsentPreferences(cookieValue);
 }
 
 function subscribeToConsentChanges(onStoreChange: () => void) {
@@ -50,16 +62,16 @@ function notifyConsentChange() {
   window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
 }
 
-function persistConsent(value: string) {
+function persistConsent(preferences: ConsentPreferences) {
   const secure = window.location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${COOKIE_CONSENT_NAME}=${value}; Path=/; Max-Age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax${secure}`;
+  document.cookie = `${COOKIE_CONSENT_NAME}=${serializeCookieConsentPreferences(preferences)}; Path=/; Max-Age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax${secure}`;
 }
 
-function clearGoogleAnalyticsCookies() {
+function clearGoogleMeasurementCookies(shouldClear: (name: string) => boolean) {
   const cookieNames = document.cookie
     .split("; ")
     .map((cookie) => cookie.split("=")[0])
-    .filter((name) => name === "_ga" || name.startsWith("_ga_"));
+    .filter(shouldClear);
 
   for (const name of cookieNames) {
     document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;
@@ -70,10 +82,23 @@ function clearGoogleAnalyticsCookies() {
   }
 }
 
+function clearGoogleAnalyticsCookies() {
+  clearGoogleMeasurementCookies((name) => name === "_ga" || name.startsWith("_ga_"));
+}
+
+function clearGoogleAdsCookies() {
+  clearGoogleMeasurementCookies((name) => name.startsWith("_gcl_"));
+}
+
+function preferencesMatch(first: ConsentPreferences | null | undefined, second: ConsentPreferences) {
+  return first?.analytics === second.analytics && first?.advertising === second.advertising;
+}
+
 export function CookieConsent() {
   const consent = useSyncExternalStore(subscribeToConsentChanges, readConsent, getServerConsent);
   const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [advertisingEnabled, setAdvertisingEnabled] = useState(false);
   const initialDialogActionRef = useRef<HTMLButtonElement>(null);
   const preferencesButtonRef = useRef<HTMLButtonElement>(null);
   const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
@@ -96,32 +121,41 @@ export function CookieConsent() {
     }
   }, [consent, showPreferences]);
 
-  function acceptAnalytics() {
-    shouldRestorePreferencesFocusRef.current = true;
-    persistConsent(COOKIE_CONSENT_ACCEPTED);
-    notifyConsentChange();
-    setAnalyticsEnabled(true);
-    setShowPreferences(false);
-  }
-
-  function rejectAnalytics() {
-    const hadAcceptedAnalytics = consent === "accepted";
+  function saveConsent(nextConsent: ConsentPreferences) {
+    const changed = !preferencesMatch(consent, nextConsent);
+    const hadGoogleAnalytics = consent?.analytics === true;
 
     shouldRestorePreferencesFocusRef.current = true;
-    persistConsent(COOKIE_CONSENT_REJECTED);
+    persistConsent(nextConsent);
     notifyConsentChange();
-    setAnalyticsEnabled(false);
+    setAnalyticsEnabled(nextConsent.analytics);
+    setAdvertisingEnabled(nextConsent.advertising);
     setShowPreferences(false);
-    clearGoogleAnalyticsCookies();
 
-    if (hadAcceptedAnalytics) {
-      window.gtag?.("consent", "update", { analytics_storage: "denied" });
+    if (!nextConsent.analytics) {
+      clearGoogleAnalyticsCookies();
+      clearGoogleAdsCookies();
+    } else if (!nextConsent.advertising) {
+      clearGoogleAdsCookies();
+    }
+
+    if (hadGoogleAnalytics && changed) {
+      window.gtag?.("consent", "update", toGoogleConsentState(nextConsent));
       window.location.reload();
     }
   }
 
+  function acceptAll() {
+    saveConsent({ analytics: true, advertising: true });
+  }
+
+  function rejectOptionalCookies() {
+    saveConsent({ analytics: false, advertising: false });
+  }
+
   function openPreferences() {
-    setAnalyticsEnabled(consent === "accepted");
+    setAnalyticsEnabled(consent?.analytics ?? false);
+    setAdvertisingEnabled(consent?.advertising ?? false);
     setShowPreferences(true);
   }
 
@@ -131,32 +165,27 @@ export function CookieConsent() {
   }
 
   function savePreferences() {
-    if (analyticsEnabled) {
-      acceptAnalytics();
-      return;
-    }
-
-    rejectAnalytics();
+    saveConsent({
+      analytics: analyticsEnabled,
+      advertising: analyticsEnabled && advertisingEnabled,
+    });
   }
 
   if (consent === undefined) {
     return null;
   }
 
+  const googleConsent = consent ? toGoogleConsentState(consent) : deniedGoogleConsent;
+
   return (
     <>
-      {consent === "accepted" ? (
+      {consent?.analytics ? (
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
-            window.gtag("consent", "default", {
-              ad_storage: "denied",
-              ad_user_data: "denied",
-              ad_personalization: "denied",
-              analytics_storage: "denied"
-            });
-            window.gtag("consent", "update", { analytics_storage: "granted" });
+            window.gtag("consent", "default", ${JSON.stringify(deniedGoogleConsent)});
+            window.gtag("consent", "update", ${JSON.stringify(googleConsent)});
             const googleAnalyticsScript = document.createElement("script");
             googleAnalyticsScript.async = true;
             googleAnalyticsScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN";
@@ -186,19 +215,24 @@ export function CookieConsent() {
         <section className="cookie-consent" role="dialog" aria-labelledby="cookie-consent-title">
           <h2 id="cookie-consent-title">Tu privacidad</h2>
           <p>
-            Usamos Vercel Analytics para medir visitas de forma agregada y sin cookies. Solo con tu permiso activamos
-            Google Analytics para obtener analítica detallada. Puedes cambiar tu elección cuando quieras.
+            Usamos Vercel Analytics para medir visitas de forma agregada y sin cookies. Con tu permiso activamos Google
+            Analytics y la medición de conversiones de Google Ads. Puedes cambiar tu elección cuando quieras.
           </p>
           <p className="cookie-consent-legal">
             Consulta la <Link href="/politica-de-cookies">Política de cookies</Link> y la{" "}
             <Link href="/politica-de-privacidad">Política de privacidad</Link>.
           </p>
           <div className="cookie-consent-actions">
-            <button ref={initialDialogActionRef} type="button" className="cookie-consent-button" onClick={rejectAnalytics}>
+            <button
+              ref={initialDialogActionRef}
+              type="button"
+              className="cookie-consent-button"
+              onClick={rejectOptionalCookies}
+            >
               Rechazar
             </button>
-            <button type="button" className="cookie-consent-button" onClick={acceptAnalytics}>
-              Aceptar analítica
+            <button type="button" className="cookie-consent-button" onClick={acceptAll}>
+              Aceptar todas
             </button>
             <button type="button" className="cookie-consent-link" onClick={openPreferences}>
               Configurar
@@ -210,7 +244,7 @@ export function CookieConsent() {
       {showPreferences ? (
         <section className="cookie-consent cookie-preferences" role="dialog" aria-labelledby="cookie-preferences-title">
           <h2 id="cookie-preferences-title">Configurar cookies</h2>
-          <p>Las cookies técnicas guardan tu elección. La analítica detallada de Google Analytics es opcional.</p>
+          <p>Las técnicas guardan tu elección. La analítica y la medición publicitaria son opcionales.</p>
           <label className="cookie-preference-row">
             <input type="checkbox" checked disabled />
             <span>
@@ -223,11 +257,30 @@ export function CookieConsent() {
               ref={preferencesAnalyticsRef}
               type="checkbox"
               checked={analyticsEnabled}
-              onChange={(event) => setAnalyticsEnabled(event.target.checked)}
+              onChange={(event) => {
+                setAnalyticsEnabled(event.target.checked);
+                if (!event.target.checked) {
+                  setAdvertisingEnabled(false);
+                }
+              }}
             />
             <span>
               <strong>Analítica</strong>
               <small>Google Analytics nos ayuda a entender el uso de la web.</small>
+            </span>
+          </label>
+          <label className="cookie-preference-row">
+            <input
+              type="checkbox"
+              checked={advertisingEnabled}
+              disabled={!analyticsEnabled}
+              onChange={(event) => setAdvertisingEnabled(event.target.checked)}
+            />
+            <span>
+              <strong>Publicidad y medición</strong>
+              <small>
+                Permite atribuir a Google Ads las solicitudes enviadas. No activamos publicidad personalizada ni remarketing.
+              </small>
             </span>
           </label>
           <div className="cookie-preferences-actions">

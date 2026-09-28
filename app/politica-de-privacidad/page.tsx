@@ -45,8 +45,10 @@ export default function PrivacyPolicyPage() {
         <h2>Proveedores y analítica</h2>
         <p>
           Los formularios se almacenan mediante Firebase Data Connect. Vercel Analytics se utiliza para la medición
-          agregada de visitas. Google Analytics solo se activa si aceptas la categoría de analítica desde el aviso o
-          el panel de cookies.
+          agregada de visitas. Google Analytics solo se activa si aceptas la categoría de analítica. Si además aceptas
+          la categoría de publicidad y medición, registramos en Google Analytics el envío correcto de una solicitud de
+          SEO local para atribuirlo a Google Ads. Ese evento no contiene datos personales del formulario. No usamos
+          remarketing, publicidad personalizada ni conversiones mejoradas.
         </p>
 
         <h2>Tus derechos</h2>

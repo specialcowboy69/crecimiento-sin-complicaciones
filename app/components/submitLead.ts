@@ -1,4 +1,11 @@
 import { track } from "@vercel/analytics";
+import { sendGoogleAdsSeoLocalLeadEvent } from "./cookieConsentCookies.mjs";
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 export type LeadSubmission = {
   sourcePage: string;
@@ -27,5 +34,11 @@ export async function submitLead(payload: LeadSubmission) {
     source_path: payload.sourcePath,
     form_type: payload.formType,
     ...(payload.interestedService ? { interested_service: payload.interestedService } : {}),
+  });
+
+  sendGoogleAdsSeoLocalLeadEvent({
+    cookieHeader: document.cookie,
+    sourcePath: payload.sourcePath,
+    gtag: window.gtag,
   });
 }

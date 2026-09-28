@@ -20,6 +20,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Project Documentation
+
+Project conventions and operating procedures live in [`docs/`](./docs):
+
+- [`docs/site-architecture.md`](./docs/site-architecture.md): public routes, redirects, canonicals, sitemap and internal-link decisions.
+- [`docs/forms-and-leads.md`](./docs/forms-and-leads.md): lead payloads, form taxonomy, privacy notice and conversion-event data contract.
+- [`docs/analytics-and-consent.md`](./docs/analytics-and-consent.md): Vercel Analytics, optional GA4, consent behavior and verification.
+- [`docs/deployment.md`](./docs/deployment.md): production domain, Cloudflare routing and production analytics checks.
+
+On Windows, use the `.cmd` variants when invoking npm from PowerShell:
+
+```powershell
+npm.cmd test
+npm.cmd run lint
+npm.cmd run build
+```
+
+Read the applicable document before changing its area. Route, sitemap, redirect, metadata, shared navigation or form changes require the appropriate validation described there.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
