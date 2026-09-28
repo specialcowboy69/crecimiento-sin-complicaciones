@@ -5,7 +5,7 @@ import path from "node:path";
 import { test } from "node:test";
 import * as cookieConsentCookies from "../app/components/cookieConsentCookies.mjs";
 
-const { GA_COOKIE_ROOT_DOMAIN, getGoogleAnalyticsCookieDomains } = cookieConsentCookies;
+const { GA_COOKIE_ROOT_DOMAIN, getCookieConsentSnapshot, getGoogleAnalyticsCookieDomains } = cookieConsentCookies;
 
 const repoRoot = process.cwd();
 
@@ -90,6 +90,17 @@ test("GA cookie cleanup covers the public parent domain without affecting other 
   assert.deepEqual(getGoogleAnalyticsCookieDomains("localhost"), ["localhost"]);
 });
 
+test("cookie consent external-store snapshot stays stable until the stored choice changes", () => {
+  const legacyAccepted = "v1:accepted";
+  const granted = "v2:analytics=granted&advertising=granted";
+
+  assert.equal(getCookieConsentSnapshot("session=first"), null);
+  assert.strictEqual(getCookieConsentSnapshot(`session=first; cookie_consent=${legacyAccepted}`), legacyAccepted);
+  assert.strictEqual(getCookieConsentSnapshot(`session=second; cookie_consent=${legacyAccepted}`), legacyAccepted);
+  assert.notStrictEqual(getCookieConsentSnapshot(`cookie_consent=${granted}`), legacyAccepted);
+  assert.strictEqual(getCookieConsentSnapshot(`cookie_consent=${granted}`), granted);
+});
+
 test("Google Ads records a local SEO lead only with explicit analytics and advertising consent", () => {
   const { parseCookieConsentPreferences, sendGoogleAdsSeoLocalLeadEvent } = cookieConsentCookies;
 
@@ -137,6 +148,7 @@ test("cookie consent synchronizes its stored preference without effect state wri
 
   assert.match(consent, /useSyncExternalStore/);
   assert.match(consent, /useLayoutEffect/);
+  assert.match(consent, /getCookieConsentSnapshot\(document\.cookie\)/);
   assert.match(consent, /initialDialogActionRef\.current\?\.focus\(\)/);
   assert.match(consent, /preferencesAnalyticsRef\.current\?\.focus\(\)/);
   assert.match(consent, /const CONSENT_CHANGE_EVENT = "cookie-consent-change"/);
