@@ -36,6 +36,10 @@ export function getCookieConsentValue(cookieHeader) {
   return cookieHeader.split("; ").find((cookie) => cookie.startsWith(prefix))?.slice(prefix.length);
 }
 
+export function getCookieConsentSnapshot(cookieHeader) {
+  return getCookieConsentValue(cookieHeader) ?? null;
+}
+
 export function sendGoogleAdsSeoLocalLeadEvent({ cookieHeader, sourcePath, gtag }) {
   const preferences = parseCookieConsentPreferences(getCookieConsentValue(cookieHeader));
 

@@ -1,11 +1,11 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import {
   COOKIE_CONSENT_NAME,
-  getCookieConsentValue,
+  getCookieConsentSnapshot,
   getGoogleAnalyticsCookieDomains,
   parseCookieConsentPreferences,
   serializeCookieConsentPreferences,
@@ -19,7 +19,7 @@ type ConsentPreferences = {
   advertising: boolean;
 };
 
-type ConsentChoice = ConsentPreferences | null;
+type ConsentChoice = ConsentPreferences | null | undefined;
 
 declare global {
   interface Window {
@@ -44,9 +44,8 @@ function toGoogleConsentState(consent: ConsentPreferences) {
   };
 }
 
-function readConsent(): ConsentChoice {
-  const cookieValue = getCookieConsentValue(document.cookie);
-  return cookieValue === undefined ? null : parseCookieConsentPreferences(cookieValue);
+function readConsent(): string | null {
+  return getCookieConsentSnapshot(document.cookie);
 }
 
 function subscribeToConsentChanges(onStoreChange: () => void) {
@@ -95,7 +94,11 @@ function preferencesMatch(first: ConsentPreferences | null | undefined, second: 
 }
 
 export function CookieConsent() {
-  const consent = useSyncExternalStore(subscribeToConsentChanges, readConsent, getServerConsent);
+  const consentValue = useSyncExternalStore(subscribeToConsentChanges, readConsent, getServerConsent);
+  const consent = useMemo<ConsentChoice>(
+    () => (consentValue === undefined || consentValue === null ? consentValue : parseCookieConsentPreferences(consentValue)),
+    [consentValue],
+  );
   const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [advertisingEnabled, setAdvertisingEnabled] = useState(false);
