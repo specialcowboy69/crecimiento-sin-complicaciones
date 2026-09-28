@@ -752,7 +752,6 @@ details p {
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-  touch-action: pan-x;
 }
 
 .case-slide {
