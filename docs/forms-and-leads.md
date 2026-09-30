@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-09-28
+**Last updated:** 2026-09-30
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -141,6 +141,10 @@ Allowed event properties are:
 Never include `name`, `contact`, `company`, `message`, website/profile URLs, or any other free-text or personal data in an analytics event. Keep the event after the successful response so failed submissions are not counted as leads. If the event name or its property inventory changes, update `docs/analytics-and-consent.md` in the same change.
 
 When both optional analytics and advertising-measurement consent are granted, a successful submission from exactly `/seo/local` also sends the GA4 event `lead_seo_local_submitted`. It has no event parameters and is the only lead event intended to be imported into Google Ads for the SEO-local campaign. Do not emit it from another route, on validation, on a button click, or after a failed API response.
+
+Both optional consents must be present when the submission begins and still be valid when measuring its success. A pending tag initialization may delay this event for up to 30 seconds in memory only; it must not replay leads submitted without consent. Revocation, entry into `/admin`, leaving the document or expiry cancels it. See `docs/analytics-and-consent.md` for the delivery contract.
+
+Once the API has accepted a lead, failures or exceptions in Vercel Analytics or GA4 must not reject `submitLead` or show a false form failure. Analytics is not part of the lead-storage transaction, and the API payload and validation rules remain unchanged.
 
 ## QA Checklist
 
