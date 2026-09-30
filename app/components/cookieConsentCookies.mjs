@@ -40,10 +40,14 @@ export function getCookieConsentSnapshot(cookieHeader) {
   return getCookieConsentValue(cookieHeader) ?? null;
 }
 
-export function sendGoogleAdsSeoLocalLeadEvent({ cookieHeader, sourcePath, gtag }) {
+export function isGoogleAdsSeoLocalLeadEligible({ cookieHeader, sourcePath, pathname = sourcePath }) {
   const preferences = parseCookieConsentPreferences(getCookieConsentValue(cookieHeader));
 
-  if (sourcePath !== "/seo/local" || !preferences.analytics || !preferences.advertising || typeof gtag !== "function") {
+  return sourcePath === "/seo/local" && pathname !== "/admin" && !pathname.startsWith("/admin/") && preferences.analytics && preferences.advertising;
+}
+
+export function sendGoogleAdsSeoLocalLeadEvent({ cookieHeader, sourcePath, gtag, pathname = sourcePath }) {
+  if (!isGoogleAdsSeoLocalLeadEligible({ cookieHeader, sourcePath, pathname }) || typeof gtag !== "function") {
     return false;
   }
 
