@@ -1382,6 +1382,14 @@ textarea {
   text-underline-offset: 3px;
 }
 
+/* Several landings keep a fixed audit CTA below the md or lg breakpoint.
+   Keep the final footer controls reachable above it at maximum scroll. */
+@media (max-width: 1023px) {
+  .footer {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom));
+  }
+}
+
 .service-page {
   overflow: hidden;
 }
