@@ -1,6 +1,6 @@
 # Deployment And Domains
 
-**Last updated:** 2026-09-28
+**Last updated:** 2026-09-29
 
 This document records production hosting, canonical host and domain redirect behavior for `pagina-agencia`.
 
@@ -72,6 +72,20 @@ If redirects return to `2`, check:
 - The rule match is host-only, not `URI Full` wildcard.
 - `Always Use HTTPS` is off.
 - No earlier Cloudflare Page Rule or Redirect Rule is forcing `http` to `https` before apex-to-www.
+
+## Git Merge Preflight
+
+Before merging any branch or Pull Request into `main`, review earlier work and report the result to the user:
+
+1. Fetch and prune `origin`, then confirm that the remote default branch is still `main`.
+2. List open Pull Requests that target `main`.
+3. Compare local and remote branches with `origin/main`; identify branches with commits that are not already contained in `main`.
+4. Inspect every registered worktree, including detached worktrees, and check both tracked and untracked changes.
+5. Confirm that the branch proposed for merge is based on the current `origin/main` and that any required checks are passing.
+
+If earlier unmerged work or untracked files need a decision, stop before merging and tell the user the exact branch or worktree, commits or files involved, and the available options. Do not consider a branch pending merely because it still exists when all of its commits are already in `main`.
+
+When the review is clean, say explicitly that no earlier work is pending before carrying out the merge. Do not merge, discard, or overwrite earlier work without the user's direction.
 
 ## Analytics And Consent Production Checks
 
