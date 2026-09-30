@@ -135,7 +135,6 @@ const workItems = [
   {
     title: "Un sistema para solicitar y gestionar reseñas",
     text: "Definimos cuándo pedir una opinión después del servicio, preparamos mensajes para email o WhatsApp y facilitamos un enlace o código QR. Organizamos las solicitudes y las respuestas para que no dependan de la memoria de una persona.",
-    note: "Solicitamos opiniones auténticas, sin premios ni filtros que dejen fuera a clientes descontentos.",
     icon: MessageCircle,
   },
   {
@@ -159,8 +158,13 @@ const workItems = [
 const planRows = [
   {
     work: "Página de servicio",
-    action: "Explicar qué incluye la reforma, proceso, zona atendida y trabajos reales autorizados; revisar indexación, enlaces internos y formulario.",
+    action: "Explicar qué incluye la reforma, el proceso, la zona atendida, las preguntas frecuentes y los trabajos reales autorizados; facilitar la solicitud de presupuesto.",
     value: "Responder a la búsqueda y facilitar una solicitud.",
+  },
+  {
+    work: "SEO de la página",
+    action: "Analizar cómo buscan reformas de baños en la zona y optimizar el título, los encabezados, el contenido, el enlazado interno, los datos estructurados y la indexación.",
+    value: "Mejorar la relevancia de la página para búsquedas locales con intención de contratar.",
   },
   {
     work: "Perfil de Google",
@@ -544,7 +548,7 @@ export default function LocalSeoPage() {
                 Qué suelen destacar los clientes
               </h2>
               <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Las reseñas no prometen posiciones. Ayudan a ver si el negocio se entiende mejor, transmite más confianza y facilita el contacto.
+                Estas opiniones muestran cómo trabajamos: con claridad, implicación y un acompañamiento cercano durante todo el proyecto.
               </p>
             </div>
             <LocalReviewsCarousel items={localReviewHighlights} />
@@ -564,9 +568,6 @@ export default function LocalSeoPage() {
                 </p>
                 <p className={styles.intro}>
                   Trabajamos esas piezas con un mismo criterio: información coherente, contenido útil y referencias auténticas. Las redes ayudan a mostrar tu trabajo y a llevar personas interesadas hacia tus servicios.
-                </p>
-                <p className={`font-bold text-slate-900 ${styles.introEmphasis}`}>
-                  No se trata de pasar una puntuación de autoridad de la web a Maps, sino de desarrollar la presencia del mismo negocio en los lugares donde lo buscan y lo valoran.
                 </p>
               </div>
             </div>
