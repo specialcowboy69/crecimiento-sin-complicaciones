@@ -1359,9 +1359,27 @@ textarea {
   color: var(--muted);
 }
 
-.footer a {
+.footer a,
+.footer-cookie-preferences {
+  border: 0;
+  background: transparent;
   color: var(--primary);
+  cursor: pointer;
   font-weight: 800;
+  padding: 0;
+  text-align: left;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer a:hover,
+.footer-cookie-preferences:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .service-page {
@@ -3171,8 +3189,7 @@ textarea {
 }
 
 .cookie-consent-button,
-.cookie-consent-link,
-.cookie-preferences-button {
+.cookie-consent-link {
   min-height: 44px;
   border: 1px solid #bfdbfe;
   border-radius: 8px;
@@ -3184,19 +3201,10 @@ textarea {
 }
 
 .cookie-consent-button:hover,
-.cookie-consent-link:hover,
-.cookie-preferences-button:hover {
+.cookie-consent-link:hover {
   border-color: var(--primary);
   background: #eff6ff;
   color: var(--primary-dark);
-}
-
-.cookie-preferences-button {
-  position: fixed;
-  right: 16px;
-  bottom: 76px;
-  z-index: 40;
-  box-shadow: var(--shadow-soft);
 }
 
 .cookie-preferences {
@@ -3243,10 +3251,6 @@ textarea {
     flex: 1 1 100%;
   }
 
-  .cookie-preferences-button {
-    right: 12px;
-    bottom: 82px;
-  }
 }
 
 .policy-page {

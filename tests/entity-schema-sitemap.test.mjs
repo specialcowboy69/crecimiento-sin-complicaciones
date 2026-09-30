@@ -62,12 +62,14 @@ test("sobre nosotros page exists and exposes supported entity facts", async () =
 });
 
 test("sobre nosotros is discoverable from public navigation and sitemap", async () => {
-  const home = await read("app/page.tsx");
+  const layout = await read("app/layout.tsx");
+  const footer = await read("app/components/SiteFooter.tsx");
   const pageLinksNav = await read("app/components/PageLinksNav.tsx");
   const sitemap = await read("app/sitemap.ts");
   const siteArchitecture = await read("docs/site-architecture.md");
 
-  assert.equal(home.includes("/sobre-nosotros"), true, "home should link to /sobre-nosotros");
+  assert.match(layout, /<SiteFooter \/>/);
+  assert.equal(footer.includes("/sobre-nosotros"), true, "public footer should link to /sobre-nosotros");
   assert.equal(pageLinksNav.includes("/sobre-nosotros"), true, "PageLinksNav should include /sobre-nosotros");
   assert.match(sitemap, /path:\s*"\/sobre-nosotros"/);
   assert.match(siteArchitecture, /\/sobre-nosotros/);

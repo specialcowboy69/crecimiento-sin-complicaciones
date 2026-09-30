@@ -54,7 +54,7 @@ export default function CookiePolicyPage() {
 
         <h2>Cómo cambiar tu elección</h2>
         <p>
-          Puedes abrir <strong>Gestionar cookies</strong> en cualquier momento para cambiar tus preferencias. Si
+          Puedes abrir <strong>Cambiar configuración de cookies</strong> en el pie de página en cualquier momento para cambiar tus preferencias. Si
           revocas una aceptación previa, eliminamos las cookies de Google Analytics y de medición publicitaria
           accesibles desde este sitio y recargamos la página con la nueva elección.
         </p>

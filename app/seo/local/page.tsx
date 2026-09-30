@@ -767,13 +767,6 @@ export default function LocalSeoPage() {
           </section>
         </main>
 
-        <footer className="border-t border-slate-800 px-4 py-10 sm:px-6 lg:px-8">
-          <div className="mx-auto flex max-w-7xl flex-col gap-2 text-sm font-semibold text-slate-400 md:flex-row md:items-center md:justify-between">
-            <p className="font-black text-slate-900">Crecimiento sin complicaciones</p>
-            <p>SEO local, web y contenidos conectados para negocios de toda España.</p>
-          </div>
-        </footer>
-
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur md:hidden">
           <a className="mx-auto flex min-h-12 max-w-md items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-black text-white shadow-lg shadow-blue-950/40" href="#auditoria-seo-local">
             Solicitar auditoría gratuita

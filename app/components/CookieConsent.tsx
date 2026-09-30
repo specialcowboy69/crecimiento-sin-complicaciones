@@ -3,6 +3,7 @@
 import { useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import { OPEN_COOKIE_PREFERENCES_EVENT } from "./CookiePreferencesLink";
 import {
   COOKIE_CONSENT_NAME,
   getCookieConsentSnapshot,
@@ -103,11 +104,18 @@ export function CookieConsent() {
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [advertisingEnabled, setAdvertisingEnabled] = useState(false);
   const initialDialogActionRef = useRef<HTMLButtonElement>(null);
-  const preferencesButtonRef = useRef<HTMLButtonElement>(null);
+  const preferencesOpenerRef = useRef<HTMLButtonElement>(null);
   const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
   const shouldRestorePreferencesFocusRef = useRef(false);
 
   useLayoutEffect(() => {
+    if (shouldRestorePreferencesFocusRef.current) {
+      preferencesOpenerRef.current?.focus();
+      preferencesOpenerRef.current = null;
+      shouldRestorePreferencesFocusRef.current = false;
+      return;
+    }
+
     if (consent === null && !showPreferences) {
       initialDialogActionRef.current?.focus();
       return;
@@ -118,17 +126,25 @@ export function CookieConsent() {
       return;
     }
 
-    if (shouldRestorePreferencesFocusRef.current) {
-      preferencesButtonRef.current?.focus();
-      shouldRestorePreferencesFocusRef.current = false;
-    }
   }, [consent, showPreferences]);
+
+  useLayoutEffect(() => {
+    function openPreferencesFromFooter(event: Event) {
+      preferencesOpenerRef.current = event instanceof CustomEvent && event.detail instanceof HTMLButtonElement ? event.detail : null;
+      setAnalyticsEnabled(consent?.analytics ?? false);
+      setAdvertisingEnabled(consent?.advertising ?? false);
+      setShowPreferences(true);
+    }
+
+    window.addEventListener(OPEN_COOKIE_PREFERENCES_EVENT, openPreferencesFromFooter);
+    return () => window.removeEventListener(OPEN_COOKIE_PREFERENCES_EVENT, openPreferencesFromFooter);
+  }, [consent]);
 
   function saveConsent(nextConsent: ConsentPreferences) {
     const changed = !preferencesMatch(consent, nextConsent);
     const hadGoogleAnalytics = consent?.analytics === true;
 
-    shouldRestorePreferencesFocusRef.current = true;
+    shouldRestorePreferencesFocusRef.current = showPreferences && preferencesOpenerRef.current !== null;
     persistConsent(nextConsent);
     notifyConsentChange();
     setAnalyticsEnabled(nextConsent.analytics);
@@ -163,7 +179,7 @@ export function CookieConsent() {
   }
 
   function closePreferences() {
-    shouldRestorePreferencesFocusRef.current = true;
+    shouldRestorePreferencesFocusRef.current = preferencesOpenerRef.current !== null;
     setShowPreferences(false);
   }
 
@@ -199,19 +215,6 @@ export function CookieConsent() {
             document.head.appendChild(googleAnalyticsScript);
           `}
         </Script>
-      ) : null}
-
-      {consent !== null ? (
-        <button
-          type="button"
-          ref={preferencesButtonRef}
-          className="cookie-preferences-button"
-          onClick={openPreferences}
-          aria-haspopup="dialog"
-          aria-expanded={showPreferences}
-        >
-          Gestionar cookies
-        </button>
       ) : null}
 
       {consent === null && !showPreferences ? (

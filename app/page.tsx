@@ -277,13 +277,6 @@ export default function Home() {
         <LeadForm />
       </main>
 
-      <footer className="footer">
-        <p>© 2026 Crecimiento sin complicaciones. Agencia SEO, Google Ads, diseño web y automatizaciones.</p>
-        <div className="flex flex-wrap gap-4">
-          <a href="/sobre-nosotros">Sobre nosotros</a>
-          <a href="#inicio">Volver arriba</a>
-        </div>
-      </footer>
     </>
   );
 }

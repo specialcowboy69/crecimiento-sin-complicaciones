@@ -1,6 +1,6 @@
 # Analytics And Consent
 
-**Last updated:** 2026-09-28
+**Last updated:** 2026-09-29
 
 This document is the operational source of truth for visitor measurement and cookie-consent behavior in `pagina-agencia`. The public explanation remains in `/politica-de-cookies` and `/politica-de-privacidad`; update those pages whenever this implementation changes in a way that affects visitors.
 
@@ -17,7 +17,7 @@ This document is the operational source of truth for visitor measurement and coo
 ## Consent Rules
 
 - The technical `cookie_consent` cookie stores the separate analytics and advertising-measurement choices for 12 months, with `Path=/`, `SameSite=Lax` and `Secure` on HTTPS. Existing `v1:accepted` choices migrate to analytics granted and advertising denied; no prior visitor is silently opted into advertising measurement.
-- On a first visit, the banner offers **Rechazar**, **Aceptar todas** and **Configurar**. The configuration panel keeps technical cookies enabled, lets a visitor enable analytics, and exposes advertising measurement only together with analytics. **Gestionar cookies** remains available after a choice.
+- On a first visit, the banner offers **Rechazar**, **Aceptar todas** and **Configurar**. The configuration panel keeps technical cookies enabled, lets a visitor enable analytics, and exposes advertising measurement only together with analytics. After a choice, the non-floating **Cambiar configuración de cookies** control remains available in the public footer.
 - Rejection keeps Vercel Analytics available but must not download or configure GA4. The technical preference cookie is necessary to remember the rejection.
 - Analytics consent loads GA4 after the page becomes interactive and grants `analytics_storage`. Advertising-measurement consent additionally grants `ad_storage` and `ad_user_data` for the GA4-to-Google-Ads conversion flow. `ad_personalization` remains denied: this implementation has no remarketing or personalized advertising.
 - Revoking analytics removes accessible `_ga`, `_ga_*` and `_gcl_*` cookies for the current host and project root domain, updates Google consent to denied, and reloads without GA4. Revoking only advertising measurement removes `_gcl_*` cookies and reloads with analytics still available.
@@ -55,7 +55,7 @@ Then verify in a fresh browser profile on the production canonical host after de
 2. Rejecting preserves only the technical preference for this feature; GA4 and advertising measurement remain absent.
 3. Accepting analytics loads GA4 with analytics storage granted and advertising storage denied.
 4. Accepting analytics plus advertising measurement grants `ad_storage` and `ad_user_data`, while `ad_personalization` remains denied.
-5. Revoking through **Gestionar cookies** removes the relevant Google cookies for the active host and root domain, then reloads with the new settings.
+5. Revoking through **Cambiar configuración de cookies** in the public footer removes the relevant Google cookies for the active host and root domain, then reloads with the new settings.
 6. A successful `/seo/local` lead with both consents produces one parameter-free `lead_seo_local_submitted` GA4 event. A failed lead, another route, or either missing consent produces none.
 7. Vercel Analytics excludes `/admin`, and the Vercel project dashboard receives production traffic after Analytics has been enabled/confirmed there.
 
