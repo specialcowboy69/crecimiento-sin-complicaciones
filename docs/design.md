@@ -53,6 +53,8 @@ Reglas:
 - Los textos de botones deben caber siempre en móvil.
 - Los subtítulos deben explicar el valor, no repetir el titular.
 
+Piloto de legibilidad en `/seo/local`: los textos explicativos de la página usan 16 px como mínimo, interlineado cercano a 1,7 y tonos slate oscuros sobre superficies claras. Sus introducciones de 18 px, titulares, etiquetas y controles conservan la escala existente. Los ajustes viven en el módulo CSS de esa página para no alterar otras landings.
+
 El tono debe ser profesional, cercano y concreto. Mejor "atraen tráfico cualificado y convierten visitas en conversaciones comerciales" que frases vagas como "llevamos tu negocio al siguiente nivel".
 
 ## Navegación

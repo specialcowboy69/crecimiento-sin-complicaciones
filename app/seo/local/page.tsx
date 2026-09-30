@@ -17,6 +17,7 @@ import { LocalReviewsCarousel } from "../../components/LocalReviewsCarousel";
 import { LocalSeoAuditForm } from "../../components/LocalSeoAuditForm";
 import { Logo } from "../../components/Logo";
 import { SITE_URL, absoluteUrl } from "../../lib/site";
+import styles from "./page.module.css";
 
 const pagePath = "/seo/local";
 const pageUrl = absoluteUrl(pagePath);
@@ -408,7 +409,7 @@ export default function LocalSeoPage() {
                 <h1 id="local-seo-hero-title" className="mb-5 max-w-3xl text-4xl font-black leading-[1.04] text-slate-900 sm:text-5xl lg:text-[3.05rem] xl:text-[3.45rem]">
                   SEO local para conseguir más consultas
                 </h1>
-                <div className="max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl">
+                <div className={`max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl ${styles.intro}`}>
                   Conectamos Google Maps, tu web, reseñas y redes para que tus servicios sean fáciles de encontrar y contactar. Si no tienes web, también la creamos.
                 </div>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -431,7 +432,7 @@ export default function LocalSeoPage() {
                       <div className="mt-3 text-2xl font-black leading-tight sm:text-3xl" style={{ color: "#ffffff" }}>
                         De Google Maps a una consulta real
                       </div>
-                      <div className="mt-4 max-w-md text-sm font-bold leading-6 text-blue-50 sm:text-base">
+                      <div className={`mt-4 max-w-md font-bold text-blue-50 ${styles.gradientBody}`}>
                         Maps, web, reseñas y redes unidos por el contacto.
                       </div>
                     </div>
@@ -502,11 +503,11 @@ export default function LocalSeoPage() {
                   <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
                     <item.icon className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                     <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-300">
+              <p className={`mt-8 max-w-3xl text-lg leading-8 text-slate-300 ${styles.intro}`}>
                 Revisamos qué servicios quieres impulsar y qué necesita cada canal para apoyar ese objetivo.
               </p>
             </div>
@@ -518,7 +519,7 @@ export default function LocalSeoPage() {
               <h2 id="includes-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Una estrategia local, desde el contenido hasta el contacto
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                 Podemos ocuparnos de todo el proceso o empezar por las prioridades de tu negocio. Tendrás por escrito qué hacemos, en qué canales y con qué frecuencia.
               </p>
             </div>
@@ -529,8 +530,8 @@ export default function LocalSeoPage() {
                     <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
                   </span>
                   <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
-                  {item.note ? <p className="mt-4 text-sm font-bold leading-7 text-slate-900">{item.note}</p> : null}
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
+                  {item.note ? <p className={`mt-4 font-bold text-slate-900 ${styles.emphasis}`}>{item.note}</p> : null}
                 </article>
               ))}
             </div>
@@ -542,7 +543,7 @@ export default function LocalSeoPage() {
               <h2 id="local-reviews-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Qué suelen destacar los clientes
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                 Las reseñas no prometen posiciones. Ayudan a ver si el negocio se entiende mejor, transmite más confianza y facilita el contacto.
               </p>
             </div>
@@ -558,13 +559,13 @@ export default function LocalSeoPage() {
                 </h2>
               </div>
               <div className="grid gap-5 text-lg leading-8 text-slate-300">
-                <p>
+                <p className={styles.intro}>
                   Tu web explica tus servicios y dónde los prestas. Las reseñas aportan experiencias de clientes. Los enlaces desde otras webs pueden contribuir a la notoriedad de tu negocio, uno de los aspectos que Google considera en los resultados locales.
                 </p>
-                <p>
+                <p className={styles.intro}>
                   Trabajamos esas piezas con un mismo criterio: información coherente, contenido útil y referencias auténticas. Las redes ayudan a mostrar tu trabajo y a llevar personas interesadas hacia tus servicios.
                 </p>
-                <p className="font-bold text-slate-900">
+                <p className={`font-bold text-slate-900 ${styles.introEmphasis}`}>
                   No se trata de pasar una puntuación de autoridad de la web a Maps, sino de desarrollar la presencia del mismo negocio en los lugares donde lo buscan y lo valoran.
                 </p>
               </div>
@@ -577,14 +578,14 @@ export default function LocalSeoPage() {
               <h2 id="plan-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Así conectamos el trabajo alrededor de un servicio
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                 Imagina una empresa de reformas que quiere recibir consultas sobre reformas de baños. Este sería un ejemplo de trabajo coordinado.
               </p>
             </div>
             <div className="mt-10 overflow-hidden rounded-lg bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200">
               <div className="border-b border-slate-200 bg-blue-50 p-5">
                 <h3 className="text-xl font-black text-slate-900">Ejemplo ilustrativo de plan de trabajo</h3>
-                <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
+                <p className={`mt-2 font-semibold text-slate-600 ${styles.emphasis}`}>
                   No corresponde a un cliente ni demuestra resultados obtenidos. Las tareas reales se definen después de revisar cada negocio.
                 </p>
               </div>
@@ -602,8 +603,8 @@ export default function LocalSeoPage() {
                     {planRows.map((row) => (
                       <tr key={row.work}>
                         <th className="border-b border-slate-200 p-5 text-sm font-black text-slate-900">{row.work}</th>
-                        <td className="border-b border-slate-200 p-5 text-sm leading-6 text-slate-600">{row.action}</td>
-                        <td className="border-b border-slate-200 p-5 text-sm font-bold leading-6 text-slate-700">{row.value}</td>
+                        <td className={`border-b border-slate-200 p-5 text-slate-600 ${styles.body}`}>{row.action}</td>
+                        <td className={`border-b border-slate-200 p-5 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -613,8 +614,8 @@ export default function LocalSeoPage() {
                 {planRows.map((row) => (
                   <article className="rounded-lg border border-slate-200 p-4" key={row.work}>
                     <h3 className="text-lg font-black text-slate-900">{row.work}</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{row.action}</p>
-                    <p className="mt-3 text-sm font-bold leading-6 text-slate-700">{row.value}</p>
+                    <p className={`mt-3 text-slate-600 ${styles.body}`}>{row.action}</p>
+                    <p className={`mt-3 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</p>
                   </article>
                 ))}
               </div>
@@ -623,7 +624,7 @@ export default function LocalSeoPage() {
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
                 Solicitar auditoría gratuita
               </a>
-              <p className="text-base font-semibold text-slate-300">Cada canal cumple una función. La estrategia los une alrededor del servicio que quieres vender.</p>
+              <p className={`text-base font-semibold text-slate-300 ${styles.emphasis}`}>Cada canal cumple una función. La estrategia los une alrededor del servicio que quieres vender.</p>
             </div>
           </section>
 
@@ -641,12 +642,12 @@ export default function LocalSeoPage() {
                     <span className="text-3xl font-black text-blue-400">{step.step}</span>
                     <div>
                       <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                      <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
+                      <p className={`mt-2 text-slate-300 ${styles.body}`}>{step.text}</p>
                     </div>
                   </article>
                 ))}
               </div>
-              <p className="mt-8 text-lg font-bold text-slate-900">Pedir la auditoría gratuita no supone contratar el servicio.</p>
+              <p className={`mt-8 text-lg font-bold text-slate-900 ${styles.introEmphasis}`}>Pedir la auditoría gratuita no supone contratar el servicio.</p>
             </div>
           </section>
 
@@ -657,7 +658,7 @@ export default function LocalSeoPage() {
                 <h2 id="budget-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Un presupuesto según lo que necesita tu negocio
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                   La auditoría inicial es gratuita. La implementación y la gestión son servicios de pago.
                 </p>
               </div>
@@ -665,7 +666,7 @@ export default function LocalSeoPage() {
                 {budgetItems.map((item) => (
                   <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
                     <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
@@ -679,7 +680,7 @@ export default function LocalSeoPage() {
                 <h2 id="trust-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Sabrás qué hacemos y qué queda por hacer
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                   En Crecimiento sin complicaciones podemos coordinar tu perfil de Google, el SEO de tu web, los contenidos, las reseñas y las redes sociales. Tendrás una hoja de ruta común y el alcance por escrito.
                 </p>
               </div>
@@ -688,7 +689,7 @@ export default function LocalSeoPage() {
                   <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
                     <ShieldCheck className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                     <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
@@ -707,12 +708,12 @@ export default function LocalSeoPage() {
                 <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/seo">
                   <FileText className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   <h3 className="!mt-7 text-xl font-black text-slate-900">Agencia SEO</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">SEO nacional, técnico, arquitectura y contenidos para captar demanda desde Google.</p>
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>SEO nacional, técnico, arquitectura y contenidos para captar demanda desde Google.</p>
                 </Link>
                 <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/diseno-pagina-web-profesional">
                   <Building2 className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   <h3 className="!mt-7 text-xl font-black text-slate-900">Diseño web profesional</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">Si no tienes web, podemos crear las páginas de tus servicios y conectarlas con tu estrategia local.</p>
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>Si no tienes web, podemos crear las páginas de tus servicios y conectarlas con tu estrategia local.</p>
                 </Link>
               </div>
             </div>
@@ -729,7 +730,7 @@ export default function LocalSeoPage() {
               {faqs.map((faq) => (
                 <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
                   <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
-                  <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
+                  <p className={`mt-4 text-slate-300 ${styles.body}`}>{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -742,7 +743,7 @@ export default function LocalSeoPage() {
                 <h2 id="audit-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Veamos qué puede mejorar en tu presencia local
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                   Cuéntanos qué negocio tienes. Revisaremos tu presencia local y cómo conectar Google, web y contenido alrededor de tus servicios. Te responderemos con las prioridades que detectemos y el siguiente paso recomendado.
                 </p>
                 <div className="mt-8 grid gap-3">
@@ -751,13 +752,13 @@ export default function LocalSeoPage() {
                     "Prioridades para ordenar Google Maps, web, reseñas y contenido.",
                     "Revisión inicial sin coste; creación web y gestión bajo presupuesto.",
                   ].map((item) => (
-                    <p className="flex gap-3 text-slate-200" key={item}>
+                    <p className={`flex gap-3 text-slate-200 ${styles.body}`} key={item}>
                       <CheckIcon />
                       <span>{item}</span>
                     </p>
                   ))}
                 </div>
-                <p className="mt-8 flex gap-3 rounded-lg bg-white/5 p-5 text-sm font-semibold leading-6 text-slate-300 ring-1 ring-white/10">
+                <p className={`mt-8 flex gap-3 rounded-lg bg-white/5 p-5 font-semibold text-slate-300 ring-1 ring-white/10 ${styles.emphasis}`}>
                   <Link2 className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   Usaremos estos datos para revisar tu negocio y responder a tu solicitud.
                 </p>
