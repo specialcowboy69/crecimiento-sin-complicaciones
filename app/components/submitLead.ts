@@ -1,5 +1,6 @@
 import { track } from "@vercel/analytics";
-import { sendGoogleAdsSeoLocalLeadEvent } from "./cookieConsentCookies.mjs";
+import { isGoogleAdsSeoLocalLeadEligible } from "./cookieConsentCookies.mjs";
+import { deliverGoogleAdsSeoLocalLeadEvent } from "./googleLeadDelivery.mjs";
 
 declare global {
   interface Window {
@@ -19,6 +20,17 @@ export type LeadSubmission = {
 };
 
 export async function submitLead(payload: LeadSubmission) {
+  let googleLeadEligibleAtSubmit = false;
+  try {
+    googleLeadEligibleAtSubmit = isGoogleAdsSeoLocalLeadEligible({
+      cookieHeader: document.cookie,
+      sourcePath: payload.sourcePath,
+      pathname: window.location.pathname,
+    });
+  } catch {
+    // Optional measurement must not prevent the lead request.
+  }
+
   const response = await fetch("/api/leads", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -29,16 +41,20 @@ export async function submitLead(payload: LeadSubmission) {
     throw new Error("Lead submission failed");
   }
 
-  track("lead_form_submitted", {
-    source_page: payload.sourcePage,
-    source_path: payload.sourcePath,
-    form_type: payload.formType,
-    ...(payload.interestedService ? { interested_service: payload.interestedService } : {}),
-  });
+  try {
+    track("lead_form_submitted", {
+      source_page: payload.sourcePage,
+      source_path: payload.sourcePath,
+      form_type: payload.formType,
+      ...(payload.interestedService ? { interested_service: payload.interestedService } : {}),
+    });
+  } catch {
+    // The API already stored this lead; provider failures cannot show a form error.
+  }
 
-  sendGoogleAdsSeoLocalLeadEvent({
-    cookieHeader: document.cookie,
-    sourcePath: payload.sourcePath,
-    gtag: window.gtag,
-  });
+  try {
+    if (googleLeadEligibleAtSubmit) deliverGoogleAdsSeoLocalLeadEvent(payload.sourcePath);
+  } catch {
+    // Google measurement is independent of the successful lead response.
+  }
 }

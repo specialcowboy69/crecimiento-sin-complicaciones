@@ -1,6 +1,6 @@
 # Deployment And Domains
 
-**Last updated:** 2026-09-28
+**Last updated:** 2026-09-30
 
 This document records production hosting, canonical host and domain redirect behavior for `pagina-agencia`.
 
@@ -73,11 +73,27 @@ If redirects return to `2`, check:
 - `Always Use HTTPS` is off.
 - No earlier Cloudflare Page Rule or Redirect Rule is forcing `http` to `https` before apex-to-www.
 
+## Git Merge Preflight
+
+Before merging any branch or Pull Request into `main`, review earlier work and report the result to the user:
+
+1. Fetch and prune `origin`, then confirm that the remote default branch is still `main`.
+2. List open Pull Requests that target `main`.
+3. Compare local and remote branches with `origin/main`; identify branches with commits that are not already contained in `main`.
+4. Inspect every registered worktree, including detached worktrees, and check both tracked and untracked changes.
+5. Confirm that the branch proposed for merge is based on the current `origin/main` and that any required checks are passing.
+
+If earlier unmerged work or untracked files need a decision, stop before merging and tell the user the exact branch or worktree, commits or files involved, and the available options. Do not consider a branch pending merely because it still exists when all of its commits are already in `main`.
+
+When the review is clean, say explicitly that no earlier work is pending before carrying out the merge. Do not merge, discard, or overwrite earlier work without the user's direction.
+
 ## Analytics And Consent Production Checks
 
 - `VercelAnalytics` is mounted in the root layout. It records aggregate, cookie-free visit data and filters `/admin` from collection.
 - `CookieConsent` owns the optional Google Analytics (GA4) and Google Ads conversion-measurement integration. GA4 must never be added directly to `app/layout.tsx` or another shared component, because it may load only after the visitor accepts analytics cookies. Google Ads measurement needs the additional advertising-measurement consent and must keep `ad_personalization` denied unless a separately approved remarketing change is made.
+- GA4 is also excluded from `/admin` and its descendants, including client-side transitions after accepting cookies. Verify both a direct admin visit and a public-to-admin transition after each measurement release.
 - Before treating analytics as live, deploy the version containing `@vercel/analytics`, confirm that the Vercel project has Analytics enabled, and verify that the dashboard receives production traffic. Installing the package or seeing a local development build is not evidence that production data is arriving.
 - Test the production canonical host, `https://www.crecimientosincomplicaciones.com`, in a fresh browser profile. Check the accept, reject and later-revocation paths described in `docs/analytics-and-consent.md`.
 - If the production hostname changes, review the Google Analytics cookie cleanup domains in `app/components/cookieConsentCookies.mjs` before deployment. Cookie revocation must cover the active host and the apex/root domain where GA cookies may have been written.
 - After deployment, use a fresh consented browser session to submit `/seo/local`, verify `lead_seo_local_submitted` in GA4 DebugView, then mark/import it in the Google dashboards. Confirm Google Ads auto-tagging and the GA4-to-Google-Ads account link there; this repository cannot verify account-level settings.
+- Confirm the four Consent Mode signals in Tag Assistant for analytics-only acceptance, both permissions and withdrawal. Repository tests use an intercepted Google loader; a green local test does not prove Google ingestion, Ads attribution or that an account warning has cleared. Keep the existing GA4 import rather than creating a duplicate native Ads conversion for the same lead.

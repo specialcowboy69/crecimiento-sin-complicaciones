@@ -11,6 +11,8 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    // Generated browser test reports/traces are not application source.
+    "output/**",
     "next-env.d.ts",
   ]),
 ]);

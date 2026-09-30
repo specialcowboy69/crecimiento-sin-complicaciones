@@ -71,11 +71,33 @@ test("cookie consent defaults optional measurement off and exposes equal visitor
   assert.match(consent, /ad_user_data: consent\.advertising \? "granted" : "denied"/);
   assert.match(consent, /ad_personalization: "denied"/);
   assert.match(consent, /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-VECVHEZ2DN/);
-  assert.match(consent, />\s*Gestionar cookies\s*</);
+  assert.doesNotMatch(consent, /cookie-preferences-button/);
   assert.match(consent, /name === "_ga" \|\| name\.startsWith\("_ga_"\)/);
   assert.match(consent, /name\.startsWith\("_gcl_"\)/);
   assert.match(consent, /for \(const domain of getGoogleAnalyticsCookieDomains\(window\.location\.hostname\)\)/);
   assert.match(consent, /window\.location\.reload\(\)/);
+});
+
+test("a shared public footer keeps an accessible cookie-preferences opener without a floating manager", async () => {
+  const layout = await read("app/layout.tsx");
+  const footer = await readIfExists("app/components/SiteFooter.tsx");
+  const preferencesLink = await readIfExists("app/components/CookiePreferencesLink.tsx");
+  const consent = await read("app/components/CookieConsent.tsx");
+  const styles = await read("app/globals.css");
+
+  assert.match(layout, /import \{ SiteFooter \} from "\.\/components\/SiteFooter"/);
+  assert.match(layout, /<SiteFooter \/>/);
+  assert.match(footer, /<CookiePreferencesLink \/>/);
+  assert.match(preferencesLink, />\s*Cambiar configuración de cookies\s*</);
+  assert.match(preferencesLink, /OPEN_COOKIE_PREFERENCES_EVENT/);
+  assert.match(preferencesLink, /new CustomEvent\(OPEN_COOKIE_PREFERENCES_EVENT/);
+  assert.match(consent, /window\.addEventListener\(OPEN_COOKIE_PREFERENCES_EVENT/);
+  assert.match(consent, /preferencesOpenerRef\.current\?\.focus\(\)/);
+  assert.ok(
+    consent.indexOf("if (shouldRestorePreferencesFocusRef.current)") < consent.indexOf("if (consent === null && !showPreferences)"),
+    "closing preferences opened from the footer must restore its opener before banner focus is applied",
+  );
+  assert.doesNotMatch(styles, /\.cookie-preferences-button/);
 });
 
 test("GA cookie cleanup covers the public parent domain without affecting other hosts", () => {

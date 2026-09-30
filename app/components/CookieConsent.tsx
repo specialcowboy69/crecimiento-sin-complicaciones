@@ -2,7 +2,8 @@
 
 import { useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import Script from "next/script";
+import { usePathname } from "next/navigation";
+import { OPEN_COOKIE_PREFERENCES_EVENT } from "./CookiePreferencesLink";
 import {
   COOKIE_CONSENT_NAME,
   getCookieConsentSnapshot,
@@ -13,6 +14,9 @@ import {
 
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 const CONSENT_CHANGE_EVENT = "cookie-consent-change";
+const GOOGLE_ANALYTICS_ID = "G-VECVHEZ2DN";
+const GOOGLE_MEASUREMENT_READY_EVENT = "google-measurement-ready";
+const GOOGLE_MEASUREMENT_DISABLED_EVENT = "google-measurement-disabled";
 
 type ConsentPreferences = {
   analytics: boolean;
@@ -25,6 +29,8 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    googleAnalyticsReady?: boolean;
+    "ga-disable-G-VECVHEZ2DN"?: boolean;
   }
 }
 
@@ -46,6 +52,14 @@ function toGoogleConsentState(consent: ConsentPreferences) {
 
 function readConsent(): string | null {
   return getCookieConsentSnapshot(document.cookie);
+}
+
+function isAdminPathname(pathname: string) {
+  return pathname === "/admin" || pathname.startsWith("/admin/");
+}
+
+function isGoogleMeasurementDisabled() {
+  return isAdminPathname(window.location.pathname) || !parseCookieConsentPreferences(readConsent() ?? "")?.analytics;
 }
 
 function subscribeToConsentChanges(onStoreChange: () => void) {
@@ -94,6 +108,8 @@ function preferencesMatch(first: ConsentPreferences | null | undefined, second: 
 }
 
 export function CookieConsent() {
+  const pathname = usePathname();
+  const isAdmin = isAdminPathname(pathname);
   const consentValue = useSyncExternalStore(subscribeToConsentChanges, readConsent, getServerConsent);
   const consent = useMemo<ConsentChoice>(
     () => (consentValue === undefined || consentValue === null ? consentValue : parseCookieConsentPreferences(consentValue)),
@@ -103,11 +119,86 @@ export function CookieConsent() {
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [advertisingEnabled, setAdvertisingEnabled] = useState(false);
   const initialDialogActionRef = useRef<HTMLButtonElement>(null);
-  const preferencesButtonRef = useRef<HTMLButtonElement>(null);
+  const preferencesOpenerRef = useRef<HTMLButtonElement>(null);
   const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
   const shouldRestorePreferencesFocusRef = useRef(false);
+  const googleAnalyticsScriptRef = useRef<HTMLScriptElement | null>(null);
+  const googleAnalyticsLoadedRef = useRef(false);
 
   useLayoutEffect(() => {
+    // GA also sends automatic history events. Read the live URL at send time so
+    // entering admin is blocked before React's route effects have run.
+    Object.defineProperty(window, `ga-disable-${GOOGLE_ANALYTICS_ID}`, {
+      configurable: true,
+      get: isGoogleMeasurementDisabled,
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (isAdmin || !consent?.analytics || isGoogleMeasurementDisabled()) {
+      window.dispatchEvent(new Event(GOOGLE_MEASUREMENT_DISABLED_EVENT));
+      return;
+    }
+
+    function initializeGoogleAnalytics() {
+      if (window.googleAnalyticsReady || isGoogleMeasurementDisabled()) {
+        return;
+      }
+
+      const currentConsent = parseCookieConsentPreferences(readConsent() ?? "");
+      if (!currentConsent?.analytics) {
+        return;
+      }
+
+      if (!preferencesMatch(consent, currentConsent)) {
+        window.gtag?.("consent", "update", toGoogleConsentState(currentConsent));
+      }
+      window.gtag?.("js", new Date());
+      window.gtag?.("config", GOOGLE_ANALYTICS_ID);
+      window.googleAnalyticsReady = true;
+      window.dispatchEvent(new Event(GOOGLE_MEASUREMENT_READY_EVENT));
+    }
+
+    // Keep the loaded script across public/admin navigation. If loading finishes
+    // in admin, defer configuration until a consenting public route is shown.
+    if (googleAnalyticsLoadedRef.current) {
+      initializeGoogleAnalytics();
+      return;
+    }
+
+    if (googleAnalyticsScriptRef.current) {
+      return;
+    }
+
+    window.googleAnalyticsReady = false;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(...args: unknown[]) { window.dataLayer?.push(args); };
+    window.gtag("consent", "default", deniedGoogleConsent);
+    window.gtag("consent", "update", toGoogleConsentState(consent));
+
+    const googleAnalyticsScript = document.createElement("script");
+    googleAnalyticsScript.async = true;
+    googleAnalyticsScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN";
+    googleAnalyticsScript.onload = () => {
+      googleAnalyticsLoadedRef.current = true;
+      initializeGoogleAnalytics();
+    };
+    googleAnalyticsScriptRef.current = googleAnalyticsScript;
+    document.head.appendChild(googleAnalyticsScript);
+  }, [consent, isAdmin, pathname]);
+
+  useLayoutEffect(() => {
+    if (isAdmin) {
+      return;
+    }
+
+    if (shouldRestorePreferencesFocusRef.current) {
+      preferencesOpenerRef.current?.focus();
+      preferencesOpenerRef.current = null;
+      shouldRestorePreferencesFocusRef.current = false;
+      return;
+    }
+
     if (consent === null && !showPreferences) {
       initialDialogActionRef.current?.focus();
       return;
@@ -118,17 +209,29 @@ export function CookieConsent() {
       return;
     }
 
-    if (shouldRestorePreferencesFocusRef.current) {
-      preferencesButtonRef.current?.focus();
-      shouldRestorePreferencesFocusRef.current = false;
+  }, [consent, isAdmin, showPreferences]);
+
+  useLayoutEffect(() => {
+    if (isAdmin) {
+      return;
     }
-  }, [consent, showPreferences]);
+
+    function openPreferencesFromFooter(event: Event) {
+      preferencesOpenerRef.current = event instanceof CustomEvent && event.detail instanceof HTMLButtonElement ? event.detail : null;
+      setAnalyticsEnabled(consent?.analytics ?? false);
+      setAdvertisingEnabled(consent?.advertising ?? false);
+      setShowPreferences(true);
+    }
+
+    window.addEventListener(OPEN_COOKIE_PREFERENCES_EVENT, openPreferencesFromFooter);
+    return () => window.removeEventListener(OPEN_COOKIE_PREFERENCES_EVENT, openPreferencesFromFooter);
+  }, [consent, isAdmin]);
 
   function saveConsent(nextConsent: ConsentPreferences) {
     const changed = !preferencesMatch(consent, nextConsent);
     const hadGoogleAnalytics = consent?.analytics === true;
 
-    shouldRestorePreferencesFocusRef.current = true;
+    shouldRestorePreferencesFocusRef.current = showPreferences && preferencesOpenerRef.current !== null;
     persistConsent(nextConsent);
     notifyConsentChange();
     setAnalyticsEnabled(nextConsent.analytics);
@@ -143,6 +246,7 @@ export function CookieConsent() {
     }
 
     if (hadGoogleAnalytics && changed) {
+      window.dispatchEvent(new Event(GOOGLE_MEASUREMENT_DISABLED_EVENT));
       window.gtag?.("consent", "update", toGoogleConsentState(nextConsent));
       window.location.reload();
     }
@@ -163,7 +267,7 @@ export function CookieConsent() {
   }
 
   function closePreferences() {
-    shouldRestorePreferencesFocusRef.current = true;
+    shouldRestorePreferencesFocusRef.current = preferencesOpenerRef.current !== null;
     setShowPreferences(false);
   }
 
@@ -174,46 +278,12 @@ export function CookieConsent() {
     });
   }
 
-  if (consent === undefined) {
+  if (consent === undefined || isAdmin) {
     return null;
   }
 
-  const googleConsent = consent ? toGoogleConsentState(consent) : deniedGoogleConsent;
-
   return (
     <>
-      {consent?.analytics ? (
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
-            window.gtag("consent", "default", ${JSON.stringify(deniedGoogleConsent)});
-            window.gtag("consent", "update", ${JSON.stringify(googleConsent)});
-            const googleAnalyticsScript = document.createElement("script");
-            googleAnalyticsScript.async = true;
-            googleAnalyticsScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VECVHEZ2DN";
-            googleAnalyticsScript.onload = function () {
-              window.gtag("js", new Date());
-              window.gtag("config", "G-VECVHEZ2DN");
-            };
-            document.head.appendChild(googleAnalyticsScript);
-          `}
-        </Script>
-      ) : null}
-
-      {consent !== null ? (
-        <button
-          type="button"
-          ref={preferencesButtonRef}
-          className="cookie-preferences-button"
-          onClick={openPreferences}
-          aria-haspopup="dialog"
-          aria-expanded={showPreferences}
-        >
-          Gestionar cookies
-        </button>
-      ) : null}
-
       {consent === null && !showPreferences ? (
         <section className="cookie-consent" role="dialog" aria-labelledby="cookie-consent-title">
           <h2 id="cookie-consent-title">Tu privacidad</h2>
