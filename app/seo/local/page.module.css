@@ -1,0 +1,27 @@
+.body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.emphasis {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.gradientBody {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+:global(.landing-light) main .body,
+:global(.landing-light) main .intro {
+  color: #334155 !important;
+}
+
+:global(.landing-light) main .emphasis {
+  color: #1e293b !important;
+}
+
+:global(.landing-light) main .introEmphasis {
+  color: #1e293b !important;
+}

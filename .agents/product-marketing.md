@@ -1,7 +1,7 @@
 # Product Marketing Context
 
-**Document version:** v1.1
-**Last updated:** 2026-09-16
+**Document version:** v1.2
+**Last updated:** 2026-10-01
 
 ## Product Overview
 **One-liner:**
@@ -156,6 +156,16 @@ Directo, orientado a negocio y con foco en datos.
 **Personality:**
 Ordenado, premium, pragmatico, tecnico y confiable.
 
+## Local SEO Offer
+
+El núcleo de `/seo/local` es el diagnóstico local, el Perfil de Empresa de Google, el SEO del sitio web, la gestión de reseñas y referencias del negocio y la medición.
+
+El método es `Analizar → priorizar → ejecutar → medir`. La ejecución empieza tras aceptar la propuesta; la medición depende de los accesos y del seguimiento disponibles. La creación web y los contenidos para redes sociales son complementos opcionales con presupuesto específico.
+
+La auditoría gratuita revisa el Perfil de Empresa y, cuando existe web, el conjunto del sitio público con análisis detallado de sus páginas clave. Comunica las prioridades del proyecto y los próximos pasos recomendados.
+
+Guardrails internos: sin rankings garantizados, sin incentivos ni filtros de satisfacción en reseñas, sin control de distancia y sin transferencia automática de autoridad entre web y perfil. Estos límites orientan las decisiones internas; no deben convertirse en explicaciones defensivas del copy visible.
+
 ## Proof Points
 **Metrics:**
 La web menciona objetivos y ejemplos como 90 dias de sprint medible, conversion objetivo 3-5%, mejoras de leads y reduccion de CPL.
@@ -186,5 +196,6 @@ No documentadas.
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v1.2 (2026-10-01) - Oferta de SEO local: núcleo, método, alcance gratuito y complementos opcionales, con límites internos para el copy futuro.
 - v1.1 (2026-09-16) - La home se mantiene como entrada comercial con servicios, casos, precios y auditoría gratuita.
 - v1 (2026-08-26) - Contexto inicial autodraft a partir de las paginas actuales del repo.

@@ -9,7 +9,6 @@ import {
   Link2,
   MapPin,
   MessageCircle,
-  Share2,
   ShieldCheck,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
@@ -17,25 +16,26 @@ import { LocalReviewsCarousel } from "../../components/LocalReviewsCarousel";
 import { LocalSeoAuditForm } from "../../components/LocalSeoAuditForm";
 import { Logo } from "../../components/Logo";
 import { SITE_URL, absoluteUrl } from "../../lib/site";
+import styles from "./page.module.css";
 
 const pagePath = "/seo/local";
 const pageUrl = absoluteUrl(pagePath);
 
 const buyingSituations = [
   {
-    title: "Tu perfil apenas muestra lo que haces",
-    text: "Realizas trabajos y ofreces servicios que apenas aparecen en tus publicaciones, fotos o páginas. A quien te descubre le faltan motivos para elegirte.",
+    title: "Tus competidores aparecen y tu negocio no.",
+    text: "Buscan uno de tus servicios en tu zona y otras empresas ocupan los resultados de Maps o de Google.",
     icon: MapPin,
   },
   {
-    title: "Pedir reseñas depende de acordarte",
-    text: "Atiendes a tus clientes, pero no tienes un proceso para invitarles a compartir su experiencia después del servicio.",
-    icon: MessageCircle,
+    title: "Tu visibilidad cambia mucho según la zona.",
+    text: "Necesitas saber dónde pierdes presencia y qué factores sí puedes mejorar.",
+    icon: BarChart3,
   },
   {
-    title: "Publicas en varios sitios, sin una dirección común",
-    text: "Tu web, Google Maps y tus redes hablan de cosas distintas, o el recorrido se corta antes del contacto. Si no tienes web, también falta un lugar propio donde explicar tu oferta.",
-    icon: Share2,
+    title: "Google no entiende bien qué ofreces ni dónde atiendes.",
+    text: "El perfil y la web no explican con suficiente claridad tus servicios, ubicaciones reales y páginas relevantes.",
+    icon: FileText,
   },
 ];
 
@@ -52,24 +52,20 @@ const localPresenceChannels = [
     title: "Reseñas",
     icon: MessageCircle,
   },
-  {
-    title: "Redes",
-    icon: Share2,
-  },
 ];
 
 const heroJourneyItems = [
   {
-    title: "Te encuentran",
-    text: "Maps",
+    title: "Te buscan",
+    text: "Servicio + zona",
   },
   {
-    title: "Entienden tu oferta",
-    text: "Web",
+    title: "Te encuentran",
+    text: "Google Maps o los resultados de búsqueda",
   },
   {
     title: "Contactan",
-    text: "Reseñas",
+    text: "Perfil o web",
   },
 ];
 
@@ -127,59 +123,68 @@ const localReviewHighlights = [
 
 const workItems = [
   {
-    title: "Un perfil de Google activo y bien trabajado",
-    text: "Revisamos categorías, servicios e información del perfil y planificamos publicaciones, fotografías y novedades de tu negocio. Cada contenido tiene un propósito: explicar un servicio, mostrar un trabajo real o facilitar una consulta.",
+    title: "Diagnóstico de búsquedas y competencia local",
+    text: "Analizamos cómo se buscan tus servicios, en qué zonas quieres captar demanda y qué negocios aparecen en los resultados locales. Con ese diagnóstico definimos las prioridades de trabajo.",
+    icon: FileText,
+  },
+  {
+    title: "Perfil de Empresa de Google",
+    text: "Revisamos categorías, servicios e información del perfil, dirección o área de servicio, duplicados y fotografías. Trabajamos publicaciones útiles para explicar tus servicios y mostrar la actividad real del negocio.",
     icon: MapPin,
   },
   {
-    title: "Un sistema para solicitar y gestionar reseñas",
-    text: "Definimos cuándo pedir una opinión después del servicio, preparamos mensajes para email o WhatsApp y facilitamos un enlace o código QR. Organizamos las solicitudes y las respuestas para que no dependan de la memoria de una persona.",
-    note: "Solicitamos opiniones auténticas, sin premios ni filtros que dejen fuera a clientes descontentos.",
-    icon: MessageCircle,
-  },
-  {
-    title: "SEO local en tu web, con base técnica y contenido útil",
-    text: "Investigamos cómo buscan tus servicios y trabajamos las páginas que responden a esas necesidades. Revisamos indexación, títulos, enlaces internos y datos estructurados del negocio, además del contenido y el contacto desde el móvil.",
-    note: "Si no tienes web, la creamos. Diseñamos las páginas de tus servicios, preparamos el contenido y configuramos las vías de contacto y la medición acordada.",
+    title: "SEO local del sitio web",
+    text: "Revisamos tu sitio público y sus páginas clave. Según la prioridad, trabajamos estructura, indexación, páginas de servicios y ubicaciones reales, títulos, enlaces internos, datos estructurados y contacto desde el móvil.",
+    note: "Si necesitas crear una web, su alcance y presupuesto requieren una propuesta específica.",
     icon: Globe2,
   },
   {
-    title: "Redes sociales conectadas con tus servicios",
-    text: "Adaptamos el contenido de tus trabajos, servicios y preguntas frecuentes a los canales donde tenga sentido estar. Coordinamos temas y enlaces para que las publicaciones conduzcan a información útil, una reserva o una consulta.",
-    icon: Share2,
+    title: "Gestión de reseñas y respuestas",
+    text: "Organizamos la solicitud de opiniones a clientes que hayan recibido el servicio, las respuestas y el seguimiento para integrar las reseñas en la gestión habitual del negocio.",
+    icon: MessageCircle,
   },
   {
-    title: "Medición para decidir el siguiente paso",
-    text: "Revisamos visibilidad, visitas y solicitudes por separado. Con tu seguimiento comercial, podemos distinguir qué contactos encajan y cuáles terminan en clientes.",
+    title: "Notoriedad y referencias del negocio",
+    text: "Revisamos la coherencia de la información del negocio y las menciones o enlaces legítimos en medios, directorios y webs locales o de tu sector.",
+    icon: Link2,
+  },
+  {
+    title: "Medición y prioridades",
+    text: "Cuando contamos con los accesos y tu seguimiento comercial, separamos visibilidad, visitas, solicitudes, oportunidades y clientes. Esa medición nos ayuda a elegir el siguiente paso.",
     icon: BarChart3,
   },
 ];
 
 const planRows = [
   {
-    work: "Página de servicio",
-    action: "Explicar qué incluye la reforma, proceso, zona atendida y trabajos reales autorizados; revisar indexación, enlaces internos y formulario.",
-    value: "Responder a la búsqueda y facilitar una solicitud.",
+    work: "Búsquedas y zona",
+    action: "Identificar cómo buscan las reformas de baños y desde qué localidades interesa captar clientes.",
+    value: "Definir la demanda y el área real de trabajo.",
+  },
+  {
+    work: "Competencia local",
+    action: "Comparar qué empresas aparecen, qué servicios destacan y cómo presentan su perfil y su web.",
+    value: "Detectar diferencias y oportunidades prioritarias.",
   },
   {
     work: "Perfil de Google",
-    action: "Revisar la categoría y el servicio; publicar fotos y contenido del trabajo con enlace a la página pertinente.",
-    value: "Mostrar qué hace la empresa a quien consulta el perfil.",
+    action: "Revisar categorías, servicios, área de servicio, información, fotos y contenido relacionado con reformas de baños.",
+    value: "Mejorar la correspondencia entre el negocio y las búsquedas relevantes.",
   },
   {
-    work: "Redes sociales",
-    action: "Adaptar el mismo proyecto a una pieza visual y responder una duda frecuente sobre el servicio.",
-    value: "Dar a conocer el trabajo y conducir hacia más información o contacto.",
+    work: "Sitio público y páginas clave",
+    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto del sitio público y analizar en detalle sus páginas clave; mejorar o crear la página de reformas de baños y relacionarla con las zonas atendidas.",
+    value: "Responder mejor a la búsqueda y facilitar una solicitud.",
   },
   {
-    work: "Contactos",
-    action: "Registrar solicitudes confirmadas y su procedencia cuando pueda medirse.",
-    value: "Separar visitas, oportunidades comerciales y clientes.",
+    work: "Reseñas y referencias",
+    action: "Incorporar un proceso de solicitud de opiniones después del servicio y revisar menciones relevantes del negocio.",
+    value: "Reforzar confianza y notoriedad con señales reales.",
   },
   {
-    work: "Reseñas tras el servicio",
-    action: "Invitar al cliente a compartir su experiencia mediante un enlace, una vez finalizado el trabajo.",
-    value: "Incorporar la solicitud de opiniones auténticas al proceso habitual.",
+    work: "Medición",
+    action: "Seguir visibilidad para las búsquedas y zonas analizadas, además de las solicitudes recibidas.",
+    value: "Comprobar la evolución y decidir la siguiente prioridad.",
   },
 ];
 
@@ -187,32 +192,32 @@ const process = [
   {
     step: "01",
     title: "Nos cuentas qué negocio tienes",
-    text: "Indica el nombre y la localidad. Puedes añadir tu web, perfil de Google o red social para que revisemos el negocio correcto. No necesitas tener todos los canales creados.",
+    text: "Indica el nombre, la localidad y los servicios que prestas. Comparte tu web y tu Perfil de Empresa de Google si los tienes, para que revisemos el negocio correcto.",
   },
   {
     step: "02",
     title: "Revisamos y te proponemos prioridades",
-    text: "Te explicamos qué vemos en la revisión inicial y qué servicios interesa impulsar. Si podemos ayudarte, recibirás una propuesta que conecte las tareas de Google, web, reseñas y contenido que necesites.",
+    text: "Analizamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y estudiamos en detalle sus páginas clave. Priorizamos el trabajo y te comunicamos los próximos pasos recomendados. Si podemos ayudarte, recibirás una propuesta con alcance, entregables y frecuencia por escrito.",
   },
   {
     step: "03",
     title: "Decides y ponemos en marcha lo acordado",
-    text: "Tras aceptar la propuesta, organizamos accesos y materiales y ejecutamos el trabajo. Si hace falta una web, la desarrollamos. En la gestión continua, planificamos contenidos y revisamos prioridades contigo.",
+    text: "La ejecución empieza después de aceptar la propuesta. Organizamos accesos y materiales, ejecutamos el alcance acordado y revisamos prioridades contigo. Medimos la evolución cuando contamos con los accesos o el seguimiento acordados.",
   },
 ];
 
 const budgetItems = [
   {
-    title: "Una propuesta conectada, con tareas concretas",
-    text: "Definimos qué necesita tu perfil, qué contenidos hacen falta, cómo organizar las reseñas y qué conviene trabajar en la web y las redes. No hace falta empezar por todo a la vez.",
+    title: "Una propuesta priorizada, con tareas concretas",
+    text: "Definimos qué necesita tu perfil, qué conviene trabajar en tu sitio web, cómo organizar las reseñas y qué podemos medir. El alcance, los entregables y la frecuencia quedan definidos por escrito.",
   },
   {
     title: "Con tu web actual o con una nueva",
-    text: "Si ya tienes web, revisamos qué aprovechar y qué mejorar. Si no tienes, incluimos su creación en la propuesta, con páginas, funcionalidades y condiciones detalladas.",
+    text: "Si ya tienes web, revisamos qué aprovechar y qué mejorar. Si necesitas una nueva, podemos presupuestar su creación con páginas, funcionalidades y condiciones detalladas en una propuesta específica.",
   },
   {
     title: "Trabajo inicial y gestión continua, claramente definidos",
-    text: "El presupuesto distingue las tareas de puesta en marcha de las que requieren continuidad: publicaciones, gestión de reseñas, contenido social y revisión de resultados.",
+    text: "El presupuesto distingue las tareas de puesta en marcha de las que requieren continuidad: mantenimiento del perfil, gestión de reseñas y revisión de resultados. La creación web y los contenidos para redes sociales se presupuestan como complementos opcionales si hacen falta.",
   },
 ];
 
@@ -250,12 +255,12 @@ const faqs = [
   {
     question: "¿Cómo funciona el sistema de reseñas?",
     answer:
-      "Preparamos una invitación para clientes que hayan recibido el servicio y una forma sencilla de enviarla o acceder a ella. La opinión es libre: no compramos reseñas ni seleccionamos solo a quienes darían una valoración positiva.",
+      "Preparamos una invitación para clientes que hayan recibido el servicio y una forma sencilla de enviarla o acceder a ella. También definimos cómo responder y dar seguimiento para que las opiniones formen parte de la gestión habitual.",
   },
   {
     question: "¿Trabajar la web mejora también mi perfil de Maps?",
     answer:
-      "La web forma parte de la presencia del negocio que trabajamos junto al perfil. No es un traspaso automático de autoridad ni una garantía de posiciones.",
+      "La web y el Perfil de Empresa cumplen funciones distintas dentro de la estrategia local. Trabajamos cada uno según su función y medimos su evolución por separado dentro del alcance acordado.",
   },
   {
     question: "¿Tengo que contratar también redes sociales?",
@@ -280,7 +285,7 @@ const faqs = [
   {
     question: "¿Qué incluye la auditoría gratuita?",
     answer:
-      "Revisamos tu perfil público de Google, una página de tu web si existe y el contenido público del canal social que compartas. Te indicamos prioridades y próximos pasos. No incluye una auditoría técnica exhaustiva, acceso a datos privados ni la ejecución del plan.",
+      "Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. También valoramos tus servicios, la zona, la competencia y las señales locales visibles. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados. No incluye acceso a datos privados ni la ejecución del plan.",
   },
   {
     question: "¿Cuánto cuesta contrataros?",
@@ -314,7 +319,7 @@ const jsonLd = {
       serviceType: "SEO local y gestión del Perfil de Empresa en Google",
       url: pageUrl,
       description:
-        "Perfil de Empresa, contenidos, solicitud de reseñas, SEO de la web y redes sociales coordinados, con creación web cuando haga falta.",
+        "Diagnóstico de búsquedas y competencia local, Perfil de Empresa, SEO del sitio web, gestión de reseñas, notoriedad y medición.",
       provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: { "@type": "Country", name: "España" },
     },
@@ -333,7 +338,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   title: "Agencia SEO local",
   description:
-    "Conectamos Google Maps, reseñas, SEO de tu web y redes sociales. Si no tienes web, la creamos. Solicita tu auditoría gratuita.",
+    "SEO local para Google Maps y las búsquedas de tu zona. Auditoría gratuita del Perfil de Empresa y de las páginas clave de tu sitio público.",
   alternates: {
     canonical: pagePath,
   },
@@ -344,7 +349,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Agencia SEO local",
     description:
-      "Google Maps, reseñas, SEO de tu web y redes sociales con una misma estrategia de captación.",
+      "Trabajamos tu Perfil de Empresa y el SEO de tu web según tus servicios, tu competencia y la zona donde atiendes.",
     url: pagePath,
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
@@ -403,13 +408,13 @@ export default function LocalSeoPage() {
             <div className="relative grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-center">
               <div className="max-w-3xl">
                 <div className="mb-4 text-sm font-black uppercase tracking-normal text-teal-700">
-                  Servicio para negocios de toda España
+                  SEO local para negocios con ubicación o área de servicio en España
                 </div>
                 <h1 id="local-seo-hero-title" className="mb-5 max-w-3xl text-4xl font-black leading-[1.04] text-slate-900 sm:text-5xl lg:text-[3.05rem] xl:text-[3.45rem]">
-                  SEO local para conseguir más consultas
+                  Agencia de SEO local para negocios
                 </h1>
-                <div className="max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl">
-                  Conectamos Google Maps, tu web, reseñas y redes para que tus servicios sean fáciles de encontrar y contactar. Si no tienes web, también la creamos.
+                <div className={`max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl ${styles.intro}`}>
+                  Analizamos cómo buscan tus clientes y trabajamos tu Perfil de Empresa de Google y el SEO de tu web para mejorar tu visibilidad en Google Maps y en las búsquedas de tu zona.
                 </div>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
@@ -423,16 +428,16 @@ export default function LocalSeoPage() {
               </div>
               <div className="relative">
                 <div className="absolute inset-6 rounded-lg bg-blue-200/45 blur-3xl" aria-hidden="true" />
-                <div className="relative rounded-lg border border-blue-100 bg-white/90 p-4 shadow-2xl shadow-blue-950/10 sm:p-5" aria-label="Sistema de presencia local conectada">
+                <div className="relative rounded-lg border border-blue-100 bg-white/90 p-4 shadow-2xl shadow-blue-950/10 sm:p-5" aria-label="Recorrido de captación local">
                   <div className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#2563eb,#0f766e)] p-5 [color:#fff] sm:p-6">
                     <div className="absolute right-0 top-0 h-full w-28 bg-white/10 [clip-path:polygon(42%_0,100%_0,100%_100%,0_100%)]" aria-hidden="true" />
                     <div className="relative max-w-xl">
-                      <div className="text-sm font-black uppercase tracking-normal text-blue-50">Presencia local conectada</div>
+                      <div className="text-sm font-black uppercase tracking-normal text-blue-50">Recorrido de captación local</div>
                       <div className="mt-3 text-2xl font-black leading-tight sm:text-3xl" style={{ color: "#ffffff" }}>
-                        De Google Maps a una consulta real
+                        De una búsqueda local a una consulta
                       </div>
-                      <div className="mt-4 max-w-md text-sm font-bold leading-6 text-blue-50 sm:text-base">
-                        Maps, web, reseñas y redes unidos por el contacto.
+                      <div className={`mt-4 max-w-md font-bold text-blue-50 ${styles.gradientBody}`}>
+                        Perfil de Empresa de Google y web trabajados según tus servicios y la zona donde atiendes.
                       </div>
                     </div>
                   </div>
@@ -444,7 +449,7 @@ export default function LocalSeoPage() {
                           <Link2 className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
                         </span>
                         <div>
-                          <div className="text-sm font-black uppercase tracking-normal text-teal-700">Recorrido hasta la consulta</div>
+                          <div className="text-sm font-black uppercase tracking-normal text-teal-700">Recorrido de captación local</div>
                           <div className="mt-1 text-xl font-black leading-tight text-slate-900">Un camino fácil de entender</div>
                         </div>
                       </div>
@@ -494,7 +499,7 @@ export default function LocalSeoPage() {
               <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Situaciones de compra</p>
                 <h2 id="situations-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Tu negocio avanza. ¿Tu presencia online lo refleja?
+                  ¿Qué está frenando tu visibilidad local?
                 </h2>
               </div>
               <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -502,12 +507,12 @@ export default function LocalSeoPage() {
                   <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
                     <item.icon className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                     <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-300">
-                Revisamos qué servicios quieres impulsar y qué necesita cada canal para apoyar ese objetivo.
+              <p className={`mt-8 max-w-3xl text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                Analizamos las búsquedas, la zona, la competencia y tu Perfil de Empresa. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Con todo ello decidimos qué conviene trabajar primero.
               </p>
             </div>
           </section>
@@ -516,10 +521,10 @@ export default function LocalSeoPage() {
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Qué incluye</p>
               <h2 id="includes-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Una estrategia local, desde el contenido hasta el contacto
+                Qué evaluamos y qué podemos trabajar según la prioridad
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Podemos ocuparnos de todo el proceso o empezar por las prioridades de tu negocio. Tendrás por escrito qué hacemos, en qué canales y con qué frecuencia.
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                Nuestro método es Analizar → priorizar → ejecutar → medir. Partimos de un diagnóstico y priorizamos las tareas que pueden mejorar la relevancia y la presencia de tu negocio en las búsquedas locales. La ejecución empieza después de aceptar la propuesta y la medición depende de los accesos y del seguimiento disponibles. El alcance, los entregables y la frecuencia quedan definidos por escrito.
               </p>
             </div>
             <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -529,10 +534,16 @@ export default function LocalSeoPage() {
                     <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
                   </span>
                   <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
-                  {item.note ? <p className="mt-4 text-sm font-bold leading-7 text-slate-900">{item.note}</p> : null}
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
+                  {item.note ? <p className={`mt-4 font-bold text-slate-900 ${styles.emphasis}`}>{item.note}</p> : null}
                 </article>
               ))}
+            </div>
+            <div className="mt-10 max-w-3xl">
+              <h3 className="text-xl font-black text-slate-900">Complementos si hacen falta</h3>
+              <p className={`mt-3 text-slate-300 ${styles.body}`}>
+                Si el diagnóstico lo justifica, también podemos coordinar contenidos para redes sociales o presupuestar la creación de una web. No es necesario contratar todos los servicios para empezar a trabajar el SEO local.
+              </p>
             </div>
           </section>
 
@@ -542,8 +553,8 @@ export default function LocalSeoPage() {
               <h2 id="local-reviews-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Qué suelen destacar los clientes
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Las reseñas no prometen posiciones. Ayudan a ver si el negocio se entiende mejor, transmite más confianza y facilita el contacto.
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                Estas opiniones muestran cómo trabajamos: con claridad, implicación y un acompañamiento cercano durante todo el proyecto.
               </p>
             </div>
             <LocalReviewsCarousel items={localReviewHighlights} />
@@ -552,21 +563,25 @@ export default function LocalSeoPage() {
           <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="maps-web-title">
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr]">
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Web y Google Maps</p>
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Cómo funciona el posicionamiento local</p>
                 <h2 id="maps-web-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  El SEO local también se trabaja fuera de Google Maps
+                  Tres factores que condicionan los resultados locales
                 </h2>
               </div>
               <div className="grid gap-5 text-lg leading-8 text-slate-300">
-                <p>
-                  Tu web explica tus servicios y dónde los prestas. Las reseñas aportan experiencias de clientes. Los enlaces desde otras webs pueden contribuir a la notoriedad de tu negocio, uno de los aspectos que Google considera en los resultados locales.
-                </p>
-                <p>
-                  Trabajamos esas piezas con un mismo criterio: información coherente, contenido útil y referencias auténticas. Las redes ayudan a mostrar tu trabajo y a llevar personas interesadas hacia tus servicios.
-                </p>
-                <p className="font-bold text-slate-900">
-                  No se trata de pasar una puntuación de autoridad de la web a Maps, sino de desarrollar la presencia del mismo negocio en los lugares donde lo buscan y lo valoran.
-                </p>
+                <div>
+                  <h3 className="text-xl font-black text-slate-900">Relevancia</h3>
+                  <p className={`mt-3 ${styles.body}`}>Ayudamos a Google y a las personas a entender qué ofreces con información completa, categorías correctas y páginas útiles.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-slate-900">Distancia</h3>
+                  <p className={`mt-3 ${styles.body}`}>Analizamos cómo cambia tu visibilidad según dónde busca el usuario y nos centramos en las zonas que tu negocio atiende realmente.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-slate-900">Prominencia</h3>
+                  <p className={`mt-3 ${styles.body}`}>Trabajamos la reputación, las reseñas y las referencias relevantes del negocio en la web y en su sector.</p>
+                </div>
+                <p className={styles.intro}>La web, el perfil y las reseñas aportan señales distintas. Las trabajamos de forma coordinada para reforzar la relevancia, la confianza y la visibilidad local, y medimos su evolución por separado.</p>
               </div>
             </div>
           </section>
@@ -575,16 +590,16 @@ export default function LocalSeoPage() {
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Ejemplo ilustrativo</p>
               <h2 id="plan-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Así conectamos el trabajo alrededor de un servicio
+                Cómo trabajaríamos el SEO local de una empresa de reformas
               </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Imagina una empresa de reformas que quiere recibir consultas sobre reformas de baños. Este sería un ejemplo de trabajo coordinado.
+              <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                Imagina una empresa que quiere recibir consultas sobre reformas de baños en las localidades donde trabaja. Este sería un posible proceso después de revisar su situación real.
               </p>
             </div>
             <div className="mt-10 overflow-hidden rounded-lg bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200">
               <div className="border-b border-slate-200 bg-blue-50 p-5">
                 <h3 className="text-xl font-black text-slate-900">Ejemplo ilustrativo de plan de trabajo</h3>
-                <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
+                <p className={`mt-2 font-semibold text-slate-600 ${styles.emphasis}`}>
                   No corresponde a un cliente ni demuestra resultados obtenidos. Las tareas reales se definen después de revisar cada negocio.
                 </p>
               </div>
@@ -602,8 +617,8 @@ export default function LocalSeoPage() {
                     {planRows.map((row) => (
                       <tr key={row.work}>
                         <th className="border-b border-slate-200 p-5 text-sm font-black text-slate-900">{row.work}</th>
-                        <td className="border-b border-slate-200 p-5 text-sm leading-6 text-slate-600">{row.action}</td>
-                        <td className="border-b border-slate-200 p-5 text-sm font-bold leading-6 text-slate-700">{row.value}</td>
+                        <td className={`border-b border-slate-200 p-5 text-slate-600 ${styles.body}`}>{row.action}</td>
+                        <td className={`border-b border-slate-200 p-5 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -613,8 +628,8 @@ export default function LocalSeoPage() {
                 {planRows.map((row) => (
                   <article className="rounded-lg border border-slate-200 p-4" key={row.work}>
                     <h3 className="text-lg font-black text-slate-900">{row.work}</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">{row.action}</p>
-                    <p className="mt-3 text-sm font-bold leading-6 text-slate-700">{row.value}</p>
+                    <p className={`mt-3 text-slate-600 ${styles.body}`}>{row.action}</p>
+                    <p className={`mt-3 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</p>
                   </article>
                 ))}
               </div>
@@ -623,7 +638,7 @@ export default function LocalSeoPage() {
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
                 Solicitar auditoría gratuita
               </a>
-              <p className="text-base font-semibold text-slate-300">Cada canal cumple una función. La estrategia los une alrededor del servicio que quieres vender.</p>
+              <p className={`text-base font-semibold text-slate-300 ${styles.emphasis}`}>Analizar → priorizar → ejecutar → medir. Cada fase parte de la situación real del negocio y del alcance acordado.</p>
             </div>
           </section>
 
@@ -632,7 +647,7 @@ export default function LocalSeoPage() {
               <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Proceso</p>
                 <h2 id="process-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Del primer análisis a un trabajo definido
+                  Analizar → priorizar → ejecutar → medir
                 </h2>
               </div>
               <div className="mt-10 grid gap-4">
@@ -641,12 +656,12 @@ export default function LocalSeoPage() {
                     <span className="text-3xl font-black text-blue-400">{step.step}</span>
                     <div>
                       <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                      <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
+                      <p className={`mt-2 text-slate-300 ${styles.body}`}>{step.text}</p>
                     </div>
                   </article>
                 ))}
               </div>
-              <p className="mt-8 text-lg font-bold text-slate-900">Pedir la auditoría gratuita no supone contratar el servicio.</p>
+              <p className={`mt-8 text-lg font-bold text-slate-900 ${styles.introEmphasis}`}>Pedir la auditoría gratuita no supone contratar el servicio.</p>
             </div>
           </section>
 
@@ -657,7 +672,7 @@ export default function LocalSeoPage() {
                 <h2 id="budget-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Un presupuesto según lo que necesita tu negocio
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                   La auditoría inicial es gratuita. La implementación y la gestión son servicios de pago.
                 </p>
               </div>
@@ -665,7 +680,7 @@ export default function LocalSeoPage() {
                 {budgetItems.map((item) => (
                   <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
                     <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
@@ -679,8 +694,8 @@ export default function LocalSeoPage() {
                 <h2 id="trust-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Sabrás qué hacemos y qué queda por hacer
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  En Crecimiento sin complicaciones podemos coordinar tu perfil de Google, el SEO de tu web, los contenidos, las reseñas y las redes sociales. Tendrás una hoja de ruta común y el alcance por escrito.
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                  En Crecimiento sin complicaciones te ayudamos a priorizar el trabajo de perfil, web, reputación y medición. Tendrás una hoja de ruta con tareas aprobadas y el alcance por escrito.
                 </p>
               </div>
               <div className="grid gap-5 md:grid-cols-3">
@@ -688,7 +703,7 @@ export default function LocalSeoPage() {
                   <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
                     <ShieldCheck className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                     <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-[1.7] text-slate-300">{item.text}</p>
+                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
                   </article>
                 ))}
               </div>
@@ -707,12 +722,12 @@ export default function LocalSeoPage() {
                 <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/seo">
                   <FileText className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   <h3 className="!mt-7 text-xl font-black text-slate-900">Agencia SEO</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">SEO nacional, técnico, arquitectura y contenidos para captar demanda desde Google.</p>
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>SEO nacional, técnico, arquitectura y contenidos para captar demanda desde Google.</p>
                 </Link>
                 <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/diseno-pagina-web-profesional">
                   <Building2 className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   <h3 className="!mt-7 text-xl font-black text-slate-900">Diseño web profesional</h3>
-                  <p className="mt-3 text-sm leading-[1.7] text-slate-300">Si no tienes web, podemos crear las páginas de tus servicios y conectarlas con tu estrategia local.</p>
+                  <p className={`mt-3 text-slate-300 ${styles.body}`}>Si no tienes web, podemos crear las páginas de tus servicios y conectarlas con tu estrategia local.</p>
                 </Link>
               </div>
             </div>
@@ -729,7 +744,7 @@ export default function LocalSeoPage() {
               {faqs.map((faq) => (
                 <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
                   <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
-                  <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
+                  <p className={`mt-4 text-slate-300 ${styles.body}`}>{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -740,24 +755,24 @@ export default function LocalSeoPage() {
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
                 <h2 id="audit-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Veamos qué puede mejorar en tu presencia local
+                  Descubre qué debe mejorar primero en tu SEO local
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Cuéntanos qué negocio tienes. Revisaremos tu presencia local y cómo conectar Google, web y contenido alrededor de tus servicios. Te responderemos con las prioridades que detectemos y el siguiente paso recomendado.
+                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
+                  Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.
                 </p>
                 <div className="mt-8 grid gap-3">
                   {[
-                    "Perfil de Google, una página de tu web si existe y canal social compartido.",
-                    "Prioridades para ordenar Google Maps, web, reseñas y contenido.",
-                    "Revisión inicial sin coste; creación web y gestión bajo presupuesto.",
+                    "Revisión inicial del Perfil de Empresa y, si existe web, del conjunto del sitio público, con análisis detallado de sus páginas clave.",
+                    "Análisis de servicios, búsquedas, zona, competencia y señales locales visibles.",
+                    "Prioridades del proyecto y próximos pasos recomendados.",
                   ].map((item) => (
-                    <p className="flex gap-3 text-slate-200" key={item}>
+                    <p className={`flex gap-3 text-slate-200 ${styles.body}`} key={item}>
                       <CheckIcon />
                       <span>{item}</span>
                     </p>
                   ))}
                 </div>
-                <p className="mt-8 flex gap-3 rounded-lg bg-white/5 p-5 text-sm font-semibold leading-6 text-slate-300 ring-1 ring-white/10">
+                <p className={`mt-8 flex gap-3 rounded-lg bg-white/5 p-5 font-semibold text-slate-300 ring-1 ring-white/10 ${styles.emphasis}`}>
                   <Link2 className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
                   Usaremos estos datos para revisar tu negocio y responder a tu solicitud.
                 </p>

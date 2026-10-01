@@ -11,6 +11,111 @@ async function read(relativePath) {
   return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 
+function requiredSlice(source, startMarker, endMarker, label) {
+  const start = source.indexOf(startMarker);
+  assert.notEqual(start, -1, `expected ${label} start`);
+  const end = source.indexOf(endMarker, start + startMarker.length);
+  assert.ok(end > start, `expected ${label} end after start`);
+  return source.slice(start, end);
+}
+
+test("seo local leads with a specialist local search proposition", async () => {
+  const page = await read("app/seo/local/page.tsx");
+  assert.match(page, /Agencia de SEO local para negocios/);
+  assert.match(page, /Analizamos cómo buscan tus clientes/);
+  assert.match(page, /SEO de tu web/);
+  assert.match(page, /Recorrido de captación local/);
+  assert.match(page, /De una búsqueda local a una consulta/);
+  assert.match(page, /Tus competidores aparecen y tu negocio no/);
+  assert.match(page, /Tu visibilidad cambia mucho según la zona/);
+  assert.match(page, /Google no entiende bien qué ofreces ni dónde atiendes/);
+
+  const buyingSituations = requiredSlice(page, "const buyingSituations = [", "const localPresenceChannels = [", "buyingSituations");
+  const localPresenceChannels = requiredSlice(page, "const localPresenceChannels = [", "const heroJourneyItems = [", "localPresenceChannels");
+  const heroJourneyItems = requiredSlice(page, "const heroJourneyItems = [", "const localReviewHighlights = [", "heroJourneyItems");
+  const hero = requiredSlice(page, 'aria-labelledby="local-seo-hero-title"', 'aria-labelledby="situations-title"', "hero");
+
+  assert.equal((buyingSituations.match(/title:/g) || []).length, 3);
+  assert.equal((localPresenceChannels.match(/title:/g) || []).length, 3);
+  assert.equal((heroJourneyItems.match(/title:/g) || []).length, 3);
+  assert.match(heroJourneyItems, /Te buscan[\s\S]*Te encuentran[\s\S]*Contactan/);
+  assert.doesNotMatch(localPresenceChannels, /Redes/i);
+  assert.doesNotMatch(hero, /redes/i);
+  assert.doesNotMatch(hero, /Si no tienes web, también la creamos/);
+});
+
+test("seo local explains its method and keeps complements optional", async () => {
+  const page = await read("app/seo/local/page.tsx");
+  assert.match(page, /Diagnóstico de búsquedas y competencia local/);
+  assert.match(page, /Perfil de Empresa de Google/);
+  assert.match(page, /SEO local del sitio web/);
+  assert.match(page, /Gestión de reseñas y respuestas/);
+  assert.match(page, /Notoriedad y referencias del negocio/);
+  assert.match(page, /Medición y prioridades/);
+  assert.match(page, /Analizar → priorizar → ejecutar → medir/);
+  assert.match(page, /Relevancia/);
+  assert.match(page, /Distancia/);
+  assert.match(page, /Prominencia/);
+  assert.match(page, /No es necesario contratar todos los servicios/);
+  assert.match(page, /coordinar contenidos para redes sociales/);
+
+  const workItems = requiredSlice(page, "const workItems = [", "const planRows = [", "workItems");
+  const faqs = requiredSlice(page, "const faqs = [", "const jsonLd = {", "faqs");
+  const jsonLd = requiredSlice(page, "const jsonLd = {", "export const metadata", "jsonLd");
+  const metadata = requiredSlice(page, "export const metadata", "export default function", "metadata");
+  const includes = requiredSlice(page, 'aria-labelledby="includes-title"', 'aria-labelledby="local-reviews-title"', "includes");
+  const optionalStart = includes.indexOf("Complementos");
+
+  assert.equal((workItems.match(/title:/g) || []).length, 6);
+  assert.ok(optionalStart > -1, "expected an optional complements subsection");
+  assert.doesNotMatch(workItems, /redes/i);
+  assert.doesNotMatch(includes.slice(0, optionalStart), /redes/i);
+  assert.match(faqs, /¿Tengo que contratar también redes sociales\?/);
+  assert.doesNotMatch(page, /incentiv|filtros de satisfacción|compramos reseñas|seleccionamos solo|traspaso automático de autoridad|transferencia automática de autoridad/i);
+  assert.match(metadata, /SEO local para Google Maps y las búsquedas de tu zona/);
+  assert.doesNotMatch(metadata, /redes/i);
+  assert.match(jsonLd, /SEO del sitio web, gestión de reseñas, notoriedad y medición/);
+  assert.doesNotMatch(jsonLd, /redes/i);
+  assert.doesNotMatch(jsonLd, /"@type": "LocalBusiness"|"@type": "Review"|aggregateRating/);
+});
+
+test("seo local example demonstrates diagnosis and the audit covers the full public website", async () => {
+  const page = await read("app/seo/local/page.tsx");
+  assert.match(page, /Cómo trabajaríamos el SEO local de una empresa de reformas/);
+  for (const label of [
+    "Búsquedas y zona",
+    "Competencia local",
+    "Perfil de Google",
+    "Sitio público y páginas clave",
+    "Reseñas y referencias",
+    "Medición",
+  ]) {
+    assert.match(page, new RegExp(label));
+  }
+  assert.match(page, /No corresponde a un cliente ni demuestra resultados obtenidos/);
+  assert.match(page, /Analizar → priorizar → ejecutar → medir/);
+  assert.match(page, /Revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave/i);
+  assert.match(page, /prioridades de tu proyecto y los próximos pasos recomendados/);
+  assert.doesNotMatch(page, /Te indicamos prioridades y próximos pasos/);
+
+  const planRows = requiredSlice(page, "const planRows = [", "const process = [", "planRows");
+  const process = requiredSlice(page, "const process = [", "const budgetItems = [", "process");
+  const faqs = requiredSlice(page, "const faqs = [", "const jsonLd = {", "faqs");
+  const plan = requiredSlice(page, 'aria-labelledby="plan-title"', 'aria-labelledby="process-title"', "plan section");
+  const audit = requiredSlice(page, 'aria-labelledby="audit-title"', '<LocalSeoAuditForm', "audit section");
+
+  assert.equal((planRows.match(/work:/g) || []).length, 6);
+  assert.match(planRows, /estructura[\s\S]*indexación[\s\S]*enlaces internos[\s\S]*reformas de baños/);
+  assert.match(process, /conjunto del sitio público[\s\S]*páginas clave/);
+  assert.match(faqs, /conjunto del sitio público[\s\S]*páginas clave/);
+  assert.match(audit, /conjunto del sitio público[\s\S]*páginas clave/);
+  assert.doesNotMatch(planRows, /redes/i);
+  assert.doesNotMatch(plan, /redes/i);
+  for (const scope of [process, faqs, audit]) {
+    assert.doesNotMatch(scope, /una página de tu web|toda tu página web|toda la web pública/i);
+  }
+});
+
 test("seo local page is indexable with canonical metadata and schema", async () => {
   const pagePath = path.join(repoRoot, "app", "seo", "local", "page.tsx");
   assert.equal(existsSync(pagePath), true, "expected app/seo/local/page.tsx to exist");
@@ -125,6 +230,7 @@ test("seo local has launch inbound links from seo, hub and pymes pages", async (
 test("local seo form accepts businesses without a website field requirement", async () => {
   const form = await read("app/components/LocalSeoAuditForm.tsx");
 
+  assert.match(form, /formType: "Auditoría gratuita"/);
   assert.match(form, /sourcePage: "SEO local"/);
   assert.match(form, /interestedService: "SEO local"/);
   assert.match(form, /sourcePath: window\.location\.pathname/);
