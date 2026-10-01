@@ -157,34 +157,34 @@ const workItems = [
 
 const planRows = [
   {
-    work: "Página de servicio",
-    action: "Explicar qué incluye la reforma, el proceso, la zona atendida, las preguntas frecuentes y los trabajos reales autorizados; facilitar la solicitud de presupuesto.",
-    value: "Responder a la búsqueda y facilitar una solicitud.",
+    work: "Búsquedas y zona",
+    action: "Identificar cómo buscan las reformas de baños y desde qué localidades interesa captar clientes.",
+    value: "Definir la demanda y el área real de trabajo.",
   },
   {
-    work: "SEO de la página",
-    action: "Analizar cómo buscan reformas de baños en la zona y optimizar el título, los encabezados, el contenido, el enlazado interno, los datos estructurados y la indexación.",
-    value: "Mejorar la relevancia de la página para búsquedas locales con intención de contratar.",
+    work: "Competencia local",
+    action: "Comparar qué empresas aparecen, qué servicios destacan y cómo presentan su perfil y su web.",
+    value: "Detectar diferencias y oportunidades prioritarias.",
   },
   {
     work: "Perfil de Google",
-    action: "Revisar la categoría y el servicio; publicar fotos y contenido del trabajo con enlace a la página pertinente.",
-    value: "Mostrar qué hace la empresa a quien consulta el perfil.",
+    action: "Revisar categorías, servicios, área de servicio, información, fotos y contenido relacionado con reformas de baños.",
+    value: "Mejorar la correspondencia entre el negocio y las búsquedas relevantes.",
   },
   {
-    work: "Redes sociales",
-    action: "Adaptar el mismo proyecto a una pieza visual y responder una duda frecuente sobre el servicio.",
-    value: "Dar a conocer el trabajo y conducir hacia más información o contacto.",
+    work: "Sitio público y páginas clave",
+    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto del sitio público y analizar en detalle sus páginas clave; mejorar o crear la página de reformas de baños y relacionarla con las zonas atendidas.",
+    value: "Responder mejor a la búsqueda y facilitar una solicitud.",
   },
   {
-    work: "Contactos",
-    action: "Registrar solicitudes confirmadas y su procedencia cuando pueda medirse.",
-    value: "Separar visitas, oportunidades comerciales y clientes.",
+    work: "Reseñas y referencias",
+    action: "Incorporar un proceso de solicitud de opiniones después del servicio y revisar menciones relevantes del negocio.",
+    value: "Reforzar confianza y notoriedad con señales reales.",
   },
   {
-    work: "Reseñas tras el servicio",
-    action: "Invitar al cliente a compartir su experiencia mediante un enlace, una vez finalizado el trabajo.",
-    value: "Incorporar la solicitud de opiniones auténticas al proceso habitual.",
+    work: "Medición",
+    action: "Seguir visibilidad para las búsquedas y zonas analizadas, además de las solicitudes recibidas.",
+    value: "Comprobar la evolución y decidir la siguiente prioridad.",
   },
 ];
 
@@ -192,17 +192,17 @@ const process = [
   {
     step: "01",
     title: "Nos cuentas qué negocio tienes",
-    text: "Indica el nombre, la localidad y los servicios que prestas. Puedes añadir tu web o Perfil de Empresa para que revisemos el negocio correcto.",
+    text: "Indica el nombre, la localidad y los servicios que prestas. Comparte tu web y tu Perfil de Empresa de Google si los tienes, para que revisemos el negocio correcto.",
   },
   {
     step: "02",
     title: "Revisamos y te proponemos prioridades",
-    text: "Te explicamos qué vemos en la revisión inicial y qué servicios interesa impulsar. Si podemos ayudarte, recibirás una propuesta para priorizar el trabajo de perfil, web, reputación y medición, con alcance, entregables y frecuencia por escrito.",
+    text: "Analizamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y estudiamos en detalle sus páginas clave. Priorizamos el trabajo y te comunicamos los próximos pasos recomendados. Si podemos ayudarte, recibirás una propuesta con alcance, entregables y frecuencia por escrito.",
   },
   {
     step: "03",
     title: "Decides y ponemos en marcha lo acordado",
-    text: "La ejecución empieza después de aceptar la propuesta. Organizamos accesos y materiales, ejecutamos las tareas aprobadas y revisamos prioridades contigo. La medición depende de los accesos y del seguimiento comercial disponibles.",
+    text: "La ejecución empieza después de aceptar la propuesta. Organizamos accesos y materiales, ejecutamos el alcance acordado y revisamos prioridades contigo. Medimos la evolución cuando contamos con los accesos o el seguimiento acordados.",
   },
 ];
 
@@ -285,7 +285,7 @@ const faqs = [
   {
     question: "¿Qué incluye la auditoría gratuita?",
     answer:
-      "Revisamos tu perfil público de Google, una página de tu web si existe y el contenido público del canal social que compartas. Te indicamos prioridades y próximos pasos. No incluye una auditoría técnica exhaustiva, acceso a datos privados ni la ejecución del plan.",
+      "Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. También valoramos tus servicios, la zona, la competencia y las señales locales visibles. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados. No incluye acceso a datos privados ni la ejecución del plan.",
   },
   {
     question: "¿Cuánto cuesta contrataros?",
@@ -590,10 +590,10 @@ export default function LocalSeoPage() {
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Ejemplo ilustrativo</p>
               <h2 id="plan-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Así conectamos el trabajo alrededor de un servicio
+                Cómo trabajaríamos el SEO local de una empresa de reformas
               </h2>
               <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Imagina una empresa de reformas que quiere recibir consultas sobre reformas de baños. Este sería un ejemplo de trabajo coordinado.
+                Imagina una empresa que quiere recibir consultas sobre reformas de baños en las localidades donde trabaja. Este sería un posible proceso después de revisar su situación real.
               </p>
             </div>
             <div className="mt-10 overflow-hidden rounded-lg bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200">
@@ -638,7 +638,7 @@ export default function LocalSeoPage() {
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
                 Solicitar auditoría gratuita
               </a>
-              <p className={`text-base font-semibold text-slate-300 ${styles.emphasis}`}>Cada canal cumple una función. La estrategia los une alrededor del servicio que quieres vender.</p>
+              <p className={`text-base font-semibold text-slate-300 ${styles.emphasis}`}>Analizar → priorizar → ejecutar → medir. Cada fase parte de la situación real del negocio y del alcance acordado.</p>
             </div>
           </section>
 
@@ -755,16 +755,16 @@ export default function LocalSeoPage() {
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
                 <h2 id="audit-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Veamos qué puede mejorar en tu presencia local
+                  Descubre qué debe mejorar primero en tu SEO local
                 </h2>
                 <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                  Cuéntanos qué negocio tienes. Revisaremos tu presencia local y cómo conectar Google, web y contenido alrededor de tus servicios. Te responderemos con las prioridades que detectemos y el siguiente paso recomendado.
+                  Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.
                 </p>
                 <div className="mt-8 grid gap-3">
                   {[
-                    "Perfil de Google, una página de tu web si existe y canal social compartido.",
-                    "Prioridades para ordenar Google Maps, web, reseñas y contenido.",
-                    "Revisión inicial sin coste; creación web y gestión bajo presupuesto.",
+                    "Revisión inicial del Perfil de Empresa y, si existe web, del conjunto del sitio público, con análisis detallado de sus páginas clave.",
+                    "Análisis de servicios, búsquedas, zona, competencia y señales locales visibles.",
+                    "Prioridades del proyecto y próximos pasos recomendados.",
                   ].map((item) => (
                     <p className={`flex gap-3 text-slate-200 ${styles.body}`} key={item}>
                       <CheckIcon />
