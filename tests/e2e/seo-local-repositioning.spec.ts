@@ -17,6 +17,8 @@ const exampleRows = [
   "Medición",
 ];
 const auditScope = /revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave/i;
+const methodParagraph = "Nuestro método es Analizar → priorizar → ejecutar → medir. Partimos de un diagnóstico y priorizamos las tareas que pueden mejorar la relevancia y la presencia de tu negocio en las búsquedas locales. La ejecución empieza después de aceptar la propuesta y la medición depende de los accesos y del seguimiento disponibles. El alcance, los entregables y la frecuencia quedan definidos por escrito.";
+const auditParagraph = "Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.";
 
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   test(`SEO local offer and existing conversion journey at ${viewport.width}x${viewport.height}`, async ({ page, baseURL }) => {
@@ -43,7 +45,16 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.crecimientosincomplicaciones.com/seo/local");
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Agencia de SEO local para negocios");
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index,\s*follow/);
+    const robotsContent = await page.locator('meta[name="robots"]').getAttribute("content");
+    expect(robotsContent).not.toBeNull();
+    const robotsTokens = (robotsContent ?? "")
+      .split(",")
+      .map((token) => token.trim().toLowerCase())
+      .filter(Boolean);
+    expect(robotsTokens).toEqual(expect.arrayContaining(["index", "follow"]));
+    for (const forbiddenToken of ["noindex", "nofollow", "none"]) {
+      expect(robotsTokens).not.toContain(forbiddenToken);
+    }
     const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
       scripts.map((script) => JSON.parse(script.textContent ?? "")));
     expect(schemas.length).toBeGreaterThan(0);
@@ -71,6 +82,8 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     const includes = page.locator('section[aria-labelledby="includes-title"]');
     await expect(includes.locator("article")).toHaveCount(6);
     await expect(includes.locator("article h3")).toHaveText(workAreas);
+    for (const card of await includes.locator("article").all()) await expect(card).toBeVisible();
+    await expect(includes.getByText(methodParagraph, { exact: true })).toBeVisible();
     await expect(includes).toContainText("Analizar → priorizar → ejecutar → medir");
     await expect(includes).toContainText("La ejecución empieza después de aceptar la propuesta");
     await expect(includes).toContainText("la medición depende de los accesos y del seguimiento disponibles");
@@ -111,6 +124,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     await expect.poll(() => carousel.evaluate((element) => element.scrollLeft)).toBeLessThanOrEqual(initialScroll + 4);
 
     const audit = page.locator("#auditoria-seo-local");
+    await expect(audit.getByText(auditParagraph, { exact: true })).toBeVisible();
     await expect(audit).toContainText(auditScope);
     await expect(audit).toContainText("las prioridades de tu proyecto y los próximos pasos recomendados");
     const auditFaq = page.locator("#faq details").filter({ has: page.locator("summary", { hasText: "¿Qué incluye la auditoría gratuita?" }) });
