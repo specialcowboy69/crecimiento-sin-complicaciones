@@ -24,19 +24,19 @@ const pageUrl = absoluteUrl(pagePath);
 
 const buyingSituations = [
   {
-    title: "Tu perfil apenas muestra lo que haces",
-    text: "Realizas trabajos y ofreces servicios que apenas aparecen en tus publicaciones, fotos o páginas. A quien te descubre le faltan motivos para elegirte.",
+    title: "Tus competidores aparecen y tu negocio no.",
+    text: "Buscan uno de tus servicios en tu zona y otras empresas ocupan los resultados de Maps o de Google.",
     icon: MapPin,
   },
   {
-    title: "Pedir reseñas depende de acordarte",
-    text: "Atiendes a tus clientes, pero no tienes un proceso para invitarles a compartir su experiencia después del servicio.",
-    icon: MessageCircle,
+    title: "Tu visibilidad cambia mucho según la zona.",
+    text: "Necesitas saber dónde pierdes presencia y qué factores sí puedes mejorar.",
+    icon: BarChart3,
   },
   {
-    title: "Publicas en varios sitios, sin una dirección común",
-    text: "Tu web, Google Maps y tus redes hablan de cosas distintas, o el recorrido se corta antes del contacto. Si no tienes web, también falta un lugar propio donde explicar tu oferta.",
-    icon: Share2,
+    title: "Google no entiende bien qué ofreces ni dónde atiendes.",
+    text: "El perfil y la web no explican con suficiente claridad tus servicios, ubicaciones reales y páginas relevantes.",
+    icon: FileText,
   },
 ];
 
@@ -53,24 +53,20 @@ const localPresenceChannels = [
     title: "Reseñas",
     icon: MessageCircle,
   },
-  {
-    title: "Redes",
-    icon: Share2,
-  },
 ];
 
 const heroJourneyItems = [
   {
-    title: "Te encuentran",
-    text: "Maps",
+    title: "Te buscan",
+    text: "Servicio + zona",
   },
   {
-    title: "Entienden tu oferta",
-    text: "Web",
+    title: "Te encuentran",
+    text: "Google Maps o los resultados de búsqueda",
   },
   {
     title: "Contactan",
-    text: "Reseñas",
+    text: "Perfil o web",
   },
 ];
 
@@ -408,13 +404,13 @@ export default function LocalSeoPage() {
             <div className="relative grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-center">
               <div className="max-w-3xl">
                 <div className="mb-4 text-sm font-black uppercase tracking-normal text-teal-700">
-                  Servicio para negocios de toda España
+                  SEO local para negocios con ubicación o área de servicio en España
                 </div>
                 <h1 id="local-seo-hero-title" className="mb-5 max-w-3xl text-4xl font-black leading-[1.04] text-slate-900 sm:text-5xl lg:text-[3.05rem] xl:text-[3.45rem]">
-                  SEO local para conseguir más consultas
+                  Agencia de SEO local para negocios
                 </h1>
                 <div className={`max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl ${styles.intro}`}>
-                  Conectamos Google Maps, tu web, reseñas y redes para que tus servicios sean fáciles de encontrar y contactar. Si no tienes web, también la creamos.
+                  Analizamos cómo buscan tus clientes y trabajamos tu Perfil de Empresa de Google y el SEO de tu web para mejorar tu visibilidad en Google Maps y en las búsquedas de tu zona.
                 </div>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
@@ -428,16 +424,16 @@ export default function LocalSeoPage() {
               </div>
               <div className="relative">
                 <div className="absolute inset-6 rounded-lg bg-blue-200/45 blur-3xl" aria-hidden="true" />
-                <div className="relative rounded-lg border border-blue-100 bg-white/90 p-4 shadow-2xl shadow-blue-950/10 sm:p-5" aria-label="Sistema de presencia local conectada">
+                <div className="relative rounded-lg border border-blue-100 bg-white/90 p-4 shadow-2xl shadow-blue-950/10 sm:p-5" aria-label="Recorrido de captación local">
                   <div className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#2563eb,#0f766e)] p-5 [color:#fff] sm:p-6">
                     <div className="absolute right-0 top-0 h-full w-28 bg-white/10 [clip-path:polygon(42%_0,100%_0,100%_100%,0_100%)]" aria-hidden="true" />
                     <div className="relative max-w-xl">
-                      <div className="text-sm font-black uppercase tracking-normal text-blue-50">Presencia local conectada</div>
+                      <div className="text-sm font-black uppercase tracking-normal text-blue-50">Recorrido de captación local</div>
                       <div className="mt-3 text-2xl font-black leading-tight sm:text-3xl" style={{ color: "#ffffff" }}>
-                        De Google Maps a una consulta real
+                        De una búsqueda local a una consulta
                       </div>
                       <div className={`mt-4 max-w-md font-bold text-blue-50 ${styles.gradientBody}`}>
-                        Maps, web, reseñas y redes unidos por el contacto.
+                        Perfil de Empresa de Google y web trabajados según tus servicios y la zona donde atiendes.
                       </div>
                     </div>
                   </div>
@@ -449,7 +445,7 @@ export default function LocalSeoPage() {
                           <Link2 className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
                         </span>
                         <div>
-                          <div className="text-sm font-black uppercase tracking-normal text-teal-700">Recorrido hasta la consulta</div>
+                          <div className="text-sm font-black uppercase tracking-normal text-teal-700">Recorrido de captación local</div>
                           <div className="mt-1 text-xl font-black leading-tight text-slate-900">Un camino fácil de entender</div>
                         </div>
                       </div>
@@ -499,7 +495,7 @@ export default function LocalSeoPage() {
               <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Situaciones de compra</p>
                 <h2 id="situations-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Tu negocio avanza. ¿Tu presencia online lo refleja?
+                  ¿Qué está frenando tu visibilidad local?
                 </h2>
               </div>
               <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -512,7 +508,7 @@ export default function LocalSeoPage() {
                 ))}
               </div>
               <p className={`mt-8 max-w-3xl text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Revisamos qué servicios quieres impulsar y qué necesita cada canal para apoyar ese objetivo.
+                Analizamos las búsquedas, la zona, la competencia y tu Perfil de Empresa. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Con todo ello decidimos qué conviene trabajar primero.
               </p>
             </div>
           </section>

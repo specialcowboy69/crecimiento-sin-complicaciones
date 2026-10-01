@@ -11,6 +11,39 @@ async function read(relativePath) {
   return readFile(path.join(repoRoot, relativePath), "utf8");
 }
 
+function requiredSlice(source, startMarker, endMarker, label) {
+  const start = source.indexOf(startMarker);
+  assert.notEqual(start, -1, `expected ${label} start`);
+  const end = source.indexOf(endMarker, start + startMarker.length);
+  assert.ok(end > start, `expected ${label} end after start`);
+  return source.slice(start, end);
+}
+
+test("seo local leads with a specialist local search proposition", async () => {
+  const page = await read("app/seo/local/page.tsx");
+  assert.match(page, /Agencia de SEO local para negocios/);
+  assert.match(page, /Analizamos cómo buscan tus clientes/);
+  assert.match(page, /SEO de tu web/);
+  assert.match(page, /Recorrido de captación local/);
+  assert.match(page, /De una búsqueda local a una consulta/);
+  assert.match(page, /Tus competidores aparecen y tu negocio no/);
+  assert.match(page, /Tu visibilidad cambia mucho según la zona/);
+  assert.match(page, /Google no entiende bien qué ofreces ni dónde atiendes/);
+
+  const buyingSituations = requiredSlice(page, "const buyingSituations = [", "const localPresenceChannels = [", "buyingSituations");
+  const localPresenceChannels = requiredSlice(page, "const localPresenceChannels = [", "const heroJourneyItems = [", "localPresenceChannels");
+  const heroJourneyItems = requiredSlice(page, "const heroJourneyItems = [", "const localReviewHighlights = [", "heroJourneyItems");
+  const hero = requiredSlice(page, 'aria-labelledby="local-seo-hero-title"', 'aria-labelledby="situations-title"', "hero");
+
+  assert.equal((buyingSituations.match(/title:/g) || []).length, 3);
+  assert.equal((localPresenceChannels.match(/title:/g) || []).length, 3);
+  assert.equal((heroJourneyItems.match(/title:/g) || []).length, 3);
+  assert.match(heroJourneyItems, /Te buscan[\s\S]*Te encuentran[\s\S]*Contactan/);
+  assert.doesNotMatch(localPresenceChannels, /Redes/i);
+  assert.doesNotMatch(hero, /redes/i);
+  assert.doesNotMatch(hero, /Si no tienes web, también la creamos/);
+});
+
 test("seo local page is indexable with canonical metadata and schema", async () => {
   const pagePath = path.join(repoRoot, "app", "seo", "local", "page.tsx");
   assert.equal(existsSync(pagePath), true, "expected app/seo/local/page.tsx to exist");
