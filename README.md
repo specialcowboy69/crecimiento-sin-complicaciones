@@ -22,9 +22,12 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Project Documentation
 
-Project conventions and operating procedures live in [`docs/`](./docs):
+Project conventions and operating procedures are indexed here:
 
+- [`AGENTS.md`](./AGENTS.md): repository scope, coordination rules and required validation.
 - [`docs/site-architecture.md`](./docs/site-architecture.md): public routes, redirects, canonicals, sitemap and internal-link decisions.
+- [`docs/navigation.md`](./docs/navigation.md): shared header, dropdown, page-link and footer navigation rules.
+- [`docs/design.md`](./docs/design.md): visual system, responsive behavior and component design conventions.
 - [`docs/forms-and-leads.md`](./docs/forms-and-leads.md): lead payloads, form taxonomy, privacy notice and conversion-event data contract.
 - [`docs/analytics-and-consent.md`](./docs/analytics-and-consent.md): Vercel Analytics, optional GA4, consent behavior and verification.
 - [`docs/deployment.md`](./docs/deployment.md): production domain, Cloudflare routing and production analytics checks.

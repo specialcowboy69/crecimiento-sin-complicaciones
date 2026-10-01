@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-10-01
 
 ## Strategic Context
 
@@ -14,9 +14,11 @@ Central strategy folder:
 
 ## Operational Files
 
-- `app/layout.tsx`: global metadata.
+- `app/layout.tsx`: global metadata plus shared `Organization` and `WebSite` JSON-LD.
 - `app/sitemap.ts`: sitemap route generation.
 - `app/page.tsx`: home.
+- `app/sobre-nosotros/page.tsx`: public entity and trust page.
+- `app/lib/structuredData.ts`: shared `Organization`, `WebSite` and `BreadcrumbList` JSON-LD helpers and stable entity IDs.
 - `app/agencia-marketing-digital/page.tsx`: commercial marketing hub replacing the old `/servicios` hub.
 - `app/agencia-marketing-digital/*`: migrated service detail pages.
 - `app/diseno-landing-pages/page.tsx`: landing-page design service page replacing the legacy CRO/Landing Systems URL.
@@ -30,9 +32,14 @@ Central strategy folder:
 - `app/soluciones-inteligencia-artificial-empresas/page.tsx`: money page for AI automation.
 - `app/components/LandingServicesMenu.tsx`: shared `Más servicios` dropdown.
 - `app/components/PageLinksNav.tsx`: desktop-only cross-page navigation strip.
+- `app/components/SiteFooter.tsx`: shared public footer with the entity page, legal routes and cookie-preference control; hidden on `/admin`.
+- `app/politica-de-cookies/page.tsx` and `app/politica-de-privacidad/page.tsx`: public legal-information routes with `noindex, follow`, intentionally omitted from the sitemap.
+- `public/llms.txt`: concise public reference for AI systems; supplementary to the sitemap and robots rules.
 - `docs/site-architecture.md`: route, cluster, sitemap and redirect source of truth.
 - `docs/navigation.md`: header and mobile navigation rules.
 - `docs/forms-and-leads.md`: lead form and payload conventions.
+- `docs/analytics-and-consent.md`: analytics, consent and public cookie-behavior source of truth.
+- `docs/deployment.md`: production host, domain routing, merge preflight and production analytics checks.
 
 ## Rules
 
@@ -42,14 +49,17 @@ Central strategy folder:
 - Add keyword decisions to `C:/Users/USUARIO/Downloads/seo-skills/companies/pagina-agencia/seo-keyword-map.json`.
 - Do not create new internal links to `/servicios` or `/diseno-web`; use the redirected canonical destinations.
 - Canonicals and sitemap URLs should use no trailing slash.
+- Sitemap entries intentionally omit `lastModified` until real per-route modification dates are maintained; never publish `new Date()` as a fictitious update date.
 - Before creating batches, review whether new pages belong in `app/sitemap.ts` and `LandingServicesMenu`.
 - Do not invent internal links. Verify the route exists in `app/`, sitemap or redirects before linking.
+- Keep page-level `BreadcrumbList` schema aligned with the shared entity IDs and global `Organization` and `WebSite` schema in `app/lib/structuredData.ts`.
 - For architecture decisions, read `docs/site-architecture.md` first.
 
 ## Current Pillars
 
 - Commercial home on `/` with services, cases, pricing and `Auditoría gratuita`.
 - Agencia de marketing digital on `/agencia-marketing-digital`.
+- Public entity and trust page on `/sobre-nosotros`.
 - Diseño web profesional on `/diseno-pagina-web-profesional`.
 - SEO nacional on `/seo`.
 - SEO local service on `/seo/local`.

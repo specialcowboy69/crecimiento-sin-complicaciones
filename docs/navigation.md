@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-10-01
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -9,6 +9,7 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 - `app/components/Logo.tsx`: shared logo.
 - `app/components/LandingServicesMenu.tsx`: shared `Más servicios` dropdown.
 - `app/components/PageLinksNav.tsx`: secondary desktop-only page links strip.
+- `app/components/SiteFooter.tsx`: global public footer with entity, legal and cookie-preference links.
 - `app/globals.css`: shared responsive behavior for headers, dropdowns and mobile quick links.
 
 ## Global Rules
@@ -20,6 +21,19 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 - Do not add links to planned routes. Verify the route exists first.
 - Header dropdown labels should stay short.
 - Desktop header should stay on one line and below 80px height.
+
+## Global Footer
+
+`SiteFooter` is mounted once in `app/layout.tsx` for public pages and is hidden on `/admin`.
+
+Its current links and controls are:
+
+- `/sobre-nosotros`
+- `/politica-de-cookies`
+- `/politica-de-privacidad`
+- `CookiePreferencesLink` for reopening consent settings.
+
+Keep these links in the shared footer rather than duplicating page-specific footers. Legal routes remain reachable here even though they are intentionally omitted from the sitemap.
 
 ## Home Header
 
@@ -111,6 +125,7 @@ Current main links:
 
 - `/`
 - `/agencia-marketing-digital`
+- `/sobre-nosotros`
 - `/agencia-marketing-digital/google-ads`
 - `/diseno-landing-pages`
 - `/seo`

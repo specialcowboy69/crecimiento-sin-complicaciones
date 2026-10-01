@@ -183,6 +183,8 @@ Reglas:
 - No superponer texto sobre cards o gráficos.
 - Priorizar hero, CTA y prueba rápida.
 - Revisar siempre que botones y chips no se salgan del contenedor.
+- En carruseles horizontales, conservar el scroll vertical nativo de la página al deslizar desde una card. El carrusel de casos usa `overflow-x: auto` y `scroll-snap-type: x mandatory` sin sobrescribir `touch-action`; evitar `touch-action: none`, valores solo horizontales como `pan-x` y `preventDefault()` en gestos táctiles salvo necesidad justificada.
+- Comprobar en un móvil real que un gesto vertical iniciado sobre una card desplaza la página, que el gesto horizontal cambia de caso y que funcionan los botones. `node --test tests/mobile-scroll.test.mjs` (incluido en `npm test`) es una protección estática, no una prueba de interacción táctil en navegador o dispositivo.
 
 ## Copy y acentos
 
@@ -218,4 +220,5 @@ Checklist mínimo:
 - No hay variantes incorrectas de `Auditoría gratuita`.
 - Los formularios no piden inversión mensual estimada.
 - Mobile no tiene botones, chips o textos desbordados.
+- El scroll vertical sigue funcionando sobre los carruseles móviles y sus gestos horizontales y controles responden.
 - `npm run lint` y `npm run build` pasan si se ha tocado código.
