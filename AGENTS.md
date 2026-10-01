@@ -8,6 +8,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Before creating or modifying SEO pages, read `.agents/product-marketing.md`, `.agents/seo-context.md`, `.agents/seo-technical-principles.md`, and `docs/design.md`.
 
+## Task Scope And Coordination
+
+Before preparing or executing a plan, confirm that the project requested by the user, the plan's target repository and the intended checkout/worktree agree. State the repository path you will use. If the target is ambiguous or the plan belongs to another project, clarify the intended scope before editing; do not copy unrelated project work into this repository.
+
+Before editing an existing checkout/worktree or delegating changes, check for known active chats or agents working on the same files, branch, shared Git state or build outputs. Assign non-overlapping ownership and use isolated worktrees when needed. Read-only work and independent tasks may continue safely. If overlapping work is already underway and ownership is unclear, ask the user how to coordinate before writing. Preserve existing tracked and untracked user changes, and stage only files belonging to the current task.
+
+Before merging into `main`, read and follow **Git Merge Preflight** in `docs/deployment.md`. Report earlier unmerged work to the user, identify any decisions needed, and pause the merge until those decisions are resolved. When the review is clean, explicitly report that no earlier work is pending before merging. Do not merge, discard or overwrite earlier work without the user's direction.
+
 ## Project Operating Rules
 
 Before changing routes, sitemap entries, redirects, canonicals, breadcrumbs, or internal links, read `docs/site-architecture.md` and `.agents/seo-context.md`.
