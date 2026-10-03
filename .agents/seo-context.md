@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-10-01
+**Last updated:** 2026-10-02
 
 ## Strategic Context
 
@@ -23,7 +23,7 @@ Central strategy folder:
 - `app/agencia-marketing-digital/*`: migrated service detail pages.
 - `app/diseno-landing-pages/page.tsx`: landing-page design service page replacing the legacy CRO/Landing Systems URL.
 - `app/seo/page.tsx`: national SEO money page.
-- `app/seo/local/page.tsx`: local SEO service page for Google Business Profile, reviews, website SEO and connected local content.
+- `app/seo/local/page.tsx`: specialist local SEO service page for diagnosis, Google Business Profile, website SEO, authentic reviews and references, and measurement. Its method is `Analizar → priorizar → ejecutar → medir`; web creation and social content remain optional complements.
 - `app/seo-para-pymes/page.tsx`: SEO for SMEs intermediate page.
 - `app/seo/*/page.tsx`: local SEO pages.
 - `app/diseno-pagina-web-profesional/page.tsx`: money page for web design.
@@ -35,6 +35,7 @@ Central strategy folder:
 - `app/components/SiteFooter.tsx`: shared public footer with the entity page, legal routes and cookie-preference control; hidden on `/admin`.
 - `app/politica-de-cookies/page.tsx` and `app/politica-de-privacidad/page.tsx`: public legal-information routes with `noindex, follow`, intentionally omitted from the sitemap.
 - `public/llms.txt`: concise public reference for AI systems; supplementary to the sitemap and robots rules.
+- `.agents/product-marketing.md`: commercial source of truth for the offer, target audience, customer language and approved copy guardrails.
 - `docs/site-architecture.md`: route, cluster, sitemap and redirect source of truth.
 - `docs/navigation.md`: header and mobile navigation rules.
 - `docs/forms-and-leads.md`: lead form and payload conventions.
