@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-10-01
+**Last updated:** 2026-10-02
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -85,9 +85,10 @@ On mobile:
 
 The direct anchors should be page-specific, for example:
 
-- SEO pages: `Servicio`, `Proceso`, `SEO local`, `FAQ`.
+- National SEO page `/seo`: `Servicio`, `Proceso`, `SEO local`, `FAQ`.
+- Specialist SEO-local page `/seo/local`: `Qué incluye`, `Proceso`, `FAQ` on desktop; keep only `Incluye` and `Proceso` on mobile.
 - SEO para pymes: `Incluye`, `Método`, `Comparativa`, `FAQ`.
-- Local SEO pages: `Estrategia`, `Sectores`, `Método`, `FAQ`.
+- City SEO pages under `/seo/{city}`: `Estrategia`, `Sectores`, `Método`, `FAQ`.
 - Web design pages: `Incluye`, `Proceso`, `Precios`, `FAQ` only if those sections exist.
 - Landing pages: `Solución`, `Incluye`, `Proceso`, `FAQ`.
 
