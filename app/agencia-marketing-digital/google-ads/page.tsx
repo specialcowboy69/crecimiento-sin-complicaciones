@@ -119,6 +119,11 @@ const relatedLinks = [
 
 const faqs = [
   {
+    question: "¿Es lo mismo una agencia SEM que una agencia Google Ads?",
+    answer:
+      "En la práctica, muchas empresas usan ambos términos para buscar el mismo servicio. SEM describe la captación de pago en buscadores; Google Ads es la plataforma con la que prestamos este servicio. Meta Ads pertenece a publicidad social y se analiza como un canal distinto.",
+  },
+  {
     question: "¿Cuánto cobra una agencia Google Ads?",
     answer:
       "Depende del tamaño de la cuenta, número de campañas, inversión mensual y nivel de seguimiento necesario. Lo correcto es valorar primero si necesitas una campaña sencilla, una reestructuración o una gestión mensual completa.",
@@ -170,7 +175,7 @@ const jsonLd = [
       {
         "@type": "ListItem",
         position: 3,
-        name: "Agencia Google Ads",
+        name: "Agencia Google Ads y SEM",
         item: `${baseUrl}${pagePath}`,
       },
     ],
@@ -178,7 +183,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Agencia Google Ads para empresas",
+    name: "Agencia Google Ads y SEM para empresas",
     serviceType: [
       "Agencia Google Ads",
       "Gestión Google Ads",
@@ -194,7 +199,7 @@ const jsonLd = [
     areaServed: "ES",
     url: `${baseUrl}${pagePath}`,
     description:
-      "Gestión de campañas de Google Ads para empresas que quieren captar leads cualificados, medir mejor sus resultados y reducir inversión desperdiciada.",
+      "Agencia Google Ads y SEM para empresas que quieren captar leads, medir conversiones y controlar mejor el presupuesto.",
     makesOffer: {
       "@type": "Offer",
       name: "Auditoría gratuita de Google Ads",
@@ -217,9 +222,9 @@ const jsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Agencia Google Ads para empresas",
+  title: "Agencia Google Ads y SEM para empresas",
   description:
-    "Gestionamos campañas de Google Ads para empresas que quieren captar leads cualificados, medir mejor sus resultados y reducir inversión desperdiciada. Solicita una auditoría gratuita.",
+    "Agencia Google Ads y SEM para empresas. Creamos, auditamos y optimizamos campañas para captar leads, medir conversiones y controlar mejor el presupuesto.",
   keywords: [
     "agencia google ads",
     "agencia sem",
@@ -236,9 +241,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Agencia Google Ads para empresas",
+    title: "Agencia Google Ads y SEM para empresas",
     description:
-      "Campañas de Google Ads conectadas con estrategia, medición y conversión para captar mejores leads.",
+      "Campañas de Google Ads conectadas con búsquedas, landing pages y medición para captar oportunidades comerciales con más control.",
     url: pagePath,
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
@@ -322,17 +327,19 @@ export default function GoogleAdsPage() {
                 <span>Google Ads</span>
               </nav>
 
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">Agencia Google Ads</p>
+              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
+                Agencia Google Ads y SEM
+              </p>
               <h1
                 id="google-ads-hero-title"
                 className="marketing-hero-title mb-6 max-w-4xl font-black text-slate-900"
               >
-                Agencia Google Ads para captar leads sin desperdiciar presupuesto
+                Agencia Google Ads para captar leads con estrategia, medición y control
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Creamos, revisamos y optimizamos campañas de Google Ads para empresas que quieren generar oportunidades
-                comerciales con control, medición y una estrategia clara. No se trata solo de activar anuncios: se trata
-                de saber qué búsquedas atraen clientes, qué mensajes convierten y dónde merece la pena invertir.
+                Somos una agencia SEM especializada en Google Ads para empresas de toda España. Creamos, auditamos y
+                optimizamos campañas conectando búsquedas, anuncios, landing pages y medición para convertir la inversión
+                en oportunidades comerciales con más control.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -406,6 +413,24 @@ export default function GoogleAdsPage() {
                 qué está pasando. Palabras clave demasiado amplias, anuncios genéricos, conversiones mal configuradas o
                 landing pages que no convierten pueden hacer que una campaña parezca poco rentable cuando el problema
                 real está en el sistema.
+              </p>
+            </div>
+          </section>
+
+          <section
+            id="agencia-sem"
+            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            aria-labelledby="sem-title"
+          >
+            <div className="max-w-4xl">
+              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">SEM y Google Ads</p>
+              <h2 id="sem-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                Agencia SEM y Google Ads: una intención de búsqueda, una plataforma concreta
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-slate-300">
+                Cuando una empresa busca una agencia SEM, normalmente quiere captar demanda de pago en buscadores.
+                Nuestro servicio se centra en Google Ads: investigamos búsquedas, estructuramos campañas, redactamos
+                anuncios, configuramos conversiones y revisamos la landing page.
               </p>
             </div>
           </section>

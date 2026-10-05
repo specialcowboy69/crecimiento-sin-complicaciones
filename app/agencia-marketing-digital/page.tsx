@@ -47,10 +47,10 @@ const services = [
     icon: Globe2,
   },
   {
-    title: "Google Ads",
+    title: "Google Ads y SEM",
     text: "Campañas conectadas con estrategia, medición y conversión para captar leads sin desperdiciar presupuesto.",
     href: "/agencia-marketing-digital/google-ads",
-    cta: "Ver Google Ads",
+    cta: "Ver Google Ads y SEM",
     icon: Megaphone,
   },
   {
@@ -118,7 +118,7 @@ const audiences = [
 const entryLinks = [
   { href: "/seo", label: "Necesito posicionar en Google", icon: Search },
   { href: "/diseno-pagina-web-profesional", label: "Necesito mejorar mi web", icon: Globe2 },
-  { href: "/agencia-marketing-digital/google-ads", label: "Necesito captar con Google Ads", icon: Megaphone },
+  { href: "/agencia-marketing-digital/google-ads", label: "Necesito captar con Google Ads y SEM", icon: Megaphone },
   { href: "/gestion-redes-sociales-empresas", label: "Necesito ordenar redes sociales", icon: Share2 },
   { href: "/soluciones-inteligencia-artificial-empresas", label: "Necesito automatizar con IA", icon: Bot },
 ];
