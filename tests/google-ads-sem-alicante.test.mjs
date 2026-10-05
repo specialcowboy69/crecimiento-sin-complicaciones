@@ -59,6 +59,7 @@ test("Alicante is a distinct indexable Google Ads and SEM service page", async (
   assert.match(page, /sourcePage="Google Ads Alicante"/);
   assert.match(page, /interestedService="Google Ads"/);
   assert.match(page, /id="auditoria-google-ads-alicante"/);
+  assert.match(page, /href="\/agencia-marketing-digital"/);
   assert.match(page, /href="\/agencia-marketing-digital\/google-ads"/);
   assert.match(page, /href="\/seo\/alicante"/);
   assert.match(page, /href="\/diseno-landing-pages"/);
@@ -74,4 +75,24 @@ test("Alicante page avoids unsupported proof, prices, and demo components", asyn
   const page = await read(file);
 
   assert.doesNotMatch(page, /5\.2x|\bROAS\b|\bCPL\b|12\.000|199 €|399 €|CaseCarousel|PricingToggle|PaidGrowthCalculatorForm/);
+});
+
+test("internal links expose Alicante locally without promoting it as a global service", async () => {
+  const national = await read("app/agencia-marketing-digital/google-ads/page.tsx");
+  const seoAlicante = await read("app/seo/alicante/page.tsx");
+  const menu = await read("app/components/LandingServicesMenu.tsx");
+  const pageLinks = await read("app/components/PageLinksNav.tsx");
+  const architecture = await read("docs/site-architecture.md");
+  const forms = await read("docs/forms-and-leads.md");
+  const llms = await read("public/llms.txt");
+  const route = "/agencia-marketing-digital/google-ads/alicante";
+
+  assert.equal(national.includes(route), true);
+  assert.equal(seoAlicante.includes(route), true);
+  assert.match(seoAlicante, /Ver Google Ads para empresas de Alicante/);
+  assert.equal(menu.includes(route), false);
+  assert.equal(pageLinks.includes(route), false);
+  assert.equal(architecture.includes(route), true);
+  assert.match(forms, /Google Ads Alicante/);
+  assert.equal(llms.includes(route), true);
 });

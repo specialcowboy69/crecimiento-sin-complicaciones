@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-05
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -106,6 +106,7 @@ Current examples:
 - `SEO Málaga`
 - `Agencia de marketing digital`
 - `Agencia Google Ads`
+- `Google Ads Alicante` (`LeadForm`, `formType: "Auditoría gratuita"`, `interestedService: "Google Ads"`)
 - `Diseño de landing pages`
 - `Diseño web`
 - `Gestión de redes sociales`

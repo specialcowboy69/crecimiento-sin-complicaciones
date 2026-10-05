@@ -123,9 +123,9 @@ const relatedLinks = [
     text: "Página local enfocada en confianza antes del contacto y servicios profesionales.",
   },
   {
-    href: "/agencia-marketing-digital/google-ads",
-    title: "Google Ads",
-    text: "Campañas para captar demanda inmediata mientras el SEO construye base orgánica.",
+    href: "/agencia-marketing-digital/google-ads/alicante",
+    title: "Google Ads en Alicante",
+    text: "Campañas locales para captar demanda inmediata mientras el SEO construye base orgánica.",
   },
   {
     href: "/diseno-pagina-web-profesional",
@@ -535,8 +535,8 @@ export default function SeoAlicantePage() {
                 </article>
               ))}
             </div>
-            <Link className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="/agencia-marketing-digital/google-ads">
-              Ver gestión de Google Ads
+            <Link className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="/agencia-marketing-digital/google-ads/alicante">
+              Ver Google Ads para empresas de Alicante
             </Link>
           </section>
 

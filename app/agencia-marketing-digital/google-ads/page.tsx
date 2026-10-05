@@ -528,6 +528,33 @@ export default function GoogleAdsPage() {
 
           <section
             className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            aria-labelledby="alicante-title"
+          >
+            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div>
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Google Ads local</p>
+                <h2 id="alicante-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Campañas orientadas a mercados concretos
+                </h2>
+              </div>
+              <Link
+                className="group rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 hover:bg-white/5"
+                href="/agencia-marketing-digital/google-ads/alicante"
+              >
+                <h3 className="text-xl font-black text-slate-900">Agencia SEM para empresas de Alicante</h3>
+                <p className="mt-3 leading-7 text-slate-300">
+                  Estrategia y gestión de Google Ads adaptadas a búsquedas por servicio, ciudad y provincia.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-300">
+                  Ver Google Ads en Alicante
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+              </Link>
+            </div>
+          </section>
+
+          <section
+            className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
             aria-labelledby="difference-title"
           >
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.86fr_1.14fr]">
