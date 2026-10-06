@@ -1,12 +1,14 @@
-﻿"use client";
+"use client";
 
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { UIEvent, useRef, useState } from "react";
+import styles from "./CaseCarousel.module.css";
 
 function CaseLogo({ company }: { company: string }) {
   if (company === "EcoBite") {
     return (
-      <svg className="case-logo ecobite-logo" width="112" height="48" viewBox="0 0 112 48" role="img" aria-label="Logo de EcoBite">
-        <rect width="112" height="48" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+      <svg className={styles.logo} width="112" height="48" viewBox="0 0 112 48" role="img" aria-label="Logo de EcoBite">
+        <rect width="112" height="48" rx="8" fill="#f8fafc" stroke="#e2e8f0" />
         <path d="M25 31c10 0 17-7 17-21-14 0-22 8-22 18 0 2 2 3 5 3Z" fill="#bbf7d0" />
         <path d="M24 30c5-7 10-11 17-15" fill="none" stroke="#047857" strokeLinecap="round" strokeWidth="3" />
         <text x="52" y="29" fill="#064e3b">EcoBite</text>
@@ -16,8 +18,8 @@ function CaseLogo({ company }: { company: string }) {
 
   if (company === "Finova App") {
     return (
-      <svg className="case-logo finova-logo" width="128" height="48" viewBox="0 0 128 48" role="img" aria-label="Logo de Finova App">
-        <rect width="128" height="48" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+      <svg className={styles.logo} width="128" height="48" viewBox="0 0 128 48" role="img" aria-label="Logo de Finova App">
+        <rect width="128" height="48" rx="8" fill="#f8fafc" stroke="#e2e8f0" />
         <circle cx="25" cy="24" r="13" fill="#dbeafe" />
         <path d="M18 27l5-6 5 4 6-8" fill="none" stroke="#2563eb" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
         <text x="48" y="29" fill="#1e3a8a">Finova</text>
@@ -26,8 +28,8 @@ function CaseLogo({ company }: { company: string }) {
   }
 
   return (
-    <svg className="case-logo lumina-logo" width="148" height="48" viewBox="0 0 148 48" role="img" aria-label="Logo de Lumina Interiors">
-      <rect width="148" height="48" rx="12" fill="#f8fafc" stroke="#e2e8f0" />
+    <svg className={styles.logo} width="148" height="48" viewBox="0 0 148 48" role="img" aria-label="Logo de Lumina Interiors">
+      <rect width="148" height="48" rx="8" fill="#f8fafc" stroke="#e2e8f0" />
       <path d="M18 28h24l-5-14H23l-5 14Z" fill="#fef3c7" stroke="#b45309" strokeLinejoin="round" strokeWidth="2" />
       <path d="M30 28v8" fill="none" stroke="#b45309" strokeLinecap="round" strokeWidth="2" />
       <path d="M22 36h16" fill="none" stroke="#b45309" strokeLinecap="round" strokeWidth="2" />
@@ -105,74 +107,90 @@ export function CaseCarousel() {
 
   function onScroll(event: UIEvent<HTMLDivElement>) {
     const track = event.currentTarget;
-    const firstSlide = track.children.item(0) as HTMLElement | null;
-    if (!firstSlide) return;
-
-    const slideWidth = firstSlide.offsetWidth + 18;
-    const index = Math.round(track.scrollLeft / slideWidth);
+    const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
     setActiveIndex(Math.max(0, Math.min(index, cases.length - 1)));
   }
 
   return (
-    <div className="case-carousel" aria-roledescription="carrusel" aria-label="Casos de éxito destacados">
-      <div className="case-track" ref={trackRef} onScroll={onScroll} tabIndex={0}>
-        {cases.map((item, index) => (
-          <article className="case-slide" key={item.company} aria-label={`${index + 1} de ${cases.length}: ${item.company}`}>
-            <header className="case-company">
-              <CaseLogo company={item.company} />
-              <div>
-                <strong>{item.company}</strong>
-                <p>{item.sector}</p>
-              </div>
-            </header>
-
-            <div className="case-story">
-              <p className="case-kicker">El reto</p>
-              <h3>{item.challengeTitle}</h3>
-              <p>{item.challenge}</p>
-              <p className="case-solution"><b>Solución:</b> {item.solution}</p>
-            </div>
-
-            <dl className="case-metrics" aria-label={`Métricas principales de ${item.company}`}>
-              {item.metrics.map((metric) => (
-                <div key={metric.label}>
-                  <dt>{metric.value}</dt>
-                  <dd>{metric.label}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <figure className="case-quote">
-              <blockquote>{item.quote}</blockquote>
-              <figcaption>{item.author}</figcaption>
-            </figure>
-          </article>
-        ))}
-      </div>
-
-      <div className="case-controls" aria-label="Controles del carrusel">
-        <button className="button secondary" type="button" onClick={() => scrollToCase(activeIndex - 1)} disabled={activeIndex === 0}>
-          Anterior
-        </button>
-        <div className="case-dots" role="tablist" aria-label="Seleccionar caso de éxito">
+    <div className={styles.carousel} aria-roledescription="carrusel" aria-label="Casos de éxito destacados">
+      <div className={styles.toolbar} data-ui="case-selector">
+        <div className={styles.tabs} role="tablist" aria-label="Seleccionar caso de éxito">
           {cases.map((item, index) => (
             <button
+              className={styles.tab}
+              id={`case-tab-${index}`}
               key={item.company}
               type="button"
               role="tab"
+              aria-controls={`case-panel-${index}`}
               aria-selected={activeIndex === index}
-              aria-label={`Ver caso ${index + 1}: ${item.company}`}
               onClick={() => scrollToCase(index)}
-            />
+            >
+              {item.company}
+            </button>
           ))}
         </div>
-        <button className="button primary" type="button" onClick={() => scrollToCase(activeIndex + 1)} disabled={activeIndex === cases.length - 1}>
-          Siguiente
-        </button>
+        <div className={styles.controls} aria-label="Controles del carrusel">
+          <button type="button" onClick={() => scrollToCase(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Ver caso anterior" title="Caso anterior">
+            <ArrowLeft aria-hidden="true" size={20} strokeWidth={2} />
+          </button>
+          <button type="button" onClick={() => scrollToCase(activeIndex + 1)} disabled={activeIndex === cases.length - 1} aria-label="Ver caso siguiente" title="Caso siguiente">
+            <ArrowRight aria-hidden="true" size={20} strokeWidth={2} />
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.track} ref={trackRef} onScroll={onScroll} tabIndex={0}>
+        {cases.map((item, index) => (
+          <article
+            className={styles.slide}
+            id={`case-panel-${index}`}
+            key={item.company}
+            role="tabpanel"
+            aria-labelledby={`case-tab-${index}`}
+            aria-label={`${index + 1} de ${cases.length}: ${item.company}`}
+            tabIndex={activeIndex === index ? 0 : -1}
+          >
+            <div className={styles.context}>
+              <header className={styles.company}>
+                <CaseLogo company={item.company} />
+                <div>
+                  <strong>{item.company}</strong>
+                  <p>{item.sector}</p>
+                </div>
+              </header>
+
+              <div className={styles.story}>
+                <p className={styles.kicker}>El reto</p>
+                <h3>{item.challengeTitle}</h3>
+                <p>{item.challenge}</p>
+              </div>
+
+              <div className={styles.solution}>
+                <span>Solución aplicada</span>
+                <strong>{item.solution}</strong>
+              </div>
+            </div>
+
+            <div className={styles.results}>
+              <p className={styles.resultsLabel}>Resultados del proyecto</p>
+              <dl className={styles.metrics} aria-label={`Métricas principales de ${item.company}`}>
+                {item.metrics.map((metric, metricIndex) => (
+                  <div className={metricIndex === 0 ? styles.primaryMetric : undefined} key={metric.label}>
+                    <dt>{metric.value}</dt>
+                    <dd>{metric.label}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <figure className={styles.quote}>
+                <blockquote>{item.quote}</blockquote>
+                <figcaption>{item.author}</figcaption>
+              </figure>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   );
 }
-
-
-

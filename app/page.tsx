@@ -3,7 +3,19 @@ import { LandingServicesMenu } from "./components/LandingServicesMenu";
 import { LeadForm } from "./components/LeadForm";
 import { Logo } from "./components/Logo";
 import { PricingToggle } from "./components/PricingToggle";
-import { ClipboardList, Palette, Rocket, Zap } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import homeGrowthImage from "../public/images/home-growth-collaboration.webp";
+import homeServiceAiImage from "../public/images/home-service-ai-automation.webp";
+import homeServiceLandingImage from "../public/images/home-service-landing.webp";
+import homeServicePaidImage from "../public/images/home-service-paid.webp";
+import homeServiceSeoImage from "../public/images/home-service-seo.webp";
+import homeStageCaptureImage from "../public/images/home-stage-capture.webp";
+import homeStageConvertImage from "../public/images/home-stage-convert.webp";
+import homeStageExplainImage from "../public/images/home-stage-explain.webp";
+import homeStageLearnImage from "../public/images/home-stage-learn.webp";
+import styles from "./home.module.css";
 
 const homeMainServiceHrefs = [
   "/agencia-marketing-digital",
@@ -20,56 +32,55 @@ const services = [
   {
     title: "SEO técnico y contenido",
     text: "Arquitectura por entidades, silos transaccionales y clusters editoriales para captar demanda con intención real.",
+    image: homeServiceSeoImage,
+    href: "/seo",
   },
   {
-    title: "SEM y paid growth",
+    title: "Google Ads",
     text: "Campañas con hipótesis claras, medición limpia y ciclos de aprendizaje pensados para bajar coste por lead.",
+    image: homeServicePaidImage,
+    href: "/agencia-marketing-digital/google-ads",
   },
   {
     title: "Landing pages",
     text: "Páginas de campaña con mensaje, diseño, formularios y medición para convertir visitas en leads.",
+    image: homeServiceLandingImage,
+    href: "/diseno-landing-pages",
   },
   {
-    title: "Analítica ejecutiva",
-    text: "Dashboards accionables para CEOs y CMOs: pipeline, atribución, conversión y prioridades semanales.",
+    title: "Automatización con IA",
+    text: "Agentes de IA y automatizaciones que cualifican oportunidades, reducen tareas manuales y conectan tus herramientas.",
+    image: homeServiceAiImage,
+    href: "/soluciones-inteligencia-artificial-empresas",
   },
 ];
 
-const diagnosticSteps = [
+const acquisitionStages = [
   {
     number: "01",
-    title: "Reserva y toma de datos",
-    text: "Completas el formulario inicial y alineamos objetivos, mercado y canales activos.",
-    deliverable: "Formulario inicial + objetivos del negocio",
-    time: "Día 1",
-    icon: ClipboardList,
+    title: "Captar",
+    text: "SEO y campañas atraen demanda con una intención reconocible.",
+    image: homeStageCaptureImage,
   },
   {
     number: "02",
-    title: "Análisis de web, SEO y campañas",
-    text: "Revisamos puntos críticos de captación, posicionamiento, mensajes y conversión.",
-    deliverable: "Revisión priorizada en 24-48h",
-    time: "24-48h",
-    icon: Palette,
+    title: "Explicar",
+    text: "La página ordena el mensaje y deja claro por qué elegirte.",
+    image: homeStageExplainImage,
   },
   {
     number: "03",
-    title: "Oportunidades de mejora e IA",
-    text: "Detectamos automatizaciones y ajustes que pueden liberar tiempo o aumentar respuesta comercial.",
-    deliverable: "Prioridades de captación, conversión y automatización",
-    time: "48-72h",
-    icon: Zap,
+    title: "Convertir",
+    text: "La experiencia elimina fricción y conduce hacia una conversación.",
+    image: homeStageConvertImage,
   },
   {
     number: "04",
-    title: "Plan de acción recomendado",
-    text: "Te entregamos una hoja de ruta sencilla, ordenada por impacto, esfuerzo y siguiente paso.",
-    deliverable: "Hoja de ruta clara con próximos pasos",
-    time: "Cierre",
-    icon: Rocket,
+    title: "Aprender",
+    text: "La medición muestra qué funciona y qué conviene priorizar después.",
+    image: homeStageLearnImage,
   },
 ];
-
 
 const faqs = [
   {
@@ -142,58 +153,60 @@ export default function Home() {
       </header>
 
       <main id="inicio">
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">Fricción cero + alta conversión + storytelling</p>
-            <h1 id="hero-title">Crecimiento sin complicaciones para startups, pymes y negocios</h1>
-            <p>
-              Construimos funnels SEO y paid media que atraen tráfico cualificado, explican tu valor con claridad y convierten visitas en conversaciones comerciales.
-            </p>
-            <div className="hero-actions">
-              <a className="button primary" href="#auditoria">Solicitar auditoría gratuita</a>
-              <a className="button secondary" href="#casos">Ver resultados</a>
-            </div>
-            <dl className="proof-strip" aria-label="Indicadores de confianza">
-              <div><dt>3-5%</dt><dd>objetivo de conversión</dd></div>
-              <div><dt>90 días</dt><dd>primer sprint medible</dd></div>
-              <div><dt>Core Web Vitals</dt><dd>como requisito</dd></div>
-            </dl>
-          </div>
-
-          <div className="hero-visual" aria-label="Panel de crecimiento con métricas de marketing">
-            <div className="visual-toolbar"><span></span><span></span><span></span></div>
-            <div className="score-card">
-              <p>Pipeline estimado</p>
-              <strong>+42.000 EUR</strong>
-              <span>próximos 90 días</span>
-            </div>
-            <div className="chart" aria-hidden="true">
-              <span style={{ height: "38%" }}></span>
-              <span style={{ height: "54%" }}></span>
-              <span style={{ height: "48%" }}></span>
-              <span style={{ height: "72%" }}></span>
-              <span style={{ height: "86%" }}></span>
-            </div>
-            <div className="signal-grid">
-              <div><b>SEO</b><span>+68% impresiones</span></div>
-              <div><b>Ads</b><span>-24% CPL</span></div>
-              <div><b>CRO</b><span>+31% conversión</span></div>
+        <section className={styles.hero} aria-labelledby="hero-title">
+          <Image
+            className={styles.heroImage}
+            src={homeGrowthImage}
+            alt="Dos especialistas revisando una estrategia de crecimiento digital"
+            fill
+            preload
+            placeholder="blur"
+            sizes="100vw"
+          />
+          <div className={styles.heroInner}>
+            <div className={styles.heroCopy}>
+              <p className={`eyebrow ${styles.heroEyebrow}`}>Agencia de crecimiento y marketing digital</p>
+              <h1 className={styles.heroTitle} id="hero-title">Crecimiento sin complicaciones para startups, pymes y negocios</h1>
+              <p className={styles.heroLead}>
+                <strong>Convertimos tráfico en oportunidades comerciales.</strong>
+                Conectamos SEO, paid media, páginas y medición para atraer demanda cualificada y llevar cada visita hacia una conversación real.
+              </p>
+              <div className="hero-actions">
+                <a className="button primary" href="#auditoria">Solicitar auditoría gratuita</a>
+                <a className={`button secondary ${styles.heroSecondary}`} href="#casos">Ver casos de éxito</a>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section problem-section" aria-labelledby="problem-title">
-          <div className="section-heading compact">
-            <p className="eyebrow">El problema real</p>
-            <h2 id="problem-title">No falta tráfico. Falta un sistema que convierta aprendizaje en crecimiento.</h2>
-          </div>
-          <div className="split-copy">
-            <p>
-              Muchos equipos invierten en SEO, Ads y contenido como piezas sueltas. El resultado es ruido: rankings que no venden, campañas que aprenden lento y landings que obligan al usuario a pensar demasiado.
-            </p>
-            <p>
-              Nuestra promesa es simple: una arquitectura de adquisición donde cada página, anuncio, historia y dato tiene una función clara en el funnel.
-            </p>
+        <section className={styles.problemSection} aria-labelledby="problem-title">
+          <div className={styles.problemInner}>
+            <div className={styles.problemHeading}>
+              <p className="eyebrow">El problema real</p>
+              <h2 id="problem-title">No falta tráfico. Falta un sistema que convierta aprendizaje en crecimiento.</h2>
+            </div>
+            <div className={styles.systemPanel}>
+              <div className={styles.systemFlow} aria-label="Sistema de adquisición conectado">
+                {acquisitionStages.map((stage) => (
+                  <article className={styles.systemStage} key={stage.number}>
+                    <Image
+                      className={styles.stageImage}
+                      src={stage.image}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      placeholder="blur"
+                      sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 25vw"
+                    />
+                    <div className={styles.stageContent}>
+                      <span>{stage.number}</span>
+                      <h3>{stage.title}</h3>
+                      <p>{stage.text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -203,12 +216,26 @@ export default function Home() {
             <h2 id="services-title">Especialistas conectados por un mismo objetivo: leads cualificados</h2>
             <p>Trabajamos cada canal como parte de un sistema completo de descubrimiento, confianza y conversión.</p>
           </div>
-          <div className="service-grid">
+          <div className={styles.serviceGrid}>
             {services.map((service) => (
-              <article className="service-card" key={service.title}>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-              </article>
+              <Link className={styles.servicePanel} href={service.href} key={service.title}>
+                <Image
+                  className={styles.serviceImage}
+                  src={service.image}
+                  alt=""
+                  fill
+                  placeholder="blur"
+                  sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 66vw"
+                />
+                <div className={styles.serviceContent}>
+                  <h3>{service.title}</h3>
+                  <p>{service.text}</p>
+                  <span className={styles.serviceLinkCue}>
+                    Ver servicio
+                    <ArrowUpRight aria-hidden="true" size={18} strokeWidth={2.2} />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -217,7 +244,7 @@ export default function Home() {
           <div className="section-heading">
             <p className="eyebrow">Casos de éxito</p>
             <h2 id="cases-title">Historias que se sostienen con datos</h2>
-            <p>El storytelling funciona mejor cuando la métrica confirma que el usuario entendió el valor.</p>
+            <p>El reto, la solución aplicada y las métricas del proyecto, en una sola lectura.</p>
           </div>
           <CaseCarousel />
 
@@ -225,37 +252,16 @@ export default function Home() {
 
         <PricingToggle />
 
-        <section className="section diagnostic-section" id="diagnostico" aria-labelledby="diagnostic-title">
-          <div className="section-heading">
-            <p className="eyebrow">Diagnóstico gratuito</p>
-            <h2 id="diagnostic-title">Diagnóstico gratuito en 4 pasos</h2>
-            <p>
-              Analizamos tu situación actual y te damos una hoja de ruta clara para mejorar captación, conversión y automatización.
-            </p>
-            <a className="button primary" href="#auditoria">Solicitar diagnóstico gratis</a>
-          </div>
-          <div className="diagnostic-process">
-            {diagnosticSteps.map((step) => {
-              const Icon = step.icon;
-
-              return (
-                <article className="diagnostic-step" key={step.number}>
-                  <div className="diagnostic-step-top">
-                    <span className="diagnostic-icon" aria-hidden="true">
-                      <Icon size={22} strokeWidth={2} />
-                    </span>
-                    <span className="diagnostic-number">{step.number}</span>
-                  </div>
-                  <p className="diagnostic-time">{step.time}</p>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                  <div className="diagnostic-deliverable">
-                    <span>Entregable</span>
-                    <strong>{step.deliverable}</strong>
-                  </div>
-                </article>
-              );
-            })}
+        <section className={`section ${styles.diagnosticSection}`} id="diagnostico" aria-labelledby="diagnostic-title">
+          <div className={styles.diagnosticBand}>
+            <div className={styles.diagnosticCopy}>
+              <p className={`eyebrow ${styles.diagnosticEyebrow}`}>Auditoría gratuita</p>
+              <h2 id="diagnostic-title">Revisamos tu web y te enviamos una propuesta clara</h2>
+              <p>
+                Cuéntanos qué quieres mejorar en el formulario. Revisamos tu web y preparamos una propuesta con el alcance, las prioridades y los siguientes pasos.
+              </p>
+            </div>
+            <a className="button primary" href="#auditoria">Solicitar auditoría gratuita</a>
           </div>
         </section>
 

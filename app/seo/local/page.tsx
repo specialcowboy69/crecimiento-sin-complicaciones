@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   BarChart3,
@@ -16,6 +17,10 @@ import { LocalReviewsCarousel } from "../../components/LocalReviewsCarousel";
 import { LocalSeoAuditForm } from "../../components/LocalSeoAuditForm";
 import { Logo } from "../../components/Logo";
 import { SITE_URL, absoluteUrl } from "../../lib/site";
+import collaborationImage from "../../../public/images/seo-local-collaboration-v2.webp";
+import factorsImage from "../../../public/images/seo-local-factors-v2.webp";
+import heroImage from "../../../public/images/seo-local-hero-v2.webp";
+import localPresenceImage from "../../../public/images/seo-local-presence-v3.webp";
 import styles from "./page.module.css";
 
 const pagePath = "/seo/local";
@@ -36,36 +41,6 @@ const buyingSituations = [
     title: "Google no entiende bien qué ofreces ni dónde atiendes.",
     text: "El perfil y la web no explican con suficiente claridad tus servicios, ubicaciones reales y páginas relevantes.",
     icon: FileText,
-  },
-];
-
-const localPresenceChannels = [
-  {
-    title: "Google Maps",
-    icon: MapPin,
-  },
-  {
-    title: "Web local",
-    icon: Globe2,
-  },
-  {
-    title: "Reseñas",
-    icon: MessageCircle,
-  },
-];
-
-const heroJourneyItems = [
-  {
-    title: "Te buscan",
-    text: "Servicio + zona",
-  },
-  {
-    title: "Te encuentran",
-    text: "Google Maps o los resultados de búsqueda",
-  },
-  {
-    title: "Contactan",
-    text: "Perfil o web",
   },
 ];
 
@@ -124,33 +99,32 @@ const localReviewHighlights = [
 const workItems = [
   {
     title: "Diagnóstico de búsquedas y competencia local",
-    text: "Analizamos cómo se buscan tus servicios, en qué zonas quieres captar demanda y qué negocios aparecen en los resultados locales. Con ese diagnóstico definimos las prioridades de trabajo.",
+    text: "Detectamos qué buscan, en qué zonas y qué negocios ocupan hoy los resultados locales.",
     icon: FileText,
   },
   {
     title: "Perfil de Empresa de Google",
-    text: "Revisamos categorías, servicios e información del perfil, dirección o área de servicio, duplicados y fotografías. Trabajamos publicaciones útiles para explicar tus servicios y mostrar la actividad real del negocio.",
+    text: "Ordenamos categorías, servicios, información, área de servicio, fotografías y posibles duplicados.",
     icon: MapPin,
   },
   {
     title: "SEO local del sitio web",
-    text: "Revisamos tu sitio público y sus páginas clave. Según la prioridad, trabajamos estructura, indexación, páginas de servicios y ubicaciones reales, títulos, enlaces internos, datos estructurados y contacto desde el móvil.",
-    note: "Si necesitas crear una web, su alcance y presupuesto requieren una propuesta específica.",
+    text: "Revisamos estructura, indexación, páginas prioritarias, enlaces internos y contacto desde el móvil.",
     icon: Globe2,
   },
   {
     title: "Gestión de reseñas y respuestas",
-    text: "Organizamos la solicitud de opiniones a clientes que hayan recibido el servicio, las respuestas y el seguimiento para integrar las reseñas en la gestión habitual del negocio.",
+    text: "Diseñamos un proceso para solicitar, responder y aprovechar opiniones reales de clientes.",
     icon: MessageCircle,
   },
   {
     title: "Notoriedad y referencias del negocio",
-    text: "Revisamos la coherencia de la información del negocio y las menciones o enlaces legítimos en medios, directorios y webs locales o de tu sector.",
+    text: "Unificamos la información y revisamos menciones o enlaces legítimos en webs relevantes.",
     icon: Link2,
   },
   {
     title: "Medición y prioridades",
-    text: "Cuando contamos con los accesos y tu seguimiento comercial, separamos visibilidad, visitas, solicitudes, oportunidades y clientes. Esa medición nos ayuda a elegir el siguiente paso.",
+    text: "Separamos visibilidad, visitas y solicitudes para decidir la siguiente prioridad.",
     icon: BarChart3,
   },
 ];
@@ -158,7 +132,7 @@ const workItems = [
 const planRows = [
   {
     work: "Búsquedas y zona",
-    action: "Identificar cómo buscan las reformas de baños y desde qué localidades interesa captar clientes.",
+    action: "Identificar cómo buscan los servicios prioritarios y desde qué localidades interesa captar clientes.",
     value: "Definir la demanda y el área real de trabajo.",
   },
   {
@@ -168,12 +142,12 @@ const planRows = [
   },
   {
     work: "Perfil de Google",
-    action: "Revisar categorías, servicios, área de servicio, información, fotos y contenido relacionado con reformas de baños.",
+    action: "Revisar categorías, servicios, área de servicio, información, fotografías y contenido del negocio.",
     value: "Mejorar la correspondencia entre el negocio y las búsquedas relevantes.",
   },
   {
     work: "Sitio público y páginas clave",
-    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto del sitio público y analizar en detalle sus páginas clave; mejorar o crear la página de reformas de baños y relacionarla con las zonas atendidas.",
+    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto del sitio público y analizar en detalle sus páginas clave; mejorar los servicios prioritarios y relacionarlos con las zonas atendidas.",
     value: "Responder mejor a la búsqueda y facilitar una solicitud.",
   },
   {
@@ -188,51 +162,59 @@ const planRows = [
   },
 ];
 
-const process = [
+const methodSteps = [
   {
     step: "01",
-    title: "Nos cuentas qué negocio tienes",
-    text: "Indica el nombre, la localidad y los servicios que prestas. Comparte tu web y tu Perfil de Empresa de Google si los tienes, para que revisemos el negocio correcto.",
+    title: "Analizar",
+    text: "Revisamos las búsquedas, tu Perfil de Empresa y, si tienes web, el conjunto del sitio público y sus páginas clave.",
   },
   {
     step: "02",
-    title: "Revisamos y te proponemos prioridades",
-    text: "Analizamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y estudiamos en detalle sus páginas clave. Priorizamos el trabajo y te comunicamos los próximos pasos recomendados. Si podemos ayudarte, recibirás una propuesta con alcance, entregables y frecuencia por escrito.",
+    title: "Priorizar",
+    text: "Ordenamos las oportunidades por impacto, esfuerzo y relación con los servicios que quieres impulsar.",
   },
   {
     step: "03",
-    title: "Decides y ponemos en marcha lo acordado",
-    text: "La ejecución empieza después de aceptar la propuesta. Organizamos accesos y materiales, ejecutamos el alcance acordado y revisamos prioridades contigo. Medimos la evolución cuando contamos con los accesos o el seguimiento acordados.",
+    title: "Ejecutar",
+    text: "Después de aceptar la propuesta, aplicamos el alcance acordado en el perfil, la web, la reputación y las referencias.",
+  },
+  {
+    step: "04",
+    title: "Medir",
+    text: "Con los accesos y el seguimiento disponibles, revisamos la evolución y decidimos la siguiente prioridad.",
   },
 ];
 
 const budgetItems = [
   {
-    title: "Una propuesta priorizada, con tareas concretas",
-    text: "Definimos qué necesita tu perfil, qué conviene trabajar en tu sitio web, cómo organizar las reseñas y qué podemos medir. El alcance, los entregables y la frecuencia quedan definidos por escrito.",
+    label: "01",
+    title: "Auditoría inicial",
+    text: "La revisión inicial es gratuita y termina con prioridades claras y próximos pasos recomendados.",
   },
   {
-    title: "Con tu web actual o con una nueva",
-    text: "Si ya tienes web, revisamos qué aprovechar y qué mejorar. Si necesitas una nueva, podemos presupuestar su creación con páginas, funcionalidades y condiciones detalladas en una propuesta específica.",
+    label: "02",
+    title: "Puesta en marcha",
+    text: "La propuesta separa las tareas iniciales, sus entregables y los accesos necesarios para empezar.",
   },
   {
-    title: "Trabajo inicial y gestión continua, claramente definidos",
-    text: "El presupuesto distingue las tareas de puesta en marcha de las que requieren continuidad: mantenimiento del perfil, gestión de reseñas y revisión de resultados. La creación web y los contenidos para redes sociales se presupuestan como complementos opcionales si hacen falta.",
+    label: "03",
+    title: "Gestión continua",
+    text: "La frecuencia de revisión, mantenimiento y medición queda definida por escrito y separada del trabajo inicial.",
   },
 ];
 
 const trustItems = [
   {
     title: "Tu negocio sigue bajo tu control",
-    text: "Mantienes la titularidad de tu perfil de Google y tus cuentas. Cuando necesitemos acceso, lo gestionaremos mediante permisos.",
+    text: "Mantienes la titularidad del perfil y de tus cuentas. Los accesos se gestionan mediante permisos.",
   },
   {
     title: "Cada cambio tiene una explicación",
-    text: "Recibirás un resumen del trabajo realizado y de las cuestiones que requieren tu decisión.",
+    text: "Recibes un resumen del trabajo realizado y de las decisiones pendientes.",
   },
   {
     title: "Las prioridades se acuerdan contigo",
-    text: "Las tareas adicionales se presupuestan antes de ejecutarse.",
+    text: "Cualquier tarea adicional se aprueba y presupuesta antes de ejecutarse.",
   },
 ];
 
@@ -396,89 +378,40 @@ export default function LocalSeoPage() {
         </header>
 
         <main>
-          <section className="relative mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 lg:px-8 lg:py-16" aria-labelledby="local-seo-hero-title">
-            <div className="pointer-events-none absolute -bottom-20 left-0 h-44 w-[42rem] rounded-tr-[12rem] bg-gradient-to-r from-blue-600/12 via-sky-400/10 to-teal-400/10" aria-hidden="true" />
-            <nav className="mb-5 flex items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
-              <Link className="hover:text-blue-300" href="/">Inicio</Link>
-              <span aria-hidden="true">/</span>
-              <Link className="hover:text-blue-300" href="/seo">Agencia SEO</Link>
-              <span aria-hidden="true">/</span>
-              <span>SEO local</span>
-            </nav>
-            <div className="relative grid gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:items-center">
-              <div className="max-w-3xl">
-                <div className="mb-4 text-sm font-black uppercase tracking-normal text-teal-700">
-                  SEO local para negocios con ubicación o área de servicio en España
-                </div>
-                <h1 id="local-seo-hero-title" className="mb-5 max-w-3xl text-4xl font-black leading-[1.04] text-slate-900 sm:text-5xl lg:text-[3.05rem] xl:text-[3.45rem]">
+          <section className={`relative isolate overflow-hidden ${styles.hero}`} aria-labelledby="local-seo-hero-title">
+            <Image
+              className={styles.heroImage}
+              src={heroImage}
+              alt="Profesional de un negocio local revisando su presencia digital desde el móvil"
+              fill
+              priority
+              placeholder="blur"
+              sizes="100vw"
+            />
+            <div className={styles.heroScrim} aria-hidden="true" />
+            <div className="relative z-10 mx-auto flex min-h-[32rem] max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+              <nav className={`flex items-center gap-2 text-sm font-bold ${styles.heroBreadcrumb}`} aria-label="Migas de pan">
+                <Link href="/">Inicio</Link>
+                <span aria-hidden="true">/</span>
+                <Link href="/seo">Agencia SEO</Link>
+                <span aria-hidden="true">/</span>
+                <span>SEO local</span>
+              </nav>
+
+              <div className="my-auto max-w-3xl py-6">
+                <h1 id="local-seo-hero-title" className={`max-w-3xl text-4xl font-black leading-[1.04] sm:text-5xl lg:text-[3.45rem] ${styles.heroTitle}`}>
                   Agencia de SEO local para negocios
                 </h1>
-                <div className={`max-w-2xl text-lg font-semibold leading-8 text-slate-600 sm:text-xl ${styles.intro}`}>
+                <p className={`mt-6 max-w-2xl text-lg font-semibold leading-8 sm:text-xl ${styles.heroIntro}`}>
                   Analizamos cómo buscan tus clientes y trabajamos tu Perfil de Empresa de Google y el SEO de tu web para mejorar tu visibilidad en Google Maps y en las búsquedas de tu zona.
-                </div>
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
+                </p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 transition hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-300" href="#auditoria-seo-local">
                     Solicitar auditoría gratuita
                   </a>
-                  <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3 font-bold text-slate-900 shadow-sm hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-blue-400" href="#incluye">
+                  <a className={`inline-flex min-h-12 items-center justify-center rounded-lg px-6 py-3 font-bold transition focus-visible:ring-2 focus-visible:ring-white ${styles.heroSecondaryButton}`} href="#incluye">
                     Ver qué incluye
                   </a>
-                </div>
-
-              </div>
-              <div className="relative">
-                <div className="absolute inset-6 rounded-lg bg-blue-200/45 blur-3xl" aria-hidden="true" />
-                <div className="relative rounded-lg border border-blue-100 bg-white/90 p-4 shadow-2xl shadow-blue-950/10 sm:p-5" aria-label="Recorrido de captación local">
-                  <div className="relative overflow-hidden rounded-lg bg-[linear-gradient(135deg,#2563eb,#0f766e)] p-5 [color:#fff] sm:p-6">
-                    <div className="absolute right-0 top-0 h-full w-28 bg-white/10 [clip-path:polygon(42%_0,100%_0,100%_100%,0_100%)]" aria-hidden="true" />
-                    <div className="relative max-w-xl">
-                      <div className="text-sm font-black uppercase tracking-normal text-blue-50">Recorrido de captación local</div>
-                      <div className="mt-3 text-2xl font-black leading-tight sm:text-3xl" style={{ color: "#ffffff" }}>
-                        De una búsqueda local a una consulta
-                      </div>
-                      <div className={`mt-4 max-w-md font-bold text-blue-50 ${styles.gradientBody}`}>
-                        Perfil de Empresa de Google y web trabajados según tus servicios y la zona donde atiendes.
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-3 rounded-lg bg-white p-5 ring-1 ring-blue-100">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100">
-                          <Link2 className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
-                        </span>
-                        <div>
-                          <div className="text-sm font-black uppercase tracking-normal text-teal-700">Recorrido de captación local</div>
-                          <div className="mt-1 text-xl font-black leading-tight text-slate-900">Un camino fácil de entender</div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2" aria-label="Canales trabajados">
-                        {localPresenceChannels.map((item) => {
-                          const Icon = item.icon;
-
-                          return (
-                            <span key={item.title} className="grid h-9 w-9 place-items-center rounded-lg bg-teal-50 text-teal-700 ring-1 ring-teal-100" title={item.title}>
-                              <Icon className="h-4 w-4" aria-hidden="true" strokeWidth={2} />
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                      {heroJourneyItems.map((item, index) => (
-                        <div key={item.title} className="rounded-lg bg-slate-50 p-4 ring-1 ring-slate-100">
-                          <span className="grid h-9 w-9 place-items-center rounded-lg bg-blue-600 text-sm font-black text-white">
-                            {index + 1}
-                          </span>
-                          <div className="mt-4">
-                            <div className="text-sm font-black leading-tight text-slate-900">{item.title}</div>
-                            <div className="mt-1 text-sm font-bold leading-5 text-slate-600">{item.text}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -494,60 +427,71 @@ export default function LocalSeoPage() {
             </div>
           </div>
 
-          <section className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="situations-title">
+          <section className="border-y border-[#dbe3ef] bg-[#eef6ff] px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="situations-title">
             <div className="mx-auto max-w-7xl">
-              <div className="max-w-3xl">
+              <div className="max-w-2xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Situaciones de compra</p>
                 <h2 id="situations-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   ¿Qué está frenando tu visibilidad local?
                 </h2>
               </div>
-              <div className="mt-10 grid gap-5 md:grid-cols-3">
-                {buyingSituations.map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
-                    <item.icon className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                    <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
+              <div className="mt-10 border-y border-[#cbd5e1]">
+                {buyingSituations.map((item, index) => (
+                  <article className="grid gap-4 border-b border-[#cbd5e1] py-7 last:border-b-0 md:grid-cols-[3rem_3.5rem_minmax(0,1fr)] md:items-start" key={item.title}>
+                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">0{index + 1}</span>
+                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700 shadow-sm ring-1 ring-[#dbe3ef]">
+                      <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
+                    </span>
+                    <div className={styles.situationCopy}>
+                      <h3 className="text-xl font-black leading-tight text-slate-900">{item.title}</h3>
+                      <p className={`mt-3 max-w-3xl text-slate-600 ${styles.body}`}>{item.text}</p>
+                    </div>
                   </article>
                 ))}
               </div>
-              <p className={`mt-8 max-w-3xl text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Analizamos las búsquedas, la zona, la competencia y tu Perfil de Empresa. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Con todo ello decidimos qué conviene trabajar primero.
-              </p>
             </div>
           </section>
 
           <section id="incluye" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="includes-title">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Qué incluye</p>
               <h2 id="includes-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Qué evaluamos y qué podemos trabajar según la prioridad
+                Un sistema coordinado para que te encuentren y te elijan
               </h2>
               <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Nuestro método es Analizar → priorizar → ejecutar → medir. Partimos de un diagnóstico y priorizamos las tareas que pueden mejorar la relevancia y la presencia de tu negocio en las búsquedas locales. La ejecución empieza después de aceptar la propuesta y la medición depende de los accesos y del seguimiento disponibles. El alcance, los entregables y la frecuencia quedan definidos por escrito.
+                Perfil, web, reputación y datos trabajan juntos. La prioridad depende de dónde esté hoy el principal bloqueo de tu negocio.
               </p>
             </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              {workItems.map((item) => (
-                <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
-                    <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                  </span>
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
-                  {item.note ? <p className={`mt-4 font-bold text-slate-900 ${styles.emphasis}`}>{item.note}</p> : null}
-                </article>
-              ))}
-            </div>
-            <div className="mt-10 max-w-3xl">
-              <h3 className="text-xl font-black text-slate-900">Complementos si hacen falta</h3>
-              <p className={`mt-3 text-slate-300 ${styles.body}`}>
-                Si el diagnóstico lo justifica, también podemos coordinar contenidos para redes sociales o presupuestar la creación de una web. No es necesario contratar todos los servicios para empezar a trabajar el SEO local.
-              </p>
+            <div className="mt-12 grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_24px_64px_rgba(15,23,42,0.09)] lg:grid-cols-[0.8fr_1.2fr]">
+              <figure className={styles.presenceFigure}>
+                <Image
+                  className={styles.presenceImage}
+                  src={localPresenceImage}
+                  alt="Profesional revisando la visibilidad de un negocio en mapas y búsquedas locales"
+                  fill
+                  placeholder="blur"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                />
+              </figure>
+
+              <div className="grid px-5 py-3 sm:px-8 lg:px-9 lg:py-6">
+                {workItems.map((item, index) => (
+                  <article className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-[#dbe3ef] py-5 last:border-b-0" key={item.title}>
+                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">0{index + 1}</span>
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <item.icon className="h-5 w-5 flex-none text-teal-700" aria-hidden="true" strokeWidth={1.8} />
+                        <h3 className="text-lg font-black leading-tight text-slate-900">{item.title}</h3>
+                      </div>
+                      <p className={`mt-3 text-slate-600 ${styles.body}`}>{item.text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
 
-          <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24" aria-labelledby="local-reviews-title">
+          <section id="resenas" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24" aria-labelledby="local-reviews-title">
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Reseñas</p>
               <h2 id="local-reviews-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
@@ -560,28 +504,51 @@ export default function LocalSeoPage() {
             <LocalReviewsCarousel items={localReviewHighlights} />
           </section>
 
-          <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="maps-web-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr]">
-              <div>
+          <section className="bg-[#eef6ff] px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="maps-web-title">
+            <div className="mx-auto max-w-7xl">
+              <div className="max-w-3xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Cómo funciona el posicionamiento local</p>
                 <h2 id="maps-web-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Tres factores que condicionan los resultados locales
                 </h2>
               </div>
-              <div className="grid gap-5 text-lg leading-8 text-slate-300">
-                <div>
-                  <h3 className="text-xl font-black text-slate-900">Relevancia</h3>
-                  <p className={`mt-3 ${styles.body}`}>Ayudamos a Google y a las personas a entender qué ofreces con información completa, categorías correctas y páginas útiles.</p>
+
+              <div className="mt-12 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+                <figure className={`relative aspect-[8/5] overflow-hidden rounded-lg shadow-[0_24px_64px_rgba(15,23,42,0.14)] ${styles.editorialFigure}`}>
+                  <Image
+                    className="object-cover"
+                    src={factorsImage}
+                    alt="Análisis de zonas de servicio y presencia local en distintos dispositivos"
+                    fill
+                    placeholder="blur"
+                    sizes="(min-width: 1024px) 56vw, 100vw"
+                  />
+                  <figcaption className={styles.imageCaption}>Visibilidad local observada por servicio y zona.</figcaption>
+                </figure>
+
+                <div className="border-y border-[#cbd5e1]">
+                  <article className="grid grid-cols-[3rem_1fr] gap-5 border-b border-[#cbd5e1] py-7">
+                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">01</span>
+                    <div>
+                      <h3 className="text-2xl font-black text-slate-900">Relevancia</h3>
+                      <p className={`mt-3 text-slate-600 ${styles.body}`}>Información, categorías y páginas que explican con claridad qué ofreces.</p>
+                    </div>
+                  </article>
+                  <article className="grid grid-cols-[3rem_1fr] gap-5 border-b border-[#cbd5e1] py-7">
+                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">02</span>
+                    <div>
+                      <h3 className="text-2xl font-black text-slate-900">Distancia</h3>
+                      <p className={`mt-3 text-slate-600 ${styles.body}`}>Lectura de cómo cambia la visibilidad según dónde busca el usuario.</p>
+                    </div>
+                  </article>
+                  <article className="grid grid-cols-[3rem_1fr] gap-5 py-7">
+                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">03</span>
+                    <div>
+                      <h3 className="text-2xl font-black text-slate-900">Prominencia</h3>
+                      <p className={`mt-3 text-slate-600 ${styles.body}`}>Reseñas, reputación y referencias que respaldan la confianza en el negocio.</p>
+                    </div>
+                  </article>
                 </div>
-                <div>
-                  <h3 className="text-xl font-black text-slate-900">Distancia</h3>
-                  <p className={`mt-3 ${styles.body}`}>Analizamos cómo cambia tu visibilidad según dónde busca el usuario y nos centramos en las zonas que tu negocio atiende realmente.</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-black text-slate-900">Prominencia</h3>
-                  <p className={`mt-3 ${styles.body}`}>Trabajamos la reputación, las reseñas y las referencias relevantes del negocio en la web y en su sector.</p>
-                </div>
-                <p className={styles.intro}>La web, el perfil y las reseñas aportan señales distintas. Las trabajamos de forma coordinada para reforzar la relevancia, la confianza y la visibilidad local, y medimos su evolución por separado.</p>
               </div>
             </div>
           </section>
@@ -590,120 +557,117 @@ export default function LocalSeoPage() {
             <div className="max-w-3xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Ejemplo ilustrativo</p>
               <h2 id="plan-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Cómo trabajaríamos el SEO local de una empresa de reformas
+                Cómo organizaríamos el SEO local de un negocio con varias zonas de servicio
               </h2>
               <p className={`mt-4 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                Imagina una empresa que quiere recibir consultas sobre reformas de baños en las localidades donde trabaja. Este sería un posible proceso después de revisar su situación real.
+                Este ejemplo muestra cómo conectamos las piezas después de revisar la situación real del negocio.
               </p>
             </div>
-            <div className="mt-10 overflow-hidden rounded-lg bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200">
-              <div className="border-b border-slate-200 bg-blue-50 p-5">
-                <h3 className="text-xl font-black text-slate-900">Ejemplo ilustrativo de plan de trabajo</h3>
-                <p className={`mt-2 font-semibold text-slate-600 ${styles.emphasis}`}>
-                  No corresponde a un cliente ni demuestra resultados obtenidos. Las tareas reales se definen después de revisar cada negocio.
-                </p>
+            <div className={`mt-10 ${styles.planTable}`}>
+              <div className={styles.planTableTitle}>
+                <h3 className="text-2xl font-black text-slate-900">Plan de trabajo ilustrativo</h3>
               </div>
-              <div className="hidden overflow-x-auto md:block">
-                <table className="w-full min-w-[860px] border-collapse text-left">
-                  <caption className="sr-only">Ejemplo ilustrativo de trabajo coordinado de SEO local</caption>
-                  <thead>
-                    <tr>
-                      <th className="border-b border-slate-200 bg-slate-50 p-5 text-sm font-black text-slate-900">Trabajo</th>
-                      <th className="border-b border-slate-200 bg-slate-50 p-5 text-sm font-black text-slate-900">Qué hacemos</th>
-                      <th className="border-b border-slate-200 bg-slate-50 p-5 text-sm font-black text-slate-900">Para qué sirve</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {planRows.map((row) => (
-                      <tr key={row.work}>
-                        <th className="border-b border-slate-200 p-5 text-sm font-black text-slate-900">{row.work}</th>
-                        <td className={`border-b border-slate-200 p-5 text-slate-600 ${styles.body}`}>{row.action}</td>
-                        <td className={`border-b border-slate-200 p-5 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className={styles.planColumnLabels} role="row">
+                <span role="columnheader">Paso</span>
+                <span role="columnheader">Área de trabajo</span>
+                <span role="columnheader">Qué revisamos</span>
+                <span role="columnheader">Para qué sirve</span>
               </div>
-              <div className="grid gap-4 p-5 md:hidden">
-                {planRows.map((row) => (
-                  <article className="rounded-lg border border-slate-200 p-4" key={row.work}>
-                    <h3 className="text-lg font-black text-slate-900">{row.work}</h3>
-                    <p className={`mt-3 text-slate-600 ${styles.body}`}>{row.action}</p>
-                    <p className={`mt-3 font-bold text-slate-700 ${styles.emphasis}`}>{row.value}</p>
-                  </article>
+              <ol className={styles.planRows}>
+                {planRows.map((row, index) => (
+                  <li className={styles.planRow} key={row.work}>
+                    <span className={styles.planStep}>0{index + 1}</span>
+                    <h3 className={styles.planWork}>{row.work}</h3>
+                    <div className={styles.planCell}>
+                      <span className={styles.planCellLabel}>Qué revisamos</span>
+                      <p className={`text-slate-600 ${styles.body}`}>{row.action}</p>
+                    </div>
+                    <div className={`${styles.planCell} ${styles.planValue}`}>
+                      <span className={styles.planCellLabel}>Para qué sirve</span>
+                      <p className={`font-bold text-slate-800 ${styles.emphasis}`}>{row.value}</p>
+                    </div>
+                  </li>
                 ))}
-              </div>
+              </ol>
             </div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8">
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo-local">
                 Solicitar auditoría gratuita
               </a>
-              <p className={`text-base font-semibold text-slate-300 ${styles.emphasis}`}>Analizar → priorizar → ejecutar → medir. Cada fase parte de la situación real del negocio y del alcance acordado.</p>
             </div>
           </section>
 
-          <section id="proceso" className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="process-title">
+          <section id="proceso" className={`px-4 py-16 sm:px-6 lg:px-8 lg:py-24 ${styles.methodSection}`} aria-labelledby="process-title">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Proceso</p>
-                <h2 id="process-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Analizar → priorizar → ejecutar → medir
+                <h2 id="process-title" className={`text-3xl font-black sm:text-4xl ${styles.methodTitle}`}>
+                  Nuestro método
                 </h2>
               </div>
-              <div className="mt-10 grid gap-4">
-                {process.map((step) => (
-                  <article className="grid gap-4 rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 sm:grid-cols-[4rem_1fr]" key={step.step}>
-                    <span className="text-3xl font-black text-blue-400">{step.step}</span>
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                      <p className={`mt-2 text-slate-300 ${styles.body}`}>{step.text}</p>
+              <ol className={styles.methodRail}>
+                {methodSteps.map((step) => (
+                  <li key={step.step}>
+                    <span className={styles.methodNumber}>{step.step}</span>
+                    <div className={styles.methodCopy}>
+                      <h3>{step.title}</h3>
+                      <p>{step.text}</p>
                     </div>
-                  </article>
+                  </li>
                 ))}
-              </div>
-              <p className={`mt-8 text-lg font-bold text-slate-900 ${styles.introEmphasis}`}>Pedir la auditoría gratuita no supone contratar el servicio.</p>
+              </ol>
             </div>
           </section>
 
           <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="budget-title">
-            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
+            <div className="grid overflow-hidden rounded-lg border border-[#dbe3ef] bg-white shadow-[0_24px_64px_rgba(15,23,42,0.1)] lg:grid-cols-[1.05fr_0.95fr]">
+              <figure className={`relative min-h-[26rem] lg:min-h-full ${styles.scopeFigure}`}>
+                <Image
+                  className="object-cover"
+                  src={collaborationImage}
+                  alt="Dos profesionales revisando juntos el alcance de un proyecto"
+                  fill
+                  placeholder="blur"
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+                <figcaption className={styles.scopeImageCaption}>
+                  <span>Auditoría inicial</span>
+                  <strong>Gratuita</strong>
+                </figcaption>
+              </figure>
+
+              <div className="px-6 py-8 sm:px-9 sm:py-10 lg:px-10 lg:py-12">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Alcance y presupuesto</p>
                 <h2 id="budget-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Un presupuesto según lo que necesita tu negocio
+                  Un alcance claro antes de empezar
                 </h2>
                 <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
                   La auditoría inicial es gratuita. La implementación y la gestión son servicios de pago.
                 </p>
-              </div>
-              <div className="grid gap-4">
-                {budgetItems.map((item) => (
-                  <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
-                    <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
-                  </article>
-                ))}
+                <div className="mt-8 border-y border-[#dbe3ef]">
+                  {budgetItems.map((item) => (
+                    <article className="grid grid-cols-[2.75rem_1fr] gap-4 border-b border-[#dbe3ef] py-5 last:border-b-0" key={item.title}>
+                      <span className="font-mono text-sm font-black tabular-nums text-blue-600">{item.label}</span>
+                      <div>
+                        <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
+                        <p className={`mt-2 text-slate-600 ${styles.body}`}>{item.text}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
-          </section>
 
-          <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="trust-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr]">
+            <div className={styles.workingAgreement} aria-labelledby="trust-title">
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Confianza y control</p>
-                <h2 id="trust-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Sabrás qué hacemos y qué queda por hacer
-                </h2>
-                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                  En Crecimiento sin complicaciones te ayudamos a priorizar el trabajo de perfil, web, reputación y medición. Tendrás una hoja de ruta con tareas aprobadas y el alcance por escrito.
-                </p>
+                <p>Cómo trabajamos contigo</p>
+                <h2 id="trust-title">Sabrás qué hacemos y qué queda por decidir</h2>
               </div>
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className={styles.agreementItems}>
                 {trustItems.map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
-                    <ShieldCheck className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                    <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className={`mt-3 text-slate-300 ${styles.body}`}>{item.text}</p>
+                  <article key={item.title}>
+                    <ShieldCheck className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
                   </article>
                 ))}
               </div>

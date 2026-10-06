@@ -1,0 +1,234 @@
+.comparisonWrap {
+  margin-top: 4rem;
+}
+
+.comparisonHeading {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.25rem;
+  align-items: end;
+}
+
+.comparisonHeading p {
+  margin: 0 0 0.35rem;
+  color: #0f766e;
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.comparisonHeading h3 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+}
+
+.comparisonHeading > span {
+  max-width: 24rem;
+  color: #475569;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.comparisonScroll {
+  overflow-x: auto;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 22px 54px rgba(15, 42, 70, 0.1);
+  scrollbar-width: thin;
+}
+
+.comparisonScroll:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+
+.comparisonTable {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.comparisonTable caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  border-bottom: 1px solid #dbe3ef;
+  padding: 1.15rem 1.25rem;
+  color: #334155;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+
+.comparisonTable thead th {
+  background: #0f2a46;
+  color: #ffffff;
+}
+
+.comparisonTable thead th:first-child {
+  color: #bfdbfe;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.comparisonTable thead th span,
+.comparisonTable thead th small {
+  display: block;
+}
+
+.comparisonTable thead th span {
+  font-size: 1rem;
+  font-weight: 850;
+}
+
+.comparisonTable thead th small {
+  margin-top: 0.35rem;
+  color: #bfdbfe;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.comparisonTable thead .recommendedPlan {
+  background: #2563eb;
+}
+
+.comparisonTable thead .recommendedPlan small {
+  color: #ffffff;
+}
+
+.comparisonTable tbody th {
+  width: 31%;
+  background: #f8fbff;
+  color: #0f172a;
+  font-weight: 850;
+}
+
+.comparisonTable tbody tr:nth-child(even) td:not(.recommendedCell) {
+  background: #fbfdff;
+}
+
+.comparisonTable tbody .recommendedCell {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+.comparisonTable tbody tr:last-child th,
+.comparisonTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.matrixValue,
+.notIncluded {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+}
+
+.recommendedCell .matrixValue svg {
+  color: #0f766e;
+}
+
+.notIncluded {
+  color: #94a3b8;
+  font-weight: 650;
+}
+
+@media (max-width: 720px) {
+  .comparisonHeading {
+    display: block;
+  }
+
+  .comparisonHeading > span {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: left;
+  }
+
+  .comparisonScroll {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .comparisonTable {
+    min-width: 0;
+    border-collapse: separate;
+  }
+
+  .comparisonTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .comparisonTable tbody {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .comparisonTable tr {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 14px 34px rgba(15, 42, 70, 0.08);
+  }
+
+  .comparisonTable th,
+  .comparisonTable td {
+    width: auto;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.9rem 1rem;
+  }
+
+  .comparisonTable tbody th {
+    width: 100%;
+    box-sizing: border-box;
+    background: #0f2a46;
+    color: #ffffff;
+  }
+
+  .comparisonTable td {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 0.78fr) minmax(0, 1.22fr);
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .comparisonTable td::before {
+    color: #64748b;
+    content: attr(data-plan);
+    font-size: 0.78rem;
+    font-weight: 850;
+  }
+
+  .comparisonTable tbody .recommendedCell {
+    background: #eff6ff;
+  }
+
+  .comparisonTable tbody tr:last-child th,
+  .comparisonTable tbody tr:last-child td {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .comparisonTable tbody tr td:last-child {
+    border-bottom: 0;
+  }
+}

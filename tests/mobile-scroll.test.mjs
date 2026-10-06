@@ -28,8 +28,8 @@ async function collectSourceFiles(dir) {
 }
 
 test("case carousel preserves vertical touch panning and horizontal snap", async () => {
-  const css = await readFile(path.join(appDir, "globals.css"), "utf8");
-  const trackRule = css.match(/\.case-track\s*\{([^}]*)\}/);
+  const css = await readFile(path.join(appDir, "components", "CaseCarousel.module.css"), "utf8");
+  const trackRule = css.match(/\.track\s*\{([^}]*)\}/);
 
   assert.ok(trackRule, "The case carousel track rule must exist");
   assert.match(trackRule[1], /\boverflow-x\s*:\s*auto\s*;/);

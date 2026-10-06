@@ -1,0 +1,13 @@
+.summary .summaryMetric,
+.summary .summaryCount,
+.summary .summaryTitle {
+  color: #ffffff !important;
+}
+
+.summary .summaryLabel {
+  color: #7dd3c7 !important;
+}
+
+.reviewAuthor {
+  padding: 1.25rem 0.75rem 0.25rem;
+}
