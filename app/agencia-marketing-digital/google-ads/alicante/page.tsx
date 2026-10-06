@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BarChart3,
   CheckCircle2,
   Compass,
-  MapPin,
-  MousePointerClick,
-  Search,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../../components/LandingServicesMenu";
 import { LeadForm } from "../../../components/LeadForm";
@@ -15,52 +12,54 @@ import { Logo } from "../../../components/Logo";
 import { PageLinksNav } from "../../../components/PageLinksNav";
 import { absoluteUrl } from "../../../lib/site";
 import { ORGANIZATION_ID, breadcrumbJsonLd } from "../../../lib/structuredData";
+import styles from "./alicante.module.css";
 
 const pagePath = "/agencia-marketing-digital/google-ads/alicante";
 const pageUrl = absoluteUrl(pagePath);
 
 const demandPrinciples = [
   {
-    icon: Search,
+    step: "01",
     title: "Servicio antes que volumen",
     text: "Priorizamos búsquedas que describen una necesidad concreta, no términos amplios que consumen presupuesto sin contexto comercial.",
   },
   {
-    icon: MapPin,
+    step: "02",
     title: "Zonas que el negocio realmente atiende",
-    text: "La segmentación responde a tu cobertura operativa en Alicante y provincia, no a una lista de municipios añadida por inercia.",
+    text: "La segmentación responde a la cobertura operativa de tu negocio en Alicante y provincia.",
   },
   {
-    icon: BarChart3,
+    step: "03",
     title: "Calidad comercial después del formulario",
     text: "La lectura no termina en el envío: revisamos qué contactos encajan, qué preguntan y qué campañas los originan.",
   },
 ];
 
-const serviceItems = [
+const campaignStages = [
   {
-    title: "Búsquedas y términos comerciales",
-    text: "Separamos consultas informativas de búsquedas donde ya existe intención de contratar, reservar o pedir presupuesto.",
+    step: "01",
+    title: "Búsqueda",
+    text: "Separamos intención comercial, servicios prioritarios, zonas y términos que conviene excluir.",
   },
   {
-    title: "Estructura por servicio y ubicación",
-    text: "Organizamos campañas para comparar servicios, zonas y prioridades sin mezclar señales incompatibles.",
+    step: "02",
+    title: "Anuncio",
+    text: "Conectamos cada búsqueda con una oferta concreta y un mensaje que explica el siguiente paso.",
   },
   {
-    title: "Anuncios conectados con la oferta",
-    text: "Cada anuncio explica qué se ofrece, para quién y cuál es el siguiente paso esperado.",
+    step: "03",
+    title: "Landing",
+    text: "Mantenemos la continuidad entre anuncio, servicio, zona, argumentos y llamada a la acción.",
   },
   {
-    title: "Conversiones y calidad del lead",
-    text: "Configuramos formularios y acciones útiles para interpretar la captación más allá del volumen de clics.",
+    step: "04",
+    title: "Contacto",
+    text: "Medimos formularios y acciones útiles para interpretar la calidad comercial, no solo los clics.",
   },
   {
-    title: "Presupuesto con prioridades claras",
-    text: "Concentramos inversión donde hay una hipótesis comercial concreta antes de ampliar campañas o cobertura.",
-  },
-  {
-    title: "Optimización documentada",
-    text: "Explicamos qué se cambia, qué evidencia lo motiva y qué necesitamos observar antes de la siguiente decisión.",
+    step: "05",
+    title: "Aprendizaje",
+    text: "Priorizamos presupuesto y ajustes según la evidencia recogida y la capacidad real del negocio.",
   },
 ];
 
@@ -88,21 +87,6 @@ const sectors = [
   {
     title: "Empresas B2B",
     text: "Un contacto de valor suele exigir mensajes por solución, sector, rol decisor y ciclo comercial.",
-  },
-];
-
-const journeyItems = [
-  {
-    title: "Mensaje local honesto",
-    text: "La página explica la zona atendida sin fingir una oficina o una presencia física que no existe.",
-  },
-  {
-    title: "Formulario de baja fricción",
-    text: "Pedimos solo los datos necesarios para entender el negocio y preparar una primera conversación.",
-  },
-  {
-    title: "Medición útil",
-    text: "Relacionamos campaña, búsqueda y contacto para aprender qué demanda merece continuidad.",
   },
 ];
 
@@ -135,10 +119,10 @@ const processSteps = [
 ];
 
 const auditPoints = [
-  "Bloqueos de cuenta y tracking",
-  "Búsquedas y zonas que conviene revisar",
+  "Tracking o conversiones mal configuradas",
+  "Búsquedas y zonas que consumen presupuesto sin oportunidad",
   "Desajustes entre anuncio y landing",
-  "Siguiente prueba recomendada",
+  "Inversión en keywords equivocadas",
 ];
 
 const faqs = [
@@ -344,30 +328,24 @@ export default function GoogleAdsAlicantePage() {
               </div>
             </div>
 
-            <aside className="seo-audit-panel rounded-lg bg-slate-900 p-6 shadow-2xl shadow-blue-950/30 ring-1 ring-slate-800" aria-label="Resumen del servicio">
-              <div className="seo-audit-panel-head mb-6 flex items-center justify-between gap-4 pb-5">
-                <div className="seo-audit-panel-title">
-                  <p className="text-sm font-black uppercase tracking-normal text-emerald-400">Campaña local</p>
-                  <strong className="mt-2 block text-2xl font-black text-white">Alicante con intención</strong>
-                </div>
-                <Compass className="h-9 w-9 text-emerald-400" aria-hidden="true" strokeWidth={1.8} />
-              </div>
-              <dl className="grid gap-4">
-                {[
-                  ["Área", "Alicante y provincia"],
-                  ["Plataforma", "Google Ads"],
-                  ["Objetivo", "Oportunidades comerciales"],
-                ].map(([term, description]) => (
-                  <div className="seo-audit-step rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800" key={term}>
-                    <dt className="text-sm font-black uppercase text-emerald-400">{term}</dt>
-                    <dd className="mt-2 text-lg font-black text-white">{description}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+            <figure className={styles.heroVisual}>
+              <Image
+                src="/images/google-ads-alicante-hero-v2.webp"
+                alt="Equipo revisando una campaña digital para el mercado de Alicante"
+                fill
+                priority
+                sizes="(min-width: 1024px) 44vw, (max-width: 639px) 125vw, 100vw"
+                quality={92}
+                className={styles.coverImage}
+              />
+              <figcaption className={styles.heroCaption}>
+                <Compass className="h-5 w-5" aria-hidden="true" strokeWidth={1.8} />
+                <span>Campañas conectadas con búsqueda, landing y oportunidad comercial</span>
+              </figcaption>
+            </figure>
           </section>
 
-          <section className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="demand-title">
+          <section className={styles.demandSection} aria-labelledby="demand-title">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-4xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-emerald-500">Demanda en Alicante</p>
@@ -377,17 +355,31 @@ export default function GoogleAdsAlicantePage() {
                 <p className="mt-5 text-lg leading-8 text-slate-300">
                   Una búsqueda informativa no vale lo mismo que una solicitud de presupuesto. Antes de ampliar tráfico,
                   ordenamos qué servicios tienen prioridad, qué zonas puede atender el negocio y qué señales distinguen
-                  un contacto útil de una consulta sin encaje.
+                  una oportunidad comercial real.
                 </p>
               </div>
-              <div className="mt-10 grid gap-5 md:grid-cols-3">
+              <div className={styles.editorialSplit}>
+                <figure className={styles.demandVisual}>
+                  <Image
+                    src="/images/google-ads-alicante-demand-v2.webp"
+                    alt="Equipo de un negocio de Alicante revisando su captación digital"
+                    fill
+                    sizes="(min-width: 1024px) 56vw, (max-width: 639px) 125vw, 100vw"
+                    quality={92}
+                    className={styles.coverImage}
+                  />
+                </figure>
+                <ol className={styles.principlesList}>
                 {demandPrinciples.map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
-                    <item.icon className="h-7 w-7 text-emerald-400" aria-hidden="true" strokeWidth={1.8} />
-                    <h3 className="!mt-6 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
-                  </article>
+                  <li className={styles.principle} key={item.title}>
+                    <span aria-hidden="true">{item.step}</span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </li>
                 ))}
+                </ol>
               </div>
             </div>
           </section>
@@ -403,15 +395,18 @@ export default function GoogleAdsAlicantePage() {
                 publicidad social y se valora como un canal distinto cuando el negocio lo necesita.
               </p>
             </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {serviceItems.map((item, index) => (
-                <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
-                  <span className="text-sm font-black text-blue-400">0{index + 1}</span>
-                  <h3 className="!mt-5 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
-                </article>
+            <ol className={styles.campaignFlow} aria-label="Recorrido de una campaña de Google Ads">
+              {campaignStages.map((item, index) => (
+                <li className={styles.campaignStage} key={item.title}>
+                  <span className={styles.stageNumber}>{item.step}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  {index < campaignStages.length - 1 ? (
+                    <ArrowRight className={styles.stageArrow} aria-hidden="true" strokeWidth={1.7} />
+                  ) : null}
+                </li>
               ))}
-            </div>
+            </ol>
           </section>
 
           <section id="sectores" className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="sectors-title">
@@ -437,49 +432,29 @@ export default function GoogleAdsAlicantePage() {
             </div>
           </section>
 
-          <section id="zona" className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.86fr_1.14fr] lg:px-8 lg:py-24" aria-labelledby="area-title">
-            <div>
+          <section id="zona" className={styles.coverageSection} aria-labelledby="area-title">
+            <div className={styles.coverageCopy}>
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-emerald-500">Alicante y provincia</p>
               <h2 id="area-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Segmentación geográfica sin prometer cobertura donde no existe
+                Segmentación enfocada en las zonas donde realmente trabajas
               </h2>
-            </div>
-            <div>
-              <p className="text-lg leading-8 text-slate-300">
+              <p className="mt-6 text-lg leading-8 text-slate-300">
                 La campaña puede concentrarse en Alicante ciudad o ampliarse a Elche, Benidorm, Torrevieja, Orihuela,
-                San Vicente del Raspeig u otros municipios cuando el negocio realmente los atiende. No abrimos campañas
-                ni landings por municipio solo para repetir keywords: primero validamos demanda, capacidad comercial y
-                una oferta específica.
-              </p>
-              <p className="mt-5 flex gap-3 rounded-lg bg-emerald-50 p-5 font-semibold leading-7 text-emerald-950 ring-1 ring-emerald-200">
-                <MapPin className="mt-0.5 h-5 w-5 flex-none" aria-hidden="true" />
-                El servicio se presta de forma remota; la segmentación describe el mercado atendido, no una sede física.
+                San Vicente del Raspeig u otros municipios según el área real de servicio. Priorizamos las zonas donde
+                existe demanda, capacidad comercial y una oferta específica.
               </p>
             </div>
-          </section>
-
-          <section className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="journey-title">
-            <div className="mx-auto max-w-7xl">
-              <div className="max-w-4xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Del clic al contacto</p>
-                <h2 id="journey-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  La campaña no termina en el anuncio
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Revisamos mensaje, estructura, llamada a la acción, formulario y medición para que la promesa del
-                  anuncio continúe en la página y el equipo pueda valorar la calidad del contacto.
-                </p>
-              </div>
-              <div className="mt-10 grid gap-5 md:grid-cols-3">
-                {journeyItems.map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.title}>
-                    <MousePointerClick className="h-7 w-7 text-blue-400" aria-hidden="true" strokeWidth={1.8} />
-                    <h3 className="!mt-6 text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-3 leading-7 text-slate-300">{item.text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
+            <figure className={styles.coverageVisual}>
+              <Image
+                src="/images/google-ads-alicante-coverage.webp"
+                alt="Vista panorámica de Alicante y su entorno urbano"
+                fill
+                sizes="(min-width: 1024px) 85vw, 100vw"
+                quality={92}
+                className={styles.coverImage}
+              />
+              <figcaption>Alicante ciudad y provincia como mercado de captación</figcaption>
+            </figure>
           </section>
 
           <section id="metodo" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="method-title">
@@ -507,16 +482,17 @@ export default function GoogleAdsAlicantePage() {
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-100">Auditoría</p>
                 <h2 id="audit-expectations-title" className="text-3xl font-black text-white sm:text-4xl">
-                  Qué puedes esperar de la auditoría gratuita
+                  Qué problemas puede detectar la auditoría gratuita en tu cuenta
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-blue-50">
-                  Una lectura inicial para decidir si el principal bloqueo está en la cuenta, la medición, la oferta o la
-                  landing. No es una promesa de rentabilidad, coste por lead o volumen de contactos.
+                  Revisamos la cuenta, la medición, los anuncios y las landing pages para localizar bloqueos y ordenar las
+                  mejoras con mayor impacto.
                 </p>
               </div>
-              <ul className="grid gap-3">
-                {auditPoints.map((point) => (
-                  <li className="flex gap-3 rounded-lg bg-white/10 p-4 font-semibold text-white ring-1 ring-white/20" key={point}>
+              <ul className={styles.auditList}>
+                {auditPoints.map((point, index) => (
+                  <li key={point}>
+                    <span className={styles.auditNumber} aria-hidden="true">0{index + 1}</span>
                     <CheckIcon />
                     <span>{point}</span>
                   </li>

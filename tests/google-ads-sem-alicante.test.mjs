@@ -21,8 +21,8 @@ test("national Google Ads page visibly owns Google Ads and SEM intent", async ()
   assert.match(page, /canonical: pagePath/);
   assert.match(page, /Agencia Google Ads y SEM/);
   assert.match(page, /Somos una agencia SEM especializada en Google Ads/);
-  assert.match(page, /Agencia SEM y Google Ads: una intención de búsqueda, una plataforma concreta/);
   assert.match(page, /¿Es lo mismo una agencia SEM que una agencia Google Ads\?/);
+  assert.doesNotMatch(page, /id="agencia-sem"/);
   assert.match(hub, /Google Ads y SEM/);
   assert.equal(existsSync(path.join(repoRoot, "app", "agencia-marketing-digital", "sem", "page.tsx")), false);
   assert.doesNotMatch(sitemap, /path: "\/agencia-marketing-digital\/sem"/);
@@ -33,6 +33,36 @@ test("national Google Ads page visibly owns Google Ads and SEM intent", async ()
   ]) {
     assert.equal(redirects.includes(legacy), true, `expected legacy redirect for ${legacy}`);
   }
+});
+
+test("national Google Ads page uses varied visual storytelling instead of repeated card grids", async () => {
+  const page = await read("app/agencia-marketing-digital/google-ads/page.tsx");
+  const styles = await read("app/agencia-marketing-digital/google-ads/google-ads.module.css");
+
+  assert.match(page, /import Image from "next\/image"/);
+  assert.match(page, /import styles from "\.\/google-ads\.module\.css"/);
+  assert.match(page, /De la búsqueda a una oportunidad comercial/);
+  assert.match(page, /Búsquedas demasiado amplias/);
+  assert.match(page, /Medición incompleta/);
+  assert.match(page, /Landing desconectada/);
+  assert.match(page, /Ya inviertes, pero no tienes claridad/);
+  assert.match(page, /Quieres empezar con una estructura sólida/);
+  assert.match(page, /Necesitas dirección especializada externa/);
+  assert.match(page, /Recibes tráfico, pero pocos contactos/);
+  assert.doesNotMatch(page, /audiences\.map/);
+
+  const imageSources = page.match(/src="\/images\/google-ads-national-[^"]+\.webp"/g) || [];
+  assert.ok(imageSources.length >= 2, "expected at least two national Google Ads visual assets");
+  for (const source of imageSources) {
+    const relativePath = source.slice(5, -1).replace(/^\//, "public/");
+    assert.equal(existsSync(path.join(repoRoot, relativePath)), true, `missing ${relativePath}`);
+  }
+
+  assert.match(styles, /\.journeyPanel/);
+  assert.match(styles, /\.problemVisual/);
+  assert.match(styles, /\.audienceList/);
+  assert.doesNotMatch(styles, /\.semSection|\.semVisual/);
+  assert.match(styles, /@media \(max-width: 767px\)/);
 });
 
 test("Alicante is a distinct indexable Google Ads and SEM service page", async () => {
@@ -48,7 +78,7 @@ test("Alicante is a distinct indexable Google Ads and SEM service page", async (
   assert.match(page, /follow: true/);
   assert.match(page, /Agencia SEM para empresas de Alicante que quieren captar demanda con Google Ads/);
   assert.match(page, /Una campaña local necesita separar servicio, zona e intención/);
-  assert.match(page, /Segmentación geográfica sin prometer cobertura donde no existe/);
+  assert.match(page, /Segmentación enfocada en las zonas donde realmente trabajas/);
   assert.match(page, /Trabajamos de forma remota con empresas de toda España/);
   assert.match(page, /"@type": "Service"/);
   assert.match(page, /breadcrumbJsonLd/);
@@ -75,6 +105,42 @@ test("Alicante page avoids unsupported proof, prices, and demo components", asyn
   const page = await read(file);
 
   assert.doesNotMatch(page, /5\.2x|\bROAS\b|\bCPL\b|12\.000|199 €|399 €|CaseCarousel|PricingToggle|PaidGrowthCalculatorForm/);
+});
+
+test("Alicante page uses direct copy and varied visual storytelling", async () => {
+  const file = "app/agencia-marketing-digital/google-ads/alicante/page.tsx";
+  const page = await read(file);
+  const nextConfig = await read("next.config.ts");
+
+  assert.match(page, /Segmentación enfocada en las zonas donde realmente trabajas/);
+  assert.match(page, /Qué problemas puede detectar la auditoría gratuita en tu cuenta/);
+  assert.match(page, /Inversión en keywords equivocadas/);
+  assert.match(page, /Búsqueda[\s\S]*Anuncio[\s\S]*Landing[\s\S]*Contacto[\s\S]*Aprendizaje/);
+
+  for (const removedCopy of [
+    /sin encaje/,
+    /lista de municipios añadida por inercia/,
+    /sin prometer cobertura donde no existe/,
+    /El servicio se presta de forma remota/,
+    /No es una promesa de rentabilidad/,
+    /Siguiente prueba recomendada/,
+  ]) {
+    assert.doesNotMatch(page, removedCopy);
+  }
+
+  const imageSources = page.match(/src="\/images\/google-ads-alicante-[^"]+\.webp"/g) || [];
+  assert.ok(imageSources.length >= 3, "expected at least three Alicante visual assets");
+  assert.match(
+    page,
+    /src="\/images\/google-ads-alicante-coverage\.webp"[\s\S]*?quality=\{92\}/,
+    "expected the detailed Alicante panorama to use high-quality image delivery",
+  );
+  assert.match(page, /sizes="\(min-width: 1024px\) 85vw, 100vw"/);
+  assert.match(nextConfig, /qualities:\s*\[75, 92\]/);
+  for (const source of imageSources) {
+    const relativePath = source.slice(5, -1).replace(/^\//, "public/");
+    assert.equal(existsSync(path.join(repoRoot, relativePath)), true, `missing ${relativePath}`);
+  }
 });
 
 test("internal links expose Alicante locally without promoting it as a global service", async () => {
