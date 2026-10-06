@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-10-01
+**Last updated:** 2026-10-05
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -19,6 +19,7 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 /  Home comercial: servicios, casos, precios y auditoría
 ├── /agencia-marketing-digital
 │   ├── /agencia-marketing-digital/google-ads
+│   │   └── /agencia-marketing-digital/google-ads/alicante
 │   └── /agencia-marketing-digital/seo-tecnico-arquitectura-entidades
 ├── /sobre-nosotros
 ├── /diseno-landing-pages
@@ -70,6 +71,7 @@ When services or canonical routes change, review this file against the published
 | `/agencia-marketing-digital` | `0.9` | Marketing hub |
 | `/sobre-nosotros` | `0.75` | Entity/trust page |
 | `/agencia-marketing-digital/google-ads` | `0.85` | Google Ads service page |
+| `/agencia-marketing-digital/google-ads/alicante` | `0.8` | Local Google Ads service page |
 | `/diseno-landing-pages` | `0.85` | Landing pages service page |
 | `/seo` | `0.9` | SEO money page |
 | `/seo/local` | `0.85` | SEO local service page |
@@ -88,7 +90,7 @@ When services or canonical routes change, review this file against the published
 
 Sitemap entries intentionally omit `lastModified` until the project maintains real per-route modification dates. Do not restore `lastModified: new Date()` because it makes every page appear updated on every build.
 
-`/agencia-marketing-digital/google-ads` is indexable and included because it replaces the legacy SEM/Paid Growth page with a distinct Google Ads intent. `/diseno-landing-pages` is indexable and included because it replaces the legacy CRO/Landing Systems page with a clearer landing-page design intent. Review intent, uniqueness and indexability before adding other detail pages from `/agencia-marketing-digital/*`.
+`/agencia-marketing-digital/google-ads` is indexable and included because it replaces the legacy SEM/Paid Growth page and owns the generic Google Ads and SEM intent. Its child `/agencia-marketing-digital/google-ads/alicante` is indexable with priority `0.8` and owns only the local Alicante intent. `/diseno-landing-pages` is indexable and included because it replaces the legacy CRO/Landing Systems page with a clearer landing-page design intent. Review intent, uniqueness and indexability before adding other detail pages from `/agencia-marketing-digital/*`.
 
 ## Redirects
 
@@ -183,7 +185,7 @@ Local SEO relationship pattern:
   -> /seo/barcelona
   -> /seo/valencia
   -> /seo/sevilla
-  -> /agencia-marketing-digital/google-ads
+  -> /agencia-marketing-digital/google-ads/alicante
   -> /diseno-pagina-web-profesional
 
 /seo/malaga
@@ -213,6 +215,21 @@ If any target route does not exist, stop and report it instead of inventing a re
 - `/agencia-marketing-digital/seo-tecnico-arquitectura-entidades`
 
 The `/agencia-marketing-digital/*` pages should link back to the hub and to closely related services only when the route exists. Do not link to legacy CRO/Landing Systems URLs; use `/diseno-landing-pages`.
+
+### Google Ads cluster
+
+```text
+/agencia-marketing-digital/google-ads
+  -> /agencia-marketing-digital/google-ads/alicante
+
+/agencia-marketing-digital/google-ads/alicante
+  -> /agencia-marketing-digital
+  -> /agencia-marketing-digital/google-ads
+  -> /seo/alicante
+  -> /diseno-landing-pages
+```
+
+The national page owns generic `Google Ads` and `agencia SEM` intent. The Alicante child is a remote-service local page for Alicante city and province; it must not be presented as an office, local branch or global navigation item.
 
 ## Web Design Cluster
 

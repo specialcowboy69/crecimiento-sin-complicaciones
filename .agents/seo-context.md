@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-10-02
+**Last updated:** 2026-10-05
 
 ## Strategic Context
 
@@ -21,6 +21,8 @@ Central strategy folder:
 - `app/lib/structuredData.ts`: shared `Organization`, `WebSite` and `BreadcrumbList` JSON-LD helpers and stable entity IDs.
 - `app/agencia-marketing-digital/page.tsx`: commercial marketing hub replacing the old `/servicios` hub.
 - `app/agencia-marketing-digital/*`: migrated service detail pages.
+- `app/agencia-marketing-digital/google-ads/page.tsx`: national page owning generic Google Ads and SEM intent.
+- `app/agencia-marketing-digital/google-ads/alicante/page.tsx`: local child page owning only Google Ads and SEM intent for Alicante city and province; service is remote and does not imply a local office.
 - `app/diseno-landing-pages/page.tsx`: landing-page design service page replacing the legacy CRO/Landing Systems URL.
 - `app/seo/page.tsx`: national SEO money page.
 - `app/seo/local/page.tsx`: specialist local SEO service page for diagnosis, Google Business Profile, website SEO, authentic reviews and references, and measurement. Its method is `Analizar → priorizar → ejecutar → medir`; web creation and social content remain optional complements.
@@ -68,5 +70,5 @@ Central strategy folder:
 - Local SEO pages under `/seo/{city}`.
 - Gestión de redes sociales.
 - IA y automatización para empresas.
-- Google Ads and SEO técnico under `/agencia-marketing-digital/*`.
+- Google Ads and SEO técnico under `/agencia-marketing-digital/*`; the national Google Ads page owns generic Google Ads and SEM searches, while its Alicante child owns only the corresponding local intent.
 - Diseño de landing pages on `/diseno-landing-pages`; legacy CRO/Landing Systems URLs redirect there.

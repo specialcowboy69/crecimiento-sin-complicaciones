@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,6 +17,7 @@ import { LeadForm } from "../../components/LeadForm";
 import { Logo } from "../../components/Logo";
 import { PageLinksNav } from "../../components/PageLinksNav";
 import { SITE_URL } from "../../lib/site";
+import styles from "./google-ads.module.css";
 
 const pagePath = "/agencia-marketing-digital/google-ads";
 const baseUrl = SITE_URL;
@@ -87,11 +89,27 @@ const processSteps = [
   },
 ];
 
-const audiences = [
-  "Empresas que ya invierten en Ads y no tienen claridad.",
-  "Negocios que quieren empezar con Google Ads sin improvisar.",
-  "Equipos que necesitan apoyo externo sin contratar un especialista interno.",
-  "Webs que reciben tráfico pero convierten poco.",
+const audienceProfiles = [
+  {
+    number: "01",
+    title: "Ya inviertes, pero no tienes claridad",
+    text: "Necesitas saber qué campañas generan oportunidades y cuáles solo consumen presupuesto.",
+  },
+  {
+    number: "02",
+    title: "Quieres empezar con una estructura sólida",
+    text: "Buscas lanzar Google Ads con prioridades, medición y una oferta clara desde el principio.",
+  },
+  {
+    number: "03",
+    title: "Necesitas dirección especializada externa",
+    text: "Tu equipo necesita criterio estratégico y ejecución sin incorporar otro perfil interno.",
+  },
+  {
+    number: "04",
+    title: "Recibes tráfico, pero pocos contactos",
+    text: "La campaña atrae visitas, aunque la landing o el seguimiento no convierten ese interés en leads.",
+  },
 ];
 
 const relatedLinks = [
@@ -118,6 +136,11 @@ const relatedLinks = [
 ];
 
 const faqs = [
+  {
+    question: "¿Es lo mismo una agencia SEM que una agencia Google Ads?",
+    answer:
+      "En la práctica, muchas empresas usan ambos términos para buscar el mismo servicio. SEM describe la captación de pago en buscadores; Google Ads es la plataforma con la que prestamos este servicio. Meta Ads pertenece a publicidad social y se analiza como un canal distinto.",
+  },
   {
     question: "¿Cuánto cobra una agencia Google Ads?",
     answer:
@@ -170,7 +193,7 @@ const jsonLd = [
       {
         "@type": "ListItem",
         position: 3,
-        name: "Agencia Google Ads",
+        name: "Agencia Google Ads y SEM",
         item: `${baseUrl}${pagePath}`,
       },
     ],
@@ -178,7 +201,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Agencia Google Ads para empresas",
+    name: "Agencia Google Ads y SEM para empresas",
     serviceType: [
       "Agencia Google Ads",
       "Gestión Google Ads",
@@ -194,7 +217,7 @@ const jsonLd = [
     areaServed: "ES",
     url: `${baseUrl}${pagePath}`,
     description:
-      "Gestión de campañas de Google Ads para empresas que quieren captar leads cualificados, medir mejor sus resultados y reducir inversión desperdiciada.",
+      "Agencia Google Ads y SEM para empresas que quieren captar leads, medir conversiones y controlar mejor el presupuesto.",
     makesOffer: {
       "@type": "Offer",
       name: "Auditoría gratuita de Google Ads",
@@ -217,9 +240,9 @@ const jsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Agencia Google Ads para empresas",
+  title: "Agencia Google Ads y SEM para empresas",
   description:
-    "Gestionamos campañas de Google Ads para empresas que quieren captar leads cualificados, medir mejor sus resultados y reducir inversión desperdiciada. Solicita una auditoría gratuita.",
+    "Agencia Google Ads y SEM para empresas. Creamos, auditamos y optimizamos campañas para captar leads, medir conversiones y controlar mejor el presupuesto.",
   keywords: [
     "agencia google ads",
     "agencia sem",
@@ -236,9 +259,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Agencia Google Ads para empresas",
+    title: "Agencia Google Ads y SEM para empresas",
     description:
-      "Campañas de Google Ads conectadas con estrategia, medición y conversión para captar mejores leads.",
+      "Campañas de Google Ads conectadas con búsquedas, landing pages y medición para captar oportunidades comerciales con más control.",
     url: pagePath,
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
@@ -322,17 +345,19 @@ export default function GoogleAdsPage() {
                 <span>Google Ads</span>
               </nav>
 
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">Agencia Google Ads</p>
+              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
+                Agencia Google Ads y SEM
+              </p>
               <h1
                 id="google-ads-hero-title"
                 className="marketing-hero-title mb-6 max-w-4xl font-black text-slate-900"
               >
-                Agencia Google Ads para captar leads sin desperdiciar presupuesto
+                Agencia Google Ads para captar leads con estrategia, medición y control
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Creamos, revisamos y optimizamos campañas de Google Ads para empresas que quieren generar oportunidades
-                comerciales con control, medición y una estrategia clara. No se trata solo de activar anuncios: se trata
-                de saber qué búsquedas atraen clientes, qué mensajes convierten y dónde merece la pena invertir.
+                Somos una agencia SEM especializada en Google Ads para empresas de toda España. Creamos, auditamos y
+                optimizamos campañas conectando búsquedas, anuncios, landing pages y medición para convertir la inversión
+                en oportunidades comerciales con más control.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -360,53 +385,102 @@ export default function GoogleAdsPage() {
               </div>
             </div>
 
-            <div
-              className="seo-audit-panel rounded-lg bg-slate-900 p-6 shadow-2xl shadow-blue-950/30 ring-1 ring-slate-800"
-              aria-label="Sistema de gestión de Google Ads"
-            >
-              <div className="seo-audit-panel-head mb-7 flex items-center justify-between gap-4 pb-5">
-                <div className="seo-audit-panel-title">
-                  <p className="text-sm font-black uppercase tracking-normal text-blue-400">Sistema Ads</p>
-                  <strong className="mt-2 block text-2xl font-black text-white">De clics a oportunidades</strong>
+            <aside className={styles.journeyPanel} aria-label="Recorrido de una campaña de Google Ads">
+              <div className={styles.journeyHeader}>
+                <div>
+                  <span className={styles.panelEyebrow}>Sistema Ads</span>
+                  <strong>De la búsqueda a una oportunidad comercial</strong>
                 </div>
-                <span className="seo-audit-panel-badge rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black uppercase text-emerald-300 ring-1 ring-emerald-300/20">
-                  Medible
+                <span className={styles.liveStatus}>
+                  <span aria-hidden="true" />
+                  Conectado
                 </span>
               </div>
 
-              <div className="grid gap-4">
-                {[
-                  ["Búsquedas", "Palabras clave con intención comercial y negativos bien controlados."],
-                  ["Anuncios", "Mensajes conectados con oferta, objeciones y llamada a la acción."],
-                  ["Landing", "Página de destino preparada para convertir sin fricción innecesaria."],
-                  ["Medición", "Conversiones, coste por lead y calidad comercial en el mismo cuadro."],
-                ].map(([title, text]) => (
-                  <article className="seo-audit-step rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800" key={title}>
-                    <h3 className="m-0 text-lg font-black text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-[1.6] text-slate-300">{text}</p>
-                  </article>
-                ))}
+              <div className={styles.searchIntent}>
+                <Search aria-hidden="true" strokeWidth={2} />
+                <div>
+                  <span>Consulta con intención</span>
+                  <strong>agencia Google Ads para empresas</strong>
+                </div>
               </div>
-            </div>
+
+              <ol className={styles.journeyTrack}>
+                <li>
+                  <span className={styles.journeyIndex}>01</span>
+                  <div>
+                    <strong>Búsqueda</strong>
+                    <span>Demanda comercial</span>
+                  </div>
+                </li>
+                <li>
+                  <span className={styles.journeyIndex}>02</span>
+                  <div>
+                    <strong>Anuncio</strong>
+                    <span>Mensaje relevante</span>
+                  </div>
+                </li>
+                <li>
+                  <span className={styles.journeyIndex}>03</span>
+                  <div>
+                    <strong>Landing</strong>
+                    <span>Oferta y acción</span>
+                  </div>
+                </li>
+                <li>
+                  <span className={styles.journeyIndex}>04</span>
+                  <div>
+                    <strong>Lead</strong>
+                    <span>Contexto medible</span>
+                  </div>
+                </li>
+              </ol>
+
+              <div className={styles.journeyOutcome}>
+                <div>
+                  <span>Resultado que podemos interpretar</span>
+                  <strong>Una solicitud conectada con su búsqueda, campaña y landing</strong>
+                </div>
+                <CheckCircle2 aria-hidden="true" strokeWidth={2} />
+              </div>
+            </aside>
           </section>
 
-          <section
-            className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8"
-            aria-labelledby="problem-title"
-          >
-            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">El problema</p>
-                <h2 id="problem-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Invertir en Google sin una estructura clara sale caro
-                </h2>
+          <section className={styles.problemSection} aria-labelledby="problem-title">
+            <div className={styles.problemGrid}>
+              <div className={styles.problemCopy}>
+                <p className={styles.sectionEyebrow}>El problema</p>
+                <h2 id="problem-title">Invertir en Google sin una estructura clara sale caro</h2>
+                <p>
+                  El presupuesto se pierde cuando búsqueda, medición y landing no cuentan la misma historia. Localizamos
+                  el punto de fuga antes de ampliar la inversión.
+                </p>
               </div>
-              <p className="text-lg leading-8 text-slate-300">
-                Muchas empresas llegan a Google Ads después de probar campañas que consumen presupuesto pero no explican
-                qué está pasando. Palabras clave demasiado amplias, anuncios genéricos, conversiones mal configuradas o
-                landing pages que no convierten pueden hacer que una campaña parezca poco rentable cuando el problema
-                real está en el sistema.
-              </p>
+
+              <figure className={styles.problemVisual}>
+                <Image
+                  src="/images/google-ads-national-analysis.webp"
+                  alt="Especialista analizando el rendimiento y la medición de una campaña digital"
+                  width={1536}
+                  height={1024}
+                  quality={92}
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+                <figcaption className={styles.problemSignals}>
+                  <span>
+                    <strong>01</strong>
+                    Búsquedas demasiado amplias
+                  </span>
+                  <span>
+                    <strong>02</strong>
+                    Medición incompleta
+                  </span>
+                  <span>
+                    <strong>03</strong>
+                    Landing desconectada
+                  </span>
+                </figcaption>
+              </figure>
             </div>
           </section>
 
@@ -472,37 +546,77 @@ export default function GoogleAdsPage() {
 
           <section
             id="para-quien"
-            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            className={styles.audienceSection}
             aria-labelledby="audience-title"
           >
-            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Para quién es</p>
-                <h2 id="audience-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Para empresas que quieren leads, no solo clics
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Este servicio encaja especialmente si vendes servicios profesionales, tienes una pyme, una empresa
-                  local, una startup o un negocio B2B que necesita convertir búsquedas con intención en contactos
-                  comerciales.
+            <div className={styles.audienceGrid}>
+              <figure className={styles.audiencePhoto}>
+                <Image
+                  src="/images/google-ads-national-audience.webp"
+                  alt="Responsable de negocio y especialista revisando juntos una campaña de captación"
+                  width={1536}
+                  height={1024}
+                  quality={92}
+                  sizes="(min-width: 1024px) 46vw, 100vw"
+                />
+                <figcaption>
+                  <span>Trabajo conjunto</span>
+                  <strong>Decisiones de campaña conectadas con la realidad comercial</strong>
+                </figcaption>
+              </figure>
+
+              <div className={styles.audienceContent}>
+                <p className={styles.sectionEyebrow}>Para quién es</p>
+                <h2 id="audience-title">Para empresas que quieren leads, no solo clics</h2>
+                <p className={styles.audienceIntro}>
+                  Encaja en empresas de servicios, pymes, negocios locales, startups y equipos B2B que necesitan
+                  convertir búsquedas con intención en conversaciones comerciales.
                 </p>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                {audiences.map((item) => (
-                  <p
-                    className="flex gap-3 rounded-lg bg-slate-950 p-5 text-base font-semibold leading-7 text-slate-300 ring-1 ring-slate-800"
-                    key={item}
-                  >
-                    <CheckIcon />
-                    <span>{item}</span>
-                  </p>
-                ))}
+
+                <ol className={styles.audienceList}>
+                  {audienceProfiles.map((profile) => (
+                    <li key={profile.number}>
+                      <span>{profile.number}</span>
+                      <div>
+                        <h3>{profile.title}</h3>
+                        <p>{profile.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
           </section>
 
           <section
             className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            aria-labelledby="alicante-title"
+          >
+            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div>
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Google Ads local</p>
+                <h2 id="alicante-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                  Campañas orientadas a mercados concretos
+                </h2>
+              </div>
+              <Link
+                className="group rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 hover:bg-white/5"
+                href="/agencia-marketing-digital/google-ads/alicante"
+              >
+                <h3 className="text-xl font-black text-slate-900">Agencia SEM para empresas de Alicante</h3>
+                <p className="mt-3 leading-7 text-slate-300">
+                  Estrategia y gestión de Google Ads adaptadas a búsquedas por servicio, ciudad y provincia.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-300">
+                  Ver Google Ads en Alicante
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
+                </span>
+              </Link>
+            </div>
+          </section>
+
+          <section
+            className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
             aria-labelledby="difference-title"
           >
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.86fr_1.14fr]">

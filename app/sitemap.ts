@@ -6,6 +6,7 @@ const routes = [
   { path: "/agencia-marketing-digital", priority: 0.9 },
   { path: "/sobre-nosotros", priority: 0.75 },
   { path: "/agencia-marketing-digital/google-ads", priority: 0.85 },
+  { path: "/agencia-marketing-digital/google-ads/alicante", priority: 0.8 },
   { path: "/diseno-landing-pages", priority: 0.85 },
   { path: "/seo", priority: 0.9 },
   { path: "/seo/local", priority: 0.85 },
