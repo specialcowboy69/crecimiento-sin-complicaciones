@@ -17,7 +17,6 @@ const exampleRows = [
   "Medición",
 ];
 const auditScope = /revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave/i;
-const methodParagraph = "Nuestro método es Analizar → priorizar → ejecutar → medir. Partimos de un diagnóstico y priorizamos las tareas que pueden mejorar la relevancia y la presencia de tu negocio en las búsquedas locales. La ejecución empieza después de aceptar la propuesta y la medición depende de los accesos y del seguimiento disponibles. El alcance, los entregables y la frecuencia quedan definidos por escrito.";
 const auditParagraph = "Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.";
 
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
@@ -74,39 +73,25 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     expect(schemaTypes).not.toEqual(expect.arrayContaining(["Review"]));
     expect(JSON.stringify(schemas)).not.toContain('"aggregateRating"');
 
-    const journey = page.locator('[aria-label="Recorrido de captación local"]');
-    await expect(journey).toBeVisible();
-    await expect(journey).toContainText("De una búsqueda local a una consulta");
-    await expect(journey.getByText(/^(Te buscan|Te encuentran|Contactan)$/)).toHaveText(["Te buscan", "Te encuentran", "Contactan"]);
+    await expect(page.getByAltText("Profesional de un negocio local revisando su presencia digital desde el móvil")).toBeVisible();
 
     const includes = page.locator('section[aria-labelledby="includes-title"]');
     await expect(includes.locator("article")).toHaveCount(6);
     await expect(includes.locator("article h3")).toHaveText(workAreas);
     for (const card of await includes.locator("article").all()) await expect(card).toBeVisible();
-    await expect(includes.getByText(methodParagraph, { exact: true })).toBeVisible();
-    await expect(includes).toContainText("Analizar → priorizar → ejecutar → medir");
-    await expect(includes).toContainText("La ejecución empieza después de aceptar la propuesta");
-    await expect(includes).toContainText("la medición depende de los accesos y del seguimiento disponibles");
-    await expect(includes.getByRole("heading", { name: "Complementos si hacen falta", exact: true })).toBeVisible();
-    await expect(includes).toContainText("coordinar contenidos para redes sociales o presupuestar la creación de una web");
-    await expect(includes).toContainText("No es necesario contratar todos los servicios");
+    await expect(includes.getByAltText("Profesional revisando la visibilidad de un negocio en mapas y búsquedas locales")).toBeVisible();
     const factors = page.locator('section[aria-labelledby="maps-web-title"]');
     await expect(factors.getByRole("heading", { level: 3 })).toHaveText(["Relevancia", "Distancia", "Prominencia"]);
-    await expect(page.locator("#proceso").getByRole("heading", { level: 2 })).toHaveText("Analizar → priorizar → ejecutar → medir");
+    const method = page.locator("#proceso");
+    await expect(method.getByRole("heading", { level: 2 })).toHaveText("Nuestro método");
+    await expect(method.getByRole("heading", { level: 3 })).toHaveText(["Analizar", "Priorizar", "Ejecutar", "Medir"]);
 
     const example = page.locator('section[aria-labelledby="plan-title"]');
-    await expect(example).toContainText("No corresponde a un cliente ni demuestra resultados obtenidos");
-    await expect(example.locator("tbody tr")).toHaveCount(6);
-    await expect(example.locator("tbody th")).toHaveText(exampleRows);
-    await expect(example.locator("article")).toHaveCount(6);
-    await expect(example.locator("article h3")).toHaveText(exampleRows);
-    if (viewport.width < 768) {
-      await expect(example.getByRole("table", { includeHidden: true })).toBeHidden();
-      for (const card of await example.locator("article").all()) await expect(card).toBeVisible();
-    } else {
-      await expect(example.getByRole("table")).toBeVisible();
-      for (const card of await example.locator("article").all()) await expect(card).toBeHidden();
-    }
+    await expect(example).not.toContainText("No corresponde a un cliente ni demuestra resultados obtenidos");
+    await expect(example.getByRole("columnheader", { includeHidden: true })).toHaveText(["Paso", "Área de trabajo", "Qué revisamos", "Para qué sirve"]);
+    await expect(example.locator("ol > li")).toHaveCount(6);
+    await expect(example.locator("ol h3")).toHaveText(exampleRows);
+    for (const row of await example.locator("ol > li").all()) await expect(row).toBeVisible();
 
     const guarantee = page.getByRole("note");
     await expect(guarantee).toHaveText("Si en 6 meses no empiezas a ver resultados te devolvemos el dinero");
