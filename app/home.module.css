@@ -1,0 +1,467 @@
+.hero {
+  position: relative;
+  display: flex;
+  min-height: clamp(38rem, 71vh, 45rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b2138;
+}
+
+.hero::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 22, 39, 0.96) 0%, rgba(6, 22, 39, 0.88) 40%, rgba(6, 22, 39, 0.46) 66%, rgba(6, 22, 39, 0.14) 100%),
+    linear-gradient(0deg, rgba(6, 22, 39, 0.28) 0%, transparent 42%);
+  content: "";
+  pointer-events: none;
+}
+
+.heroImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: 68% 55%;
+  filter: saturate(0.86) contrast(1.03);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  max-width: 1180px;
+  min-height: inherit;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5.25rem;
+  align-items: center;
+}
+
+.heroCopy {
+  width: min(100%, 44rem);
+}
+
+.heroEyebrow {
+  color: #5eead4;
+}
+
+.heroTitle {
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-size: clamp(3.35rem, 5.45vw, 5.25rem);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.heroLead {
+  max-width: 40rem;
+  margin: 0 0 2rem;
+  color: #dbeafe;
+  font-size: clamp(1.08rem, 1.5vw, 1.24rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.heroLead strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #ffffff;
+  font-size: 1.08em;
+  font-weight: 850;
+}
+
+.heroSecondary {
+  border-color: rgba(255, 255, 255, 0.68) !important;
+  background: rgba(6, 22, 39, 0.38) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(8px);
+}
+
+.heroSecondary:hover {
+  border-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.problemSection {
+  border-block: 1px solid #dbe3ef;
+  background: #eef6ff;
+}
+
+.problemInner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem 6rem;
+}
+
+.problemHeading {
+  margin-bottom: clamp(2.75rem, 5vw, 4.75rem);
+}
+
+.problemHeading h2 {
+  max-width: 62rem;
+  text-wrap: balance;
+}
+
+.systemPanel {
+  min-width: 0;
+}
+
+.systemFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.systemStage {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 24rem;
+  overflow: hidden;
+  align-items: flex-end;
+  border: 1px solid rgba(219, 234, 254, 0.18);
+  border-radius: 8px;
+  background: #0f2a46;
+  box-shadow: 0 20px 46px rgba(15, 42, 70, 0.16);
+  isolation: isolate;
+  transition: box-shadow 260ms ease, transform 260ms ease;
+}
+
+.systemStage::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 22, 39, 0.08) 14%, rgba(6, 22, 39, 0.42) 48%, rgba(6, 22, 39, 0.97) 100%),
+    linear-gradient(90deg, rgba(6, 22, 39, 0.35), transparent 68%);
+  content: "";
+  pointer-events: none;
+}
+
+.systemStage:hover {
+  box-shadow: 0 26px 56px rgba(15, 42, 70, 0.22);
+  transform: translateY(-3px);
+}
+
+.stageImage {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 58% center;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.systemStage:hover .stageImage {
+  transform: scale(1.035);
+}
+
+.stageContent {
+  padding: 1.6rem;
+}
+
+.stageContent > span {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #7dd3fc;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.systemStage h3 {
+  margin-bottom: 0.55rem;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.systemStage p {
+  margin: 0;
+  color: #dbeafe;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.servicePanel {
+  position: relative;
+  display: flex;
+  min-height: 23.5rem;
+  overflow: hidden;
+  flex-direction: column;
+  grid-column: span 4;
+  justify-content: flex-end;
+  border-radius: 8px;
+  background: #0f2a46;
+  box-shadow: 0 20px 50px rgba(15, 42, 70, 0.14);
+  color: inherit;
+  isolation: isolate;
+  text-decoration: none;
+  transition: box-shadow 260ms ease, transform 260ms ease;
+}
+
+.servicePanel:nth-child(2),
+.servicePanel:nth-child(3) {
+  grid-column: span 2;
+}
+
+.servicePanel::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 25, 43, 0.05) 18%, rgba(7, 25, 43, 0.94) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.serviceImage {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms ease;
+}
+
+.servicePanel:nth-child(1) .serviceImage,
+.servicePanel:nth-child(3) .serviceImage {
+  object-position: 58% center;
+}
+
+.servicePanel:nth-child(2) .serviceImage,
+.servicePanel:nth-child(4) .serviceImage {
+  object-position: 62% center;
+}
+
+.servicePanel:hover .serviceImage {
+  filter: saturate(1.04);
+  transform: scale(1.035);
+}
+
+.servicePanel:hover {
+  box-shadow: 0 28px 58px rgba(15, 42, 70, 0.2);
+  transform: translateY(-3px);
+}
+
+.servicePanel:active {
+  transform: translateY(-1px);
+}
+
+.servicePanel:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 4px;
+}
+
+.serviceContent {
+  padding: clamp(1.6rem, 3vw, 2.35rem);
+}
+
+.servicePanel h3 {
+  max-width: 28rem;
+  margin-bottom: 0.65rem;
+  color: #ffffff;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  text-wrap: balance;
+}
+
+.servicePanel p {
+  max-width: 39rem;
+  margin: 0;
+  color: #dbeafe;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.serviceLinkCue {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.serviceLinkCue svg {
+  transition: transform 220ms ease;
+}
+
+.servicePanel:hover .serviceLinkCue svg,
+.servicePanel:focus-visible .serviceLinkCue svg {
+  transform: translate(2px, -2px);
+}
+
+.diagnosticSection {
+  padding-top: 6rem;
+  padding-bottom: 6.5rem;
+}
+
+.diagnosticBand {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(2rem, 5vw, 5rem);
+  border-left: 6px solid #14b8a6;
+  border-radius: 8px;
+  background: #0f2a46;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+  box-shadow: 0 24px 56px rgba(15, 42, 70, 0.17);
+}
+
+.diagnosticEyebrow {
+  color: #5eead4;
+}
+
+.diagnosticCopy h2 {
+  max-width: 47rem;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3.45rem);
+  text-wrap: balance;
+}
+
+.diagnosticCopy > p:last-child {
+  max-width: 46rem;
+  margin: 0;
+  color: #dbeafe;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.diagnosticBand > a {
+  min-width: 15rem;
+}
+
+@media (max-width: 980px) {
+  .hero::after {
+    background:
+      linear-gradient(90deg, rgba(6, 22, 39, 0.95) 0%, rgba(6, 22, 39, 0.84) 56%, rgba(6, 22, 39, 0.35) 100%),
+      linear-gradient(0deg, rgba(6, 22, 39, 0.34) 0%, transparent 48%);
+  }
+
+  .heroImage {
+    object-position: 62% 50%;
+  }
+
+  .problemHeading {
+    max-width: 44rem;
+  }
+
+  .systemFlow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .serviceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .servicePanel,
+  .servicePanel:nth-child(2),
+  .servicePanel:nth-child(3) {
+    grid-column: span 1;
+  }
+
+  .diagnosticBand {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnosticBand > a {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    min-height: 43rem;
+  }
+
+  .hero::after {
+    background: rgba(6, 22, 39, 0.82);
+  }
+
+  .heroImage {
+    object-position: 58% center;
+  }
+
+  .heroInner {
+    padding: 3.5rem 1rem 4.25rem;
+    align-items: flex-end;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.75rem, 13vw, 3.65rem);
+  }
+
+  .heroLead {
+    font-size: 1.04rem;
+  }
+
+  .hero :global(.hero-actions) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero :global(.hero-actions) a {
+    width: 100%;
+  }
+
+  .problemInner {
+    gap: 2.5rem;
+    padding: 4rem 1rem 4.5rem;
+  }
+
+  .systemFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .systemStage {
+    min-height: 20rem;
+  }
+
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicePanel {
+    min-height: 22rem;
+  }
+
+  .diagnosticSection {
+    padding: 4.5rem 1rem 5rem;
+  }
+
+  .diagnosticBand {
+    gap: 1.75rem;
+    border-left-width: 4px;
+    padding: 2rem 1.4rem;
+  }
+
+  .diagnosticBand > a {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .systemStage,
+  .stageImage,
+  .servicePanel,
+  .serviceImage,
+  .serviceLinkCue svg {
+    transition: none;
+  }
+
+  .systemStage:hover,
+  .systemStage:hover .stageImage,
+  .servicePanel:hover,
+  .servicePanel:active,
+  .servicePanel:hover .serviceImage,
+  .servicePanel:hover .serviceLinkCue svg,
+  .servicePanel:focus-visible .serviceLinkCue svg {
+    transform: none;
+  }
+}

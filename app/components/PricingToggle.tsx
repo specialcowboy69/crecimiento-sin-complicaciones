@@ -1,3 +1,6 @@
+import { Check, Minus } from "lucide-react";
+import styles from "./PricingToggle.module.css";
+
 type PricingService = {
   title: string;
   detail: string;
@@ -190,26 +193,52 @@ export function PricingToggle() {
         ))}
       </div>
 
-      <div className="comparison-wrap" aria-labelledby="comparison-title">
-        <h3 id="comparison-title">Matriz de valor</h3>
-        <div className="comparison-scroll" tabIndex={0}>
-          <table className="comparison-table">
+      <div className={styles.comparisonWrap} aria-labelledby="comparison-title">
+        <div className={styles.comparisonHeading}>
+          <div>
+            <p>Comparativa</p>
+            <h3 id="comparison-title">Matriz de valor</h3>
+          </div>
+          <span>Compara el alcance de cada plan de un vistazo.</span>
+        </div>
+        <div className={styles.comparisonScroll} tabIndex={0}>
+          <table className={styles.comparisonTable}>
             <caption>Tabla comparativa de características por plan</caption>
             <thead>
               <tr>
                 <th scope="col">Característica</th>
-                <th scope="col">Esencial</th>
-                <th scope="col">Crecimiento</th>
-                <th scope="col">Vanguardia</th>
+                <th scope="col">
+                  <span>Esencial</span>
+                  <small>Base profesional</small>
+                </th>
+                <th scope="col" className={styles.recommendedPlan}>
+                  <span>Crecimiento</span>
+                  <small>Recomendado</small>
+                </th>
+                <th scope="col">
+                  <span>Vanguardia</span>
+                  <small>Escala avanzada</small>
+                </th>
               </tr>
             </thead>
             <tbody>
               {comparison.map(([feature, essential, growth, vanguard]) => (
                 <tr key={feature}>
                   <th scope="row">{feature}</th>
-                  <td>{essential}</td>
-                  <td>{growth}</td>
-                  <td>{vanguard}</td>
+                  <td data-plan="Esencial">
+                    {essential === "-" ? (
+                      <span className={styles.notIncluded}><Minus size={16} aria-hidden="true" /> No incluido</span>
+                    ) : (
+                      <span className={styles.matrixValue}>{essential}</span>
+                    )}
+                  </td>
+                  <td data-plan="Crecimiento" className={styles.recommendedCell}>
+                    <span className={styles.matrixValue}>
+                      {growth === "Incluido" ? <Check size={17} aria-hidden="true" /> : null}
+                      {growth}
+                    </span>
+                  </td>
+                  <td data-plan="Vanguardia"><span className={styles.matrixValue}>{vanguard}</span></td>
                 </tr>
               ))}
             </tbody>
