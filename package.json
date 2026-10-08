@@ -12,9 +12,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@11ty/gray-matter": "^3.0.0",
     "@vercel/analytics": "^2.0.1",
     "firebase-admin": "^14.2.0",
-    "gray-matter": "^4.0.3",
     "lucide-react": "^1.28.0",
     "next": "16.2.4",
     "react": "19.2.4",

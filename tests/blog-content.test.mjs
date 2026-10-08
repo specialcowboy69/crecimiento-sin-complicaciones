@@ -93,6 +93,15 @@ test("parseBlogDocument derives the slug and reading time from a strict document
   assert.equal(post.readingTimeMinutes, 1);
 });
 
+test("parseBlogDocument preserves YAML block lists and Markdown separators", () => {
+  const source = documentSource("lista-bloque", {}, "Inicio.\n\n---\n\nFinal.")
+    .replace('tags: ["seo", "estrategia"]', "tags:\n  - seo\n  - estrategia");
+  const post = parseBlogDocument({ fileName: "lista-bloque.md", source });
+
+  assert.deepEqual(post.tags, ["seo", "estrategia"]);
+  assert.equal(post.body, "Inicio.\n\n---\n\nFinal.");
+});
+
 test("parseBlogDocument reports the filename for invalid documents", () => {
   const cases = [
     ["Mayusculas.md", documentSource("Mayusculas")],
