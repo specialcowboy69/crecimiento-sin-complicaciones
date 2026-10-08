@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-10-05
+**Last updated:** 2026-10-06
 
 ## Strategic Context
 
@@ -16,7 +16,7 @@ Central strategy folder:
 
 - `app/layout.tsx`: global metadata plus shared `Organization` and `WebSite` JSON-LD.
 - `app/sitemap.ts`: sitemap route generation.
-- `app/page.tsx`: home.
+- `app/page.tsx`: commercial home for the complete marketing system. Its hero uses the keyword signal `Agencia de crecimiento y marketing digital`, the promise `Convertimos tráfico en oportunidades comerciales` and a direct path to the free audit and case studies.
 - `app/sobre-nosotros/page.tsx`: public entity and trust page.
 - `app/lib/structuredData.ts`: shared `Organization`, `WebSite` and `BreadcrumbList` JSON-LD helpers and stable entity IDs.
 - `app/agencia-marketing-digital/page.tsx`: commercial marketing hub replacing the old `/servicios` hub.
@@ -38,6 +38,7 @@ Central strategy folder:
 - `app/politica-de-cookies/page.tsx` and `app/politica-de-privacidad/page.tsx`: public legal-information routes with `noindex, follow`, intentionally omitted from the sitemap.
 - `public/llms.txt`: concise public reference for AI systems; supplementary to the sitemap and robots rules.
 - `.agents/product-marketing.md`: commercial source of truth for the offer, target audience, customer language and approved copy guardrails.
+- `docs/decisions/2026-10-06-commercial-pages-redesign.md`: dated rationale for the home, SEO local and Google Ads design and copy renewal delivered in PRs #11 and #12.
 - `docs/site-architecture.md`: route, cluster, sitemap and redirect source of truth.
 - `docs/navigation.md`: header and mobile navigation rules.
 - `docs/forms-and-leads.md`: lead form and payload conventions.
@@ -57,6 +58,7 @@ Central strategy folder:
 - Do not invent internal links. Verify the route exists in `app/`, sitemap or redirects before linking.
 - Keep page-level `BreadcrumbList` schema aligned with the shared entity IDs and global `Organization` and `WebSite` schema in `app/lib/structuredData.ts`.
 - For architecture decisions, read `docs/site-architecture.md` first.
+- Do not reintroduce decorative performance metrics, unsupported case-study figures or office claims as SEO copy. Route intent does not override commercial evidence requirements.
 
 ## Current Pillars
 
