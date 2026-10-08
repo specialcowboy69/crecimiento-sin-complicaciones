@@ -251,6 +251,44 @@ Known planned route:
 
 Do not link to the Sevilla page until the route exists.
 
+## Blog Foundation
+
+The blog is implemented as a two-phase launch. The code for `/blog` and `/blog/{slug}` exists, but both surfaces remain closed with `404` responses until the repository contains at least three valid articles that are not drafts and whose publication date has arrived in the `Europe/Madrid` calendar.
+
+Phase 1 includes:
+
+- The validated local Markdown repository under `content/blog/`.
+- The gated `/blog` and `/blog/{slug}` routes.
+- Canonical metadata and `CollectionPage`, `Blog`, `ItemList`, `BlogPosting`, and `BreadcrumbList` schema generated only after the publication gate opens.
+- Safe Markdown rendering with GFM and without raw HTML execution.
+- Removal of the two former links to nonexistent blog articles.
+
+Phase 1 deliberately excludes global navigation links, footer links, sitemap entries, category archives, and RSS. Those signals are activated together in phase 2, after the first three articles have completed editorial review and have final dates, cover assets, and related links. Do not add a public blog link before that activation.
+
+### Article frontmatter
+
+The slug comes only from the lowercase, hyphenated `.md` filename. Every document must use this frontmatter contract:
+
+```yaml
+title: string
+description: string
+publishedAt: YYYY-MM-DD
+updatedAt: YYYY-MM-DD # optional
+category: seo | google-ads | web-y-conversion | contenidos-y-redes | ia-y-automatizacion
+draft: boolean
+authorId: equipo
+coverImage: /images/blog/{slug}/cover.webp
+coverImageAlt: string
+primaryKeyword: string
+relatedService: approved canonical commercial route
+relatedSlugs: string[]
+tags: string[]
+```
+
+Markdown bodies cannot be empty. Dates must be real ISO dates, `updatedAt` cannot predate `publishedAt`, related slugs must exist and cannot contain the current slug or duplicates, and non-draft articles must have their cover file under `public/images/blog/{slug}/cover.webp`. Validation failures include the source filename and stop the build.
+
+Category archives remain inactive until at least two categories each contain three published articles. Until then, article categories are plain text rather than links.
+
 ## Link Audit Checklist
 
 Public indexable service pages should include `BreadcrumbList` JSON-LD that matches the documented hierarchy. The root layout renders global `Organization` and `WebSite` schema, so page-level schema should reference the same entity instead of inventing separate local businesses or unsupported ratings.

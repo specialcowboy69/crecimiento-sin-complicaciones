@@ -295,8 +295,6 @@ export default function SeoArchitecturePage() {
         <section className="internal-links" aria-labelledby="internal-links-title">
           <h2 id="internal-links-title">Recursos relacionados</h2>
           <Link href="/">Volver a la página de Inicio</Link>
-          <a href="/blog/que-es-core-web-vital">Qué es un Core Web Vital</a>
-          <a href="/blog/que-es-topic-cluster">Qué es un Topic Cluster</a>
         </section>
 
         <section className="service-final-cta" id="auditoria-arquitectura" aria-labelledby="final-cta-title">
