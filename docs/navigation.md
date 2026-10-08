@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-10-02
+**Last updated:** 2026-10-08
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -29,6 +29,7 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 Its current links and controls are:
 
 - `/sobre-nosotros`
+- `/blog`
 - `/politica-de-cookies`
 - `/politica-de-privacidad`
 - `CookiePreferencesLink` for reopening consent settings.
@@ -43,6 +44,7 @@ Desktop home header:
 
 - Logo.
 - Direct section anchors such as `Servicios`, `Casos`, `Precios` and `Diagnóstico`.
+- A desktop link to the published `/blog`; the shared footer keeps it reachable on mobile.
 - Services dropdown using `LandingServicesMenu`; the current home label can be `Nuestros servicios` or another short services label.
 - No `Auditoría gratuita` CTA in the header; the audit CTA should live in the hero and conversion sections.
 
@@ -127,6 +129,7 @@ Current main links:
 - `/`
 - `/agencia-marketing-digital`
 - `/sobre-nosotros`
+- `/blog`
 - `/agencia-marketing-digital/google-ads`
 - `/diseno-landing-pages`
 - `/seo`

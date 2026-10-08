@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { hasPublishedBlog } from "./lib/blog/gates";
+import { getProductionPublishedPosts } from "./lib/blog/production";
 import { absoluteUrl } from "./lib/site";
 
 const routes = [
@@ -25,9 +27,24 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
+  const staticEntries = routes.map((route) => ({
     url: absoluteUrl(route.path),
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority: route.priority,
   }));
+  const posts = getProductionPublishedPosts();
+
+  if (!hasPublishedBlog(posts)) {
+    return staticEntries;
+  }
+
+  return [
+    ...staticEntries,
+    { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.7 },
+    ...posts.map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    })),
+  ];
 }

@@ -557,8 +557,7 @@
   }
 
   .headerCta {
-    padding-inline: 12px;
-    font-size: 0.82rem;
+    display: none;
   }
 
   .heroInner,
