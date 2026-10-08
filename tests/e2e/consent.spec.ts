@@ -91,7 +91,7 @@ async function storedConsent(context: BrowserContext, baseURL: string, analytics
 }
 
 async function commands(page: Page): Promise<unknown[][]> {
-  return page.evaluate(() => (Reflect.get(window, "dataLayer") ?? []).map((item: ArrayLike<unknown>) => Array.from(item)));
+  return page.evaluate(() => ((Reflect.get(window, "dataLayer") ?? []) as Array<ArrayLike<unknown>>).map((item) => Array.from(item)));
 }
 
 async function leadEvents(page: Page) {

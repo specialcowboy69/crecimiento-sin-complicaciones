@@ -1,17 +1,17 @@
 # Product Marketing Context
 
-**Document version:** v1.2
-**Last updated:** 2026-10-01
+**Document version:** v1.3
+**Last updated:** 2026-10-06
 
 ## Product Overview
 **One-liner:**
-Agencia de crecimiento para startups, pymes y negocios que combina SEO tecnico, paid growth, CRO, contenidos, analitica e implementacion de IA.
+Agencia de crecimiento y marketing digital para startups, pymes y negocios que convierte tráfico en oportunidades comerciales.
 
 **What it does:**
-Crecimiento sin complicaciones diseña sistemas de captacion y conversion: webs orientadas a clientes, SEO tecnico, campañas SEM, gestion de redes sociales, CRO, reporting y automatizaciones con IA. La promesa central es ordenar canales, mensajes y datos para convertir visitas en conversaciones comerciales.
+Crecimiento sin complicaciones conecta SEO, Google Ads, páginas, contenido, medición y automatizaciones con IA para atraer demanda cualificada y llevar cada visita hacia una conversación comercial. La promesa central es ordenar canales, mensajes y datos sin añadir complejidad innecesaria.
 
 **Product category:**
-Agencia de marketing digital / Agencia SEO / Agencia de crecimiento / Automatizacion con IA para empresas.
+Agencia de marketing digital y marketing online / Agencia SEO / Agencia Google Ads / Agencia de crecimiento / Automatización con IA para empresas.
 
 **Product type:**
 Servicio profesional B2B.
@@ -46,8 +46,8 @@ Conseguir mas leads cualificados mediante una web clara, SEO, paid media, conten
 - Gestion de redes sociales para empresas.
 - Soluciones de inteligencia artificial para empresas.
 - SEO tecnico y arquitectura de entidades.
-- SEM / paid growth.
-- CRO y landing systems.
+- Google Ads / SEM.
+- Diseño de landing pages y optimización de conversión.
 
 ## Personas
 | Persona | Cares about | Challenge | Value we promise |
@@ -86,7 +86,7 @@ Plantillas web, builders no-code, herramientas de IA y cursos que obligan al cli
 **Key differentiators:**
 - Enfoque de sistema: captacion, mensaje, conversion y medicion conectados.
 - Oferta amplia pero agrupada por resultados: web, SEO, paid, CRO, contenido e IA.
-- Auditoria gratuita como entrada de baja friccion.
+- Auditoría gratuita como entrada de baja fricción.
 - Estetica y UX de servicio premium, no agencia local generica.
 
 **How we do it differently:**
@@ -133,7 +133,7 @@ Miedo a pagar otra agencia y recibir informes confusos o acciones sin impacto.
 - "Un equipo que conecta web, SEO, Ads, contenido y datos."
 
 **Words to use:**
-auditoria gratuita, leads cualificados, crecimiento, SEO tecnico, paid growth, CRO, redes sociales, IA para empresas, automatizacion, pagina web profesional.
+auditoría gratuita, oportunidades comerciales, demanda cualificada, SEO técnico, Google Ads, landing pages, redes sociales, IA para empresas, automatización, página web profesional.
 
 **Words to avoid:**
 trafico por trafico, viralidad garantizada, resultados inmediatos garantizados, marketing magico.
@@ -156,6 +156,39 @@ Directo, orientado a negocio y con foco en datos.
 **Personality:**
 Ordenado, premium, pragmatico, tecnico y confiable.
 
+## Mensajes de páginas comerciales
+
+### Home `/`
+
+- Función: entrada comercial al sistema completo de servicios.
+- Señal de categoría: `Agencia de crecimiento y marketing digital`.
+- Promesa principal: `Convertimos tráfico en oportunidades comerciales.`
+- Mecanismo: conectar SEO, paid media, páginas y medición para atraer demanda cualificada y convertir visitas en conversaciones reales.
+- CTA principal: `Solicitar auditoría gratuita`.
+- CTA secundario: `Ver casos de éxito`.
+- El diagnóstico debe ser sencillo: el visitante envía el formulario, el equipo revisa la web pública y devuelve una propuesta gratuita. No recrear un proceso artificial de cuatro pasos.
+
+### SEO local `/seo/local`
+
+- Posee la oferta especialista de SEO local, sin afirmar una oficina en una ciudad concreta.
+- Conecta diagnóstico de búsquedas, Perfil de Empresa de Google, sitio público, reseñas y referencias auténticas y medición.
+- El método aparece bajo el único encabezado `Nuestro método`, seguido por `Analizar`, `Priorizar`, `Ejecutar` y `Medir`.
+- El plan ilustrativo debe nombrar sus columnas y seguir siendo explícitamente ilustrativo sin añadir avisos defensivos al encabezado visible.
+- La auditoría gratuita revisa el Perfil de Empresa y, cuando existe web, el sitio público completo con análisis más detallado de sus páginas clave.
+
+### Google Ads `/agencia-marketing-digital/google-ads`
+
+- Posee la intención nacional genérica de `Google Ads` y `agencia SEM`.
+- Explica estrategia, estructura de cuenta, anuncios, landing pages, seguimiento de conversiones y optimización de presupuesto sin publicar cifras inventadas de CPL o pipeline.
+- Enlaza a la página de Alicante solo como mercado local relacionado, no como elemento de navegación global.
+
+### Google Ads Alicante `/agencia-marketing-digital/google-ads/alicante`
+
+- Posee únicamente la intención `Google Ads Alicante` y `agencia SEM Alicante` para empresas que venden en Alicante ciudad o provincia.
+- El servicio se presta de forma remota. Copy, imágenes y schema no deben implicar oficina física, sucursal ni dirección local.
+- Las referencias geográficas describen cobertura de campaña y segmentación del mercado, no la ubicación de la agencia.
+- El formulario usa `Google Ads Alicante` como `sourcePage` y `Google Ads` como `interestedService`.
+
 ## Local SEO Offer
 
 El núcleo de `/seo/local` es el diagnóstico local, el Perfil de Empresa de Google, el SEO del sitio web, la gestión de reseñas y referencias del negocio y la medición.
@@ -168,13 +201,13 @@ Guardrails internos: sin rankings garantizados, sin incentivos ni filtros de sat
 
 ## Proof Points
 **Metrics:**
-La web menciona objetivos y ejemplos como 90 dias de sprint medible, conversion objetivo 3-5%, mejoras de leads y reduccion de CPL.
+No hay métricas de rendimiento reutilizables aprobadas como prueba general. Las cifras decorativas de pipeline, `3-5%`, `90 días` y mejoras porcentuales se retiraron de la home. Cualquier cifra futura debe poder atribuirse a un caso real y documentado.
 
 **Customers:**
-Casos demo o ejemplos: Finova App, Clinica Norte, Lumina Interiors.
+La home presenta casos para explicar reto, solución y resultado. Antes de reutilizar nombres o cifras fuera de su contexto actual, confirmar la fuente y el permiso correspondiente.
 
 **Testimonials:**
-Pendiente validar si son reales antes de usarlos fuera de la web actual.
+`/seo/local` presenta opiniones de clientes como reseñas verificadas. Mantener el texto, la empresa y el rol exactamente como estén aprobados; no derivar métricas, rankings ni resultados nuevos a partir de una reseña.
 
 **Value themes:**
 | Theme | Proof |
@@ -196,6 +229,7 @@ No documentadas.
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v1.3 (2026-10-06) - Mensajes de home, SEO local y Google Ads alineados con el rediseño editorial; se eliminan métricas decorativas y se documentan las reglas para intención local, pruebas y CTAs.
 - v1.2 (2026-10-01) - Oferta de SEO local: núcleo, método, alcance gratuito y complementos opcionales, con límites internos para el copy futuro.
 - v1.1 (2026-09-16) - La home se mantiene como entrada comercial con servicios, casos, precios y auditoría gratuita.
 - v1 (2026-08-26) - Contexto inicial autodraft a partir de las paginas actuales del repo.
