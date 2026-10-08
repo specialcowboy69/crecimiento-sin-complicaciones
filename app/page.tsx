@@ -6,6 +6,7 @@ import { PricingToggle } from "./components/PricingToggle";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { isBlogPublished } from "./lib/blog/publication";
 import homeGrowthImage from "../public/images/home-growth-collaboration.webp";
 import homeServiceAiImage from "../public/images/home-service-ai-automation.webp";
 import homeServiceLandingImage from "../public/images/home-service-landing.webp";
@@ -141,6 +142,7 @@ export default function Home() {
             <a href="#casos">Casos</a>
             <a href="#precios">Precios</a>
             <a href="#diagnostico">Diagnóstico</a>
+            {isBlogPublished() ? <Link href="/blog">Blog</Link> : null}
           </div>
           <div className="nav-actions">
             <LandingServicesMenu

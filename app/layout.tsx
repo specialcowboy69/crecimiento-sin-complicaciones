@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CookieConsent } from "./components/CookieConsent";
 import { SiteFooter } from "./components/SiteFooter";
 import { VercelAnalytics } from "./components/VercelAnalytics";
+import { isBlogPublished } from "./lib/blog/publication";
 import { SITE_URL } from "./lib/site";
 import { SCHEMA_CONTEXT, organizationJsonLd, webSiteJsonLd } from "./lib/structuredData";
 import "./globals.css";
@@ -53,7 +54,7 @@ export default function RootLayout({
           }}
         />
         {children}
-        <SiteFooter />
+        <SiteFooter showBlog={isBlogPublished()} />
         <VercelAnalytics />
         <CookieConsent />
       </body>

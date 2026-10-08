@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { isBlogPublished } from "../lib/blog/publication";
 
 const pages = [
   { href: "/", label: "Inicio" },
   { href: "/agencia-marketing-digital", label: "Marketing digital" },
   { href: "/sobre-nosotros", label: "Sobre nosotros" },
+  { href: "/blog", label: "Blog" },
   { href: "/agencia-marketing-digital/google-ads", label: "Google Ads" },
   { href: "/diseno-landing-pages", label: "Landing pages" },
   { href: "/seo", label: "SEO" },
@@ -20,7 +22,8 @@ type PageLinksNavProps = {
 
 export function PageLinksNav({ currentPath, variant = "dark" }: PageLinksNavProps) {
   const isDark = variant === "dark";
-  const links = pages.filter((page) => page.href !== currentPath);
+  const showBlog = isBlogPublished();
+  const links = pages.filter((page) => page.href !== currentPath && (page.href !== "/blog" || showBlog));
 
   return (
     <nav

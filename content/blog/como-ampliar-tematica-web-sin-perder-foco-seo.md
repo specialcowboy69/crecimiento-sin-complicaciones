@@ -1,15 +1,15 @@
 ---
 title: "Cómo ampliar la temática de una web sin perder el foco SEO"
 description: "Método para crear nuevos clústeres de contenido, conectar temas relacionados y evitar que la estrategia editorial pierda coherencia."
-publishedAt: "2026-11-03"
+publishedAt: "2026-10-08"
 category: "seo"
-draft: true
+draft: false
 authorId: "equipo"
 coverImage: "/images/blog/como-ampliar-tematica-web-sin-perder-foco-seo/cover.webp"
-coverImageAlt: "Mapa de contenidos que conecta un tema principal con áreas relacionadas"
+coverImageAlt: "Tarjetas azules y verdes conectadas por un puente de contenidos"
 primaryKeyword: "ampliar la temática de una web"
 relatedService: "/seo"
-relatedSlugs: []
+relatedSlugs: ["como-lanzar-una-web-nueva-sin-comprometer-seo"]
 tags:
   - "autoridad temática"
   - "estrategia de contenidos"

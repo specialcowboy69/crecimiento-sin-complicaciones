@@ -86,7 +86,7 @@ test("a shared public footer keeps an accessible cookie-preferences opener witho
   const styles = await read("app/globals.css");
 
   assert.match(layout, /import \{ SiteFooter \} from "\.\/components\/SiteFooter"/);
-  assert.match(layout, /<SiteFooter \/>/);
+  assert.match(layout, /<SiteFooter showBlog=\{isBlogPublished\(\)\} \/>/);
   assert.match(footer, /<CookiePreferencesLink \/>/);
   assert.match(preferencesLink, />\s*Cambiar configuración de cookies\s*</);
   assert.match(preferencesLink, /OPEN_COOKIE_PREFERENCES_EVENT/);

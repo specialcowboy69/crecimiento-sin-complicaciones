@@ -1,15 +1,15 @@
 ---
 title: "Domain Rating: qué mide y cómo evaluar un backlink de verdad"
 description: "Aprende qué significa el Domain Rating de Ahrefs, cuáles son sus límites y qué señales conviene revisar antes de aceptar o comprar un enlace."
-publishedAt: "2026-10-27"
+publishedAt: "2026-10-08"
 category: "seo"
-draft: true
+draft: false
 authorId: "equipo"
 coverImage: "/images/blog/domain-rating-como-evaluar-backlinks/cover.webp"
-coverImageAlt: "Evaluación de un backlink mediante relevancia, contexto y calidad editorial"
+coverImageAlt: "Lupa sobre un mapa de enlaces entre páginas para evaluar su contexto"
 primaryKeyword: "Domain Rating"
 relatedService: "/seo"
-relatedSlugs: []
+relatedSlugs: ["como-lanzar-una-web-nueva-sin-comprometer-seo"]
 tags:
   - "domain rating"
   - "backlinks"

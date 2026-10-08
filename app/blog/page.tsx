@@ -28,7 +28,10 @@ export function generateMetadata(): Metadata {
   return {
     title: BLOG_TITLE,
     description: BLOG_DESCRIPTION,
-    alternates: { canonical: BLOG_PATH },
+    alternates: {
+      canonical: BLOG_PATH,
+      types: { "application/rss+xml": "/blog/feed.xml" },
+    },
     robots: { index: true, follow: true },
     openGraph: {
       title: `${BLOG_TITLE} | Crecimiento sin complicaciones`,

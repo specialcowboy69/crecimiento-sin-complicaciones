@@ -68,7 +68,7 @@ test("sobre nosotros is discoverable from public navigation and sitemap", async 
   const sitemap = await read("app/sitemap.ts");
   const siteArchitecture = await read("docs/site-architecture.md");
 
-  assert.match(layout, /<SiteFooter \/>/);
+  assert.match(layout, /<SiteFooter showBlog=\{isBlogPublished\(\)\} \/>/);
   assert.equal(footer.includes("/sobre-nosotros"), true, "public footer should link to /sobre-nosotros");
   assert.equal(pageLinksNav.includes("/sobre-nosotros"), true, "PageLinksNav should include /sobre-nosotros");
   assert.match(sitemap, /path:\s*"\/sobre-nosotros"/);

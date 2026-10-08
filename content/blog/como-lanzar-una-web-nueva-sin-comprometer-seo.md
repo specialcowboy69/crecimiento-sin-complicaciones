@@ -1,15 +1,15 @@
 ---
 title: "Cómo lanzar una web nueva sin comprometer su SEO"
 description: "Guía para preparar el staging, facilitar el rastreo y conseguir los primeros enlaces sin recurrir a atajos que puedan perjudicar el proyecto."
-publishedAt: "2026-10-20"
+publishedAt: "2026-10-08"
 category: "seo"
-draft: true
+draft: false
 authorId: "equipo"
 coverImage: "/images/blog/como-lanzar-una-web-nueva-sin-comprometer-seo/cover.webp"
-coverImageAlt: "Lista de comprobación para el lanzamiento SEO de una web nueva"
+coverImageAlt: "Portátil con diseño web y planos de páginas revisados antes del lanzamiento"
 primaryKeyword: "cómo lanzar una web nueva"
 relatedService: "/seo"
-relatedSlugs: []
+relatedSlugs: ["domain-rating-como-evaluar-backlinks", "como-ampliar-tematica-web-sin-perder-foco-seo"]
 tags:
   - "lanzamiento web"
   - "indexación"

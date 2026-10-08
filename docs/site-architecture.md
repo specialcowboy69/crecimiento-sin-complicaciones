@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-10-05
+**Last updated:** 2026-10-08
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -32,6 +32,10 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 │   ├── /seo/alicante
 │   └── /seo/malaga
 ├── /seo-para-pymes
+├── /blog
+│   ├── /blog/como-ampliar-tematica-web-sin-perder-foco-seo
+│   ├── /blog/como-lanzar-una-web-nueva-sin-comprometer-seo
+│   └── /blog/domain-rating-como-evaluar-backlinks
 ├── /diseno-pagina-web-profesional
 │   ├── /diseno-pagina-web-profesional/empresas
 │   └── /diseno-pagina-web-profesional/valencia
@@ -47,6 +51,7 @@ Internal/admin routes:
 /admin/leads
 /api/leads
 /api/admin/leads
+/blog/feed.xml
 /robots.txt
 /sitemap.xml
 ```
@@ -251,9 +256,9 @@ Known planned route:
 
 Do not link to the Sevilla page until the route exists.
 
-## Blog Foundation
+## Blog Publication
 
-The blog is implemented as a two-phase launch. The code for `/blog` and `/blog/{slug}` exists, but both surfaces remain closed with `404` responses until the repository contains at least three valid articles that are not drafts and whose publication date has arrived in the `Europe/Madrid` calendar.
+The blog launched on 2026-10-08 with three reviewed SEO articles, final cover images and related links. `/blog` and `/blog/{slug}` are public only while the repository contains at least three valid, non-draft articles whose publication date has arrived in the `Europe/Madrid` calendar. Unknown or unpublished article slugs still return 404.
 
 Phase 1 includes:
 
@@ -263,7 +268,7 @@ Phase 1 includes:
 - Safe Markdown rendering with GFM and without raw HTML execution.
 - Removal of the two former links to nonexistent blog articles.
 
-Phase 1 deliberately excludes global navigation links, footer links, sitemap entries, category archives, and RSS. Those signals are activated together in phase 2, after the first three articles have completed editorial review and have final dates, cover assets, and related links. Do not add a public blog link before that activation.
+The public launch adds `/blog` to the home navigation, desktop page links and shared footer. The sitemap lists the blog and its published article URLs, and `/blog/feed.xml` exposes an RSS feed. These discovery signals follow the same three-post publication gate. Category archives remain inactive until at least two categories each contain three published articles; no category URLs are linked or indexed yet.
 
 ### Article frontmatter
 
