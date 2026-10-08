@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="706" viewBox="0 0 320 706" role="img" aria-labelledby="title description">
+  <title id="title">Ejemplo de puente temático desde SEO hacia conversión</title>
+  <desc id="description">Una web especializada en SEO puede abordar primero el problema compartido del tráfico orgánico que no genera contactos. Esa pieza de transición explica la relación con un nuevo clúster de conversión. La audiencia, el problema y la oferta deben seguir conectados.</desc>
+  <rect x="0.5" y="0.5" width="319" height="705" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="18" y="38" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Expansión con foco</text>
+  <text x="18" y="63" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="14">Ejemplo: del SEO a la conversión</text>
+
+  <rect x="18" y="85" width="284" height="112" rx="6" fill="#e8efff" stroke="#b7c9f0"/>
+  <text x="34" y="115" fill="#1d4ed8" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">NÚCLEO ACTUAL</text>
+  <text x="34" y="148" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">SEO</text>
+  <text x="34" y="176" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="14">Audiencia y problemas conocidos</text>
+  <path d="M160 197 V223" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M154 218 L160 224 L166 218" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <rect x="18" y="225" width="284" height="142" rx="6" fill="#eaf5f2" stroke="#a8d5c9"/>
+  <rect x="18" y="225" width="4" height="142" rx="2" fill="#0f766e"/>
+  <text x="34" y="254" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">PUENTE TEMÁTICO</text>
+  <text x="34" y="288" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">Tráfico orgánico sin</text>
+  <text x="34" y="311" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">contactos</text>
+  <text x="34" y="344" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="14">Problema compartido con CRO</text>
+  <path d="M160 367 V393" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M154 388 L160 394 L166 388" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <rect x="18" y="395" width="284" height="112" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="34" y="425" fill="#1d4ed8" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">NUEVO CLÚSTER</text>
+  <text x="34" y="458" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Conversión (CRO)</text>
+  <text x="34" y="486" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="14">Contenido y oferta relacionados</text>
+
+  <path d="M160 507 V533" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M154 528 L160 534 L166 528" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="18" y="535" width="284" height="151" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="34" y="565" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">COMPRUEBA EL ENCAJE</text>
+  <text x="34" y="597" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="15">Misma audiencia y necesidad</text>
+  <text x="34" y="627" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="15">Relación con la oferta real</text>
+  <text x="34" y="657" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="15">Enlaces útiles para el lector</text>
+</svg>
