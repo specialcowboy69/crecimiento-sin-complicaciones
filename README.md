@@ -69,6 +69,7 @@ Las convenciones y los procedimientos operativos están organizados aquí:
 - [`docs/site-architecture.md`](./docs/site-architecture.md): rutas públicas, redirecciones, canonicals, sitemap y enlazado interno.
 - [`docs/navigation.md`](./docs/navigation.md): cabeceras, menús, enlaces de página y footer compartido.
 - [`docs/design.md`](./docs/design.md): sistema visual, legibilidad, responsive y convenciones de componentes.
+- [`docs/decisions/2026-10-06-commercial-pages-redesign.md`](./docs/decisions/2026-10-06-commercial-pages-redesign.md): decisiones de diseño y copy aplicadas a la home, SEO local y Google Ads en los PRs #11 y #12.
 - [`docs/forms-and-leads.md`](./docs/forms-and-leads.md): payloads, taxonomía de formularios, privacidad y eventos de conversión.
 - [`docs/analytics-and-consent.md`](./docs/analytics-and-consent.md): Vercel Analytics, GA4 opcional, consentimiento y verificación.
 - [`docs/deployment.md`](./docs/deployment.md): dominio de producción, Cloudflare, preflight de Git y comprobaciones posteriores al despliegue.

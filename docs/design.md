@@ -105,7 +105,7 @@ CTAs recomendados:
 
 - `Solicitar auditoría gratuita`
 - `Quiero mi auditoría gratuita`
-- `Ver resultados`
+- `Ver casos de éxito`
 - `Ver precios`
 
 Reglas:
@@ -126,7 +126,7 @@ Reglas:
 - Reutilizar azul principal y verde acento.
 - Mantener el logo y la navegación alineados con la home.
 - Evitar bloques demasiado densos en móvil.
-- Las métricas y pruebas deben ser visibles pronto.
+- Mostrar pronto solo pruebas, reseñas o resultados que estén respaldados y puedan atribuirse con precisión.
 
 Cada landing debe responder rápido a:
 
@@ -135,6 +135,27 @@ Cada landing debe responder rápido a:
 - Qué resultado promete.
 - Por qué confiar.
 - Qué hacer después.
+
+## Fotografía y composición editorial
+
+La fotografía debe mostrar el servicio, el contexto de trabajo o el mercado al que se dirige la página. No debe funcionar como relleno atmosférico.
+
+Patrones aprobados:
+
+- Hero de ancho completo con fotografía editorial, overlay suficiente y copy legible sobre la imagen.
+- Composiciones de imagen y texto que alternen el ritmo de la página.
+- Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
+- Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
+- Figcaption breve cuando la imagen necesite contexto comercial o geográfico.
+
+Evitar:
+
+- Gráficos, dashboards o métricas ficticias que puedan interpretarse como resultados reales.
+- Collages decorativos, blobs y fondos abstractos sin función.
+- Texto incrustado en la propia imagen cuando pueda mantenerse como HTML accesible.
+- Recortes que oculten el producto, la persona o el lugar que la imagen pretende mostrar.
+
+Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
 
 ## Formularios
 
@@ -169,9 +190,13 @@ Reglas:
 - Cards con radio moderado, alrededor de `8px`.
 - Bordes suaves y sombras discretas.
 - No meter cards dentro de cards salvo que sea imprescindible.
-- Métricas grandes y claras.
+- Métricas grandes y claras cuando procedan de datos respaldados.
 - Iconos solo cuando ayuden a reconocer una acción o categoría.
 - Evitar secciones que parezcan landing genérica de SaaS si la página necesita información operativa.
+- Mantener suficiente padding alrededor de títulos, descripciones y pies de tarjeta; ningún texto debe quedar pegado al borde.
+- Las tarjetas con imagen de fondo necesitan overlay, contraste comprobado y un área de texto estable.
+- Reservar las cards para servicios, casos, controles o elementos repetidos; una sección completa no debe parecer una tarjeta flotante.
+- Las tablas y comparativas deben nombrar sus columnas. No usar líneas de color u otros acentos si su función no es evidente.
 
 ## Mobile
 
@@ -192,6 +217,24 @@ Reglas:
 
 Todo el copy visible debe estar en español correcto.
 
+Estructura recomendada para el copy comercial:
+
+1. Nombrar el servicio, categoría o mercado de forma literal.
+2. Exponer un problema reconocible sin dramatización genérica.
+3. Explicar el mecanismo de trabajo con acciones concretas.
+4. Describir un resultado observable sin prometer cifras no verificadas.
+5. Cerrar con un CTA coherente con el siguiente paso real.
+
+El H1 debe poseer la intención principal de la ruta. Los subtítulos desarrollan la propuesta y no deben competir con el título mediante etiquetas, claims o eslóganes redundantes.
+
+Evitar:
+
+- Frases intercambiables entre agencias como `llevamos tu negocio al siguiente nivel`.
+- Cadenas de sustantivos abstractos sin explicar qué se hace.
+- Procesos artificialmente divididos en pasos cuando la experiencia real es más sencilla.
+- Métricas, plazos, precios, oficinas o resultados que no estén respaldados.
+- Notas defensivas en el copy visible cuando corresponden a un guardrail interno.
+
 Palabras y formas preferidas:
 
 - `Auditoría gratuita`
@@ -201,7 +244,6 @@ Palabras y formas preferidas:
 - `IA empresas`
 - `tráfico cualificado`
 - `conversión`
-- `próximos 90 días`
 
 Evitar inconsistencias de acentos:
 
@@ -217,10 +259,14 @@ Evitar inconsistencias de acentos:
 Checklist mínimo:
 
 - La home y las landings siguen pareciendo la misma marca.
+- El hero muestra con claridad el servicio o contexto real y mantiene contraste suficiente.
 - El header no está saturado ni vacío.
 - El CTA principal sigue siendo claro.
 - No hay variantes incorrectas de `Auditoría gratuita`.
 - Los formularios no piden inversión mensual estimada.
+- Las tablas tienen encabezados comprensibles y las cards conservan padding suficiente.
+- No se presentan gráficos o métricas ficticias como prueba comercial.
 - Mobile no tiene botones, chips o textos desbordados.
 - El scroll vertical sigue funcionando sobre los carruseles móviles y sus gestos horizontales y controles responden.
+- Se revisan como mínimo los breakpoints de `1440x900` y `390x844` cuando cambia la composición visual.
 - `npm run lint` y `npm run build` pasan si se ha tocado código.
