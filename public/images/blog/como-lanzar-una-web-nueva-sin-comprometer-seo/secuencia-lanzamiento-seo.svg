@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="846" viewBox="0 0 320 846" role="img" aria-labelledby="title description">
+  <title id="title">Secuencia de comprobación SEO para una web nueva</title>
+  <desc id="description">Antes de publicar, proteger staging y terminar las páginas prioritarias. Al publicar, retirar bloqueos y revisar URLs, respuestas y sitemap. En la primera semana, comprobar rastreo e indexación. En las semanas siguientes, corregir incidencias, reforzar enlaces internos y distribuir recursos útiles.</desc>
+  <rect x="0.5" y="0.5" width="319" height="845" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="18" y="39" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Lanzamiento SEO</text>
+  <text x="18" y="65" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="15">Qué revisar en cada etapa</text>
+  <path d="M31 116 V786" fill="none" stroke="#94a3b8" stroke-width="3"/>
+
+  <circle cx="31" cy="116" r="9" fill="#0f766e"/>
+  <text x="53" y="123" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">ANTES DE PUBLICAR</text>
+  <text x="53" y="157" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Protege staging</text>
+  <text x="53" y="190" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Termina páginas clave</text>
+  <text x="53" y="223" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Revisa arquitectura y enlaces</text>
+  <path d="M53 253 H300" stroke="#e2e8f0"/>
+
+  <circle cx="31" cy="286" r="9" fill="#2563eb"/>
+  <text x="53" y="293" fill="#1d4ed8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">AL PUBLICAR</text>
+  <text x="53" y="327" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Retira bloqueos y noindex</text>
+  <text x="53" y="360" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Revisa URLs y canonicals</text>
+  <text x="53" y="393" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Verifica respuestas y sitemap</text>
+  <path d="M53 423 H300" stroke="#e2e8f0"/>
+
+  <circle cx="31" cy="456" r="9" fill="#0f766e"/>
+  <text x="53" y="463" fill="#0f766e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">PRIMERA SEMANA</text>
+  <text x="53" y="497" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Inspecciona URLs principales</text>
+  <text x="53" y="530" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Revisa rastreo e indexación</text>
+  <text x="53" y="563" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Consulta Search Console</text>
+  <path d="M53 593 H300" stroke="#e2e8f0"/>
+
+  <circle cx="31" cy="626" r="9" fill="#2563eb"/>
+  <text x="53" y="633" fill="#1d4ed8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">SEMANAS SIGUIENTES</text>
+  <text x="53" y="667" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Corrige incidencias</text>
+  <text x="53" y="700" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Refuerza enlaces internos</text>
+  <text x="53" y="733" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Distribuye recursos útiles</text>
+  <text x="53" y="766" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="16">Busca menciones relevantes</text>
+</svg>
