@@ -260,7 +260,7 @@ Do not link to the Sevilla page until the route exists.
 
 The blog launched on 2026-10-08 with three reviewed SEO articles, final cover images and related links. `/blog` and `/blog/{slug}` are public only while the repository contains at least three valid, non-draft articles whose publication date has arrived in the `Europe/Madrid` calendar. Unknown or unpublished article slugs still return 404.
 
-Phase 1 includes:
+The foundation delivered before the public launch included:
 
 - The validated local Markdown repository under `content/blog/`.
 - The gated `/blog` and `/blog/{slug}` routes.
@@ -268,7 +268,7 @@ Phase 1 includes:
 - Safe Markdown rendering with GFM and without raw HTML execution.
 - Removal of the two former links to nonexistent blog articles.
 
-The public launch adds `/blog` to the home navigation, desktop page links and shared footer. The sitemap lists the blog and its published article URLs, and `/blog/feed.xml` exposes an RSS feed. These discovery signals follow the same three-post publication gate. Category archives remain inactive until at least two categories each contain three published articles; no category URLs are linked or indexed yet.
+The public launch added `/blog` to the home navigation, desktop page links and shared footer. The sitemap lists the blog and its published article URLs, and `/blog/feed.xml` exposes an RSS feed. These discovery signals follow the same three-post publication gate. Category archives remain inactive until at least two categories each contain three published articles; no category URLs are linked or indexed yet.
 
 ### Article frontmatter
 
@@ -291,6 +291,13 @@ tags: string[]
 ```
 
 Markdown bodies cannot be empty. Dates must be real ISO dates, `updatedAt` cannot predate `publishedAt`, related slugs must exist and cannot contain the current slug or duplicates, and non-draft articles must have their cover file under `public/images/blog/{slug}/cover.webp`. Validation failures include the source filename and stop the build.
+
+### Publishing another article
+
+1. Add `content/blog/{slug}.md` with the frontmatter above and `draft: true`. Use an existing approved `relatedService` route; keep `relatedSlugs` limited to reviewed articles that should actually be shown.
+2. Review the copy, internal links, alt text and final WebP cover. Verify every internal route before linking to it. Place the cover at `public/images/blog/{slug}/cover.webp`; explanatory diagrams may live alongside it.
+3. Set `publishedAt` to the intended real publication date in the `Europe/Madrid` calendar and switch to `draft: false` only when the article and assets are approved. A future-dated article remains unpublished until that date. Use `updatedAt` only for an actual later content update.
+4. Run `npm.cmd run test:blog`, `npm.cmd test`, `npm.cmd run lint` and `npm.cmd run build`. Review the article in desktop and mobile view before merging. After deployment, verify the article's HTTP response, `www` canonical, cover, `/blog`, sitemap and `/blog/feed.xml` on the production host; a local build alone does not prove publication.
 
 Category archives remain inactive until at least two categories each contain three published articles. Until then, article categories are plain text rather than links.
 
