@@ -8,6 +8,7 @@ import { test } from "node:test";
 import { BlogMarkdown } from "../app/blog/_components/BlogMarkdown.tsx";
 import {
   blogArticleJsonLd,
+  blogCategoryJsonLd,
   blogHomeJsonLd,
 } from "../app/lib/blog/schema.ts";
 
@@ -56,6 +57,19 @@ test("article schema omits an invented modified date and reuses the organization
   assert.equal(updatedArticle.dateModified, "2026-10-03");
 });
 
+test("category schema lists only its published articles with canonical breadcrumbs", () => {
+  const schema = blogCategoryJsonLd("seo", [samplePost]);
+  const page = schema["@graph"].find((entry) => entry["@type"] === "CollectionPage");
+  const list = schema["@graph"].find((entry) => entry["@type"] === "ItemList");
+  const breadcrumbs = schema["@graph"].find((entry) => entry["@type"] === "BreadcrumbList");
+
+  assert.equal(page.url, "https://www.crecimientosincomplicaciones.com/blog/categoria/seo");
+  assert.equal(list.numberOfItems, 1);
+  assert.equal(list.itemListElement[0].url, "https://www.crecimientosincomplicaciones.com/blog/auditoria-seo");
+  assert.equal(breadcrumbs.itemListElement.at(-1).item,
+    "https://www.crecimientosincomplicaciones.com/blog/categoria/seo");
+});
+
 test("Markdown renderer supports GFM without executing raw HTML", () => {
   const html = renderToStaticMarkup(
     React.createElement(BlogMarkdown, {
@@ -74,16 +88,24 @@ test("blog routes share the publication gate and canonical policy", async () => 
     path.join(process.cwd(), "app", "blog", "[slug]", "page.tsx"),
     "utf8",
   );
+  const categorySource = await readFile(
+    path.join(process.cwd(), "app", "blog", "categoria", "[slug]", "page.tsx"),
+    "utf8",
+  );
 
   assert.match(hubSource, /isBlogPublished\(posts\)/);
   assert.match(hubSource, /notFound\(\)/);
   assert.match(hubSource, /canonical:\s*BLOG_PATH/);
-  assert.doesNotMatch(hubSource, /\/blog\/categoria\//);
+  assert.match(hubSource, /\/blog\/categoria\//);
 
   assert.match(articleSource, /export const dynamicParams = false/);
   assert.match(articleSource, /generateStaticParams/);
   assert.match(articleSource, /params:\s*Promise<\{ slug: string \}>/);
   assert.match(articleSource, /isBlogPublished\(posts\)/);
   assert.match(articleSource, /notFound\(\)/);
-  assert.doesNotMatch(articleSource, /href=.*categoria/);
+  assert.match(categorySource, /export const dynamicParams = false/);
+  assert.match(categorySource, /generateStaticParams/);
+  assert.match(categorySource, /isBlogPublished\(posts\)/);
+  assert.match(categorySource, /notFound\(\)/);
+  assert.match(categorySource, /alternates:\s*\{ canonical:/);
 });

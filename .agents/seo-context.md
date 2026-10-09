@@ -16,7 +16,7 @@ Central strategy folder:
 
 - `app/layout.tsx`: global metadata plus shared `Organization` and `WebSite` JSON-LD.
 - `app/sitemap.ts`: sitemap route generation.
-- `app/blog/page.tsx`, `app/blog/[slug]/page.tsx` and `app/blog/feed.xml/route.ts`: published blog index, articles and RSS, gated by the published content set.
+- `app/blog/page.tsx`, `app/blog/[slug]/page.tsx`, `app/blog/categoria/[slug]/page.tsx` and `app/blog/feed.xml/route.ts`: published blog index, articles, category archives and RSS, gated by the published content set.
 - `content/blog/`: reviewed Markdown articles; `public/images/blog/{slug}/cover.webp` contains each published cover.
 - `app/lib/blog/`: frontmatter validation, publication dates, related posts and category gates.
 - `app/page.tsx`: commercial home for the complete marketing system. Its hero uses the keyword signal `Agencia de crecimiento y marketing digital`, the promise `Convertimos tráfico en oportunidades comerciales` and a direct path to the free audit and case studies.
@@ -74,7 +74,7 @@ Central strategy folder:
 - SEO local service on `/seo/local`.
 - SEO para pymes on `/seo-para-pymes`.
 - Local SEO pages under `/seo/{city}`.
-- Published SEO articles under `/blog/{slug}`; `/blog`, sitemap entries and RSS share the three-published-post gate. Category archives remain inactive until two categories each have three published posts.
+- Published SEO articles under `/blog/{slug}`; `/blog`, sitemap entries and RSS share the three-published-post gate. Each category archive under `/blog/categoria/{slug}` activates with its first published article after that global gate; `/blog/categoria/seo` is active.
 - Gestión de redes sociales.
 - IA y automatización para empresas.
 - Google Ads and SEO técnico under `/agencia-marketing-digital/*`; the national Google Ads page owns generic Google Ads and SEM searches, while its Alicante child owns only the corresponding local intent.

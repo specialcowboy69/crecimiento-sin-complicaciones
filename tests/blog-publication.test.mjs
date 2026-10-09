@@ -4,6 +4,7 @@ import path from "node:path";
 import { test } from "node:test";
 
 import { getAllBlogPosts, getPublishedPosts, isBlogPublished } from "../app/lib/blog/index.ts";
+import { escapeXml } from "../app/lib/blog/xml.ts";
 import sitemapModule from "../app/sitemap.ts";
 
 const publicationDate = "2026-10-08";
@@ -34,11 +35,13 @@ test("the three editorial articles are publishable today with real WebP covers",
   }
 });
 
-test("sitemap lists the blog and its three canonical articles", () => {
+test("sitemap lists the blog, active SEO category and its three canonical articles", () => {
   const urls = sitemapModule.default().map((entry) => entry.url);
   const blogUrls = urls.filter((url) => url.startsWith(`${canonicalOrigin}/blog`));
 
   assert.ok(blogUrls.includes(`${canonicalOrigin}/blog`));
+  assert.ok(blogUrls.includes(`${canonicalOrigin}/blog/categoria/seo`));
+  assert.ok(!blogUrls.some((url) => url.includes("/blog/categoria/google-ads")));
   for (const slug of launchSlugs) {
     assert.ok(blogUrls.includes(`${canonicalOrigin}/blog/${slug}`));
   }
@@ -48,7 +51,6 @@ test("sitemap lists the blog and its three canonical articles", () => {
 test("RSS contains only published canonical articles and escapes XML", async () => {
   const routeModule = await import("../app/blog/feed.xml/route.ts");
   const GET = routeModule.GET ?? routeModule.default?.GET;
-  const escapeXml = routeModule.escapeXml ?? routeModule.default?.escapeXml;
   const response = await GET();
   const xml = await response.text();
 

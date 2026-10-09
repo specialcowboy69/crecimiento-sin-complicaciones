@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Logo } from "../components/Logo";
+import { BLOG_CATEGORIES } from "../lib/blog/categories";
+import { activeCategorySlugs } from "../lib/blog/gates";
 import { hasPublishedBlog as isBlogPublished } from "../lib/blog/gates";
 import { getProductionPublishedPosts } from "../lib/blog/production";
 import { blogHomeJsonLd } from "../lib/blog/schema";
@@ -51,6 +53,7 @@ export default function BlogPage() {
   }
 
   const jsonLd = blogHomeJsonLd(posts);
+  const categories = activeCategorySlugs(posts).map((slug) => BLOG_CATEGORIES[slug]);
 
   return (
     <div className={styles.page}>
@@ -95,6 +98,14 @@ export default function BlogPage() {
               <p className={styles.eyebrow}>Biblioteca práctica</p>
               <h2 id="latest-articles">Últimos artículos</h2>
             </div>
+            <nav className={styles.categoryNav} aria-label="Categorías del blog">
+              <span aria-current="page">Todos</span>
+              {categories.map((category) => (
+                <Link key={category.slug} href={`/blog/categoria/${category.slug}`}>
+                  {category.name}
+                </Link>
+              ))}
+            </nav>
             <div className={styles.grid}>
               {posts.map((post) => (
                 <BlogPostCard key={post.slug} post={post} />

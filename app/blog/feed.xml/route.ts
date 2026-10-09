@@ -1,21 +1,9 @@
 import { hasPublishedBlog } from "../../lib/blog/gates";
 import { getProductionPublishedPosts } from "../../lib/blog/production";
+import { escapeXml } from "../../lib/blog/xml";
 import { absoluteUrl } from "../../lib/site";
 
 export const dynamic = "force-static";
-
-export function escapeXml(value: string) {
-  return value.replace(/[&<>"']/g, (character) => {
-    const entities: Record<string, string> = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&apos;",
-    };
-    return entities[character];
-  });
-}
 
 export function GET() {
   const posts = getProductionPublishedPosts();

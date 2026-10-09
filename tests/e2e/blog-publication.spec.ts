@@ -62,6 +62,39 @@ test("unknown articles stay 404 and noindex", async ({ page }) => {
   }
 });
 
+test("SEO category is indexable and empty categories stay unpublished", async ({ page }) => {
+  await page.goto("/blog", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("navigation", { name: "Categorías del blog" })
+    .getByRole("link", { name: "SEO" })).toBeVisible();
+  await expect(page.locator('a[href="/blog/categoria/google-ads"]')).toHaveCount(0);
+
+  const category = await page.goto("/blog/categoria/seo", { waitUntil: "domcontentloaded" });
+  expect(category?.status()).toBe(200);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("SEO");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://www.crecimientosincomplicaciones.com/blog/categoria/seo",
+  );
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index, follow/i);
+  await expect(page.locator('article h2 a[href^="/blog/"]')).toHaveCount(3);
+  await expect(page.getByRole("navigation", { name: "Categorías del blog" })
+    .getByRole("link", { name: "Todos" })).toBeVisible();
+
+  await page.goto(`/blog/${articles[0].slug}`, { waitUntil: "domcontentloaded" });
+  await expect(page.locator('article header a[href="/blog/categoria/seo"]')).toBeVisible();
+
+  for (const route of ["/blog/categoria/google-ads", "/blog/categoria/desconocida"]) {
+    const response = await page.goto(route, { waitUntil: "domcontentloaded" });
+    expect(response?.status(), route).toBe(404);
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+    const robots = await page.locator('meta[name="robots"]').evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute("content") ?? ""),
+    );
+    expect(robots.length, route).toBeGreaterThan(0);
+    expect(robots.every((content) => /noindex/i.test(content)), route).toBe(true);
+  }
+});
+
 test("navigation, sitemap and RSS expose only the published blog", async ({ page, request }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page.locator('a[href="/blog"]').first()).toBeVisible();
@@ -70,6 +103,8 @@ test("navigation, sitemap and RSS expose only the published blog", async ({ page
   expect(sitemap.status()).toBe(200);
   const sitemapXml = await sitemap.text();
   expect(sitemapXml).toContain("https://www.crecimientosincomplicaciones.com/blog</loc>");
+  expect(sitemapXml).toContain("https://www.crecimientosincomplicaciones.com/blog/categoria/seo</loc>");
+  expect(sitemapXml).not.toContain("/blog/categoria/google-ads</loc>");
   for (const article of articles) {
     expect(sitemapXml).toContain(`https://www.crecimientosincomplicaciones.com/blog/${article.slug}</loc>`);
   }
@@ -87,7 +122,7 @@ test("mobile blog header keeps the logo without a cramped audit CTA", async ({ p
   await expect(page.locator('header .logo-link')).toBeVisible();
   await expect(page.locator('header a[href="/#auditoria"]')).toBeHidden();
 
-  for (const route of ["/blog", ...articles.map((article) => `/blog/${article.slug}`)]) {
+  for (const route of ["/blog", "/blog/categoria/seo", ...articles.map((article) => `/blog/${article.slug}`)]) {
     await page.goto(route, { waitUntil: "domcontentloaded" });
     const widths = await page.evaluate(() => ({
       document: document.documentElement.scrollWidth,

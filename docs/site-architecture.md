@@ -1,6 +1,6 @@
 # Site Architecture
 
-**Last updated:** 2026-10-08
+**Last updated:** 2026-10-09
 
 This is the source of truth for public routes, clusters, redirects, sitemap inclusion and internal linking decisions in `pagina-agencia`.
 
@@ -33,6 +33,7 @@ This is the source of truth for public routes, clusters, redirects, sitemap incl
 │   └── /seo/malaga
 ├── /seo-para-pymes
 ├── /blog
+│   ├── /blog/categoria/seo
 │   ├── /blog/como-ampliar-tematica-web-sin-perder-foco-seo
 │   ├── /blog/como-lanzar-una-web-nueva-sin-comprometer-seo
 │   └── /blog/domain-rating-como-evaluar-backlinks
@@ -268,7 +269,7 @@ The foundation delivered before the public launch included:
 - Safe Markdown rendering with GFM and without raw HTML execution.
 - Removal of the two former links to nonexistent blog articles.
 
-The public launch added `/blog` to the home navigation, desktop page links and shared footer. The sitemap lists the blog and its published article URLs, and `/blog/feed.xml` exposes an RSS feed. These discovery signals follow the same three-post publication gate. Category archives remain inactive until at least two categories each contain three published articles; no category URLs are linked or indexed yet.
+The public launch added `/blog` to the home navigation, desktop page links and shared footer. The sitemap lists the blog and its published article URLs, and `/blog/feed.xml` exposes an RSS feed. These discovery signals follow the same three-post publication gate. Once the blog is public, `/blog/categoria/{slug}` opens with the first published article in that category. Only active categories appear in navigation and the sitemap; empty, draft-only, future-only and unknown categories return 404 and have no canonical URL. The initial active category is `/blog/categoria/seo`.
 
 ### Article frontmatter
 
@@ -299,7 +300,7 @@ Markdown bodies cannot be empty. Dates must be real ISO dates, `updatedAt` canno
 3. Set `publishedAt` to the intended real publication date in the `Europe/Madrid` calendar and switch to `draft: false` only when the article and assets are approved. A future-dated article remains unpublished until that date. Use `updatedAt` only for an actual later content update.
 4. Run `npm.cmd run test:blog`, `npm.cmd test`, `npm.cmd run lint` and `npm.cmd run build`. Review the article in desktop and mobile view before merging. After deployment, verify the article's HTTP response, `www` canonical, cover, `/blog`, sitemap and `/blog/feed.xml` on the production host; a local build alone does not prove publication.
 
-Category archives remain inactive until at least two categories each contain three published articles. Until then, article categories are plain text rather than links.
+Category archives do not require three articles or a second category. A published article activates its category when the global three-post blog gate is open; the category is then linked from the blog and its articles, and listed in the sitemap. Publishing into a new category requires a new build/deployment, because category routes are statically generated. After deployment, verify the category URL, article links, `www` canonical, breadcrumb schema and sitemap entry. Do not link to a category containing only drafts or future-dated articles.
 
 ## Link Audit Checklist
 

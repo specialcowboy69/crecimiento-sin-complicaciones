@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { hasPublishedBlog } from "./lib/blog/gates";
+import { activeCategorySlugs, hasPublishedBlog } from "./lib/blog/gates";
 import { getProductionPublishedPosts } from "./lib/blog/production";
 import { absoluteUrl } from "./lib/site";
 
@@ -41,6 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticEntries,
     { url: absoluteUrl("/blog"), changeFrequency: "weekly", priority: 0.7 },
+    ...activeCategorySlugs(posts).map((slug) => ({
+      url: absoluteUrl(`/blog/categoria/${slug}`),
+      changeFrequency: "weekly" as const,
+      priority: 0.65,
+    })),
     ...posts.map((post) => ({
       url: absoluteUrl(`/blog/${post.slug}`),
       changeFrequency: "monthly" as const,
