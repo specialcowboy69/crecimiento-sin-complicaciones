@@ -139,6 +139,34 @@
   line-height: 1.15;
 }
 
+.categoryNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: -8px 0 30px;
+  border-bottom: 1px solid #dbe3ee;
+  color: #475569;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.categoryNav > a,
+.categoryNav > span {
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  padding: 0 0 12px;
+}
+
+.categoryNav > a:hover,
+.categoryNav > [aria-current="page"] {
+  border-bottom-color: #0f766e;
+  color: #0f766e;
+}
+
+.categoryHero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -184,8 +212,14 @@
   font-weight: 700;
 }
 
-.cardMeta > span:first-child {
+.cardMeta > a:first-child {
   color: #0f766e;
+}
+
+.cardMeta > a:hover,
+.eyebrow a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .cardTitle {
@@ -373,129 +407,129 @@
   text-underline-offset: 3px;
 }
 
-:global(.blog-markdown) {
+.page :global(.blog-markdown) {
   color: #334155;
   font-size: 1.06rem;
   line-height: 1.82;
 }
 
-:global(.blog-markdown h2),
-:global(.blog-markdown h3) {
+.page :global(.blog-markdown h2),
+.page :global(.blog-markdown h3) {
   color: #0f172a;
   line-height: 1.2;
 }
 
-:global(.blog-markdown h2) {
+.page :global(.blog-markdown h2) {
   margin: 2.1em 0 0.65em;
   font-size: 1.65rem;
 }
 
-:global(.blog-markdown h3) {
+.page :global(.blog-markdown h3) {
   margin: 1.8em 0 0.6em;
   font-size: 1.28rem;
 }
 
-:global(.blog-markdown h2[id]),
-:global(.blog-markdown h3[id]) {
+.page :global(.blog-markdown h2[id]),
+.page :global(.blog-markdown h3[id]) {
   scroll-margin-top: 12px;
 }
 
-:global(.blog-markdown p),
-:global(.blog-markdown ul),
-:global(.blog-markdown ol),
-:global(.blog-markdown blockquote),
-:global(.blog-markdown table) {
+.page :global(.blog-markdown p),
+.page :global(.blog-markdown ul),
+.page :global(.blog-markdown ol),
+.page :global(.blog-markdown blockquote),
+.page :global(.blog-markdown table) {
   margin: 0 0 1.35em;
 }
 
-:global(.blog-markdown a) {
+.page :global(.blog-markdown a) {
   color: #1d4ed8;
   font-weight: 750;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-:global(.blog-markdown ul),
-:global(.blog-markdown ol) {
+.page :global(.blog-markdown ul),
+.page :global(.blog-markdown ol) {
   padding-left: 1.4em;
 }
 
-:global(.blog-markdown ul) {
+.page :global(.blog-markdown ul) {
   list-style-type: disc;
 }
 
-:global(.blog-markdown ol) {
+.page :global(.blog-markdown ol) {
   list-style-type: decimal;
 }
 
-:global(.blog-markdown blockquote) {
+.page :global(.blog-markdown blockquote) {
   border-left: 4px solid #0f766e;
   background: #eef6f4;
   padding: 16px 20px;
 }
 
-:global(.blog-markdown blockquote.blog-summary) {
+.page :global(.blog-markdown blockquote.blog-summary) {
   border-left-width: 2px;
   background: #f2f7f6;
   padding: 16px 20px;
   color: #203a39;
 }
 
-:global(.blog-markdown blockquote.blog-summary > p:first-child) {
+.page :global(.blog-markdown blockquote.blog-summary > p:first-child) {
   margin-bottom: 0.55em;
 }
 
-:global(.blog-markdown figure) {
+.page :global(.blog-markdown figure) {
   width: 100%;
   margin: 32px 0;
 }
 
-:global(.blog-markdown figure img),
-:global(.blog-markdown p img) {
+.page :global(.blog-markdown figure img),
+.page :global(.blog-markdown p img) {
   display: block;
   width: auto;
   max-width: 100%;
   height: auto;
 }
 
-:global(.blog-markdown figure img) {
+.page :global(.blog-markdown figure img) {
   margin-inline: auto;
 }
 
-:global(.blog-markdown figure figcaption) {
+.page :global(.blog-markdown figure figcaption) {
   margin-top: 9px;
   color: #64748b;
   font-size: 0.86rem;
   line-height: 1.5;
 }
 
-:global(.blog-markdown table) {
+.page :global(.blog-markdown table) {
   display: block;
   width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
 }
 
-:global(.blog-markdown th),
-:global(.blog-markdown td) {
+.page :global(.blog-markdown th),
+.page :global(.blog-markdown td) {
   border: 1px solid #cbd5e1;
   padding: 10px 12px;
   text-align: left;
 }
 
-:global(.blog-markdown th) {
+.page :global(.blog-markdown th) {
   background: #eef2f7;
   color: #0f172a;
 }
 
-:global(.blog-markdown code) {
+.page :global(.blog-markdown code) {
   border-radius: 4px;
   background: #e2e8f0;
   padding: 0.15em 0.35em;
   font-size: 0.92em;
 }
 
-:global(.blog-markdown pre) {
+.page :global(.blog-markdown pre) {
   overflow-x: auto;
   border-radius: 8px;
   background: #111827;
@@ -503,7 +537,7 @@
   color: #e5e7eb;
 }
 
-:global(.blog-markdown pre code) {
+.page :global(.blog-markdown pre code) {
   background: transparent;
   padding: 0;
 }

@@ -5,7 +5,8 @@ import {
   WEBSITE_ID,
   breadcrumbJsonLd,
 } from "../structuredData";
-import type { BlogPost } from "./types";
+import { BLOG_CATEGORIES } from "./categories";
+import type { BlogCategorySlug, BlogPost } from "./types";
 
 const BLOG_PATH = "/blog";
 const BLOG_NAME = "Blog de Crecimiento sin complicaciones";
@@ -57,6 +58,44 @@ export function blogHomeJsonLd(posts: BlogPost[]) {
   };
 }
 
+export function blogCategoryJsonLd(categorySlug: BlogCategorySlug, posts: BlogPost[]) {
+  const category = BLOG_CATEGORIES[categorySlug];
+  const categoryPath = `/blog/categoria/${categorySlug}`;
+  const categoryUrl = absoluteUrl(categoryPath);
+
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${categoryUrl}#webpage`,
+        url: categoryUrl,
+        name: `${category.name} | ${BLOG_NAME}`,
+        description: category.description,
+        inLanguage: "es-ES",
+        isPartOf: { "@id": WEBSITE_ID },
+        mainEntity: { "@id": `${categoryUrl}#articles` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${categoryUrl}#articles`,
+        numberOfItems: posts.length,
+        itemListElement: posts.map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: post.title,
+          url: absoluteUrl(`/blog/${post.slug}`),
+        })),
+      },
+      breadcrumbJsonLd([
+        { name: "Inicio", path: "/" },
+        { name: "Blog", path: BLOG_PATH },
+        { name: category.name, path: categoryPath },
+      ]),
+    ],
+  };
+}
+
 export function blogArticleJsonLd(post: BlogPost) {
   const articlePath = `/blog/${post.slug}`;
   const articleUrl = absoluteUrl(articlePath);
@@ -83,6 +122,7 @@ export function blogArticleJsonLd(post: BlogPost) {
       breadcrumbJsonLd([
         { name: "Inicio", path: "/" },
         { name: "Blog", path: BLOG_PATH },
+        { name: BLOG_CATEGORIES[post.category].name, path: `/blog/categoria/${post.category}` },
         { name: post.title, path: articlePath },
       ]),
     ],

@@ -196,7 +196,7 @@ test("related posts preserve editorial order and omit unavailable entries", asyn
   );
 });
 
-test("publication and category gates require three posts and two qualifying categories", () => {
+test("the blog needs three posts, but each category needs only one published post", () => {
   const posts = [
     parseBlogDocument({ fileName: "uno.md", source: documentSource("uno") }),
     parseBlogDocument({ fileName: "dos.md", source: documentSource("dos") }),
@@ -217,10 +217,37 @@ test("publication and category gates require three posts and two qualifying cate
 
   assert.equal(isBlogPublished(posts.slice(0, 2)), false);
   assert.equal(isBlogPublished(posts.slice(0, 3)), true);
-  assert.equal(isCategoryActive("seo", posts.slice(0, 4)), false);
+  assert.deepEqual(getActiveCategories(posts.slice(0, 2)), []);
+  assert.deepEqual(getActiveCategories(posts.slice(0, 3)), ["seo"]);
+  assert.equal(isCategoryActive("seo", posts.slice(0, 4)), true);
+  assert.equal(isCategoryActive("google-ads", posts.slice(0, 4)), true);
   assert.equal(isCategoryActive("seo", posts), true);
   assert.equal(isCategoryActive("google-ads", posts), true);
   assert.deepEqual(getActiveCategories(posts), ["seo", "google-ads"]);
+});
+
+test("draft and future posts do not activate another category", () => {
+  const posts = ["uno", "dos", "tres"].map((slug) =>
+    parseBlogDocument({ fileName: `${slug}.md`, source: documentSource(slug) }),
+  );
+  posts.push(parseBlogDocument({
+    fileName: "borrador-ads.md",
+    source: documentSource("borrador-ads", {
+      category: "google-ads",
+      relatedService: "/agencia-marketing-digital/google-ads",
+      draft: true,
+    }),
+  }));
+  posts.push(parseBlogDocument({
+    fileName: "futuro-ads.md",
+    source: documentSource("futuro-ads", {
+      category: "google-ads",
+      relatedService: "/agencia-marketing-digital/google-ads",
+      publishedAt: "2099-01-01",
+    }),
+  }));
+
+  assert.deepEqual(getActiveCategories(posts), ["seo"]);
 });
 
 test("publication gates never count drafts or future posts passed by a caller", () => {

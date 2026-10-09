@@ -19,7 +19,7 @@ export {
   isBlogPublished,
   isCategoryActive,
 } from "./publication";
-export { blogArticleJsonLd, blogHomeJsonLd } from "./schema";
+export { blogArticleJsonLd, blogCategoryJsonLd, blogHomeJsonLd } from "./schema";
 export type {
   BlogCategory,
   BlogCategorySlug,

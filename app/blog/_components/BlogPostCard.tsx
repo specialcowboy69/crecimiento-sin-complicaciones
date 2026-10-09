@@ -27,7 +27,9 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       </Link>
       <div className={styles.cardBody}>
         <div className={styles.cardMeta}>
-          <span>{BLOG_CATEGORIES[post.category].name}</span>
+          <Link href={`/blog/categoria/${post.category}`}>
+            {BLOG_CATEGORIES[post.category].name}
+          </Link>
           <span aria-hidden="true">·</span>
           <time dateTime={post.publishedAt}>
             {dateFormatter.format(new Date(`${post.publishedAt}T00:00:00.000Z`))}

@@ -120,7 +120,11 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{post.title}</span>
               </nav>
-              <p className={styles.eyebrow}>{BLOG_CATEGORIES[post.category].name}</p>
+              <p className={styles.eyebrow}>
+                <Link href={`/blog/categoria/${post.category}`}>
+                  {BLOG_CATEGORIES[post.category].name}
+                </Link>
+              </p>
               <h1>{post.title}</h1>
               <p className={styles.articleDescription}>{post.description}</p>
               <div className={styles.articleMeta}>

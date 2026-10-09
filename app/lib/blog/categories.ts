@@ -1,7 +1,7 @@
 import type { BlogCategory, BlogCategorySlug } from "./types";
 
 export const MINIMUM_BLOG_POSTS = 3;
-export const MINIMUM_CATEGORY_POSTS = 3;
+export const MINIMUM_CATEGORY_POSTS = 1;
 export const POSTS_PER_PAGE = 12;
 
 export const BLOG_CATEGORY_SLUGS = [

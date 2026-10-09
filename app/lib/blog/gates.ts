@@ -16,11 +16,9 @@ export function activeCategorySlugs(posts: BlogPost[], now = new Date()): BlogCa
     return [];
   }
 
-  const qualifyingCategories = BLOG_CATEGORY_SLUGS.filter(
+  return BLOG_CATEGORY_SLUGS.filter(
     (category) =>
       publishedPosts.filter((post) => post.category === category).length >=
       MINIMUM_CATEGORY_POSTS,
   );
-
-  return qualifyingCategories.length >= 2 ? qualifyingCategories : [];
 }
