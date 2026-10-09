@@ -172,7 +172,9 @@ export function CookieConsent() {
 
     window.googleAnalyticsReady = false;
     window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag(...args: unknown[]) { window.dataLayer?.push(args); };
+    // Google's tag ignores arrays here; its command queue requires the Arguments object.
+    // eslint-disable-next-line prefer-rest-params
+    window.gtag = window.gtag || function gtag() { window.dataLayer?.push(arguments); };
     window.gtag("consent", "default", deniedGoogleConsent);
     window.gtag("consent", "update", toGoogleConsentState(consent));
 

@@ -29,7 +29,9 @@ const googleStub = `(() => {
   const layer = window.dataLayer;
   const push = layer.push.bind(layer);
   layer.push = (...items) => {
-    for (const item of items) if (item[0] === 'config') send();
+    for (const item of items) {
+      if (Object.prototype.toString.call(item) === '[object Arguments]' && item[0] === 'config') send();
+    }
     return push(...items);
   };
   for (const method of ['pushState', 'replaceState']) {
@@ -149,6 +151,7 @@ for (const advertising of [false, true]) {
     }]);
     expect(layer.findIndex((command) => command[0] === "config")).toBeGreaterThan(1);
     expect(network.googleRequests.some((url) => url.includes("/gtag/js"))).toBe(true);
+    await expect.poll(() => network.googleRequests.some((url) => url.includes("/g/collect"))).toBe(true);
   });
 }
 
