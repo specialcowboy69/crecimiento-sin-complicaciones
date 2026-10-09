@@ -9,7 +9,7 @@ La URL canónica de producción es `https://www.crecimientosincomplicaciones.com
 El repositorio usa `npm` y mantiene `package-lock.json` como archivo de bloqueo.
 
 ```powershell
-npm.cmd install
+npm.cmd ci
 if (-not (Test-Path .env.local)) { Copy-Item .env.example .env.local }
 npm.cmd run dev
 ```
@@ -23,12 +23,14 @@ Las variables documentadas en `.env.example` cubren el acceso al panel interno y
 ```powershell
 npm.cmd run dev
 npm.cmd test
+npm.cmd run test:blog
 npm.cmd run lint
 npm.cmd run build
 ```
 
 - `npm.cmd run dev`: inicia el servidor de desarrollo.
 - `npm.cmd test`: ejecuta las pruebas estructurales y de regresión del repositorio.
+- `npm.cmd run test:blog`: ejecuta las pruebas enfocadas del blog.
 - `npm.cmd run lint`: ejecuta ESLint.
 - `npm.cmd run build`: genera y valida la compilación de producción.
 - `npm.cmd run start`: sirve una compilación ya generada.
@@ -54,6 +56,7 @@ No inicies otro servidor de Next.js en el mismo puerto mientras se ejecuta Playw
 - `app/`: rutas públicas, metadata, APIs y panel interno.
 - `app/components/`: navegación, formularios, consentimiento, analítica y componentes compartidos.
 - `app/lib/`: configuración del sitio, datos estructurados e integración del servidor.
+- `content/blog/`: artículos Markdown; las portadas y diagramas están en `public/images/blog/`.
 - `tests/`: pruebas estructurales y E2E.
 - `.agents/`: contexto comercial y principios SEO que deben leerse antes de modificar páginas.
 - `docs/`: arquitectura, diseño y procedimientos operativos.
@@ -75,6 +78,10 @@ Las convenciones y los procedimientos operativos están organizados aquí:
 - [`docs/deployment.md`](./docs/deployment.md): dominio de producción, Cloudflare, preflight de Git y comprobaciones posteriores al despliegue.
 
 Lee el documento aplicable antes de cambiar su área. Las rutas, metadata, sitemap, redirecciones, navegación compartida y formularios requieren las validaciones descritas en `AGENTS.md` y en sus documentos específicos.
+
+## Artículos del blog
+
+Prepara cada artículo como `content/blog/{slug}.md` con `draft: true`. El contrato completo de frontmatter, el criterio de publicación y la comprobación posterior al despliegue están en [`docs/site-architecture.md`](./docs/site-architecture.md#blog-publication). La portada final debe guardarse en `public/images/blog/{slug}/cover.webp` antes de publicarlo. Revisa el texto, los enlaces y la imagen antes de fijar la fecha real de publicación y cambiar a `draft: false`.
 
 ## Despliegue
 

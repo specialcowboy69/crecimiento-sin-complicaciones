@@ -1,6 +1,6 @@
 # SEO Context - pagina-agencia
 
-**Last updated:** 2026-10-06
+**Last updated:** 2026-10-09
 
 ## Strategic Context
 
@@ -16,6 +16,9 @@ Central strategy folder:
 
 - `app/layout.tsx`: global metadata plus shared `Organization` and `WebSite` JSON-LD.
 - `app/sitemap.ts`: sitemap route generation.
+- `app/blog/page.tsx`, `app/blog/[slug]/page.tsx` and `app/blog/feed.xml/route.ts`: published blog index, articles and RSS, gated by the published content set.
+- `content/blog/`: reviewed Markdown articles; `public/images/blog/{slug}/cover.webp` contains each published cover.
+- `app/lib/blog/`: frontmatter validation, publication dates, related posts and category gates.
 - `app/page.tsx`: commercial home for the complete marketing system. Its hero uses the keyword signal `Agencia de crecimiento y marketing digital`, the promise `Convertimos tráfico en oportunidades comerciales` and a direct path to the free audit and case studies.
 - `app/sobre-nosotros/page.tsx`: public entity and trust page.
 - `app/lib/structuredData.ts`: shared `Organization`, `WebSite` and `BreadcrumbList` JSON-LD helpers and stable entity IDs.
@@ -40,6 +43,7 @@ Central strategy folder:
 - `.agents/product-marketing.md`: commercial source of truth for the offer, target audience, customer language and approved copy guardrails.
 - `docs/decisions/2026-10-06-commercial-pages-redesign.md`: dated rationale for the home, SEO local and Google Ads design and copy renewal delivered in PRs #11 and #12.
 - `docs/site-architecture.md`: route, cluster, sitemap and redirect source of truth.
+- `docs/site-architecture.md#blog-publication`: blog frontmatter and publication workflow source of truth.
 - `docs/navigation.md`: header and mobile navigation rules.
 - `docs/forms-and-leads.md`: lead form and payload conventions.
 - `docs/analytics-and-consent.md`: analytics, consent and public cookie-behavior source of truth.
@@ -70,6 +74,7 @@ Central strategy folder:
 - SEO local service on `/seo/local`.
 - SEO para pymes on `/seo-para-pymes`.
 - Local SEO pages under `/seo/{city}`.
+- Published SEO articles under `/blog/{slug}`; `/blog`, sitemap entries and RSS share the three-published-post gate. Category archives remain inactive until two categories each have three published posts.
 - Gestión de redes sociales.
 - IA y automatización para empresas.
 - Google Ads and SEO técnico under `/agencia-marketing-digital/*`; the national Google Ads page owns generic Google Ads and SEM searches, while its Alicante child owns only the corresponding local intent.
