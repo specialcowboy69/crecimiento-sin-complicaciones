@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLeadsDataConnect } from "@/app/lib/firebaseDataConnect";
+import { blockLeadAdsExport, qualifyLead, type AdminLeadState, type LeadStateStore } from "@/app/lib/qualifiedLeadState";
 
 export const runtime = "nodejs";
 
@@ -14,11 +15,34 @@ type Lead = {
   message: string | null;
   interestedService: string | null;
   status: string;
+  adsClickType: string | null;
+  adsMeasurementConsentAtSubmit: boolean | null;
+  qualifiedAt: string | null;
+  adsExportBlockedAt: string | null;
+  adsExportClaimedAt: string | null;
+  adsExportSubmittedAt: string | null;
+  adsExportAttemptedAt: string | null;
+  adsExportTerminalAt: string | null;
+  adsExportLastErrorCode: string | null;
   createdAt: string;
   updatedAt: string | null;
 };
 
 const allowedStatuses = new Set(["new", "contacted", "closed"]);
+
+function leadStateStore(): LeadStateStore {
+  const dataConnect = getLeadsDataConnect();
+  return {
+    executeMutation: async (name, variables) => {
+      const response = await dataConnect.executeMutation<{ updated?: number }, { id: string; status?: string }>(name, variables);
+      return { data: response.data };
+    },
+    executeQuery: async (name, variables) => {
+      const response = await dataConnect.executeQuery<{ leads: AdminLeadState[] }, { id: string }>(name, variables);
+      return { data: response.data };
+    },
+  };
+}
 
 function isAuthorized(request: Request) {
   const key = process.env.ADMIN_ACCESS_KEY;
@@ -47,9 +71,26 @@ export async function PATCH(request: Request) {
   }
 
   try {
-    const { id, status } = await request.json();
+    const { id, status, action } = await request.json();
 
-    if (typeof id !== "string" || !allowedStatuses.has(status)) {
+    if (typeof id !== "string" || id.length < 10) {
+      return NextResponse.json({ error: "Lead no válido." }, { status: 400 });
+    }
+    if (status === "qualified") {
+      const lead = await qualifyLead(leadStateStore(), id);
+      return NextResponse.json({ ok: true, lead });
+    }
+    if (action === "blockAdsExport") {
+      const lead = await blockLeadAdsExport(leadStateStore(), id);
+      if (lead.adsExportSubmittedAt) {
+        return NextResponse.json({ error: "El envío a Ads ya fue aceptado." }, { status: 409 });
+      }
+      if (!lead.adsExportBlockedAt) {
+        return NextResponse.json({ error: "No se ha confirmado la exclusión. El envío puede estar en curso; actualiza el estado y reinténtalo." }, { status: 409 });
+      }
+      return NextResponse.json({ ok: true, lead });
+    }
+    if (!allowedStatuses.has(status)) {
       return NextResponse.json({ error: "Estado no valido." }, { status: 400 });
     }
 
@@ -73,7 +114,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Lead no valido." }, { status: 400 });
     }
 
-    await getLeadsDataConnect().executeMutation("DeleteLead", { id });
+    const response = await getLeadsDataConnect().executeMutation<{ deleted: number }, { id: string }>("DeleteLeadIfNotExporting", { id });
+    if (response.data.deleted !== 1) {
+      return NextResponse.json({ error: "El lead no existe o tiene un envío a Ads en curso." }, { status: 409 });
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Lead delete failed", error);

@@ -1,6 +1,6 @@
 # Deployment And Domains
 
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-11
 
 This document records production hosting, canonical host and domain redirect behavior for `pagina-agencia`.
 
@@ -97,3 +97,17 @@ When the review is clean, say explicitly that no earlier work is pending before 
 - If the production hostname changes, review the Google Analytics cookie cleanup domains in `app/components/cookieConsentCookies.mjs` before deployment. Cookie revocation must cover the active host and the apex/root domain where GA cookies may have been written.
 - After deployment, use a fresh consented browser session to submit `/seo/local`, verify `lead_seo_local_submitted` in GA4 DebugView, then mark/import it in the Google dashboards. Confirm Google Ads auto-tagging and the GA4-to-Google-Ads account link there; this repository cannot verify account-level settings.
 - Confirm the four Consent Mode signals in Tag Assistant for analytics-only acceptance, both permissions and withdrawal. Repository tests use an intercepted Google loader; a green local test does not prove Google ingestion, Ads attribution or that an account warning has cleared. Keep the existing GA4 import rather than creating a duplicate native Ads conversion for the same lead.
+
+## SEO-local qualified lead release sequence
+
+1. Obtain privacy/legal review of the consent banner, policies and the procedure for a later withdrawal of cookie consent after a lead was saved. Keep offline export disabled until the pending-export behavior is resolved.
+2. Run `firebase dataconnect:compile --service leads` and `firebase dataconnect:sql:diff --service leads`. Confirm that the migration adds only nullable fields. Deploy the compatible Data Connect schema and `leads` connector before deploying app code that writes or queries those fields. Do not deploy the application first.
+3. Deploy the app with `GOOGLE_ADS_OFFLINE_ENABLED=false`. In a fresh production browser, test accepted, rejected and revoked consent with a controlled synthetic SEO-local lead. Verify the stored click type and consent flag without showing the raw ID in the panel or logs. Confirm GA4 still receives only its parameter-free form event.
+4. In Google Ads, confirm auto-tagging and create a distinct `UPLOAD_CLICKS` qualified-lead conversion action. Set it **secondary**. Keep the imported GA4 form submission as the primary action during validation; do not change bidding based on unverified offline data.
+5. Enable the Data Manager API and give a dedicated service account user access to the Google Ads operating account or its manager. Set protected Vercel variables `GOOGLE_DATA_MANAGER_SERVICE_ACCOUNT_JSON`, `GOOGLE_ADS_OPERATING_ACCOUNT_ID`, optional `GOOGLE_ADS_LOGIN_ACCOUNT_ID`, `GOOGLE_ADS_QUALIFIED_ACTION_ID`, and a random `CRON_SECRET` of at least 16 characters. Do not reuse the Firebase service account or commit these values.
+6. Use `sendQualifiedLeadEvent` with `validateOnly: true` against an approved controlled event and inspect errors without ingesting data. A successful validation can have no `requestId`. Then enable `GOOGLE_ADS_OFFLINE_ENABLED=true` only after the consent and account checks. Vercel invokes `/api/cron/export-qualified-leads` once daily at `0 8 * * *` UTC and supplies the secret as a bearer token. On Hobby, execution can occur at any point during the 08:00 hour.
+7. For one controlled qualified lead, compare the cron's aggregate counts, Firebase export state and Data Manager diagnostics. A successful API request is not proof of Ads attribution; inspect the secondary conversion action separately after processing. Keep the action secondary until sufficient genuine qualified leads justify another decision.
+
+To stop future exports, set `GOOGLE_ADS_OFFLINE_ENABLED=false` and redeploy; the scheduled endpoint will return zero counts without reading leads or calling Google. The Vercel Cron job can also be disabled in the project dashboard. Before any merge to `main`, follow **Git Merge Preflight** above and resolve earlier pending work.
+
+The export job claims each eligible lead atomically before calling Google. While claimed, admin exclusion and deletion return a conflict rather than reporting success. A crash leaves the claim for up to 24 hours; the next cron releases older claims for retry. Configuration and Ads permission errors remain pending for retry after repair. Check the panel's latest status before telling someone that their lead was excluded.

@@ -133,6 +133,83 @@ test("fresh visit and rejection never request Google or create measurement cooki
   expect(consent).toMatchObject({ value: consentValue(false, false), path: "/", sameSite: "Lax" });
 });
 
+test("consented click ID stays in this tab and is removed after advertising revocation", async ({ page, context, baseURL }) => {
+  await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
+});
+
+test("a full navigation without a click query preserves the consented session ID", async ({ page, context, baseURL }) => {
+  await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+  await page.goto("/seo/local");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+});
+
+test("rejected visitor never stores an ad click ID", async ({ page }) => {
+  await harness(page);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await page.getByRole("dialog", { name: "Tu privacidad" }).getByRole("button", { name: "Rechazar", exact: true }).click();
+  expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
+});
+
+test("unavailable session storage does not break consent or a lead", async ({ page, context, baseURL }) => {
+  const network = await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await page.evaluate(() => {
+    Object.defineProperty(window, "sessionStorage", { configurable: true, get() { throw new DOMException("Storage blocked", "SecurityError"); } });
+  });
+  await submitLocalForm(page);
+  await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
+  expect(network.leadPayloads).toHaveLength(1);
+  expect(network.leadPayloads[0]).not.toHaveProperty("adsClickId");
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  expect((await context.cookies()).find((cookie) => cookie.name === "cookie_consent")?.value).toBe(consentValue(true, false));
+});
+
+test("visitor notices explain click ID association and later qualified-lead measurement", async ({ page }) => {
+  await harness(page);
+  await page.goto("/seo/local");
+  const banner = page.getByRole("dialog", { name: "Tu privacidad" });
+  await expect(banner).toContainText("identificador del clic");
+  await expect(banner).toContainText("cualificada");
+  await page.goto("/politica-de-privacidad");
+  await expect(page.getByRole("main")).toContainText("identificador del clic");
+  await expect(page.getByRole("main")).toContainText("cualificada");
+  await page.goto("/politica-de-cookies");
+  await expect(page.getByRole("main")).toContainText("identificador del clic");
+  await expect(page.getByRole("main")).toContainText("cualificada");
+});
+
+test("only a consented SEO-local submission sends its click ID to the lead API", async ({ page, context, baseURL }) => {
+  const network = await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await submitLocalForm(page);
+  await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
+  expect(network.leadPayloads[0]).toMatchObject({ adsClickType: "gclid", adsClickId: "AbC_123" });
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  await submitLocalForm(page);
+  await expect.poll(() => network.leadPayloads.length).toBe(2);
+  expect(network.leadPayloads[1]).not.toHaveProperty("adsClickId");
+  expect(network.leadPayloads[1]).not.toHaveProperty("adsClickType");
+});
+
 for (const advertising of [false, true]) {
   test(`Google consent is queued before config, advertising ${advertising ? "granted" : "denied"}`, async ({ page }) => {
     const network = await harness(page);

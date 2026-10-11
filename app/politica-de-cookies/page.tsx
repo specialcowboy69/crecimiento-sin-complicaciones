@@ -48,6 +48,14 @@ export default function CookiePolicyPage() {
           medición no incluye el nombre, email, teléfono, empresa ni el mensaje del formulario.
         </p>
         <p>
+          Con analítica y publicidad aceptadas, si la URL contiene un identificador del clic de Google Ads, lo guardamos
+          en el almacenamiento de sesión de esta pestaña. Podemos asociarlo al formulario de SEO local que envíes y,
+          si nuestro equipo marca la solicitud como cualificada, comunicar ese hito a Google Ads sin transmitir los
+          datos de contacto del formulario. Borramos el identificador de sesión al rechazar o revocar la medición
+          publicitaria. Si ya enviaste el formulario, puedes solicitar la exclusión de una exportación pendiente
+          escribiendo a info@crecimientosincomplicaciones.com.
+        </p>
+        <p>
           Esta configuración funciona sin personalización ni remarketing, y tampoco utiliza conversiones mejoradas. Si
           rechazas la categoría publicitaria, mantenemos esta medición desactivada.
         </p>

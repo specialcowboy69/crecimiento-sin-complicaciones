@@ -5,6 +5,7 @@ test.use({ hasTouch: true });
 test("a successful home lead replaces the form with a visible confirmation", async ({ page }) => {
   await page.route("**/api/leads", (route) => route.fulfill({ status: 200, body: "{}" }));
   await page.goto("/", { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "Rechazar", exact: true }).click();
 
   const contact = page.locator("#auditoria");
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
@@ -42,6 +43,7 @@ test("the mobile confirmation remains in view after the tall form disappears", a
 test("a failed home lead keeps the entered values and shows an error", async ({ page }) => {
   await page.route("**/api/leads", (route) => route.fulfill({ status: 503, body: "{}" }));
   await page.goto("/", { waitUntil: "networkidle" });
+  await page.getByRole("button", { name: "Rechazar", exact: true }).click();
 
   const contact = page.locator("#auditoria");
   await contact.getByLabel("Nombre*").fill("Ana Pérez");

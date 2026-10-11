@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-10-09
+**Last updated:** 2026-10-11
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -20,10 +20,20 @@ Payload fields:
 | `company` | No | Keep optional unless the form explicitly requires it. |
 | `message` | No | Free context assembled from form fields. |
 | `interestedService` | No | Service, goal or selected category. |
+| `adsClickType`, `adsClickId` | No | Only a consented `/seo/local` browser may supply a click ID. The server checks the v2 cookie, exact route and same-origin Referer before persisting it. Never infer campaign origin from `sourcePage`. |
 
 The API lives in `app/api/leads/route.ts`, stores through Firebase Data Connect and validates/sanitizes strings before writing.
 
 Admin review lives in `app/admin/leads/AdminLeadsPanel.tsx` and groups leads by `sourcePage`.
+For SEO-local leads it shows whether a consented ad click ID is available, without displaying the ID itself.
+Older leads and leads from other routes have unknown measurement consent. The raw ID stays in Firebase Data Connect
+for possible later qualified-lead attribution; it is not sent to GA4 or Vercel Analytics.
+
+The admin may mark a lead `qualified` manually. The first `qualifiedAt` timestamp is preserved on repeated actions;
+`closed` remains available. For a pending SEO-local lead, **Excluir de Ads** records `adsExportBlockedAt` and prevents
+the later offline export. An already submitted lead cannot be excluded retroactively through this action; handle
+privacy requests promptly and inspect its export status before promising an outcome. While an export is in progress,
+the panel refuses both exclusion and deletion and shows that status; repeat the request after the attempt finishes.
 
 ## Approved `formType` Values
 

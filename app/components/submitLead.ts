@@ -1,5 +1,6 @@
 import { track } from "@vercel/analytics";
-import { isGoogleAdsSeoLocalLeadEligible } from "./cookieConsentCookies.mjs";
+import { getCookieConsentValue, isGoogleAdsSeoLocalLeadEligible, parseCookieConsentPreferences } from "./cookieConsentCookies.mjs";
+import { readAdsClick } from "./adsClickAttribution.mjs";
 import { deliverGoogleAdsSeoLocalLeadEvent } from "./googleLeadDelivery.mjs";
 
 declare global {
@@ -21,12 +22,20 @@ export type LeadSubmission = {
 
 export async function submitLead(payload: LeadSubmission) {
   let googleLeadEligibleAtSubmit = false;
+  let adsClick: { type: string; value: string } | null = null;
   try {
     googleLeadEligibleAtSubmit = isGoogleAdsSeoLocalLeadEligible({
       cookieHeader: document.cookie,
       sourcePath: payload.sourcePath,
       pathname: window.location.pathname,
     });
+    if (googleLeadEligibleAtSubmit) {
+      adsClick = readAdsClick({
+        pathname: window.location.pathname,
+        preferences: parseCookieConsentPreferences(getCookieConsentValue(document.cookie)),
+        storage: window.sessionStorage,
+      });
+    }
   } catch {
     // Optional measurement must not prevent the lead request.
   }
@@ -34,7 +43,10 @@ export async function submitLead(payload: LeadSubmission) {
   const response = await fetch("/api/leads", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({
+      ...payload,
+      ...(adsClick ? { adsClickType: adsClick.type, adsClickId: adsClick.value } : {}),
+    }),
   });
 
   if (!response.ok) {
