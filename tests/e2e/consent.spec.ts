@@ -152,6 +152,24 @@ test("rejected visitor never stores an ad click ID", async ({ page }) => {
   expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
 });
 
+test("unavailable session storage does not break consent or a lead", async ({ page, context, baseURL }) => {
+  const network = await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await page.evaluate(() => {
+    Object.defineProperty(window, "sessionStorage", { configurable: true, get() { throw new DOMException("Storage blocked", "SecurityError"); } });
+  });
+  await submitLocalForm(page);
+  await expect(page.getByRole("status").filter({ hasText: "Hemos recibido tu solicitud" })).toBeVisible();
+  expect(network.leadPayloads).toHaveLength(1);
+  expect(network.leadPayloads[0]).not.toHaveProperty("adsClickId");
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  expect((await context.cookies()).find((cookie) => cookie.name === "cookie_consent")?.value).toBe(consentValue(true, false));
+});
+
 test("visitor notices explain click ID association and later qualified-lead measurement", async ({ page }) => {
   await harness(page);
   await page.goto("/seo/local");

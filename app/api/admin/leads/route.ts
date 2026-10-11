@@ -20,6 +20,9 @@ type Lead = {
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
   adsExportSubmittedAt: string | null;
+  adsExportAttemptedAt: string | null;
+  adsExportTerminalAt: string | null;
+  adsExportLastErrorCode: string | null;
   createdAt: string;
   updatedAt: string | null;
 };

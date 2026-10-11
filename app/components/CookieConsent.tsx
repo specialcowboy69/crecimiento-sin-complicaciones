@@ -104,6 +104,14 @@ function clearGoogleAdsCookies() {
   clearGoogleMeasurementCookies((name) => name.startsWith("_gcl_"));
 }
 
+function adsClickStorage(): Storage | undefined {
+  try {
+    return window.sessionStorage;
+  } catch {
+    return undefined;
+  }
+}
+
 function preferencesMatch(first: ConsentPreferences | null | undefined, second: ConsentPreferences) {
   return first?.analytics === second.analytics && first?.advertising === second.advertising;
 }
@@ -132,7 +140,7 @@ export function CookieConsent() {
         pathname: window.location.pathname,
         search: window.location.search,
         preferences: consent,
-        storage: window.sessionStorage,
+        storage: adsClickStorage(),
       });
     };
     captureCurrentUrl();
@@ -251,7 +259,7 @@ export function CookieConsent() {
     shouldRestorePreferencesFocusRef.current = showPreferences && preferencesOpenerRef.current !== null;
     persistConsent(nextConsent);
     notifyConsentChange();
-    if (!nextConsent.analytics || !nextConsent.advertising) clearAdsClick(window.sessionStorage);
+    if (!nextConsent.analytics || !nextConsent.advertising) clearAdsClick(adsClickStorage());
     setAnalyticsEnabled(nextConsent.analytics);
     setAdvertisingEnabled(nextConsent.advertising);
     setShowPreferences(false);

@@ -16,6 +16,9 @@ type Lead @table(name: "leads") {
   qualifiedAt: Timestamp
   adsExportBlockedAt: Timestamp
   adsExportSubmittedAt: Timestamp
+  adsExportAttemptedAt: Timestamp
+  adsExportTerminalAt: Timestamp
+  adsExportLastErrorCode: String @col(dataType: "varchar(80)")
   createdAt: Timestamp! @default(expr: "request.time")
   updatedAt: Timestamp
 }

@@ -46,6 +46,16 @@ Analytics is best-effort and must never turn an already saved lead into a form e
 
 The optional click ID is stored only in Firebase Data Connect alongside a future consented SEO-local lead; neither analytics event contains it. A later manual `qualified` status may produce a separate offline Google Ads event using that ID and the qualification time, without form contact fields. The separate action starts as secondary and must not be treated as attributed until Google Ads reports it. Public wording in both policy pages and the consent control requires privacy/legal review before deployment.
 
+## Qualified lead export
+
+`/api/cron/export-qualified-leads` runs daily at 08:00 UTC through Vercel Cron. It requires `Authorization: Bearer CRON_SECRET` and returns aggregate counts only. `GOOGLE_ADS_OFFLINE_ENABLED` defaults to false; while false the route does not query leads or contact Google. The Data Connect query reads only attribution and export fields, never name, contact, company or message.
+
+Only a manually qualified `/seo/local` lead with a stored valid click ID, consent recorded at submission, and no exclusion, terminal failure or accepted submission is eligible. The event uses the first `qualifiedAt` time and `seo-local-qualified-<lead UUID>` as a stable transaction ID. It sends only the matching click ID type, `adUserData=CONSENT_GRANTED` and `adPersonalization=CONSENT_DENIED` to a separate Google Ads conversion action. The existing GA4 form submission remains the primary conversion while the qualified-lead action is secondary.
+
+An HTTP success with a Data Manager `requestId` means Google accepted the ingestion request; it does not establish that Ads attributed a conversion. Transient failures are retried with the same transaction ID. Permanent provider errors become terminal and require manual review. If Google accepts an event but the local acceptance marker cannot be saved, the next run may resubmit the same transaction ID so Google's deduplication can handle it. Inspect Data Manager diagnostics and the Ads action separately before drawing attribution conclusions.
+
+**Privacy requests:** identify the lead in the admin panel and use **Excluir de Ads** while the export is pending, then verify its blocked state. Changing cookie preferences after submission only stops new browser capture; it does not automatically block the already stored lead. An accepted submission cannot be recalled with this control. The behavior of later preference withdrawal must receive privacy/legal review before live export is enabled. When needed, set `GOOGLE_ADS_OFFLINE_ENABLED=false` and redeploy to stop all future sends while investigating.
+
 If Google Analytics has not finished initializing, an eligible conversion may wait in memory for at most 30 seconds. It carries no lead fields, is not persisted to cookies or browser storage, and is attempted at most once when GA4 becomes ready. Both permissions must already be present when submitting and must still be present at delivery. A later acceptance must not replay a submission made without consent. Withdrawal of either permission, departure from the document, entry into the administrator or expiry cancels pending delivery. Browser blocking or departure can still prevent measurement; this is not a guaranteed-delivery system.
 
 ## Change Rules

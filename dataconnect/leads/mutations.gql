@@ -48,6 +48,30 @@ mutation BlockLeadAdsExport($id: UUID!) @auth(level: NO_ACCESS) {
   )
 }
 
+mutation MarkLeadAdsExportSubmitted($id: UUID!) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: { id: { eq: $id }, adsExportSubmittedAt: { isNull: true } }
+    data: {
+      adsExportSubmittedAt_expr: "request.time"
+      adsExportAttemptedAt_expr: "request.time"
+      adsExportLastErrorCode: null
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+mutation RecordLeadAdsExportFailure($id: UUID!, $code: String!, $terminalAt: Timestamp) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: { id: { eq: $id }, adsExportSubmittedAt: { isNull: true }, adsExportTerminalAt: { isNull: true } }
+    data: {
+      adsExportAttemptedAt_expr: "request.time"
+      adsExportTerminalAt: $terminalAt
+      adsExportLastErrorCode: $code
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
 mutation DeleteLead($id: UUID!) @auth(level: NO_ACCESS) {
   lead_delete(key: { id: $id })
 }

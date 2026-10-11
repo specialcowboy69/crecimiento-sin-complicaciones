@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/export-qualified-leads",
+      "schedule": "0 8 * * *"
+    }
+  ]
+}

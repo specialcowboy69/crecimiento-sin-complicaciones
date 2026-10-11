@@ -16,6 +16,9 @@ type Lead = {
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
   adsExportSubmittedAt: string | null;
+  adsExportAttemptedAt: string | null;
+  adsExportTerminalAt: string | null;
+  adsExportLastErrorCode: string | null;
   adsClickType: string | null;
   adsMeasurementConsentAtSubmit: boolean | null;
   createdAt: string;
@@ -200,7 +203,10 @@ export function AdminLeadsPanel() {
                         <div><dt className="font-black text-slate-100">Primera calificación</dt><dd>{new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" }).format(new Date(lead.qualifiedAt))}</dd></div>
                       ) : null}
                       {lead.sourcePath === "/seo/local" ? (
-                        <div><dt className="font-black text-slate-100">Exportación a Ads</dt><dd>{lead.adsExportSubmittedAt ? "Envío aceptado" : lead.adsExportBlockedAt ? "Excluido" : "Pendiente o no elegible"}</dd></div>
+                        <div>
+                          <dt className="font-black text-slate-100">Exportación a Ads</dt>
+                          <dd>{lead.adsExportSubmittedAt ? "Envío aceptado" : lead.adsExportBlockedAt ? "Excluido" : lead.adsExportTerminalAt ? `Rechazo definitivo (${lead.adsExportLastErrorCode ?? "sin código"})` : lead.adsExportAttemptedAt ? "Reintento pendiente" : "Pendiente o no elegible"}</dd>
+                        </div>
                       ) : null}
                       <div>
                         <dt className="font-black text-slate-100">Formulario</dt>
