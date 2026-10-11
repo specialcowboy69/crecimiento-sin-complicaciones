@@ -114,6 +114,221 @@
   color: #b2f3e9;
 }
 
+.sectionInner {
+  width: min(100% - 2rem, 80rem);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: #0e766f !important;
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.anatomySection,
+.solutionSection {
+  padding: clamp(4rem, 7vw, 7rem) 0;
+}
+
+.anatomySection {
+  background: #eaf1f3;
+}
+
+.anatomyIntro h2,
+.solutionIntro h2 {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(2.15rem, 3.6vw, 3.5rem);
+  font-weight: 850;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.anatomyIntro > p:last-child,
+.solutionIntro > p:last-child {
+  max-width: 43rem;
+  margin: 1rem 0 0;
+  color: #4a5d6d !important;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+.landingAnatomy {
+  display: grid;
+  gap: 2rem 4rem;
+  align-items: center;
+  margin-top: 3.5rem;
+}
+
+.anatomyFigure {
+  min-width: 0;
+  margin: 0;
+  padding: 1.25rem;
+  border-radius: 6px;
+  background: #163747;
+  box-shadow: 0 24px 55px rgba(18, 46, 59, 0.16);
+}
+
+.anatomyBrowser {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.1rem 0 1rem;
+}
+
+.anatomyBrowser span {
+  width: 0.47rem;
+  height: 0.47rem;
+  border-radius: 50%;
+  background: #7bb8b0;
+}
+
+.anatomyBrowser span:nth-child(2) {
+  background: #88a5c3;
+}
+
+.anatomyBrowser span:nth-child(3) {
+  background: #cfaa79;
+}
+
+.anatomyPage {
+  background: #f8fbfc;
+}
+
+.anatomyPage > div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid #cbdce4;
+}
+
+.anatomyPage > div:first-child {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background: #dcece9;
+}
+
+.anatomyPage > div:last-child {
+  border-bottom: 0;
+}
+
+.anatomyPage span {
+  color: #0a756e;
+  font-size: 0.75rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+:global(.landing-light) .anatomyPage strong {
+  color: #173245 !important;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.35;
+}
+
+:global(.landing-light) .anatomyFigure figcaption {
+  padding: 0.9rem 0.1rem 0.1rem;
+  color: #d3e7ec !important;
+  font-size: 0.83rem;
+  line-height: 1.45;
+}
+
+.anatomyNotes {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #a9c2ca;
+  list-style: none;
+}
+
+.anatomyNotes li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #a9c2ca;
+}
+
+.anatomyNotes li > span {
+  color: #0e766f;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.anatomyNotes h3 {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 850;
+}
+
+.anatomyNotes p {
+  margin: 0.35rem 0 0;
+  color: #4b5f6b !important;
+  line-height: 1.5;
+}
+
+.solutionSection {
+  background: #ffffff;
+}
+
+.solutionMoments {
+  margin: 3.3rem 0 0;
+  padding: 0;
+  border-top: 1px solid #b7cdd5;
+  list-style: none;
+}
+
+.solutionMoments li {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) minmax(9rem, 0.35fr);
+  gap: 1rem 1.4rem;
+  align-items: start;
+  padding: 1.65rem 0;
+  border-bottom: 1px solid #b7cdd5;
+}
+
+.momentNumber {
+  color: #0e766f;
+  font-size: 1.8rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.momentLabel {
+  color: #0e766f;
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.solutionMoments h3 {
+  margin: 0.3rem 0 0;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 850;
+}
+
+.solutionMoments p {
+  max-width: 48rem;
+  margin: 0.55rem 0 0;
+  color: #4c6070 !important;
+  line-height: 1.6;
+}
+
+.momentDetail {
+  justify-self: end;
+  padding: 0.25rem 0 0.25rem 0.7rem;
+  border-left: 2px solid #208987;
+  color: #215569;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+@media (min-width: 900px) {
+  .landingAnatomy {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  }
+}
+
 @media (max-width: 767px) {
   .hero {
     min-height: min(640px, calc(100svh - 112px));
@@ -143,6 +358,16 @@
 
   :global(.landing-light) .heroDescription {
     font-size: 1rem;
+  }
+
+  .solutionMoments li {
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .momentDetail {
+    grid-column: 2;
+    justify-self: start;
   }
 }
 

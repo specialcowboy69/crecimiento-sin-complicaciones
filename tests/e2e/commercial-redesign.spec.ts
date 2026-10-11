@@ -73,3 +73,14 @@ test("Landing Pages has a photographic hero and no duplicate navigation", async 
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   }
 });
+
+test("Landing Pages anatomy and solution remain legible on narrow and wide screens", async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/diseno-landing-pages", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { level: 2, name: "Una landing bonita no siempre convierte" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Una página que conecta mensaje, acción y aprendizaje" })).toBeVisible();
+    await expect(page.locator("#problema figure")).toContainText("04 / Medición");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  }
+});

@@ -51,3 +51,15 @@ test("Landing Pages uses a full-bleed image hero without duplicate navigation or
   assert.match(page, /href="#auditoria-landing-pages-form"/);
   assert.ok(asset("landing-pages-hero-editorial.webp").size > 10_000);
 });
+
+test("Landing Pages explains page anatomy and three moments without repeated problem or solution cards", () => {
+  const page = source("app/diseno-landing-pages/page.tsx");
+
+  assert.doesNotMatch(page, /problemPoints|solutionBlocks/);
+  assert.match(page, /styles\.landingAnatomy/);
+  assert.match(page, /styles\.solutionMoments/);
+  assert.match(page, /Mensaje|Acción|Aprendizaje/);
+  for (const id of ["problema", "solucion", "para-quien", "incluye"]) {
+    assert.match(page, new RegExp(`id="${id}"`));
+  }
+});

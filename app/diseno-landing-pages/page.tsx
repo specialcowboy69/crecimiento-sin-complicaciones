@@ -2,20 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  BarChart3,
   ChevronRight,
   ClipboardCheck,
   FileText,
-  FormInput,
-  Gauge,
-  LayoutTemplate,
   LineChart,
-  MessageSquareText,
   MousePointerClick,
   Route,
   Sparkles,
   Target,
-  TestTube2,
 } from "lucide-react";
 
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
@@ -50,43 +44,34 @@ export const metadata: Metadata = {
   },
 };
 
-const problemPoints = [
-  "El mensaje no deja claro qué problema resuelve la oferta.",
-  "Los formularios piden demasiado pronto o no filtran bien.",
-  "La página recibe tráfico, pero no explica por qué actuar ahora.",
-  "No hay medición fiable para saber qué campaña, sección o CTA genera leads.",
+const anatomyPoints = [
+  { number: "01", title: "Oferta difusa", text: "El mensaje no deja claro qué problema resuelve la oferta." },
+  { number: "02", title: "Valor sin contexto", text: "La página recibe tráfico, pero no explica por qué actuar ahora." },
+  { number: "03", title: "Contacto con fricción", text: "Los formularios piden demasiado pronto o no filtran bien." },
+  { number: "04", title: "Resultado invisible", text: "No hay medición fiable para saber qué campaña, sección o CTA genera leads." },
 ];
 
-const solutionBlocks = [
+const solutionMoments = [
   {
-    icon: MessageSquareText,
-    title: "Mensaje de oferta",
-    text: "Ordenamos la propuesta, objeciones y beneficios para que el usuario entienda rápido si la solución encaja.",
+    number: "01",
+    label: "Mensaje",
+    title: "Que la oferta se entienda",
+    text: "Ordenamos propuesta, beneficios y objeciones en una secuencia clara para campañas de Google Ads, servicios y lanzamientos.",
+    detail: "Copy y estructura de conversión",
   },
   {
-    icon: LayoutTemplate,
-    title: "Estructura de conversión",
-    text: "Diseñamos una secuencia clara: contexto, valor, prueba, detalle, formulario y siguiente paso.",
+    number: "02",
+    label: "Acción",
+    title: "Que contactar sea el paso natural",
+    text: "Diseñamos CTAs, formularios y microcopy con foco en claridad, experiencia móvil y calidad del contacto.",
+    detail: "Diseño, formulario y rendimiento",
   },
   {
-    icon: FormInput,
-    title: "Captación de leads",
-    text: "Planteamos formularios, CTAs y microcopys pensados para reducir dudas sin bajar la calidad del contacto.",
-  },
-  {
-    icon: BarChart3,
-    title: "Analítica conectada",
-    text: "Preparamos eventos y medición para leer leads, coste, intención y rendimiento por fuente de tráfico.",
-  },
-  {
-    icon: TestTube2,
-    title: "Optimización continua",
-    text: "Priorizamos mejoras con datos reales: titulares, bloques, formularios, CTAs y señales de confianza.",
-  },
-  {
-    icon: Gauge,
-    title: "Rendimiento técnico",
-    text: "Cuidamos velocidad, claridad visual y experiencia móvil para no perder conversiones por fricción básica.",
+    number: "03",
+    label: "Aprendizaje",
+    title: "Que cada campaña enseñe algo",
+    text: "Conectamos eventos, origen del tráfico y leads para revisar qué funciona y priorizar mejoras con datos reales.",
+    detail: "Analítica e iteración",
   },
 ];
 
@@ -99,20 +84,20 @@ const audience = [
 
 const includes = [
   {
-    title: "Copy y jerarquía",
-    text: "Titulares, argumentos, objeciones, prueba social y llamadas a la acción.",
+    title: "Guion de página",
+    text: "Orden de titulares, argumentos, objeciones y llamadas a la acción.",
   },
   {
-    title: "Diseño responsive",
-    text: "Diseño limpio en desktop y móvil, con foco en lectura, confianza y acción.",
+    title: "Diseño y desarrollo",
+    text: "Página adaptable a escritorio y móvil, con lectura y carga cuidadas.",
   },
   {
-    title: "Formulario y seguimiento",
-    text: "Campos, validación, mensaje de gracias y trazabilidad del lead desde origen.",
+    title: "Captación configurada",
+    text: "Campos, validación y confirmación del envío preparados para recibir consultas.",
   },
   {
-    title: "Medición básica",
-    text: "Eventos clave preparados para campañas, analítica y lectura comercial.",
+    title: "Mapa de medición",
+    text: "Eventos y fuentes definidos para leer el rendimiento comercial de la página.",
   },
 ];
 
@@ -352,63 +337,56 @@ export default function DisenoLandingPagesPage() {
         </div>
       </section>
 
-      <section className="section-band border-y border-slate-200 bg-slate-100" id="problema">
-        <div className="mx-auto grid max-w-[1520px] items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.82fr_1fr] lg:px-8 lg:py-24">
-          <div>
-            <p className="section-eyebrow mb-6">EL PROBLEMA</p>
-            <h2 className="marketing-section-title text-slate-900">
-              Una landing bonita no siempre convierte
-            </h2>
+      <section className={styles.anatomySection} id="problema" aria-labelledby="landing-problem-title">
+        <div className={styles.sectionInner}>
+          <div className={styles.anatomyIntro}>
+            <p className={styles.eyebrow}>El problema</p>
+            <h2 id="landing-problem-title">Una landing bonita no siempre convierte</h2>
+            <p>Una página puede verse correcta y perder la decisión en cuatro puntos: oferta, valor, contacto y medición.</p>
           </div>
-          <div className="space-y-6 text-lg leading-8 text-slate-700">
-            <p>
-              Muchas páginas se diseñan como si fueran una pieza visual aislada:
-              se ven correctas, pero no explican la oferta con precisión, no
-              eliminan dudas y no ayudan al usuario a tomar una decisión.
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {problemPoints.map((point) => (
-                <div key={point} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-                  <p className="font-bold text-slate-800">{point}</p>
-                </div>
+          <div className={styles.landingAnatomy}>
+            <figure className={styles.anatomyFigure}>
+              <div className={styles.anatomyBrowser} aria-hidden="true"><span /><span /><span /></div>
+              <div className={styles.anatomyPage}>
+                <div><span>01 / Oferta</span><strong>Entender la propuesta</strong></div>
+                <div><span>02 / Valor</span><strong>Encontrar una razón para elegir</strong></div>
+                <div><span>03 / Acción</span><strong>Dar el siguiente paso</strong></div>
+                <div><span>04 / Medición</span><strong>Saber qué ocurrió después</strong></div>
+              </div>
+              <figcaption>Cuatro decisiones que una landing debe facilitar antes de pedir el contacto.</figcaption>
+            </figure>
+            <ol className={styles.anatomyNotes}>
+              {anatomyPoints.map((point) => (
+                <li key={point.number}>
+                  <span>{point.number}</span>
+                  <div><h3>{point.title}</h3><p>{point.text}</p></div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
-      <section className="bg-white" id="solucion">
-        <div className="mx-auto max-w-[1520px] px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
-          <div className="max-w-5xl">
-            <p className="section-eyebrow mb-6">LA SOLUCIÓN</p>
-            <h2 className="marketing-section-title text-slate-900">
-              Landing pages diseñadas para campañas, leads y medición
-            </h2>
-            <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-700">
-              Trabajamos la página como una pieza del sistema comercial:
-              mensaje, diseño, formularios, seguimiento y aprendizaje posterior.
-              El objetivo es que cada visita entienda la oferta y tenga un
-              camino claro para actuar.
-            </p>
+      <section className={styles.solutionSection} id="solucion" aria-labelledby="landing-solution-title">
+        <div className={styles.sectionInner}>
+          <div className={styles.solutionIntro}>
+            <p className={styles.eyebrow}>La solución</p>
+            <h2 id="landing-solution-title">Una página que conecta mensaje, acción y aprendizaje</h2>
+            <p>Trabajamos la landing como parte del sistema comercial, desde la primera frase hasta lo que aprendemos de cada contacto.</p>
           </div>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {solutionBlocks.map((block) => {
-              const Icon = block.icon;
-              return (
-                <article
-                  key={block.title}
-                  className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
-                >
-                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-teal-700">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-2xl font-black tracking-normal text-slate-900">{block.title}</h3>
-                  <p className="mt-3 text-base leading-7 text-slate-700">{block.text}</p>
-                </article>
-              );
-            })}
-          </div>
+          <ol className={styles.solutionMoments}>
+            {solutionMoments.map((moment) => (
+              <li key={moment.number}>
+                <span className={styles.momentNumber}>{moment.number}</span>
+                <div>
+                  <span className={styles.momentLabel}>{moment.label}</span>
+                  <h3>{moment.title}</h3>
+                  <p>{moment.text}</p>
+                </div>
+                <span className={styles.momentDetail}>{moment.detail}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -440,9 +418,7 @@ export default function DisenoLandingPagesPage() {
         <div className="mx-auto grid max-w-[1520px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.72fr_1fr] lg:px-8 lg:py-24">
           <div>
             <p className="section-eyebrow mb-6">QUÉ TRABAJAMOS</p>
-            <h2 className="marketing-section-title text-slate-900">
-              Qué trabajamos en una landing page
-            </h2>
+            <h2 className="marketing-section-title text-slate-900">Entregables para ponerla en marcha</h2>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {includes.map((item) => (
