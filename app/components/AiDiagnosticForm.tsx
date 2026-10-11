@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { FormPrivacyNotice } from "./FormPrivacyNotice";
+import { ContactOptions } from "./ContactOptions";
+import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
 
 type FormState = {
@@ -89,6 +91,10 @@ export function AiDiagnosticForm() {
   }
 
   return (
+    <div className="audit-form-shell" id="audit-request">
+    {status === "sent" ? (
+      <LeadSuccess>Hemos recibido tu solicitud. Te responderemos con los siguientes pasos.</LeadSuccess>
+    ) : (
     <form className="grid gap-5 rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 sm:grid-cols-2" onSubmit={onSubmit} noValidate>
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="ai-name">
         Nombre y apellido
@@ -175,9 +181,11 @@ export function AiDiagnosticForm() {
         {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
-        {status === "sent" ? "Solicitud registrada. Te responderemos con los siguientes pasos." : ""}
         {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
       </p>
     </form>
+    )}
+    <ContactOptions dark />
+    </div>
   );
 }

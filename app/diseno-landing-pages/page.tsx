@@ -314,7 +314,7 @@ export default function DisenoLandingPagesPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <LandingServicesMenu currentPath={pagePath} />
+              <LandingServicesMenu currentPath={pagePath} mobileAuditHref="#audit-request" />
               <a
                 className="landing-top-cta inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400"
                 href="#auditoria-landing-pages-form"
@@ -631,8 +631,8 @@ export default function DisenoLandingPagesPage() {
         </main>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 p-3 shadow-2xl backdrop-blur lg:hidden">
-        <a className={`${primaryCtaClass} w-full justify-center`} href="#auditoria-landing-pages-form">
-          Solicitar auditoría gratuita
+        <a className={`${primaryCtaClass} w-full justify-center`} href="tel:+34604990651" aria-label="Llamar al 604 990 651">
+          Llamar
         </a>
       </div>
       </div>

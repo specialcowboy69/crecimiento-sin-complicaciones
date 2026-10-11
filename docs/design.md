@@ -73,19 +73,20 @@ Estructura actual recomendada:
 
 Reglas:
 
-- No incluir `Auditoría gratuita` en el header de la home.
-- La home usa `Auditoría gratuita` como oferta de conversión en hero/secciones/formulario, pero no como CTA visible en el header.
-- En móvil, el header de la home debe quedarse en logo + desplegable de servicios cuando los enlaces directos no quepan con comodidad.
+- No incluir `Auditoría gratuita` en el header de escritorio de la home.
+- La home usa `Auditoría gratuita` como oferta de conversión en hero, secciones y formulario; en el header móvil se muestra la CTA directa al formulario.
+- En móvil, el header de la home muestra logo + `Solicitar auditoría gratuita` enlazado al formulario de la propia página. El desplegable de servicios permanece en escritorio.
 - El CTA principal debe vivir en el hero y en secciones de conversión.
 - Los enlaces centrales deben tener peso visual suficiente.
-- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto.
+- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto. En páginas con formulario propio, la CTA de auditoría sustituye al desplegable; las páginas sin formulario conservan el desplegable.
 
 En landings de servicio:
 
-- Mantener `Auditoría gratuita` visible en el header.
-- Usar `Más servicios` como desplegable secundario antes del CTA.
+- Mantener `Auditoría gratuita` visible en el header de escritorio.
+- Usar `Más servicios` como desplegable secundario antes del CTA en escritorio. En móvil, usar la CTA directa al formulario propio en lugar del desplegable.
 - Evitar una segunda barra de navegación encima del hero salvo que sea imprescindible.
 - Los enlaces internos de la landing deben quedarse en el header principal cuando haya espacio.
+- Donde ya existe una barra fija inferior de auditoría en móvil, su acción pasa a `Llamar` con el teléfono público verificado; el formulario sigue accesible desde el header.
 
 ## CTAs y oferta
 
@@ -99,7 +100,7 @@ Usar siempre esta forma en páginas comerciales, con tilde y sin variantes como:
 - Auditoría gratis
 - Diagnóstico gratuito
 
-La home también usa `Auditoría gratuita`; mantener el CTA fuera del header y ubicarlo en hero, diagnóstico/sección de proceso y formulario.
+La home también usa `Auditoría gratuita`; mantener el CTA fuera del header de escritorio y ubicarlo en hero, diagnóstico/sección de proceso y formulario. En móvil, el header enlaza directamente a ese formulario.
 
 CTAs recomendados:
 

@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-10-08
+**Last updated:** 2026-10-09
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -8,6 +8,7 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 
 - `app/components/Logo.tsx`: shared logo.
 - `app/components/LandingServicesMenu.tsx`: shared `Más servicios` dropdown.
+- `app/blog/_components/BlogHeader.tsx`: shared blog, article and category header.
 - `app/components/PageLinksNav.tsx`: secondary desktop-only page links strip.
 - `app/components/SiteFooter.tsx`: global public footer with entity, legal and cookie-preference links.
 - `app/globals.css`: shared responsive behavior for headers, dropdowns and mobile quick links.
@@ -15,9 +16,9 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 ## Global Rules
 
 - Keep the logo visible in mobile headers.
-- Do not show the header CTA in mobile. Use `.mobile-hide-cta` or an equivalent rule.
-- Mobile headers can show `Más servicios` plus only the most necessary direct links for that page.
-- If mobile feels cramped, remove direct links and keep only logo plus `Más servicios`.
+- On mobile, pages with an in-page audit form show `Solicitar auditoría gratuita` in the header instead of the services dropdown. It links to the shared `#audit-request` anchor beside the live form or confirmation.
+- On mobile, pages without an in-page form, including blog routes, keep the services dropdown. Do not link a mobile audit CTA to another page and imply the form is local.
+- Remove direct quick links when they crowd the mobile header; the logo and primary header action take priority.
 - Do not add links to planned routes. Verify the route exists first.
 - Header dropdown labels should stay short.
 - Desktop header should stay on one line and below 80px height.
@@ -46,14 +47,13 @@ Desktop home header:
 - Direct section anchors such as `Servicios`, `Casos`, `Precios` and `Diagnóstico`.
 - A desktop link to the published `/blog`; the shared footer keeps it reachable on mobile.
 - Services dropdown using `LandingServicesMenu`; the current home label can be `Nuestros servicios` or another short services label.
-- No `Auditoría gratuita` CTA in the header; the audit CTA should live in the hero and conversion sections.
+- No audit CTA in the desktop header; the audit CTA lives in the hero and conversion sections.
 
 Mobile home header:
 
 - Logo.
-- Services dropdown only when space is tight.
+- Logo and `Solicitar auditoría gratuita` linked to `#audit-request`; the services dropdown remains on desktop.
 - No direct section anchors if they make the header cramped.
-- No `Auditoría gratuita` CTA in the header.
 
 The home `Más servicios` dropdown should show only principal services:
 
@@ -80,15 +80,14 @@ Commercial landing pages can show:
 On mobile:
 
 - Keep logo visible.
-- Keep `Más servicios`.
-- Keep at most two direct page anchors if they are truly useful and fit comfortably.
-- Hide the header CTA.
-- If in doubt, use logo plus `Más servicios` only.
+- On pages with an in-page form, use the shared mobile audit CTA linked directly to `#audit-request` and hide `Más servicios` in the header.
+- On pages without an in-page form, keep `Más servicios` and do not show a misleading audit CTA.
+- Hide direct page anchors when they crowd the primary action.
 
 The direct anchors should be page-specific, for example:
 
 - National SEO page `/seo`: `Servicio`, `Proceso`, `SEO local`, `FAQ`.
-- Specialist SEO-local page `/seo/local`: `Qué incluye`, `Proceso`, `FAQ` on desktop; keep only `Incluye` and `Proceso` on mobile.
+- Specialist SEO-local page `/seo/local`: `Qué incluye`, `Proceso`, `FAQ` on desktop; the mobile header prioritizes the in-page audit CTA.
 - SEO para pymes: `Incluye`, `Método`, `Comparativa`, `FAQ`.
 - City SEO pages under `/seo/{city}`: `Estrategia`, `Sectores`, `Método`, `FAQ`.
 - Web design pages: `Incluye`, `Proceso`, `Precios`, `FAQ` only if those sections exist.
@@ -110,6 +109,18 @@ Default dropdown links in `LandingServicesMenu`:
 - `/agencia-marketing-digital`
 
 The component filters out the current page via `currentPath`.
+
+Pages with an in-page audit form pass `mobileAuditHref="#audit-request"`. The component then shows the audit CTA only below 768 px and hides its dropdown at that width; desktop still shows the services dropdown. Each active form or confirmation keeps the stable `#audit-request` anchor. Do not pass this prop until a real local form exists.
+
+The panel uses two compact columns on desktop and one scrollable column on mobile. It closes when the visitor clicks or taps outside, presses `Escape`, or follows a service link. Keep the native `details/summary` keyboard interaction.
+
+## Blog Header
+
+The blog index, articles and category archives use the shared `BlogHeader`. The index shows the services dropdown; articles and categories also keep a direct `Blog` link on desktop. The desktop audit CTA leads to the home audit section. On narrow mobile widths, show the logo and services dropdown; the article and category breadcrumb provides the return path to the blog.
+
+## Mobile Floating Action
+
+Existing fixed bottom audit bars on commercial landing pages now offer `Llamar`, linked to `tel:+34604990651`. The page's regular audit links and form remain available separately. Do not add a floating bar to pages that did not already have one without reviewing mobile overlap and form access.
 
 The home passes an allowed list to show only principal services. Other pages should use default behavior unless there is a clear reason to restrict the list.
 
@@ -144,7 +155,7 @@ Before closing navigation changes:
 
 - Check that the logo remains reachable and visible.
 - Check that dropdown links are keyboard reachable through native `details/summary` behavior or equivalent accessible controls.
-- Check that hidden mobile CTAs are not visually visible.
+- Check that the desktop-only CTA is hidden on mobile, while the shared mobile audit CTA appears only when a local form exists and points to it.
 - Check mobile width around `375px` and narrow widths around `320px` when labels change.
 - Check desktop around `1280px` and tablet around `768px`.
 - Use Playwright screenshots for visual header changes when practical.

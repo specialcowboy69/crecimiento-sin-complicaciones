@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Logo } from "../../components/Logo";
 import { BLOG_CATEGORIES } from "../../lib/blog/categories";
 import { hasPublishedBlog as isBlogPublished } from "../../lib/blog/gates";
 import {
@@ -18,6 +17,7 @@ import {
 import { ArticleContents } from "../_components/ArticleContents";
 import { BlogMarkdown } from "../_components/BlogMarkdown";
 import { BlogPostCard } from "../_components/BlogPostCard";
+import { BlogHeader } from "../_components/BlogHeader";
 import styles from "../blog.module.css";
 
 type BlogArticlePageProps = {
@@ -95,19 +95,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
         }}
       />
 
-      <header className={styles.header}>
-        <nav className={styles.headerInner} aria-label="Navegación del blog">
-          <Link className="logo-link" href="/" aria-label="Crecimiento sin complicaciones, inicio">
-            <Logo variant="light" />
-          </Link>
-          <div className={styles.headerActions}>
-            <Link href="/blog">Blog</Link>
-            <Link className={styles.headerCta} href="/#auditoria">
-              Auditoría gratuita
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <BlogHeader showBlogLink />
 
       <main>
         <article>

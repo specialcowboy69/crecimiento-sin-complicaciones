@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Logo } from "../components/Logo";
 import { BLOG_CATEGORIES } from "../lib/blog/categories";
 import { activeCategorySlugs } from "../lib/blog/gates";
 import { hasPublishedBlog as isBlogPublished } from "../lib/blog/gates";
 import { getProductionPublishedPosts } from "../lib/blog/production";
 import { blogHomeJsonLd } from "../lib/blog/schema";
 import { BlogPostCard } from "./_components/BlogPostCard";
+import { BlogHeader } from "./_components/BlogHeader";
 import styles from "./blog.module.css";
 
 const BLOG_PATH = "/blog";
@@ -64,19 +64,7 @@ export default function BlogPage() {
         }}
       />
 
-      <header className={styles.header}>
-        <nav className={styles.headerInner} aria-label="Navegación del blog">
-          <Link className="logo-link" href="/" aria-label="Crecimiento sin complicaciones, inicio">
-            <Logo variant="light" />
-          </Link>
-          <div className={styles.headerActions}>
-            <Link href="/agencia-marketing-digital">Servicios</Link>
-            <Link className={styles.headerCta} href="/#auditoria">
-              Auditoría gratuita
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <BlogHeader />
 
       <main>
         <section className={styles.hero} aria-labelledby="blog-title">

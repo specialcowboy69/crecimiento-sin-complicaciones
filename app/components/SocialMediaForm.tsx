@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { FormPrivacyNotice } from "./FormPrivacyNotice";
+import { ContactOptions } from "./ContactOptions";
+import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
 
 type FocusNetwork = "instagram" | "tiktok" | "linkedin" | "facebook" | "youtube" | "no-se";
@@ -85,6 +87,10 @@ export function SocialMediaForm() {
   }
 
   return (
+    <div className="audit-form-shell" id="audit-request">
+    {status === "sent" ? (
+      <LeadSuccess>Hemos recibido tu solicitud. Revisaremos tus perfiles y te responderemos con los siguientes pasos.</LeadSuccess>
+    ) : (
     <form className="social-media-form grid gap-5 rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 sm:grid-cols-2" onSubmit={onSubmit} noValidate>
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-name">
         Nombre y apellidos
@@ -151,9 +157,11 @@ export function SocialMediaForm() {
         {status === "sending" ? "Enviando..." : "Solicitar auditoría gratuita"}
       </button>
       <p className="min-h-6 text-sm font-bold text-emerald-300 sm:col-span-2" role="status" aria-live="polite">
-        {status === "sent" ? "Solicitud registrada. Revisaremos tus perfiles y te responderemos en menos de 24 horas." : ""}
         {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
       </p>
     </form>
+    )}
+    <ContactOptions dark />
+    </div>
   );
 }

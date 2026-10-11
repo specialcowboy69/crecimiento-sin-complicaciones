@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Logo } from "../../../components/Logo";
 import { BLOG_CATEGORIES } from "../../../lib/blog/categories";
 import { activeCategorySlugs, hasPublishedBlog as isBlogPublished } from "../../../lib/blog/gates";
 import { getProductionPublishedPosts } from "../../../lib/blog/production";
 import { blogCategoryJsonLd } from "../../../lib/blog/schema";
 import type { BlogCategorySlug } from "../../../lib/blog/types";
 import { BlogPostCard } from "../../_components/BlogPostCard";
+import { BlogHeader } from "../../_components/BlogHeader";
 import styles from "../../blog.module.css";
 
 type BlogCategoryPageProps = {
@@ -76,19 +76,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
         }}
       />
 
-      <header className={styles.header}>
-        <nav className={styles.headerInner} aria-label="Navegación del blog">
-          <Link className="logo-link" href="/" aria-label="Crecimiento sin complicaciones, inicio">
-            <Logo variant="light" />
-          </Link>
-          <div className={styles.headerActions}>
-            <Link href="/blog">Blog</Link>
-            <Link className={styles.headerCta} href="/#auditoria">
-              Auditoría gratuita
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <BlogHeader showBlogLink />
 
       <main>
         <section className={`${styles.hero} ${styles.categoryHero}`} aria-labelledby="category-title">

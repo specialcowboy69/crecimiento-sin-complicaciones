@@ -107,7 +107,7 @@ export default function AboutPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <LandingServicesMenu currentPath={pagePath} />
+              <LandingServicesMenu currentPath={pagePath} mobileAuditHref="#audit-request" />
               <a
                 className="landing-top-cta inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400"
                 href="#auditoria"

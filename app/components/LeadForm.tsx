@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { FormPrivacyNotice } from "./FormPrivacyNotice";
+import { ContactOptions } from "./ContactOptions";
+import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
 
 type FormState = {
@@ -110,8 +112,13 @@ export function LeadForm({
             <span key={point}>{point}</span>
           ))}
         </div>
+        <ContactOptions />
       </div>
 
+      <div className="audit-form-shell" id="audit-request">
+      {status === "sent" ? (
+        <LeadSuccess>Hemos recibido tu solicitud. Te responderemos con los siguientes pasos.</LeadSuccess>
+      ) : (
       <form className="lead-form" onSubmit={onSubmit} noValidate>
         <div className="field">
           <label htmlFor="name">Nombre*</label>
@@ -181,10 +188,11 @@ export function LeadForm({
           {status === "sending" ? "Enviando..." : buttonLabel}
         </button>
         <p className="form-status" role="status" aria-live="polite">
-          {status === "sent" ? "Enviado con éxito. Te responderemos con los siguientes pasos." : ""}
           {status === "failed" ? "No se pudo enviar. Inténtalo de nuevo en unos segundos." : ""}
         </p>
       </form>
+      )}
+      </div>
     </section>
   );
 }

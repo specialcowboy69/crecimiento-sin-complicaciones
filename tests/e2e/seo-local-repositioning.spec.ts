@@ -128,16 +128,23 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     }
     await expect(form.getByLabel(/^Web, perfil de Google o red social/)).not.toHaveAttribute("aria-required", "true");
     await expect(form.getByRole("button", { name: "Solicitar auditoría gratuita", exact: true })).toBeEnabled();
-    const auditLinks = page.getByRole("link", { name: /auditoría gratuita/i, includeHidden: true });
-    await expect(auditLinks).toHaveCount(4);
-    for (const link of await auditLinks.all()) await expect(link).toHaveAttribute("href", "#auditoria-seo-local");
-    const mobileCta = page.locator("div.fixed").getByRole("link", { name: "Solicitar auditoría gratuita", exact: true });
+    const auditLinks = page.locator('a[href="#auditoria-seo-local"]');
+    await expect(auditLinks).toHaveCount(3);
+    const headerAuditCta = page.locator("header").first().locator(".mobile-audit-cta");
+    await expect(headerAuditCta).toHaveAttribute("href", "#audit-request");
+    const mobileCta = page.locator('div.fixed a[href="tel:+34604990651"]');
+    await expect(mobileCta).toHaveAttribute("aria-label", "Llamar al 604 990 651");
+    await expect(mobileCta).toHaveAttribute("href", "tel:+34604990651");
     if (viewport.width < 768) {
       await expect(mobileCta).toBeVisible();
       expect(await mobileCta.locator("..").evaluate((element) => getComputedStyle(element).position)).toBe("fixed");
-      await mobileCta.click();
-      await expect(page).toHaveURL(/#auditoria-seo-local$/);
-    } else await expect(mobileCta).toBeHidden();
+      await expect(headerAuditCta).toBeVisible();
+      await headerAuditCta.click();
+      await expect(page).toHaveURL(/#audit-request$/);
+    } else {
+      await expect(mobileCta).toBeHidden();
+      await expect(headerAuditCta).toBeHidden();
+    }
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     expect(leadRequests, "no lead endpoint request").toEqual([]);

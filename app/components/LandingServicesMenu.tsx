@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const serviceLinks = [
   {
@@ -48,9 +51,34 @@ type LandingServicesMenuProps = {
   currentPath: string;
   allowedHrefs?: readonly string[];
   label?: string;
+  mobileAuditHref?: string;
 };
 
-export function LandingServicesMenu({ currentPath, allowedHrefs, label = "Más servicios" }: LandingServicesMenuProps) {
+export function LandingServicesMenu({ currentPath, allowedHrefs, label = "Más servicios", mobileAuditHref }: LandingServicesMenuProps) {
+  const menuRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    function closeOnOutside(event: PointerEvent) {
+      if (menuRef.current?.open && !menuRef.current.contains(event.target as Node)) {
+        menuRef.current.open = false;
+      }
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape" && menuRef.current?.open) {
+        menuRef.current.open = false;
+        menuRef.current.querySelector("summary")?.focus();
+      }
+    }
+
+    document.addEventListener("pointerdown", closeOnOutside);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutside);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
   const links = (allowedHrefs
     ? allowedHrefs
         .map((href) => serviceLinks.find((link) => link.href === href))
@@ -59,19 +87,24 @@ export function LandingServicesMenu({ currentPath, allowedHrefs, label = "Más s
   ).filter((link) => link.href !== currentPath);
 
   return (
-    <details className="landing-services-menu">
+    <>
+    <details className={`landing-services-menu${mobileAuditHref ? " mobile-audit-replaces-menu" : ""}`} ref={menuRef}>
       <summary>
         {label}
         <ChevronDown className="landing-services-chevron" size={16} strokeWidth={2.2} aria-hidden="true" />
       </summary>
       <div className="landing-services-dropdown">
         {links.map((link) => (
-          <Link href={link.href} key={link.href}>
+          <Link href={link.href} key={link.href} onClick={() => { if (menuRef.current) menuRef.current.open = false; }}>
             <span className="landing-services-label">{link.label}</span>
             <span className="landing-services-helper">{link.helper}</span>
           </Link>
         ))}
       </div>
     </details>
+    {mobileAuditHref ? (
+      <a className="mobile-audit-cta" href={mobileAuditHref}>Solicitar auditoría gratuita</a>
+    ) : null}
+    </>
   );
 }

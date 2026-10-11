@@ -2,6 +2,8 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { FormPrivacyNotice } from "./FormPrivacyNotice";
+import { ContactOptions } from "./ContactOptions";
+import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
 
 type FormState = {
@@ -120,6 +122,10 @@ export function LocalSeoAuditForm() {
   }
 
   return (
+    <div className="audit-form-shell" id="audit-request">
+    {status === "sent" ? (
+      <LeadSuccess>Revisaremos la información de tu negocio y te escribiremos al email que has indicado. Si necesitamos algún dato más, te lo pediremos por esa vía.</LeadSuccess>
+    ) : (
     <form
       className="seo-audit-form grid gap-5 rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 sm:grid-cols-2"
       onSubmit={onSubmit}
@@ -223,12 +229,6 @@ export function LocalSeoAuditForm() {
         {status === "sending" ? "Enviando solicitud..." : "Solicitar auditoría gratuita"}
       </button>
       <div className="min-h-12 text-sm font-bold sm:col-span-2" role="status" aria-live="polite">
-        {status === "sent" ? (
-          <p className="text-emerald-300">
-            <strong className="block text-emerald-300">Hemos recibido tu solicitud</strong>
-            Revisaremos la información de tu negocio y te escribiremos al email que has indicado. Si necesitamos algún dato más, te lo pediremos por esa vía.
-          </p>
-        ) : null}
         {status === "failed" ? (
           <p className="text-red-300">
             No hemos podido enviar la solicitud. Tus datos siguen en el formulario. Inténtalo de nuevo.
@@ -236,5 +236,8 @@ export function LocalSeoAuditForm() {
         ) : null}
       </div>
     </form>
+    )}
+    <ContactOptions dark />
+    </div>
   );
 }
