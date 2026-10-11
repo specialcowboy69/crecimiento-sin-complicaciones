@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   BarChart3,
-  CheckCircle2,
   ChevronRight,
   ClipboardCheck,
   FileText,
@@ -22,16 +21,13 @@ import {
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { LeadForm } from "../components/LeadForm";
 import { Logo } from "../components/Logo";
-import { PageLinksNav } from "../components/PageLinksNav";
 import { SITE_URL } from "../lib/site";
+import styles from "./landing-pages.module.css";
 
 const pagePath = "/diseno-landing-pages";
 const pageUrl = `${SITE_URL}${pagePath}`;
 const primaryCtaClass =
   "inline-flex min-h-14 items-center justify-center rounded-lg bg-blue-600 px-6 py-4 text-base font-black text-white shadow-lg shadow-blue-950/20 transition hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400";
-const secondaryCtaClass =
-  "inline-flex min-h-14 items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-4 text-base font-black text-slate-900 shadow-sm transition hover:border-blue-200 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-400";
-
 export const metadata: Metadata = {
   title: "Diseño de landing pages para captar leads",
   description:
@@ -53,12 +49,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const landingChecks = [
-  "Landing pages para campañas de Google Ads, servicios y lanzamientos",
-  "Copy, diseño, formularios y analítica conectados",
-  "Estructura clara para explicar la oferta y reducir fricción",
-];
 
 const problemPoints = [
   "El mensaje no deja claro qué problema resuelve la oferta.",
@@ -325,77 +315,39 @@ export default function DisenoLandingPagesPage() {
           </nav>
         </header>
 
-        <PageLinksNav currentPath={pagePath} />
-
         <main>
-      <section className="hero-section relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(37,99,235,0.15),transparent_34%)]" />
-        <div className="hero-container relative mx-auto grid max-w-[1520px] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(430px,0.8fr)] lg:px-8 lg:py-20">
-          <div>
-            <nav
-              className="mb-8 flex flex-wrap items-center gap-2 text-sm font-extrabold text-slate-500 sm:text-base"
-              aria-label="Migas de pan"
-            >
-              <Link className="inline-flex min-h-10 items-center text-teal-700 transition hover:text-teal-600" href="/">
-                Inicio
-              </Link>
-              <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              <Link
-                className="inline-flex min-h-10 items-center text-teal-700 transition hover:text-teal-600"
-                href="/agencia-marketing-digital"
-              >
-                Marketing digital
-              </Link>
-              <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              <span className="inline-flex min-h-10 items-center">Landing pages</span>
-            </nav>
-
-            <p className="section-eyebrow mb-6">DISEÑO DE LANDING PAGES</p>
-            <h1 className="marketing-hero-title max-w-[960px] text-slate-900">
-              Diseño de landing pages para convertir visitas en leads
-            </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-700 sm:text-xl sm:leading-9">
-              Creamos landing pages profesionales para campañas, servicios y
-              lanzamientos que necesitan explicar bien la oferta, reducir
-              fricción y convertir tráfico en oportunidades medibles.
-            </p>
-
-            <div className="mt-8 grid gap-3 text-base font-bold text-slate-800 sm:grid-cols-3">
-              {landingChecks.map((check) => (
-                <div
-                  key={check}
-                  className="flex min-h-[92px] items-start gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
-                >
-                  <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-teal-600" aria-hidden="true" />
-                  <span>{check}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a className={primaryCtaClass} href="#auditoria-landing-pages-form">
-                Solicitar auditoría gratuita
-              </a>
-              <Link className={secondaryCtaClass} href="/agencia-marketing-digital">
-                Ver servicios de marketing digital
-              </Link>
-            </div>
-            <p className="mt-3 text-base font-bold text-slate-700">
-              Sin permanencia obligatoria. Respuesta en menos de 24h.
-            </p>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[700px] lg:mx-0">
-            <div className="hero-visual-frame relative aspect-[5/4] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-2xl">
-              <Image
-                src="/images/landing-pages-conversion-hero.png"
-                alt="Esquema visual de una landing page conectada con leads y medición"
-                fill
-                priority
-                sizes="(min-width: 1024px) 44vw, 92vw"
-                className="object-cover"
-              />
-            </div>
+      <section className={styles.hero} aria-labelledby="landing-hero-title">
+        <Image
+          src="/images/landing-pages-hero-editorial.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          fetchPriority="high"
+          className={styles.heroImage}
+        />
+        <div className={styles.heroContent}>
+          <nav className={styles.heroBreadcrumbs} aria-label="Migas de pan">
+            <Link href="/">Inicio</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/agencia-marketing-digital">Marketing digital</Link>
+            <span aria-hidden="true">/</span>
+            <span>Landing pages</span>
+          </nav>
+          <p className={styles.heroEyebrow}>Diseño de landing pages</p>
+          <h1 id="landing-hero-title" className={styles.heroTitle}>
+            Diseño de landing pages para convertir visitas en leads
+          </h1>
+          <p className={styles.heroDescription}>
+            Creamos páginas para campañas, servicios y lanzamientos que explican la oferta con claridad,
+            reducen fricción y convierten el tráfico en oportunidades medibles.
+          </p>
+          <div className={styles.heroActions}>
+            <a className={styles.heroPrimary} href="#auditoria-landing-pages-form">
+              Solicitar auditoría gratuita
+            </a>
+            <Link className={styles.heroSecondary} href="/agencia-marketing-digital">
+              Ver servicios de marketing digital
+            </Link>
           </div>
         </div>
       </section>

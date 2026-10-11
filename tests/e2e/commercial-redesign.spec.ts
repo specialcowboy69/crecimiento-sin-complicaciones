@@ -55,3 +55,21 @@ test("SEO editorial flow is responsive and links to the live technical service",
   const response = await page.request.get("/agencia-marketing-digital/seo-tecnico-arquitectura-entidades");
   expect(response.status()).toBe(200);
 });
+
+test("Landing Pages has a photographic hero and no duplicate navigation", async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
+    await page.goto("/diseno-landing-pages", { waitUntil: "domcontentloaded" });
+    const hero = page.locator("main > section").first();
+    const image = hero.locator('img[src*="landing-pages-hero-editorial.webp"]');
+    await expect(page.getByRole("heading", { level: 1, name: /Diseño de landing pages/ })).toBeVisible();
+    await expect(hero.getByRole("link", { name: "Solicitar auditoría gratuita" })).toHaveAttribute(
+      "href",
+      "#auditoria-landing-pages-form",
+    );
+    await expect(page.getByRole("navigation", { name: "Páginas principales" })).toHaveCount(0);
+    await expect(image).toBeVisible();
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  }
+});

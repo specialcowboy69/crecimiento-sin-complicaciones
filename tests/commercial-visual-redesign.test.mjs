@@ -42,3 +42,12 @@ test("national SEO explains diagnosis, system, process and audiences without rep
     assert.match(page, new RegExp(`id="${id}"`));
   }
 });
+
+test("Landing Pages uses a full-bleed image hero without duplicate navigation or a time promise", () => {
+  const page = source("app/diseno-landing-pages/page.tsx");
+
+  assert.doesNotMatch(page, /PageLinksNav|hero-visual-frame|landingChecks|Respuesta en menos de 24h/);
+  assert.match(page, /landing-pages-hero-editorial\.webp/);
+  assert.match(page, /href="#auditoria-landing-pages-form"/);
+  assert.ok(asset("landing-pages-hero-editorial.webp").size > 10_000);
+});
