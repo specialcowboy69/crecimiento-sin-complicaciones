@@ -88,9 +88,15 @@ export function LandingServicesMenu({ currentPath, allowedHrefs, label = "Más s
 
   return (
     <>
-    <details className={`landing-services-menu${mobileAuditHref ? " mobile-audit-replaces-menu" : ""}`} ref={menuRef}>
+    {mobileAuditHref ? (
+      <a className="mobile-audit-cta" href={mobileAuditHref} aria-label="Solicitar auditoría gratuita">
+        Auditoría gratuita
+      </a>
+    ) : null}
+    <details className="landing-services-menu" ref={menuRef}>
       <summary>
-        {label}
+        <span className="landing-services-desktop-label">{label}</span>
+        <span className="landing-services-mobile-label">Servicios</span>
         <ChevronDown className="landing-services-chevron" size={16} strokeWidth={2.2} aria-hidden="true" />
       </summary>
       <div className="landing-services-dropdown">
@@ -102,9 +108,6 @@ export function LandingServicesMenu({ currentPath, allowedHrefs, label = "Más s
         ))}
       </div>
     </details>
-    {mobileAuditHref ? (
-      <a className="mobile-audit-cta" href={mobileAuditHref}>Solicitar auditoría gratuita</a>
-    ) : null}
     </>
   );
 }
