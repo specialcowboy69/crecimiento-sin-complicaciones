@@ -3,6 +3,7 @@ export type AdminLeadState = {
   status: string;
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
+  adsExportClaimedAt: string | null;
   adsExportSubmittedAt: string | null;
 };
 

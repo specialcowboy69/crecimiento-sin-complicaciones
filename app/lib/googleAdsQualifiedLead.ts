@@ -58,7 +58,7 @@ export async function sendQualifiedLeadEvent(event: QualifiedLeadEvent, options:
   const actionId = env.GOOGLE_ADS_QUALIFIED_ACTION_ID;
   const serviceAccount = env.GOOGLE_DATA_MANAGER_SERVICE_ACCOUNT_JSON;
   if (!/^\d{10}$/.test(operatingId ?? "") || !/^\d{10}$/.test(loginId ?? "") || !/^\d+$/.test(actionId ?? "") || !serviceAccount) {
-    throw new QualifiedLeadSendError("CONFIG_MISSING", false);
+    throw new QualifiedLeadSendError("CONFIG_MISSING", true);
   }
 
   let token: string | null;
@@ -71,9 +71,9 @@ export async function sendQualifiedLeadEvent(event: QualifiedLeadEvent, options:
       token = (await auth.getAccessToken()) ?? null;
     }
   } catch {
-    throw new QualifiedLeadSendError("AUTH_FAILED", false);
+    throw new QualifiedLeadSendError("AUTH_FAILED", true);
   }
-  if (!token) throw new QualifiedLeadSendError("AUTH_FAILED", false);
+  if (!token) throw new QualifiedLeadSendError("AUTH_FAILED", true);
 
   const body = {
     destinations: [{
@@ -99,9 +99,11 @@ export async function sendQualifiedLeadEvent(event: QualifiedLeadEvent, options:
     throw new QualifiedLeadSendError("NETWORK_ERROR", true);
   }
   if (!response.ok) {
-    const retryable = response.status === 408 || response.status === 429 || response.status >= 500;
+    const retryable = response.status === 401 || response.status === 403 || response.status === 404 ||
+      response.status === 408 || response.status === 429 || response.status >= 500;
     throw new QualifiedLeadSendError(`PROVIDER_HTTP_${response.status}`, retryable);
   }
+  if (options.validateOnly) return { accepted: false, validated: true, requestId: undefined };
   let requestId: unknown;
   try {
     requestId = (await response.json()).requestId;

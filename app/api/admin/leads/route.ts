@@ -19,6 +19,7 @@ type Lead = {
   adsMeasurementConsentAtSubmit: boolean | null;
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
+  adsExportClaimedAt: string | null;
   adsExportSubmittedAt: string | null;
   adsExportAttemptedAt: string | null;
   adsExportTerminalAt: string | null;
@@ -84,6 +85,9 @@ export async function PATCH(request: Request) {
       if (lead.adsExportSubmittedAt) {
         return NextResponse.json({ error: "El envío a Ads ya fue aceptado." }, { status: 409 });
       }
+      if (!lead.adsExportBlockedAt) {
+        return NextResponse.json({ error: "No se ha confirmado la exclusión. El envío puede estar en curso; actualiza el estado y reinténtalo." }, { status: 409 });
+      }
       return NextResponse.json({ ok: true, lead });
     }
     if (!allowedStatuses.has(status)) {
@@ -110,7 +114,10 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "Lead no valido." }, { status: 400 });
     }
 
-    await getLeadsDataConnect().executeMutation("DeleteLead", { id });
+    const response = await getLeadsDataConnect().executeMutation<{ deleted: number }, { id: string }>("DeleteLeadIfNotExporting", { id });
+    if (response.data.deleted !== 1) {
+      return NextResponse.json({ error: "El lead no existe o tiene un envío a Ads en curso." }, { status: 409 });
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Lead delete failed", error);

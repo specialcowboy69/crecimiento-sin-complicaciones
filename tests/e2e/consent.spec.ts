@@ -145,6 +145,15 @@ test("consented click ID stays in this tab and is removed after advertising revo
   expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
 });
 
+test("a full navigation without a click query preserves the consented session ID", async ({ page, context, baseURL }) => {
+  await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+  await page.goto("/seo/local");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+});
+
 test("rejected visitor never stores an ad click ID", async ({ page }) => {
   await harness(page);
   await page.goto("/seo/local?gclid=AbC_123");

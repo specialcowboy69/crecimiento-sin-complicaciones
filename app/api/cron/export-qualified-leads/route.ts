@@ -18,12 +18,20 @@ function authorized(request: Request) {
 function exportStore(): QualifiedLeadExportStore {
   const dataConnect = getLeadsDataConnect();
   return {
+    async releaseStale(before) {
+      await dataConnect.executeMutation("ReleaseStaleLeadAdsExportClaims", { before });
+    },
     async listPending() {
       const response = await dataConnect.executeQuery<{ leads: QualifiedLeadForExport[] }>("ListQualifiedLeadsForAdsExport");
       return response.data.leads ?? [];
     },
+    async claim(id) {
+      const response = await dataConnect.executeMutation<{ updated: number }, { id: string }>("ClaimLeadAdsExport", { id });
+      return response.data.updated === 1;
+    },
     async markSubmitted(id) {
-      await dataConnect.executeMutation<{ updated: number }, { id: string }>("MarkLeadAdsExportSubmitted", { id });
+      const response = await dataConnect.executeMutation<{ updated: number }, { id: string }>("MarkLeadAdsExportSubmitted", { id });
+      if (response.data.updated !== 1) throw new Error("Ads export acknowledgment was not stored");
     },
     async recordFailure(id, code, terminal) {
       await dataConnect.executeMutation<{ updated: number }, { id: string; code: string; terminalAt: string | null }>(

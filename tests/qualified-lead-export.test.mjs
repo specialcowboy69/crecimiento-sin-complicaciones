@@ -13,6 +13,7 @@ const base = {
   adsMeasurementConsentAtSubmit: true,
   qualifiedAt: "2026-10-11T12:00:00Z",
   adsExportBlockedAt: null,
+  adsExportClaimedAt: null,
   adsExportSubmittedAt: null,
   adsExportAttemptedAt: null,
   adsExportTerminalAt: null,
@@ -22,15 +23,28 @@ const base = {
 function store(leads) {
   return {
     leads,
-    async listPending() { return leads; },
+    async releaseStale(before) {
+      for (const lead of leads) {
+        if (lead.adsExportClaimedAt && Date.parse(lead.adsExportClaimedAt) < Date.parse(before)) lead.adsExportClaimedAt = null;
+      }
+    },
+    async listPending() { return leads.map((lead) => ({ ...lead })); },
+    async claim(id) {
+      const lead = leads.find((item) => item.id === id);
+      if (!lead || lead.adsExportBlockedAt || lead.adsExportClaimedAt || lead.adsExportSubmittedAt || lead.adsExportTerminalAt) return false;
+      lead.adsExportClaimedAt = "2026-10-11T12:30:00Z";
+      return true;
+    },
     async markSubmitted(id) {
       const lead = leads.find((item) => item.id === id);
       lead.adsExportSubmittedAt = "2026-10-11T13:00:00Z";
+      lead.adsExportClaimedAt = null;
     },
     async recordFailure(id, code, terminal) {
       const lead = leads.find((item) => item.id === id);
       lead.adsExportLastErrorCode = code;
       lead.adsExportAttemptedAt = "2026-10-11T13:00:00Z";
+      lead.adsExportClaimedAt = null;
       if (terminal) lead.adsExportTerminalAt = "2026-10-11T13:00:00Z";
     },
   };
@@ -54,12 +68,12 @@ test("only future consented, qualified, unblocked SEO-local clicks are sent", as
   assert.equal(skipped.every((lead) => lead.adsExportSubmittedAt === null || lead.id.endsWith("0006")), true);
 });
 
-test("two leads fail independently; permanent errors stay terminal and transient errors can retry", async () => {
+test("two leads fail independently; malformed events stay terminal and account permission errors can retry", async () => {
   const first = { ...base };
   const second = { ...base, id: "00000000-0000-4000-8000-000000000002" };
   const db = store([first, second]);
   const outcome = await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async (event) => {
-    throw new QualifiedLeadSendError(event.transactionId.endsWith("0001") ? "PROVIDER_HTTP_503" : "PROVIDER_HTTP_403", event.transactionId.endsWith("0001"));
+    throw new QualifiedLeadSendError(event.transactionId.endsWith("0001") ? "PROVIDER_HTTP_403" : "PROVIDER_HTTP_400", event.transactionId.endsWith("0001"));
   } });
   assert.deepEqual(outcome, { attempted: 2, submitted: 0, failed: 2 });
   assert.equal(first.adsExportTerminalAt, null);
@@ -67,6 +81,68 @@ test("two leads fail independently; permanent errors stay terminal and transient
   const retried = [];
   await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async (event) => { retried.push(event.transactionId); return { accepted: true }; } });
   assert.deepEqual(retried, [`seo-local-qualified-${first.id}`]);
+});
+
+test("a configuration failure remains pending and succeeds after configuration is repaired", async () => {
+  const lead = { ...base };
+  const db = store([lead]);
+  const first = await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async () => { throw new QualifiedLeadSendError("CONFIG_MISSING", true); } });
+  assert.deepEqual(first, { attempted: 1, submitted: 0, failed: 1 });
+  assert.equal(lead.adsExportTerminalAt, null);
+  const second = await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async () => ({ accepted: true }) });
+  assert.deepEqual(second, { attempted: 1, submitted: 1, failed: 0 });
+});
+
+test("an excluded or deleted lead cannot be sent after another lead is processed", async () => {
+  const first = { ...base };
+  const second = { ...base, id: "00000000-0000-4000-8000-000000000002" };
+  const third = { ...base, id: "00000000-0000-4000-8000-000000000003" };
+  const db = store([first, second, third]);
+  const sent = [];
+  const result = await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async (event) => {
+    sent.push(event.transactionId);
+    if (event.transactionId.endsWith("0001")) {
+      second.adsExportBlockedAt = "2026-10-11T12:31:00Z";
+      db.leads.splice(db.leads.indexOf(third), 1);
+    }
+    return { accepted: true };
+  } });
+  assert.deepEqual(result, { attempted: 1, submitted: 1, failed: 0 });
+  assert.deepEqual(sent, [`seo-local-qualified-${first.id}`]);
+});
+
+test("overlapping runs cannot send a lead twice while its claim is active", async () => {
+  const lead = { ...base };
+  const db = store([lead]);
+  let release;
+  const pending = new Promise((resolve) => { release = resolve; });
+  const seen = [];
+  const firstRun = exportPendingQualifiedLeads({ store: db, enabled: true, sender: async (event) => {
+    seen.push(event.transactionId);
+    await pending;
+    return { accepted: true };
+  } });
+  while (!lead.adsExportClaimedAt) await new Promise((resolve) => setTimeout(resolve, 1));
+  assert.deepEqual(await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async () => { throw Error("duplicate send"); } }), { attempted: 0, submitted: 0, failed: 0 });
+  release();
+  assert.deepEqual(await firstRun, { attempted: 1, submitted: 1, failed: 0 });
+  assert.deepEqual(seen, [`seo-local-qualified-${lead.id}`]);
+});
+
+test("a claim abandoned by a crashed run becomes eligible after one day", async () => {
+  const lead = { ...base, adsExportClaimedAt: "2020-01-01T00:00:00Z" };
+  const db = store([lead]);
+  assert.deepEqual(await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async () => ({ accepted: true }) }), { attempted: 1, submitted: 1, failed: 0 });
+});
+
+test("a malformed stored click is quarantined after one claimed attempt", async () => {
+  const lead = { ...base, adsClickId: "contains a space" };
+  const db = store([lead]);
+  const outcome = await exportPendingQualifiedLeads({ store: db, enabled: true, sender: async () => { throw Error("should not send"); } });
+  assert.deepEqual(outcome, { attempted: 1, submitted: 0, failed: 1 });
+  assert.equal(lead.adsExportLastErrorCode, "INVALID_CLICK_ID");
+  assert.ok(lead.adsExportTerminalAt);
+  assert.equal(lead.adsExportClaimedAt, null);
 });
 
 test("retry after acknowledgement marker failure reuses the same transaction ID", async () => {

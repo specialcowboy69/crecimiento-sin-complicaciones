@@ -66,14 +66,14 @@ test("missing account configuration stops before an HTTP request", async () => {
     sendQualifiedLeadEvent(buildQualifiedLeadEvent({ id, adsClickType: "gclid", adsClickId: "AbC_123", qualifiedAt: "2026-10-11T12:00:00Z" }), {
       validateOnly: false, env: {}, getAccessToken: async () => "token", fetchImpl: async () => { called = true; },
     }),
-    (error) => error instanceof QualifiedLeadSendError && error.code === "CONFIG_MISSING",
+    (error) => error instanceof QualifiedLeadSendError && error.code === "CONFIG_MISSING" && error.retryable,
   );
   assert.equal(called, false);
 });
 
 test("provider errors expose a safe code and retryability without lead content", async () => {
   const event = buildQualifiedLeadEvent({ id, adsClickType: "gclid", adsClickId: "AbC_123", qualifiedAt: "2026-10-11T12:00:00Z" });
-  for (const [status, retryable] of [[403, false], [503, true]]) {
+  for (const [status, retryable] of [[400, false], [403, true], [503, true]]) {
     await assert.rejects(
       sendQualifiedLeadEvent(event, {
         validateOnly: false, env, getAccessToken: async () => "token",
@@ -82,4 +82,21 @@ test("provider errors expose a safe code and retryability without lead content",
       (error) => error instanceof QualifiedLeadSendError && error.retryable === retryable && !JSON.stringify(error).includes("AbC_123"),
     );
   }
+});
+
+test("a successful validateOnly response may have no request ID", async () => {
+  const event = buildQualifiedLeadEvent({ id, adsClickType: "gclid", adsClickId: "AbC_123", qualifiedAt: "2026-10-11T12:00:00Z" });
+  const result = await sendQualifiedLeadEvent(event, {
+    validateOnly: true, env, getAccessToken: async () => "token",
+    fetchImpl: async () => new Response("{}", { status: 200 }),
+  });
+  assert.equal(result.validated, true);
+  assert.equal(result.accepted, false);
+});
+
+test("token acquisition failure remains retryable after credentials are fixed", async () => {
+  const event = buildQualifiedLeadEvent({ id, adsClickType: "gclid", adsClickId: "AbC_123", qualifiedAt: "2026-10-11T12:00:00Z" });
+  await assert.rejects(sendQualifiedLeadEvent(event, {
+    validateOnly: false, env, getAccessToken: async () => { throw Error("temporary auth failure"); },
+  }), (error) => error instanceof QualifiedLeadSendError && error.code === "AUTH_FAILED" && error.retryable);
 });

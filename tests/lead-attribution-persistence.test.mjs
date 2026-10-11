@@ -44,7 +44,8 @@ test("other paths, absent or foreign referrers cannot attach an ad click", () =>
 
 test("malformed click types and values are discarded without truncation", () => {
   for (const changed of [
-    { type: "fake" }, { value: "" }, { value: "a b" }, { value: "x".repeat(513) }, { value: 123 },
+    { type: "fake" }, { type: ["gclid"] }, { type: { value: "gclid" } },
+    { value: "" }, { value: "a b" }, { value: "x".repeat(513) }, { value: 123 },
   ]) {
     const result = validateLeadAttribution({ ...base, ...changed });
     assert.equal(result.adsClickId, null);

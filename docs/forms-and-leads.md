@@ -32,7 +32,8 @@ for possible later qualified-lead attribution; it is not sent to GA4 or Vercel A
 The admin may mark a lead `qualified` manually. The first `qualifiedAt` timestamp is preserved on repeated actions;
 `closed` remains available. For a pending SEO-local lead, **Excluir de Ads** records `adsExportBlockedAt` and prevents
 the later offline export. An already submitted lead cannot be excluded retroactively through this action; handle
-privacy requests promptly and inspect its export status before promising an outcome.
+privacy requests promptly and inspect its export status before promising an outcome. While an export is in progress,
+the panel refuses both exclusion and deletion and shows that status; repeat the request after the attempt finishes.
 
 ## Approved `formType` Values
 

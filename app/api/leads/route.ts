@@ -65,9 +65,7 @@ export async function POST(request: Request) {
       value: body.adsClickId,
     });
 
-    await getLeadsDataConnect().executeMutation("CreateLead", { ...payload, ...attribution }, {
-      impersonate: { unauthenticated: true },
-    });
+    await getLeadsDataConnect().executeMutation("CreateLead", { ...payload, ...attribution });
 
     return NextResponse.json({ ok: true });
   } catch (error) {

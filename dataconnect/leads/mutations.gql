@@ -11,7 +11,7 @@ mutation CreateLead(
   $adsClickId: String
   $adsMeasurementConsentAtSubmit: Boolean
   $adsConsentVersion: String
-) @auth(level: PUBLIC, insecureReason: "Anyone can submit a contact form lead from the public website.") {
+) @auth(level: NO_ACCESS) {
   lead_insert(
     data: {
       sourcePage: $sourcePage
@@ -43,16 +43,42 @@ mutation MarkLeadQualified($id: UUID!) @auth(level: NO_ACCESS) {
 
 mutation BlockLeadAdsExport($id: UUID!) @auth(level: NO_ACCESS) {
   updated: lead_updateMany(
-    where: { id: { eq: $id }, adsExportBlockedAt: { isNull: true }, adsExportSubmittedAt: { isNull: true } }
+    where: { id: { eq: $id }, adsExportBlockedAt: { isNull: true }, adsExportClaimedAt: { isNull: true }, adsExportSubmittedAt: { isNull: true } }
     data: { adsExportBlockedAt_expr: "request.time", updatedAt_expr: "request.time" }
+  )
+}
+
+mutation ClaimLeadAdsExport($id: UUID!) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: {
+      id: { eq: $id }
+      sourcePath: { eq: "/seo/local" }
+      status: { eq: "qualified" }
+      adsMeasurementConsentAtSubmit: { eq: true }
+      adsClickId: { isNull: false }
+      qualifiedAt: { isNull: false }
+      adsExportBlockedAt: { isNull: true }
+      adsExportClaimedAt: { isNull: true }
+      adsExportSubmittedAt: { isNull: true }
+      adsExportTerminalAt: { isNull: true }
+    }
+    data: { adsExportClaimedAt_expr: "request.time" }
+  )
+}
+
+mutation ReleaseStaleLeadAdsExportClaims($before: Timestamp!) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: { adsExportClaimedAt: { lt: $before }, adsExportSubmittedAt: { isNull: true } }
+    data: { adsExportClaimedAt: null }
   )
 }
 
 mutation MarkLeadAdsExportSubmitted($id: UUID!) @auth(level: NO_ACCESS) {
   updated: lead_updateMany(
-    where: { id: { eq: $id }, adsExportSubmittedAt: { isNull: true } }
+    where: { id: { eq: $id }, adsExportClaimedAt: { isNull: false }, adsExportSubmittedAt: { isNull: true } }
     data: {
       adsExportSubmittedAt_expr: "request.time"
+      adsExportClaimedAt: null
       adsExportAttemptedAt_expr: "request.time"
       adsExportLastErrorCode: null
       updatedAt_expr: "request.time"
@@ -62,9 +88,10 @@ mutation MarkLeadAdsExportSubmitted($id: UUID!) @auth(level: NO_ACCESS) {
 
 mutation RecordLeadAdsExportFailure($id: UUID!, $code: String!, $terminalAt: Timestamp) @auth(level: NO_ACCESS) {
   updated: lead_updateMany(
-    where: { id: { eq: $id }, adsExportSubmittedAt: { isNull: true }, adsExportTerminalAt: { isNull: true } }
+    where: { id: { eq: $id }, adsExportClaimedAt: { isNull: false }, adsExportSubmittedAt: { isNull: true }, adsExportTerminalAt: { isNull: true } }
     data: {
       adsExportAttemptedAt_expr: "request.time"
+      adsExportClaimedAt: null
       adsExportTerminalAt: $terminalAt
       adsExportLastErrorCode: $code
       updatedAt_expr: "request.time"
@@ -74,4 +101,8 @@ mutation RecordLeadAdsExportFailure($id: UUID!, $code: String!, $terminalAt: Tim
 
 mutation DeleteLead($id: UUID!) @auth(level: NO_ACCESS) {
   lead_delete(key: { id: $id })
+}
+
+mutation DeleteLeadIfNotExporting($id: UUID!) @auth(level: NO_ACCESS) {
+  deleted: lead_deleteMany(where: { id: { eq: $id }, adsExportClaimedAt: { isNull: true } })
 }

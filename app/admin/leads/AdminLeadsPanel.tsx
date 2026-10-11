@@ -15,6 +15,7 @@ type Lead = {
   status: string;
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
+  adsExportClaimedAt: string | null;
   adsExportSubmittedAt: string | null;
   adsExportAttemptedAt: string | null;
   adsExportTerminalAt: string | null;
@@ -94,7 +95,7 @@ export function AdminLeadsPanel() {
       body: JSON.stringify({ id, action: "blockAdsExport" }),
     });
     if (!response.ok) {
-      setMessage("No se pudo excluir este lead de Ads.");
+      setMessage(response.status === 409 ? "El envío a Ads está en curso o ya fue aceptado. Actualiza la lista antes de reintentarlo." : "No se pudo excluir este lead de Ads.");
       return;
     }
     const data = await response.json();
@@ -121,7 +122,7 @@ export function AdminLeadsPanel() {
     setDeletingLeadId(null);
 
     if (!response.ok) {
-      setMessage("No se pudo eliminar el lead.");
+      setMessage(response.status === 409 ? "El envío a Ads está en curso. Actualiza la lista y vuelve a intentarlo." : "No se pudo eliminar el lead.");
       return;
     }
 
@@ -205,7 +206,7 @@ export function AdminLeadsPanel() {
                       {lead.sourcePath === "/seo/local" ? (
                         <div>
                           <dt className="font-black text-slate-100">Exportación a Ads</dt>
-                          <dd>{lead.adsExportSubmittedAt ? "Envío aceptado" : lead.adsExportBlockedAt ? "Excluido" : lead.adsExportTerminalAt ? `Rechazo definitivo (${lead.adsExportLastErrorCode ?? "sin código"})` : lead.adsExportAttemptedAt ? "Reintento pendiente" : "Pendiente o no elegible"}</dd>
+                          <dd>{lead.adsExportSubmittedAt ? "Envío aceptado" : lead.adsExportBlockedAt ? "Excluido" : lead.adsExportClaimedAt ? "Envío en curso" : lead.adsExportTerminalAt ? `Rechazo definitivo (${lead.adsExportLastErrorCode ?? "sin código"})` : lead.adsExportAttemptedAt ? "Reintento pendiente" : "Pendiente o no elegible"}</dd>
                         </div>
                       ) : null}
                       <div>
@@ -248,14 +249,14 @@ export function AdminLeadsPanel() {
                             {statusLabels[nextStatus]}
                           </button>
                         ))}
-                        {lead.sourcePath === "/seo/local" && !lead.adsExportBlockedAt && !lead.adsExportSubmittedAt ? (
+                        {lead.sourcePath === "/seo/local" && !lead.adsExportBlockedAt && !lead.adsExportClaimedAt && !lead.adsExportSubmittedAt ? (
                           <button className="rounded-md bg-amber-500/10 px-3 py-2 text-xs font-black text-amber-200 ring-1 ring-amber-400/20 hover:bg-amber-500 hover:text-slate-950" type="button" onClick={() => blockAdsExport(lead.id)}>
                             Excluir de Ads
                           </button>
                         ) : null}
                         <button
                           className="rounded-md bg-red-500/10 px-3 py-2 text-xs font-black text-red-200 ring-1 ring-red-400/20 hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                          disabled={deletingLeadId === lead.id}
+                          disabled={deletingLeadId === lead.id || Boolean(lead.adsExportClaimedAt)}
                           type="button"
                           onClick={() => deleteLead(lead.id, lead.name)}
                         >

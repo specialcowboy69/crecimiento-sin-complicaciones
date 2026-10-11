@@ -39,9 +39,9 @@ export function validateLeadAttribution(input: LeadAttributionInput): LeadAttrib
   } catch {
     return result;
   }
-  if (!["gclid", "gbraid", "wbraid"].includes(String(input.type))) return result;
+  if (typeof input.type !== "string" || !["gclid", "gbraid", "wbraid"].includes(input.type)) return result;
   if (typeof input.value !== "string" || input.value.length === 0 || input.value.length > 512 || !/^[\x21-\x7e]+$/.test(input.value)) return result;
-  result.adsClickType = input.type as string;
+  result.adsClickType = input.type;
   result.adsClickId = input.value;
   return result;
 }

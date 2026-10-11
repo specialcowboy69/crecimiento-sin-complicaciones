@@ -4,7 +4,7 @@ import { qualifyLead, blockLeadAdsExport } from "../app/lib/qualifiedLeadState.t
 import { PATCH } from "../app/api/admin/leads/route.ts";
 
 function store(initial = {}) {
-  const lead = { id: "00000000-0000-4000-8000-000000000001", status: "new", qualifiedAt: null, adsExportBlockedAt: null, adsExportSubmittedAt: null, ...initial };
+  const lead = { id: "00000000-0000-4000-8000-000000000001", status: "new", qualifiedAt: null, adsExportBlockedAt: null, adsExportClaimedAt: null, adsExportSubmittedAt: null, ...initial };
   let tick = 0;
   return {
     lead,
@@ -16,7 +16,7 @@ function store(initial = {}) {
         return { data: { updated: 1 } };
       }
       if (name === "BlockLeadAdsExport") {
-        if (lead.adsExportSubmittedAt || lead.adsExportBlockedAt) return { data: { updated: 0 } };
+        if (lead.adsExportSubmittedAt || lead.adsExportBlockedAt || lead.adsExportClaimedAt) return { data: { updated: 0 } };
         lead.adsExportBlockedAt = `2026-10-11T12:00:0${++tick}Z`;
         return { data: { updated: 1 } };
       }
@@ -49,6 +49,13 @@ test("a pending lead can be blocked but a submitted lead cannot", async () => {
   assert.equal((await blockLeadAdsExport(db, db.lead.id)).adsExportBlockedAt, "2026-10-11T12:00:01Z");
   const sent = store({ adsExportSubmittedAt: "2026-10-11T12:00:00Z" });
   assert.equal((await blockLeadAdsExport(sent, sent.lead.id)).adsExportBlockedAt, null);
+});
+
+test("an in-progress export cannot report a successful exclusion", async () => {
+  const db = store({ adsExportClaimedAt: "2026-10-11T12:00:00Z" });
+  const result = await blockLeadAdsExport(db, db.lead.id);
+  assert.equal(result.adsExportBlockedAt, null);
+  assert.equal(result.adsExportClaimedAt, "2026-10-11T12:00:00Z");
 });
 
 test("unauthorized status changes are rejected before database access", async () => {

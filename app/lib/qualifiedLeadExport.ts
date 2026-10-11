@@ -9,6 +9,7 @@ export type QualifiedLeadForExport = {
   adsMeasurementConsentAtSubmit: boolean | null;
   qualifiedAt: string | null;
   adsExportBlockedAt: string | null;
+  adsExportClaimedAt: string | null;
   adsExportSubmittedAt: string | null;
   adsExportAttemptedAt: string | null;
   adsExportTerminalAt: string | null;
@@ -16,7 +17,9 @@ export type QualifiedLeadForExport = {
 };
 
 export type QualifiedLeadExportStore = {
+  releaseStale: (before: string) => Promise<void>;
   listPending: () => Promise<QualifiedLeadForExport[]>;
+  claim: (id: string) => Promise<boolean>;
   markSubmitted: (id: string) => Promise<void>;
   recordFailure: (id: string, code: string, terminal: boolean) => Promise<void>;
 };
@@ -30,7 +33,7 @@ type ExportOptions = {
 function eligible(lead: QualifiedLeadForExport) {
   return lead.sourcePath === "/seo/local" && lead.status === "qualified" &&
     lead.adsMeasurementConsentAtSubmit === true && lead.qualifiedAt !== null &&
-    !lead.adsExportBlockedAt && !lead.adsExportSubmittedAt && !lead.adsExportTerminalAt &&
+    !lead.adsExportBlockedAt && !lead.adsExportClaimedAt && !lead.adsExportSubmittedAt && !lead.adsExportTerminalAt &&
     ["gclid", "gbraid", "wbraid"].includes(lead.adsClickType ?? "") && Boolean(lead.adsClickId);
 }
 
@@ -38,23 +41,23 @@ export async function exportPendingQualifiedLeads({ store, sender, enabled }: Ex
   const counts = { attempted: 0, submitted: 0, failed: 0 };
   if (!enabled) return counts;
 
+  // A serverless process cannot still be sending after a full day. Recover a
+  // claim left by a crash before selecting this run's pending leads.
+  await store.releaseStale(new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
   const leads = await store.listPending();
   for (const lead of leads) {
     if (!eligible(lead)) continue;
-    let event: QualifiedLeadEvent;
+    // This conditional database update is the coordination point with the
+    // admin's exclude/delete actions and with overlapping cron invocations.
+    if (!(await store.claim(lead.id))) continue;
+    counts.attempted++;
     try {
-      event = buildQualifiedLeadEvent({
+      const event = buildQualifiedLeadEvent({
         id: lead.id,
         adsClickType: lead.adsClickType as AdsClickType,
         adsClickId: lead.adsClickId!,
         qualifiedAt: lead.qualifiedAt!,
       });
-    } catch {
-      continue;
-    }
-
-    counts.attempted++;
-    try {
       const result = await sender(event);
       if (!result.accepted) throw new QualifiedLeadSendError("PROVIDER_UNCONFIRMED", true);
       await store.markSubmitted(lead.id);

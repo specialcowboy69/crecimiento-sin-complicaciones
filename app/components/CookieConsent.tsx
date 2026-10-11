@@ -135,6 +135,7 @@ export function CookieConsent() {
   const googleAnalyticsLoadedRef = useRef(false);
 
   useLayoutEffect(() => {
+    if (consent === undefined && !isAdmin) return;
     const captureCurrentUrl = () => {
       captureAdsClick({
         pathname: window.location.pathname,
@@ -146,7 +147,7 @@ export function CookieConsent() {
     captureCurrentUrl();
     window.addEventListener("popstate", captureCurrentUrl);
     return () => window.removeEventListener("popstate", captureCurrentUrl);
-  }, [consent, pathname]);
+  }, [consent, isAdmin, pathname]);
 
   useLayoutEffect(() => {
     // GA also sends automatic history events. Read the live URL at send time so

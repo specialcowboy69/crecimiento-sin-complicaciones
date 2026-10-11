@@ -15,6 +15,7 @@ type Lead @table(name: "leads") {
   status: String! @default(value: "new") @col(dataType: "varchar(40)")
   qualifiedAt: Timestamp
   adsExportBlockedAt: Timestamp
+  adsExportClaimedAt: Timestamp
   adsExportSubmittedAt: Timestamp
   adsExportAttemptedAt: Timestamp
   adsExportTerminalAt: Timestamp

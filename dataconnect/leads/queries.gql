@@ -14,6 +14,7 @@ query ListLeads @auth(level: NO_ACCESS) {
     adsMeasurementConsentAtSubmit
     qualifiedAt
     adsExportBlockedAt
+    adsExportClaimedAt
     adsExportSubmittedAt
     adsExportAttemptedAt
     adsExportTerminalAt
@@ -39,6 +40,7 @@ query ListLeadsBySource($sourcePage: String!) @auth(level: NO_ACCESS) {
     adsMeasurementConsentAtSubmit
     qualifiedAt
     adsExportBlockedAt
+    adsExportClaimedAt
     adsExportSubmittedAt
     adsExportAttemptedAt
     adsExportTerminalAt
@@ -54,6 +56,7 @@ query GetLeadForAdmin($id: UUID!) @auth(level: NO_ACCESS) {
     status
     qualifiedAt
     adsExportBlockedAt
+    adsExportClaimedAt
     adsExportSubmittedAt
     adsExportAttemptedAt
     adsExportTerminalAt
@@ -70,6 +73,7 @@ query ListQualifiedLeadsForAdsExport @auth(level: NO_ACCESS) {
       adsClickId: { isNull: false }
       qualifiedAt: { isNull: false }
       adsExportBlockedAt: { isNull: true }
+      adsExportClaimedAt: { isNull: true }
       adsExportSubmittedAt: { isNull: true }
       adsExportTerminalAt: { isNull: true }
     }
@@ -84,6 +88,7 @@ query ListQualifiedLeadsForAdsExport @auth(level: NO_ACCESS) {
     adsMeasurementConsentAtSubmit
     qualifiedAt
     adsExportBlockedAt
+    adsExportClaimedAt
     adsExportSubmittedAt
     adsExportAttemptedAt
     adsExportTerminalAt
