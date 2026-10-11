@@ -16,7 +16,15 @@ npm.cmd run dev
 
 Abre [http://localhost:3000](http://localhost:3000). Completa `.env.local` con credenciales locales o del proveedor autorizado y no confirmes secretos en Git.
 
-Las variables documentadas en `.env.example` cubren el acceso al panel interno y la conexión del servidor con Firebase Data Connect. Los formularios públicos pueden renderizarse sin exponer esas credenciales al navegador, pero el guardado real de leads requiere una configuración válida del servidor.
+Las variables documentadas en `.env.example` cubren el acceso al panel interno, Firebase Data Connect y la exportación opcional de leads cualificados a Google Ads. Los formularios públicos pueden renderizarse sin exponer esas credenciales al navegador, pero el guardado real de leads requiere una configuración válida del servidor. La exportación offline permanece desactivada con `GOOGLE_ADS_OFFLINE_ENABLED=false`.
+
+## Leads y conversiones de SEO local
+
+Un formulario de `/seo/local` guardado correctamente puede emitir el evento `lead_seo_local_submitted` a GA4 cuando el visitante acepta analítica y medición publicitaria. Con ambas preferencias concedidas, la web también puede conservar en la sesión un `gclid`, `gbraid` o `wbraid` y asociarlo al lead tras validar la petición en el servidor. El evento de GA4 no incluye el identificador ni datos del formulario.
+
+El panel `/admin/leads` permite marcar manualmente un lead como **Cualificado** y excluir un envío pendiente a Ads. Un cron diario puede comunicar ese hito a una acción offline **separada y secundaria** mediante Data Manager API; envía el identificador del clic y la fecha de calificación, sin nombre, correo, teléfono ni mensaje. No se atribuyen ni importan retrospectivamente los leads anteriores a esta captura.
+
+Antes de activar el cron, sigue la [secuencia de publicación y comprobación](./docs/deployment.md#seo-local-qualified-lead-release-sequence): revisión de privacidad, despliegue compatible de Data Connect, configuración de la acción y credenciales de Ads, validación sin ingesta y comprobación con un lead controlado. El [contrato de formularios y del panel](./docs/forms-and-leads.md) y las [reglas de consentimiento y exportación](./docs/analytics-and-consent.md) detallan los estados, las exclusiones y los reintentos. Una aceptación de Data Manager no confirma atribución en Google Ads.
 
 ## Comandos principales
 

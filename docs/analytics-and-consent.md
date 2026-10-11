@@ -1,6 +1,6 @@
 # Analytics And Consent
 
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-11
 
 This document is the operational source of truth for visitor measurement and cookie-consent behavior in `pagina-agencia`. The public explanation remains in `/politica-de-cookies` and `/politica-de-privacidad`; update those pages whenever this implementation changes in a way that affects visitors.
 
@@ -12,6 +12,7 @@ This document is the operational source of truth for visitor measurement and coo
 | Google Analytics 4 (`G-VECVHEZ2DN`) | Optional, more detailed usage measurement | Yes: explicit analytics acceptance | Public pages only, loaded after analytics consent; `/admin` and its descendants are excluded |
 | Google Ads conversion measurement | Attribute the successful SEO-local lead event imported from GA4 | Yes: analytics and advertising-measurement consent | `lead_seo_local_submitted` only after a successful `/seo/local` submission |
 | Consented ad click ID | Link a later SEO-local request to a possible qualified-lead event | Yes: both optional categories | `gclid`, `gbraid` or `wbraid` in this tab's `sessionStorage`, then optional Firebase lead fields |
+| Google Ads qualified-lead upload | Send a manually qualified SEO-local lead to a separate secondary conversion action | Yes: both optional categories recorded when the form was submitted | Server-side Data Manager API, only for eligible leads after offline export is explicitly enabled; no form contact fields |
 
 `app/layout.tsx` mounts `VercelAnalytics` and `CookieConsent` for the public application. The Vercel wrapper filters admin URLs before data is sent. Do not add another global analytics script or import GA4 directly in the layout: `CookieConsent` is the sole GA4 loading gate.
 

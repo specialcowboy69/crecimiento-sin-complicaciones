@@ -1,6 +1,6 @@
 # Deployment And Domains
 
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-11
 
 This document records production hosting, canonical host and domain redirect behavior for `pagina-agencia`.
 
