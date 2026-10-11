@@ -13,6 +13,8 @@ type Lead = {
   message: string | null;
   interestedService: string | null;
   status: string;
+  adsClickType: string | null;
+  adsMeasurementConsentAtSubmit: boolean | null;
   createdAt: string;
 };
 
@@ -169,6 +171,12 @@ export function AdminLeadsPanel() {
                     </div>
 
                     <dl className="mt-4 grid gap-3 text-sm text-slate-300">
+                      {lead.sourcePath === "/seo/local" ? (
+                        <div>
+                          <dt className="font-black text-slate-100">Procedencia de anuncio</dt>
+                          <dd>{lead.adsClickType && lead.adsMeasurementConsentAtSubmit ? "ID de anuncio disponible" : "Sin ID de anuncio"}</dd>
+                        </div>
+                      ) : null}
                       <div>
                         <dt className="font-black text-slate-100">Formulario</dt>
                         <dd>{lead.formType}</dd>

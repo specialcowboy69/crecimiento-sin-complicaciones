@@ -8,6 +8,10 @@ type Lead @table(name: "leads") {
   company: String @col(dataType: "varchar(220)")
   message: String
   interestedService: String @col(dataType: "varchar(140)")
+  adsClickType: String @col(dataType: "varchar(16)")
+  adsClickId: String @col(dataType: "varchar(512)")
+  adsMeasurementConsentAtSubmit: Boolean
+  adsConsentVersion: String @col(dataType: "varchar(16)")
   status: String! @default(value: "new") @col(dataType: "varchar(40)")
   createdAt: Timestamp! @default(expr: "request.time")
   updatedAt: Timestamp

@@ -14,6 +14,8 @@ type Lead = {
   message: string | null;
   interestedService: string | null;
   status: string;
+  adsClickType: string | null;
+  adsMeasurementConsentAtSubmit: boolean | null;
   createdAt: string;
   updatedAt: string | null;
 };

@@ -10,6 +10,8 @@ query ListLeads @auth(level: NO_ACCESS) {
     message
     interestedService
     status
+    adsClickType
+    adsMeasurementConsentAtSubmit
     createdAt
     updatedAt
   }
@@ -27,6 +29,8 @@ query ListLeadsBySource($sourcePage: String!) @auth(level: NO_ACCESS) {
     message
     interestedService
     status
+    adsClickType
+    adsMeasurementConsentAtSubmit
     createdAt
     updatedAt
   }

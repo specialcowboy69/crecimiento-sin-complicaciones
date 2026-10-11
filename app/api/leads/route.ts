@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLeadsDataConnect } from "@/app/lib/firebaseDataConnect";
+import { validateLeadAttribution } from "@/app/lib/leadAttribution";
 
 export const runtime = "nodejs";
 
@@ -12,6 +13,8 @@ type LeadPayload = {
   company?: string;
   message?: string;
   interestedService?: string;
+  adsClickType?: unknown;
+  adsClickId?: unknown;
 };
 
 function clean(value: unknown, maxLength = 4000) {
@@ -46,13 +49,23 @@ function validate(payload: LeadPayload) {
 
 export async function POST(request: Request) {
   try {
-    const payload = validate(await request.json());
+    const body = (await request.json()) as LeadPayload;
+    const payload = validate(body);
 
     if (!payload) {
       return NextResponse.json({ error: "Datos del formulario incompletos." }, { status: 400 });
     }
 
-    await getLeadsDataConnect().executeMutation("CreateLead", payload, {
+    const attribution = validateLeadAttribution({
+      cookieHeader: request.headers.get("cookie") ?? "",
+      sourcePath: payload.sourcePath ?? "",
+      referer: request.headers.get("referer"),
+      requestOrigin: new URL(request.url).origin,
+      type: body.adsClickType,
+      value: body.adsClickId,
+    });
+
+    await getLeadsDataConnect().executeMutation("CreateLead", { ...payload, ...attribution }, {
       impersonate: { unauthenticated: true },
     });
 

@@ -152,6 +152,23 @@ test("rejected visitor never stores an ad click ID", async ({ page }) => {
   expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
 });
 
+test("only a consented SEO-local submission sends its click ID to the lead API", async ({ page, context, baseURL }) => {
+  const network = await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await submitLocalForm(page);
+  await expect(page.getByRole("status").filter({ hasText: "Hemos recibido tu solicitud" })).toBeVisible();
+  expect(network.leadPayloads[0]).toMatchObject({ adsClickType: "gclid", adsClickId: "AbC_123" });
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  await submitLocalForm(page);
+  await expect.poll(() => network.leadPayloads.length).toBe(2);
+  expect(network.leadPayloads[1]).not.toHaveProperty("adsClickId");
+  expect(network.leadPayloads[1]).not.toHaveProperty("adsClickType");
+});
+
 for (const advertising of [false, true]) {
   test(`Google consent is queued before config, advertising ${advertising ? "granted" : "denied"}`, async ({ page }) => {
     const network = await harness(page);
