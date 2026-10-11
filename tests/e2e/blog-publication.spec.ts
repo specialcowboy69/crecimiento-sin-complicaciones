@@ -131,3 +131,14 @@ test("mobile blog header keeps the logo without a cramped audit CTA", async ({ p
     expect(widths.document, route).toBeLessThanOrEqual(widths.viewport);
   }
 });
+
+test("blog headers prioritize services throughout the mobile breakpoint", async ({ page }) => {
+  await page.setViewportSize({ width: 700, height: 900 });
+  for (const route of ["/blog", "/blog/categoria/seo", `/blog/${articles[0].slug}`]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    const header = page.locator("header").first();
+    await expect(header.locator("details.landing-services-menu")).toBeVisible();
+    await expect(header.locator('a[href="/#auditoria"]')).toBeHidden();
+    await expect(header.locator('a[href="/blog"]')).toBeHidden();
+  }
+});

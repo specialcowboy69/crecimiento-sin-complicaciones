@@ -21,16 +21,17 @@ test("Alicante Google Ads form sends the approved lead attribution", async ({ pa
   await page.getByLabel("Nombre*").fill("Empresa de prueba");
   await page.getByLabel("Email corporativo*").fill("equipo@example.com");
   await page.getByLabel("Empresa*").fill("Proyecto Alicante");
+  await expect(
+    page.locator("#auditoria-google-ads-alicante").getByRole("link", { name: /política de privacidad/i }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Solicitar auditoría gratuita" }).last().click();
 
-  await expect(page.getByRole("status")).toContainText("Enviado con éxito");
+  await expect(page.getByRole("status")).toContainText("Solicitud enviada");
   expect(payload).toMatchObject({
     sourcePage: "Google Ads Alicante",
     sourcePath: "/agencia-marketing-digital/google-ads/alicante",
     formType: "Auditoría gratuita",
     interestedService: "Google Ads",
   });
-  await expect(
-    page.locator("#auditoria-google-ads-alicante").getByRole("link", { name: /política de privacidad/i }),
-  ).toBeVisible();
+  await expect(page.locator("#auditoria-google-ads-alicante form")).toHaveCount(0);
 });

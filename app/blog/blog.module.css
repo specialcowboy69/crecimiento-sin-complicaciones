@@ -581,17 +581,15 @@
   }
 }
 
+@media (max-width: 767px) {
+  .headerActions > a {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .headerInner {
     padding-inline: 16px;
-  }
-
-  .headerActions > a:not(.headerCta) {
-    display: none;
-  }
-
-  .headerCta {
-    display: none;
   }
 
   .heroInner,

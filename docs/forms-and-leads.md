@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-10-05
+**Last updated:** 2026-10-09
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -119,6 +119,9 @@ If a page changes title but not business source, prefer keeping the same `source
 - Use inline validation messages tied with `aria-describedby`.
 - Use `aria-invalid` for invalid fields.
 - Use `role="status"` and `aria-live="polite"` for submit status.
+- After `/api/leads` succeeds, replace the form in place with a focused confirmation. Do not show the confirmation for validation or API failures; preserve the entered values and inline errors so the visitor can retry.
+- Show direct contact alternatives alongside active audit forms: `tel:+34604990651` (604 990 651) and `mailto:info@crecimientosincomplicaciones.com`.
+- Keep `#audit-request` on the form/confirmation container so each mobile header audit CTA lands at the form on its own page.
 - Keep mobile forms to one column.
 - Keep required fields minimal.
 - Use privacy copy when the form asks for more context.

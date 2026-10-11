@@ -278,10 +278,10 @@ for (const scenario of ["success", "failed", "rejected", "analytics-only", "no-c
       await page.locator("#email").fill("test@example.invalid");
       await page.locator("#company").fill("Negocio de prueba");
       await page.locator("form.lead-form").getByRole("button", { name: "Quiero mi auditoría" }).click();
-      await expect(page.getByRole("status").filter({ hasText: "Enviado con éxito" })).toBeVisible();
+      await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
     } else {
       await submitLocalForm(page);
-      await expect(page.getByRole("status").filter({ hasText: scenario === "failed" ? "No hemos podido enviar" : "Hemos recibido tu solicitud" })).toBeVisible();
+      await expect(page.getByRole("status").filter({ hasText: scenario === "failed" ? "No hemos podido enviar" : "Solicitud enviada" })).toBeVisible();
     }
     expect(network.leadPayloads).toHaveLength(1);
     await expect.poll(async () => (await leadEvents(page)).length).toBe(scenario === "success" ? 1 : 0);
@@ -302,7 +302,7 @@ test("successful lead waits for delayed tag config then emits once without param
   await page.goto("/seo/local", { waitUntil: "domcontentloaded" });
   await expect.poll(() => network.googleRequests.length).toBe(1);
   await submitLocalForm(page);
-  await expect(page.getByRole("status").filter({ hasText: "Hemos recibido tu solicitud" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
   expect(await leadEvents(page)).toEqual([]);
   await network.releaseGoogle();
   await configured(page);
@@ -320,7 +320,7 @@ test("pending conversion is dropped if client path changes to admin before tag r
   await page.goto("/seo/local", { waitUntil: "domcontentloaded" });
   await expect.poll(() => network.googleRequests.length).toBe(1);
   await submitLocalForm(page);
-  await expect(page.getByRole("status").filter({ hasText: "Hemos recibido tu solicitud" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
   await page.evaluate(() => window.history.pushState(null, "", "/admin/leads"));
   await network.releaseGoogle();
   await expect.poll(() => page.evaluate(() => Reflect.get(window, "ga-disable-G-VECVHEZ2DN"))).toBe(true);
@@ -350,7 +350,7 @@ test("pending conversion is dropped after optional consent is revoked", async ({
   await page.goto("/seo/local", { waitUntil: "domcontentloaded" });
   await expect.poll(() => network.googleRequests.length).toBe(1);
   await submitLocalForm(page);
-  await expect(page.getByRole("status").filter({ hasText: "Hemos recibido tu solicitud" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
   // Simulate the preference-store notification without unloading the document,
   // so the queue's cancellation can be observed independently of pagehide.
   await page.evaluate((value) => {

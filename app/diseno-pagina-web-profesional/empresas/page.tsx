@@ -256,7 +256,7 @@ export default function WebDesignForCompaniesPage() {
               <a href="#proceso">Proceso</a>
             </div>
             <div className="flex items-center gap-3">
-              <LandingServicesMenu currentPath="/diseno-pagina-web-profesional/empresas" />
+              <LandingServicesMenu currentPath="/diseno-pagina-web-profesional/empresas" mobileAuditHref="#audit-request" />
               <a className="landing-top-cta inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-950/30 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-web-empresas">
                 <span className="hidden sm:inline">Auditoría gratuita</span>
                 <span className="sm:hidden">Auditoría</span>
@@ -532,8 +532,8 @@ export default function WebDesignForCompaniesPage() {
         </main>
 
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur md:hidden">
-          <a className="mx-auto flex min-h-12 max-w-md items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-black text-white shadow-lg shadow-blue-950/40" href="#auditoria-web-empresas">
-            Solicitar auditoría gratuita
+          <a className="mx-auto flex min-h-12 max-w-md items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-black text-white shadow-lg shadow-blue-950/40" href="tel:+34604990651" aria-label="Llamar al 604 990 651">
+            Llamar
           </a>
         </div>
       </div>

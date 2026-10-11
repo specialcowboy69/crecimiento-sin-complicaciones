@@ -149,6 +149,7 @@ export default function Home() {
               currentPath="/"
               allowedHrefs={homeMainServiceHrefs}
               label="Nuestros servicios"
+              mobileAuditHref="#audit-request"
             />
           </div>
         </nav>
