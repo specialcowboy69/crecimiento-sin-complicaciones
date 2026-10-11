@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   BarChart3,
@@ -15,6 +16,7 @@ import {
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { SeoAuditForm } from "../components/SeoAuditForm";
+import styles from "./seo.module.css";
 
 const systemBlocks = [
   {
@@ -268,67 +270,36 @@ export default function SeoPage() {
         </header>
 
         <main>
-          <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24" aria-labelledby="seo-hero-title">
-            <div>
-              <nav className="mb-5 flex items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
-                <Link className="hover:text-blue-300" href="/">Inicio</Link>
+          <section className={styles.hero} aria-labelledby="seo-hero-title">
+            <Image
+              src="/images/seo-hero-editorial.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              fetchPriority="high"
+              className={styles.heroImage}
+            />
+            <div className={styles.heroContent}>
+              <nav className={styles.heroBreadcrumbs} aria-label="Migas de pan">
+                <Link href="/">Inicio</Link>
                 <span aria-hidden="true">/</span>
                 <span>SEO</span>
               </nav>
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
-                AGENCIA SEO PARA EMPRESAS
-              </p>
-              <h1 id="seo-hero-title" className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] text-slate-900 sm:text-5xl lg:text-6xl">
+              <p className={styles.heroEyebrow}>Agencia SEO para empresas</p>
+              <h1 id="seo-hero-title" className={styles.heroTitle}>
                 Agencia SEO para empresas que quieren captar más clientes desde Google
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-200">
+              <p className={styles.heroDescription}>
                 Auditamos tu web, detectamos qué está frenando tu posicionamiento y construimos una hoja de ruta SEO
                 clara: técnica, contenidos, arquitectura e intención de búsqueda conectadas con negocio.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-seo">
+              <div className={styles.heroActions}>
+                <a className={styles.heroPrimary} href="#auditoria-seo">
                   Solicitar auditoría SEO gratuita
                 </a>
-                <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="#proceso">
+                <a className={styles.heroSecondary} href="#proceso">
                   Ver cómo trabajamos el SEO
                 </a>
-              </div>
-              <dl className="mt-10 grid gap-3 sm:grid-cols-3">
-                {[
-                  ["Entrada", "Auditoría SEO gratuita"],
-                  ["Foco", "Leads cualificados"],
-                  ["Sistema", "Técnica, contenido y conversión"],
-                ].map(([label, value]) => (
-                  <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10" key={label}>
-                    <dt className="text-sm font-black uppercase text-blue-300">{label}</dt>
-                    <dd className="mt-2 text-base font-bold leading-6 text-slate-100">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="seo-audit-panel rounded-lg bg-slate-900 p-6 shadow-2xl shadow-blue-950/30 ring-1 ring-slate-800" aria-label="Panel de auditoría SEO">
-              <div className="seo-audit-panel-head mb-7 flex items-center justify-between gap-4 pb-5">
-                <div className="seo-audit-panel-title">
-                  <p className="text-sm font-black uppercase tracking-normal text-blue-400">Auditoría inicial</p>
-                  <strong className="mt-2 block text-2xl font-black text-white">Hoja de ruta SEO</strong>
-                </div>
-                <span className="seo-audit-panel-badge rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black uppercase text-emerald-300 ring-1 ring-emerald-300/20">
-                  24-48h
-                </span>
-              </div>
-              <div className="seo-audit-step-grid grid gap-4">
-                {[
-                  ["Rastreo e indexación", "Detectar URLs bloqueadas, duplicadas o sin prioridad."],
-                  ["Keywords de decisión", "Separar búsquedas que informan de búsquedas que generan contacto."],
-                  ["Arquitectura interna", "Conectar páginas money, clusters y servicios relacionados."],
-                  ["Medición comercial", "Unir rankings, formularios y oportunidades reales."],
-                ].map(([title, text]) => (
-                  <article className="seo-audit-step rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800" key={title}>
-                    <h3 className="m-0 text-lg font-black text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-[1.6] text-slate-300">{text}</p>
-                  </article>
-                ))}
               </div>
             </div>
           </section>
@@ -530,7 +501,7 @@ export default function SeoPage() {
             </div>
           </section>
 
-          <section id="auditoria-seo" className="border-t border-slate-800 bg-slate-900 px-4 py-16 pb-28 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="cta-title">
+          <section id="auditoria-seo" className={`${styles.auditSection} border-t border-slate-800 bg-slate-900 px-4 py-16 pb-28 sm:px-6 lg:px-8 lg:py-24`} aria-labelledby="cta-title">
             <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
               <div>
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
@@ -550,7 +521,7 @@ export default function SeoPage() {
                   ))}
                 </div>
               </div>
-              <SeoAuditForm />
+              <SeoAuditForm contactDark={false} />
             </div>
           </section>
         </main>

@@ -22,6 +22,7 @@ type Errors = Partial<Record<keyof FormState, string>>;
 type SeoAuditFormProps = {
   sourcePage?: string;
   defaultService?: string;
+  contactDark?: boolean;
 };
 
 const initialState: FormState = {
@@ -51,7 +52,7 @@ function validate(values: FormState) {
   return errors;
 }
 
-export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO" }: SeoAuditFormProps) {
+export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO", contactDark = true }: SeoAuditFormProps) {
   const [values, setValues] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
@@ -207,7 +208,7 @@ export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO
       </p>
     </form>
     )}
-    <ContactOptions dark />
+    <ContactOptions dark={contactDark} />
     </div>
   );
 }
