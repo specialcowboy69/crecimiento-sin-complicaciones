@@ -12,6 +12,9 @@ query ListLeads @auth(level: NO_ACCESS) {
     status
     adsClickType
     adsMeasurementConsentAtSubmit
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportSubmittedAt
     createdAt
     updatedAt
   }
@@ -31,7 +34,20 @@ query ListLeadsBySource($sourcePage: String!) @auth(level: NO_ACCESS) {
     status
     adsClickType
     adsMeasurementConsentAtSubmit
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportSubmittedAt
     createdAt
     updatedAt
+  }
+}
+
+query GetLeadForAdmin($id: UUID!) @auth(level: NO_ACCESS) {
+  leads(where: { id: { eq: $id } }, limit: 1) {
+    id
+    status
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportSubmittedAt
   }
 }

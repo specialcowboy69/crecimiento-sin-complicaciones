@@ -13,6 +13,9 @@ type Lead @table(name: "leads") {
   adsMeasurementConsentAtSubmit: Boolean
   adsConsentVersion: String @col(dataType: "varchar(16)")
   status: String! @default(value: "new") @col(dataType: "varchar(40)")
+  qualifiedAt: Timestamp
+  adsExportBlockedAt: Timestamp
+  adsExportSubmittedAt: Timestamp
   createdAt: Timestamp! @default(expr: "request.time")
   updatedAt: Timestamp
 }

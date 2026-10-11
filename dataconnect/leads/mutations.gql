@@ -34,6 +34,20 @@ mutation UpdateLeadStatus($id: UUID!, $status: String!) @auth(level: NO_ACCESS) 
   lead_update(key: { id: $id }, data: { status: $status, updatedAt_expr: "request.time" })
 }
 
+mutation MarkLeadQualified($id: UUID!) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: { id: { eq: $id }, qualifiedAt: { isNull: true } }
+    data: { status: "qualified", qualifiedAt_expr: "request.time", updatedAt_expr: "request.time" }
+  )
+}
+
+mutation BlockLeadAdsExport($id: UUID!) @auth(level: NO_ACCESS) {
+  updated: lead_updateMany(
+    where: { id: { eq: $id }, adsExportBlockedAt: { isNull: true }, adsExportSubmittedAt: { isNull: true } }
+    data: { adsExportBlockedAt_expr: "request.time", updatedAt_expr: "request.time" }
+  )
+}
+
 mutation DeleteLead($id: UUID!) @auth(level: NO_ACCESS) {
   lead_delete(key: { id: $id })
 }

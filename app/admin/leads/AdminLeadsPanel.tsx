@@ -13,6 +13,9 @@ type Lead = {
   message: string | null;
   interestedService: string | null;
   status: string;
+  qualifiedAt: string | null;
+  adsExportBlockedAt: string | null;
+  adsExportSubmittedAt: string | null;
   adsClickType: string | null;
   adsMeasurementConsentAtSubmit: boolean | null;
   createdAt: string;
@@ -21,6 +24,7 @@ type Lead = {
 const statusLabels: Record<string, string> = {
   new: "Nuevo",
   contacted: "Contactado",
+  qualified: "Cualificado",
   closed: "Cerrado",
 };
 
@@ -76,7 +80,22 @@ export function AdminLeadsPanel() {
       return;
     }
 
-    setLeads((current) => current.map((lead) => (lead.id === id ? { ...lead, status: nextStatus } : lead)));
+    const data = await response.json();
+    setLeads((current) => current.map((lead) => (lead.id === id ? { ...lead, ...data.lead, status: nextStatus } : lead)));
+  }
+
+  async function blockAdsExport(id: string) {
+    const response = await fetch("/api/admin/leads", {
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${accessKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ id, action: "blockAdsExport" }),
+    });
+    if (!response.ok) {
+      setMessage("No se pudo excluir este lead de Ads.");
+      return;
+    }
+    const data = await response.json();
+    setLeads((current) => current.map((lead) => (lead.id === id ? { ...lead, ...data.lead } : lead)));
   }
 
   async function deleteLead(id: string, name: string) {
@@ -177,6 +196,12 @@ export function AdminLeadsPanel() {
                           <dd>{lead.adsClickType && lead.adsMeasurementConsentAtSubmit ? "ID de anuncio disponible" : "Sin ID de anuncio"}</dd>
                         </div>
                       ) : null}
+                      {lead.qualifiedAt ? (
+                        <div><dt className="font-black text-slate-100">Primera calificación</dt><dd>{new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" }).format(new Date(lead.qualifiedAt))}</dd></div>
+                      ) : null}
+                      {lead.sourcePath === "/seo/local" ? (
+                        <div><dt className="font-black text-slate-100">Exportación a Ads</dt><dd>{lead.adsExportSubmittedAt ? "Envío aceptado" : lead.adsExportBlockedAt ? "Excluido" : "Pendiente o no elegible"}</dd></div>
+                      ) : null}
                       <div>
                         <dt className="font-black text-slate-100">Formulario</dt>
                         <dd>{lead.formType}</dd>
@@ -206,7 +231,7 @@ export function AdminLeadsPanel() {
                         {new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" }).format(new Date(lead.createdAt))}
                       </time>
                       <div className="flex gap-2">
-                        {["new", "contacted", "closed"].map((nextStatus) => (
+                        {["new", "contacted", "qualified", "closed"].map((nextStatus) => (
                           <button
                             className="rounded-md bg-slate-800 px-3 py-2 text-xs font-black text-slate-100 hover:bg-blue-600 disabled:opacity-50"
                             disabled={lead.status === nextStatus}
@@ -217,6 +242,11 @@ export function AdminLeadsPanel() {
                             {statusLabels[nextStatus]}
                           </button>
                         ))}
+                        {lead.sourcePath === "/seo/local" && !lead.adsExportBlockedAt && !lead.adsExportSubmittedAt ? (
+                          <button className="rounded-md bg-amber-500/10 px-3 py-2 text-xs font-black text-amber-200 ring-1 ring-amber-400/20 hover:bg-amber-500 hover:text-slate-950" type="button" onClick={() => blockAdsExport(lead.id)}>
+                            Excluir de Ads
+                          </button>
+                        ) : null}
                         <button
                           className="rounded-md bg-red-500/10 px-3 py-2 text-xs font-black text-red-200 ring-1 ring-red-400/20 hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                           disabled={deletingLeadId === lead.id}

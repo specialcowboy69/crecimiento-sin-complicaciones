@@ -29,6 +29,11 @@ For SEO-local leads it shows whether a consented ad click ID is available, witho
 Older leads and leads from other routes have unknown measurement consent. The raw ID stays in Firebase Data Connect
 for possible later qualified-lead attribution; it is not sent to GA4 or Vercel Analytics.
 
+The admin may mark a lead `qualified` manually. The first `qualifiedAt` timestamp is preserved on repeated actions;
+`closed` remains available. For a pending SEO-local lead, **Excluir de Ads** records `adsExportBlockedAt` and prevents
+the later offline export. An already submitted lead cannot be excluded retroactively through this action; handle
+privacy requests promptly and inspect its export status before promising an outcome.
+
 ## Approved `formType` Values
 
 Use:
