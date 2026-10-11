@@ -133,6 +133,25 @@ test("fresh visit and rejection never request Google or create measurement cooki
   expect(consent).toMatchObject({ value: consentValue(false, false), path: "/", sameSite: "Lax" });
 });
 
+test("consented click ID stays in this tab and is removed after advertising revocation", async ({ page, context, baseURL }) => {
+  await harness(page);
+  await storedConsent(context, baseURL!, true, true);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await expect.poll(() => page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBe('{"type":"gclid","value":"AbC_123"}');
+  await page.getByRole("button", { name: "Cambiar configuración de cookies" }).click();
+  const dialog = page.getByRole("dialog", { name: "Configurar cookies" });
+  await dialog.getByRole("checkbox", { name: /^Publicidad y medición/ }).uncheck();
+  await Promise.all([page.waitForEvent("load"), dialog.getByRole("button", { name: "Guardar elección" }).click()]);
+  expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
+});
+
+test("rejected visitor never stores an ad click ID", async ({ page }) => {
+  await harness(page);
+  await page.goto("/seo/local?gclid=AbC_123");
+  await page.getByRole("dialog", { name: "Tu privacidad" }).getByRole("button", { name: "Rechazar", exact: true }).click();
+  expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
+});
+
 for (const advertising of [false, true]) {
   test(`Google consent is queued before config, advertising ${advertising ? "granted" : "denied"}`, async ({ page }) => {
     const network = await harness(page);

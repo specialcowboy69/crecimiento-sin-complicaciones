@@ -4,6 +4,7 @@ import { useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { OPEN_COOKIE_PREFERENCES_EVENT } from "./CookiePreferencesLink";
+import { captureAdsClick, clearAdsClick } from "./adsClickAttribution.mjs";
 import {
   COOKIE_CONSENT_NAME,
   getCookieConsentSnapshot,
@@ -126,6 +127,20 @@ export function CookieConsent() {
   const googleAnalyticsLoadedRef = useRef(false);
 
   useLayoutEffect(() => {
+    const captureCurrentUrl = () => {
+      captureAdsClick({
+        pathname: window.location.pathname,
+        search: window.location.search,
+        preferences: consent,
+        storage: window.sessionStorage,
+      });
+    };
+    captureCurrentUrl();
+    window.addEventListener("popstate", captureCurrentUrl);
+    return () => window.removeEventListener("popstate", captureCurrentUrl);
+  }, [consent, pathname]);
+
+  useLayoutEffect(() => {
     // GA also sends automatic history events. Read the live URL at send time so
     // entering admin is blocked before React's route effects have run.
     Object.defineProperty(window, `ga-disable-${GOOGLE_ANALYTICS_ID}`, {
@@ -236,6 +251,7 @@ export function CookieConsent() {
     shouldRestorePreferencesFocusRef.current = showPreferences && preferencesOpenerRef.current !== null;
     persistConsent(nextConsent);
     notifyConsentChange();
+    if (!nextConsent.analytics || !nextConsent.advertising) clearAdsClick(window.sessionStorage);
     setAnalyticsEnabled(nextConsent.analytics);
     setAdvertisingEnabled(nextConsent.advertising);
     setShowPreferences(false);
