@@ -208,7 +208,7 @@ const pagesWithAuditForm = [
   "/soluciones-inteligencia-artificial-empresas",
 ];
 
-test("mobile headers on audit pages link directly to their own forms", async ({ page }) => {
+test("mobile headers on audit pages keep the service menu and local form link", async ({ page }) => {
   test.setTimeout(120_000);
   await page.setViewportSize({ width: 375, height: 812 });
   for (const path of pagesWithAuditForm) {
@@ -216,7 +216,7 @@ test("mobile headers on audit pages link directly to their own forms", async ({ 
     const header = page.locator("header").first();
     await expect(header.locator(".mobile-audit-cta"), path).toBeVisible();
     await expect(header.locator(".mobile-audit-cta")).toHaveAttribute("href", "#audit-request");
-    await expect(header.locator(".landing-services-menu"), path).toBeHidden();
+    await expect(header.locator(".landing-services-menu"), path).toBeVisible();
     await expect(page.locator("#audit-request form"), path).toBeVisible();
   }
 });
@@ -237,8 +237,19 @@ test("mobile audit header fits and scrolls to the form", async ({ page }) => {
     await page.goto("/seo/local", { waitUntil: "networkidle" });
     const reject = page.getByRole("button", { name: "Rechazar", exact: true });
     if (await reject.isVisible()) await reject.click();
-    const cta = page.locator("header").first().locator(".mobile-audit-cta");
+    const header = page.locator("header").first();
+    const cta = header.locator(".mobile-audit-cta");
+    const menu = header.locator(".landing-services-menu");
     if (width < 768) {
+      await expect(menu).toBeVisible();
+      await menu.locator("summary").click();
+      await expect(menu).toHaveAttribute("open", "");
+      const panel = await menu.locator(".landing-services-dropdown").boundingBox();
+      expect(panel).not.toBeNull();
+      expect(panel!.x).toBeGreaterThanOrEqual(0);
+      expect(panel!.x + panel!.width).toBeLessThanOrEqual(width + 1);
+      await expect(menu.locator('a[href="/seo"]')).toBeVisible();
+      await page.keyboard.press("Escape");
       await expect(cta).toBeVisible();
       await cta.click();
       await expect(page).toHaveURL(/#audit-request$/);

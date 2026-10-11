@@ -2942,6 +2942,10 @@ textarea {
   display: none;
 }
 
+.landing-services-mobile-label {
+  display: none;
+}
+
 .landing-services-menu > summary {
   display: inline-flex;
   min-height: 44px;
@@ -3175,9 +3179,13 @@ textarea {
     flex: 0 0 auto;
   }
 
-  .landing-services-menu.mobile-audit-replaces-menu,
+  .landing-services-desktop-label,
   header:has(.mobile-audit-cta) .mobile-header-links {
     display: none !important;
+  }
+
+  .landing-services-mobile-label {
+    display: inline;
   }
 
   .mobile-audit-cta {
@@ -3209,7 +3217,7 @@ textarea {
 
   .landing-services-menu > summary,
   .nav-services-menu > summary {
-    min-height: 36px;
+    min-height: 44px;
     padding: 8px 10px;
     font-size: 0.76rem;
   }
