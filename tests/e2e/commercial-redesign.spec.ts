@@ -40,3 +40,18 @@ test("national SEO hero and contact details remain readable", async ({ page }) =
   await page.goto("/seo/madrid", { waitUntil: "domcontentloaded" });
   await expect(page.locator(".contact-options")).toHaveClass(/contact-options-dark/);
 });
+
+test("SEO editorial flow is responsive and links to the live technical service", async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/seo", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { level: 2, name: "Cuatro piezas que trabajan juntas" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "Del diagnóstico a la siguiente decisión" })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  }
+
+  const technical = page.getByRole("link", { name: "Ver SEO técnico y arquitectura" });
+  await expect(technical).toHaveAttribute("href", "/agencia-marketing-digital/seo-tecnico-arquitectura-entidades");
+  const response = await page.request.get("/agencia-marketing-digital/seo-tecnico-arquitectura-entidades");
+  expect(response.status()).toBe(200);
+});

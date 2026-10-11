@@ -28,3 +28,17 @@ test("national SEO uses an image hero and a light contact variant", () => {
   assert.match(form, /<ContactOptions dark=\{contactDark\}/);
   assert.ok(asset("seo-hero-editorial.webp").size > 10_000);
 });
+
+test("national SEO explains diagnosis, system, process and audiences without repeated card grids", () => {
+  const page = source("app/seo/page.tsx");
+
+  assert.doesNotMatch(page, /systemBlocks|difference-title|FileSearch/);
+  assert.match(page, /styles\.diagnosis/);
+  assert.match(page, /styles\.systemFlow/);
+  assert.match(page, /styles\.processTimeline/);
+  assert.match(page, /styles\.audienceRoutes/);
+  assert.match(page, /\/agencia-marketing-digital\/seo-tecnico-arquitectura-entidades/);
+  for (const id of ["servicio", "proceso", "seo-local", "faq", "auditoria-seo"]) {
+    assert.match(page, new RegExp(`id="${id}"`));
+  }
+});
