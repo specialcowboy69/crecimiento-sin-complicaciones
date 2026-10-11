@@ -50,6 +50,19 @@ export default function PrivacyPolicyPage() {
           SEO local para atribuirlo a Google Ads. Ese evento no contiene datos personales del formulario. No usamos
           remarketing, publicidad personalizada ni conversiones mejoradas.
         </p>
+        <p>
+          Con ambas categorías aceptadas, si llegas desde un anuncio que contiene un identificador del clic de Google
+          Ads, podemos conservarlo durante la sesión y asociarlo a la solicitud de SEO local que envíes. Si nuestro
+          equipo marca después esa solicitud como cualificada, podemos comunicar a Google Ads ese hito, el identificador
+          del clic y la fecha de calificación. En esta integración no enviamos a Google el nombre, email, teléfono,
+          empresa ni mensaje del formulario. Google Ads determina si el clic es atribuible a un anuncio.
+        </p>
+        <p>
+          Cambiar tus preferencias impide nuevas capturas en este navegador. Si ya enviaste una solicitud y quieres
+          oponerte a una exportación pendiente o ejercer tus derechos, escríbenos a{" "}
+          <a href="mailto:info@crecimientosincomplicaciones.com">info@crecimientosincomplicaciones.com</a>.
+          Un cambio posterior no retira automáticamente un evento que ya se haya enviado.
+        </p>
 
         <h2>Tus derechos</h2>
         <p>

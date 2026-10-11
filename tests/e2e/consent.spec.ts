@@ -152,6 +152,20 @@ test("rejected visitor never stores an ad click ID", async ({ page }) => {
   expect(await page.evaluate(() => sessionStorage.getItem("seo_local_ads_click_v1"))).toBeNull();
 });
 
+test("visitor notices explain click ID association and later qualified-lead measurement", async ({ page }) => {
+  await harness(page);
+  await page.goto("/seo/local");
+  const banner = page.getByRole("dialog", { name: "Tu privacidad" });
+  await expect(banner).toContainText("identificador del clic");
+  await expect(banner).toContainText("cualificada");
+  await page.goto("/politica-de-privacidad");
+  await expect(page.getByRole("main")).toContainText("identificador del clic");
+  await expect(page.getByRole("main")).toContainText("cualificada");
+  await page.goto("/politica-de-cookies");
+  await expect(page.getByRole("main")).toContainText("identificador del clic");
+  await expect(page.getByRole("main")).toContainText("cualificada");
+});
+
 test("only a consented SEO-local submission sends its click ID to the lead API", async ({ page, context, baseURL }) => {
   const network = await harness(page);
   await storedConsent(context, baseURL!, true, true);

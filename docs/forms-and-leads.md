@@ -20,10 +20,14 @@ Payload fields:
 | `company` | No | Keep optional unless the form explicitly requires it. |
 | `message` | No | Free context assembled from form fields. |
 | `interestedService` | No | Service, goal or selected category. |
+| `adsClickType`, `adsClickId` | No | Only a consented `/seo/local` browser may supply a click ID. The server checks the v2 cookie, exact route and same-origin Referer before persisting it. Never infer campaign origin from `sourcePage`. |
 
 The API lives in `app/api/leads/route.ts`, stores through Firebase Data Connect and validates/sanitizes strings before writing.
 
 Admin review lives in `app/admin/leads/AdminLeadsPanel.tsx` and groups leads by `sourcePage`.
+For SEO-local leads it shows whether a consented ad click ID is available, without displaying the ID itself.
+Older leads and leads from other routes have unknown measurement consent. The raw ID stays in Firebase Data Connect
+for possible later qualified-lead attribution; it is not sent to GA4 or Vercel Analytics.
 
 ## Approved `formType` Values
 

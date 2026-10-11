@@ -307,7 +307,9 @@ export function CookieConsent() {
           <h2 id="cookie-consent-title">Tu privacidad</h2>
           <p>
             Usamos Vercel Analytics para medir visitas de forma agregada y sin cookies. Con tu permiso activamos Google
-            Analytics y la medición de conversiones de Google Ads. Puedes cambiar tu elección cuando quieras.
+            Analytics y la medición de conversiones de Google Ads. Si aceptas ambas categorías, podemos asociar el
+            identificador del clic de un anuncio a una solicitud de SEO local y comunicar a Google Ads si luego se marca
+            como cualificada, sin enviar los datos de contacto del formulario. Puedes cambiar tu elección cuando quieras.
           </p>
           <p className="cookie-consent-legal">
             Consulta la <Link href="/politica-de-cookies">Política de cookies</Link> y la{" "}
@@ -370,7 +372,8 @@ export function CookieConsent() {
             <span>
               <strong>Publicidad y medición</strong>
               <small>
-                Permite atribuir a Google Ads las solicitudes enviadas. No activamos publicidad personalizada ni remarketing.
+                Permite asociar el identificador del clic a tu solicitud de SEO local y medir si luego se marca como
+                cualificada. No activamos publicidad personalizada ni remarketing.
               </small>
             </span>
           </label>
