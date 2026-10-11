@@ -8,5 +8,6 @@ schema:
       database: leads
       cloudSql:
         instanceId: leads-fdc
+        schemaValidation: "COMPATIBLE"
 connectorDirs:
   - "./leads"

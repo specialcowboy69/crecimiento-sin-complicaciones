@@ -1,6 +1,6 @@
 # Analytics And Consent
 
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-11
 
 This document is the operational source of truth for visitor measurement and cookie-consent behavior in `pagina-agencia`. The public explanation remains in `/politica-de-cookies` and `/politica-de-privacidad`; update those pages whenever this implementation changes in a way that affects visitors.
 
@@ -11,6 +11,8 @@ This document is the operational source of truth for visitor measurement and coo
 | Vercel Analytics | Aggregate visits, page views and documented custom events | No: it is configured without cookies | Mounted globally, except `/admin` |
 | Google Analytics 4 (`G-VECVHEZ2DN`) | Optional, more detailed usage measurement | Yes: explicit analytics acceptance | Public pages only, loaded after analytics consent; `/admin` and its descendants are excluded |
 | Google Ads conversion measurement | Attribute the successful SEO-local lead event imported from GA4 | Yes: analytics and advertising-measurement consent | `lead_seo_local_submitted` only after a successful `/seo/local` submission |
+| Consented ad click ID | Link a later SEO-local request to a possible qualified-lead event | Yes: both optional categories | `gclid`, `gbraid` or `wbraid` in this tab's `sessionStorage`, then optional Firebase lead fields |
+| Google Ads qualified-lead upload | Send a manually qualified SEO-local lead to a separate secondary conversion action | Yes: both optional categories recorded when the form was submitted | Server-side Data Manager API, only for eligible leads after offline export is explicitly enabled; no form contact fields |
 
 `app/layout.tsx` mounts `VercelAnalytics` and `CookieConsent` for the public application. The Vercel wrapper filters admin URLs before data is sent. Do not add another global analytics script or import GA4 directly in the layout: `CookieConsent` is the sole GA4 loading gate.
 
@@ -21,6 +23,7 @@ This document is the operational source of truth for visitor measurement and coo
 - Rejection keeps Vercel Analytics available but must not download or configure GA4. The technical preference cookie is necessary to remember the rejection.
 - Analytics consent loads GA4 after the page becomes interactive and grants `analytics_storage`. Advertising-measurement consent additionally grants `ad_storage` and `ad_user_data` for the GA4-to-Google-Ads conversion flow. `ad_personalization` remains denied: this implementation has no remarketing or personalized advertising.
 - Revoking analytics removes accessible `_ga`, `_ga_*` and `_gcl_*` cookies for the current host and project root domain, updates Google consent to denied, and reloads without GA4. Revoking only advertising measurement removes `_gcl_*` cookies and reloads with analytics still available.
+- Rejecting or revoking advertising measurement also clears `seo_local_ads_click_v1` from this tab's `sessionStorage`. A public URL with a valid click ID may replace the session value only while both categories are granted. The server independently checks the v2 consent cookie, `/seo/local` source path and same-origin `/seo/local` Referer before saving the ID on a lead. A later preference change does not automatically update an already stored lead; requests to block a pending export must be handled in the admin panel.
 
 The helper `app/components/cookieConsentCookies.mjs` defines consent serialization, the GA4/Ads lead-event guard, and the root domain used during Google-cookie cleanup. Update it and extend the tests before adding a public hostname or changing the canonical domain.
 
@@ -41,6 +44,20 @@ It must never contain names, email addresses, phone numbers, company names, mess
 `lead_seo_local_submitted` is a parameter-free GA4 event emitted only after a successful `/seo/local` submission and only with both optional consents. Mark that event as a GA4 key event and import it as the primary, one-per-click Google Ads conversion for the initial SEO-local campaign. The account link and Google Ads auto-tagging are dashboard configuration and remain outside this repository.
 
 Analytics is best-effort and must never turn an already saved lead into a form error. The form's success is determined by `/api/leads`, not by the availability of either analytics provider.
+
+The optional click ID is stored only in Firebase Data Connect alongside a future consented SEO-local lead; neither analytics event contains it. A later manual `qualified` status may produce a separate offline Google Ads event using that ID and the qualification time, without form contact fields. The separate action starts as secondary and must not be treated as attributed until Google Ads reports it. Public wording in both policy pages and the consent control requires privacy/legal review before deployment.
+
+## Qualified lead export
+
+`/api/cron/export-qualified-leads` runs daily at 08:00 UTC through Vercel Cron. It requires `Authorization: Bearer CRON_SECRET` and returns aggregate counts only. `GOOGLE_ADS_OFFLINE_ENABLED` defaults to false; while false the route does not query leads or contact Google. The Data Connect query reads only attribution and export fields, never name, contact, company or message.
+
+Only a manually qualified `/seo/local` lead with a stored valid click ID, consent recorded at submission, and no exclusion, terminal failure or accepted submission is eligible. The event uses the first `qualifiedAt` time and `seo-local-qualified-<lead UUID>` as a stable transaction ID. It sends only the matching click ID type, `adUserData=CONSENT_GRANTED` and `adPersonalization=CONSENT_DENIED` to a separate Google Ads conversion action. The existing GA4 form submission remains the primary conversion while the qualified-lead action is secondary.
+
+An HTTP success with a Data Manager `requestId` means Google accepted the ingestion request; it does not establish that Ads attributed a conversion. A successful `validateOnly` response may omit `requestId` because no event was ingested. Missing configuration, token failures and account permission errors remain pending so they can be retried after repair; malformed event rejections become terminal and require manual review. If Google accepts an event but the local acceptance marker cannot be saved, the next run may resubmit the same transaction ID so Google's deduplication can handle it. Inspect Data Manager diagnostics and the Ads action separately before drawing attribution conclusions.
+
+Before sending an event, the cron atomically claims its lead in Data Connect. An exclusion or deletion confirmed before the claim prevents the send. While a claim is active, the panel reports an in-progress export and refuses exclusion or deletion, rather than confirming an action that cannot stop a request already underway. The claim clears after a recorded result; claims abandoned by a crashed process become eligible again after 24 hours. Pause `GOOGLE_ADS_OFFLINE_ENABLED` first when handling an urgent privacy request during an active export.
+
+**Privacy requests:** identify the lead in the admin panel and use **Excluir de Ads** while the export is pending, then verify its blocked state. If the panel reports that an export is in progress, the action has not succeeded; pause future sends, wait for the current request to finish and inspect its result. Changing cookie preferences after submission only stops new browser capture; it does not automatically block the already stored lead. An accepted submission cannot be recalled with this control. The behavior of later preference withdrawal must receive privacy/legal review before live export is enabled. When needed, set `GOOGLE_ADS_OFFLINE_ENABLED=false` and redeploy to stop future sends while investigating.
 
 If Google Analytics has not finished initializing, an eligible conversion may wait in memory for at most 30 seconds. It carries no lead fields, is not persisted to cookies or browser storage, and is attempted at most once when GA4 becomes ready. Both permissions must already be present when submitting and must still be present at delivery. A later acceptance must not replay a submission made without consent. Withdrawal of either permission, departure from the document, entry into the administrator or expiry cancels pending delivery. Browser blocking or departure can still prevent measurement; this is not a guaranteed-delivery system.
 

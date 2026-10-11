@@ -107,6 +107,19 @@ test("an already consenting successful lead waits for GA readiness and emits onc
   h.assertClean();
 });
 
+test("a lead click ID stays in the lead request and never enters GA4 or Vercel events", async (t) => {
+  const h = browser(t, { ready: true });
+  h.win.sessionStorage = {
+    getItem: () => '{"type":"gclid","value":"AbC_123"}',
+    removeItem() {},
+  };
+  await submitLead(lead);
+  assert.equal(JSON.parse(h.requests[0][1].body).adsClickId, "AbC_123");
+  assert.deepEqual(h.calls, [["event", "lead_seo_local_submitted"]]);
+  assert.equal(JSON.stringify(h.tracks).includes("AbC_123"), false);
+  h.assertClean();
+});
+
 test("a gtag stub alone is not ready until Google has been configured", async (t) => {
   const h = browser(t);
   h.win.gtag = (...args) => h.calls.push(args);

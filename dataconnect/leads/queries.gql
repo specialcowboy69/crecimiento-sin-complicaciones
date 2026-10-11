@@ -10,6 +10,15 @@ query ListLeads @auth(level: NO_ACCESS) {
     message
     interestedService
     status
+    adsClickType
+    adsMeasurementConsentAtSubmit
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportClaimedAt
+    adsExportSubmittedAt
+    adsExportAttemptedAt
+    adsExportTerminalAt
+    adsExportLastErrorCode
     createdAt
     updatedAt
   }
@@ -27,7 +36,62 @@ query ListLeadsBySource($sourcePage: String!) @auth(level: NO_ACCESS) {
     message
     interestedService
     status
+    adsClickType
+    adsMeasurementConsentAtSubmit
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportClaimedAt
+    adsExportSubmittedAt
+    adsExportAttemptedAt
+    adsExportTerminalAt
+    adsExportLastErrorCode
     createdAt
     updatedAt
+  }
+}
+
+query GetLeadForAdmin($id: UUID!) @auth(level: NO_ACCESS) {
+  leads(where: { id: { eq: $id } }, limit: 1) {
+    id
+    status
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportClaimedAt
+    adsExportSubmittedAt
+    adsExportAttemptedAt
+    adsExportTerminalAt
+    adsExportLastErrorCode
+  }
+}
+
+query ListQualifiedLeadsForAdsExport @auth(level: NO_ACCESS) {
+  leads(
+    where: {
+      sourcePath: { eq: "/seo/local" }
+      status: { eq: "qualified" }
+      adsMeasurementConsentAtSubmit: { eq: true }
+      adsClickId: { isNull: false }
+      qualifiedAt: { isNull: false }
+      adsExportBlockedAt: { isNull: true }
+      adsExportClaimedAt: { isNull: true }
+      adsExportSubmittedAt: { isNull: true }
+      adsExportTerminalAt: { isNull: true }
+    }
+    orderBy: [{ qualifiedAt: ASC }]
+    limit: 100
+  ) {
+    id
+    sourcePath
+    status
+    adsClickType
+    adsClickId
+    adsMeasurementConsentAtSubmit
+    qualifiedAt
+    adsExportBlockedAt
+    adsExportClaimedAt
+    adsExportSubmittedAt
+    adsExportAttemptedAt
+    adsExportTerminalAt
+    adsExportLastErrorCode
   }
 }
