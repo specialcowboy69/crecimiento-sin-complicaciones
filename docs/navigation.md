@@ -1,6 +1,6 @@
 # Navigation Rules
 
-**Last updated:** 2026-10-09
+**Last updated:** 2026-10-11
 
 This document defines header, dropdown and mobile navigation behavior for `pagina-agencia`.
 
@@ -16,8 +16,8 @@ This document defines header, dropdown and mobile navigation behavior for `pagin
 ## Global Rules
 
 - Keep the logo visible in mobile headers.
-- On mobile, pages with an in-page audit form show `Solicitar auditoría gratuita` in the header instead of the services dropdown. It links to the shared `#audit-request` anchor beside the live form or confirmation.
-- On mobile, pages without an in-page form, including blog routes, keep the services dropdown. Do not link a mobile audit CTA to another page and imply the form is local.
+- On mobile, every public header keeps the services dropdown. Pages with an in-page audit form also show an `Auditoría gratuita` link to the shared `#audit-request` anchor beside the live form or confirmation.
+- On mobile, pages without an in-page form, including blog routes, keep the services dropdown without a local audit CTA. Do not link a mobile audit CTA to another page and imply the form is local.
 - Remove direct quick links when they crowd the mobile header; the logo and primary header action take priority.
 - Do not add links to planned routes. Verify the route exists first.
 - Header dropdown labels should stay short.
@@ -51,8 +51,7 @@ Desktop home header:
 
 Mobile home header:
 
-- Logo.
-- Logo and `Solicitar auditoría gratuita` linked to `#audit-request`; the services dropdown remains on desktop.
+- Logo, `Auditoría gratuita` linked to `#audit-request`, and the services dropdown.
 - No direct section anchors if they make the header cramped.
 
 The home `Más servicios` dropdown should show only principal services:
@@ -80,8 +79,8 @@ Commercial landing pages can show:
 On mobile:
 
 - Keep logo visible.
-- On pages with an in-page form, use the shared mobile audit CTA linked directly to `#audit-request` and hide `Más servicios` in the header.
-- On pages without an in-page form, keep `Más servicios` and do not show a misleading audit CTA.
+- On pages with an in-page form, show the services dropdown and the shared mobile audit CTA linked directly to `#audit-request`.
+- On pages without an in-page form, keep the services dropdown and do not show a misleading audit CTA.
 - Hide direct page anchors when they crowd the primary action.
 
 The direct anchors should be page-specific, for example:
@@ -110,7 +109,7 @@ Default dropdown links in `LandingServicesMenu`:
 
 The component filters out the current page via `currentPath`.
 
-Pages with an in-page audit form pass `mobileAuditHref="#audit-request"`. The component then shows the audit CTA only below 768 px and hides its dropdown at that width; desktop still shows the services dropdown. Each active form or confirmation keeps the stable `#audit-request` anchor. Do not pass this prop until a real local form exists.
+Pages with an in-page audit form pass `mobileAuditHref="#audit-request"`. The component then shows the audit CTA alongside its dropdown below 768 px; desktop shows only the services dropdown. The mobile menu label is shortened to `Servicios` so both controls fit. Each active form or confirmation keeps the stable `#audit-request` anchor. Do not pass this prop until a real local form exists.
 
 The panel uses two compact columns on desktop and one scrollable column on mobile. It closes when the visitor clicks or taps outside, presses `Escape`, or follows a service link. Keep the native `details/summary` keyboard interaction.
 
@@ -155,7 +154,7 @@ Before closing navigation changes:
 
 - Check that the logo remains reachable and visible.
 - Check that dropdown links are keyboard reachable through native `details/summary` behavior or equivalent accessible controls.
-- Check that the desktop-only CTA is hidden on mobile, while the shared mobile audit CTA appears only when a local form exists and points to it.
+- Check that the desktop-only CTA is hidden on mobile, the services dropdown remains available, and the shared mobile audit CTA appears only when a local form exists and points to it.
 - Check mobile width around `375px` and narrow widths around `320px` when labels change.
 - Check desktop around `1280px` and tablet around `768px`.
 - Use Playwright screenshots for visual header changes when practical.
