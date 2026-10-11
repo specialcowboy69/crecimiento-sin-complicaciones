@@ -134,6 +134,8 @@ When adding a new principal service:
 
 `PageLinksNav` is desktop-only and helps users move between main commercial pages. It is not a mobile header replacement.
 
+Do not render this secondary strip on `/agencia-marketing-digital/google-ads` or `/diseno-landing-pages`: both lead directly from the main header into a full-bleed service hero. Their breadcrumb and shared services dropdown remain the cross-page navigation. Other pages may keep the strip where it still adds useful navigation.
+
 Current main links:
 
 - `/`

@@ -75,15 +75,15 @@ Reglas:
 
 - No incluir `Auditoría gratuita` en el header de escritorio de la home.
 - La home usa `Auditoría gratuita` como oferta de conversión en hero, secciones y formulario; en el header móvil se muestra la CTA directa al formulario.
-- En móvil, el header de la home muestra logo + `Solicitar auditoría gratuita` enlazado al formulario de la propia página. El desplegable de servicios permanece en escritorio.
+- En móvil, el header de la home muestra logo, CTA de auditoría al formulario propio y desplegable de servicios compacto.
 - El CTA principal debe vivir en el hero y en secciones de conversión.
 - Los enlaces centrales deben tener peso visual suficiente.
-- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto. En páginas con formulario propio, la CTA de auditoría sustituye al desplegable; las páginas sin formulario conservan el desplegable.
+- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto. Las páginas con formulario propio muestran CTA de auditoría y desplegable compacto; las páginas sin formulario conservan el desplegable sin CTA local.
 
 En landings de servicio:
 
 - Mantener `Auditoría gratuita` visible en el header de escritorio.
-- Usar `Más servicios` como desplegable secundario antes del CTA en escritorio. En móvil, usar la CTA directa al formulario propio en lugar del desplegable.
+- Usar `Más servicios` como desplegable secundario antes del CTA en escritorio. En móvil, mantener tanto la CTA directa al formulario propio como el desplegable `Servicios`.
 - Evitar una segunda barra de navegación encima del hero salvo que sea imprescindible.
 - Los enlaces internos de la landing deben quedarse en el header principal cuando haya espacio.
 - Donde ya existe una barra fija inferior de auditoría en móvil, su acción pasa a `Llamar` con el teléfono público verificado; el formulario sigue accesible desde el header.
@@ -123,7 +123,7 @@ Las landings deben parecer parte de la misma familia visual que la home. Pueden 
 Reglas:
 
 - Usar la capa visual clara `landing-light` cuando una landing venga de un diseño oscuro.
-- Mantener fondos claros, cards blancas y bordes suaves.
+- Mantener una base de fondos claros y usar tarjetas solo para elementos que necesitan un marco propio; los procesos, recorridos y argumentos funcionan mejor como secciones editoriales sin cajas repetidas.
 - Reutilizar azul principal y verde acento.
 - Mantener el logo y la navegación alineados con la home.
 - Evitar bloques demasiado densos en móvil.
@@ -144,6 +144,7 @@ La fotografía debe mostrar el servicio, el contexto de trabajo o el mercado al 
 Patrones aprobados:
 
 - Hero de ancho completo con fotografía editorial, overlay suficiente y copy legible sobre la imagen.
+- En `/agencia-marketing-digital/google-ads`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
 - Composiciones de imagen y texto que alternen el ritmo de la página.
 - Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
 - Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
@@ -157,6 +158,8 @@ Evitar:
 - Recortes que oculten el producto, la persona o el lugar que la imagen pretende mostrar.
 
 Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
+
+En las tres páginas comerciales anteriores, el contenido posterior al hero evita repetir cuadrículas de tarjetas: Google Ads mantiene un recorrido de campaña, SEO presenta diagnóstico, sistema y proceso, y Landing Pages explica la anatomía de la página y el ciclo mensaje → acción → aprendizaje. Los esquemas deben seguir siendo comprensibles como texto HTML sin depender de una imagen ni prometer métricas o plazos no verificados.
 
 ## Formularios
 

@@ -84,3 +84,85 @@ test("Landing Pages anatomy and solution remain legible on narrow and wide scree
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   }
 });
+
+test("commercial hero CTAs reach their audit heading below the sticky header", async ({ page }) => {
+  const routes = [
+    ["/agencia-marketing-digital/google-ads", "#auditoria-google-ads"],
+    ["/seo", "#auditoria-seo"],
+    ["/diseno-landing-pages", "#auditoria-landing-pages-form"],
+  ] as const;
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
+    for (const [route, targetId] of routes) {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      const reject = page.getByRole("button", { name: "Rechazar" });
+      if (await reject.isVisible()) await reject.click();
+
+      await page.locator("main > section").first().locator(`a[href="${targetId}"]`).click();
+      await expect(page).toHaveURL(new RegExp(`${targetId}$`));
+      const heading = page.locator(targetId).getByRole("heading").first();
+      await expect(heading).toBeInViewport();
+      const headingTop = await heading.evaluate((element) => element.getBoundingClientRect().top);
+      const headerBottom = await page.locator("header").evaluate((element) => element.getBoundingClientRect().bottom);
+      expect(headingTop, `${route} at ${width}px`).toBeGreaterThanOrEqual(headerBottom + 4);
+      await expect(page.locator(".contact-options a[href='tel:+34604990651']")).toBeVisible();
+      await expect(page.locator(".contact-options a[href='mailto:info@crecimientosincomplicaciones.com']")).toBeVisible();
+      expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe("auto");
+    }
+  }
+});
+
+test("SEO contact links have readable contrast and the services menu supports keyboard escape", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/seo", { waitUntil: "domcontentloaded" });
+  const contrast = await page.locator("#audit-request .contact-options a").first().evaluate((element) => {
+    const channels = (value: string) => value.match(/\d+(?:\.\d+)?/g)?.slice(0, 3).map(Number) ?? [];
+    const luminance = (rgb: number[]) => rgb.slice(0, 3).map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    }).reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
+    const foreground = channels(getComputedStyle(element).color);
+    let background: number[] = [255, 255, 255];
+    for (let node: Element | null = element; node; node = node.parentElement) {
+      const color = getComputedStyle(node).backgroundColor;
+      if (color !== "rgba(0, 0, 0, 0)" && color !== "transparent") {
+        background = channels(color);
+        break;
+      }
+    }
+    const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+  });
+  expect(contrast).toBeGreaterThanOrEqual(4.5);
+
+  const menu = page.locator(".landing-services-menu");
+  await menu.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(menu).toHaveAttribute("open", "");
+  await page.keyboard.press("Escape");
+  await expect(menu).not.toHaveAttribute("open", "");
+  await expect(menu.locator("summary")).toBeFocused();
+});
+
+test("all three commercial hero images load without horizontal overflow", async ({ page }) => {
+  const routes = [
+    ["/agencia-marketing-digital/google-ads", "google-ads-hero-editorial.webp"],
+    ["/seo", "seo-hero-editorial.webp"],
+    ["/diseno-landing-pages", "landing-pages-hero-editorial.webp"],
+  ] as const;
+
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: width < 500 ? 844 : 900 });
+    for (const [route, assetName] of routes) {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      const image = page.locator("main > section").first().locator(`img[src*="${assetName}"]`);
+      await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth), `${route} at ${width}px`).toBeLessThanOrEqual(0);
+      const title = page.getByRole("heading", { level: 1 });
+      await expect(title).toBeVisible();
+      expect((await title.boundingBox())?.width).toBeLessThanOrEqual(width);
+    }
+  }
+});
