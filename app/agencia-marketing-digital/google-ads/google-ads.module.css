@@ -1,3 +1,120 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: min(690px, calc(100svh - 72px));
+  align-items: center;
+  overflow: hidden;
+  background: #142638;
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 22, 38, 0.95) 0%, rgba(8, 22, 38, 0.82) 38%, rgba(8, 22, 38, 0.3) 72%, rgba(8, 22, 38, 0.08) 100%);
+  content: "";
+}
+
+.heroImage {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center 46%;
+}
+
+.heroContent {
+  position: relative;
+  width: min(100% - 2rem, 80rem);
+  margin: 0 auto;
+  padding: 2.25rem 0 3rem;
+}
+
+.heroBreadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: 42rem;
+  color: #c8d7e7;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.heroBreadcrumbs a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+:global(.landing-light) .heroEyebrow {
+  margin: 2.6rem 0 0.85rem;
+  color: #74e1d0 !important;
+  font-size: 0.8rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+:global(.landing-light) .heroTitle {
+  max-width: 14.5ch;
+  margin: 0;
+  color: #ffffff !important;
+  font-size: clamp(2.55rem, 5vw, 4.7rem);
+  font-weight: 850;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+:global(.landing-light) .heroDescription {
+  max-width: 39rem;
+  margin: 1.35rem 0 0;
+  color: #e0e9f2 !important;
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.58;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.35rem;
+  margin-top: 2rem;
+}
+
+.heroPrimary,
+.heroSecondary {
+  display: inline-flex;
+  min-height: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.heroPrimary {
+  padding: 0.8rem 1.25rem;
+  background: #285ef0;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(8, 22, 38, 0.22);
+}
+
+.heroPrimary:hover {
+  background: #4376ff;
+}
+
+.heroSecondary {
+  padding: 0.8rem 0.15rem;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #74e1d0;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.heroSecondary:hover {
+  color: #a8f5e8;
+}
+
 .sectionEyebrow {
   margin: 0 0 0.75rem;
   color: #0f766e !important;
@@ -437,6 +554,36 @@
 }
 
 @media (max-width: 767px) {
+  .hero {
+    min-height: min(640px, calc(100svh - 112px));
+    align-items: flex-end;
+  }
+
+  .hero::after {
+    background: linear-gradient(0deg, rgba(8, 22, 38, 0.98) 0%, rgba(8, 22, 38, 0.88) 48%, rgba(8, 22, 38, 0.35) 100%);
+  }
+
+  .heroImage {
+    object-position: 64% center;
+  }
+
+  .heroContent {
+    padding: 1.5rem 0 2.2rem;
+  }
+
+  :global(.landing-light) .heroEyebrow {
+    margin-top: 1.7rem;
+  }
+
+  :global(.landing-light) .heroTitle {
+    max-width: 15ch;
+    font-size: clamp(2.25rem, 7vw, 3.6rem);
+  }
+
+  :global(.landing-light) .heroDescription {
+    font-size: 1rem;
+  }
+
   .journeyHeader {
     padding: 1.4rem 1.25rem 1.2rem;
   }
@@ -520,6 +667,15 @@
 }
 
 @media (max-width: 420px) {
+  .heroActions {
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .heroPrimary {
+    width: 100%;
+  }
+
   .journeyHeader {
     display: grid;
   }

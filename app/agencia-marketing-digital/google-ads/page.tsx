@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  CheckCircle2,
   Gauge,
   LineChart,
   Megaphone,
@@ -15,18 +14,11 @@ import {
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { LeadForm } from "../../components/LeadForm";
 import { Logo } from "../../components/Logo";
-import { PageLinksNav } from "../../components/PageLinksNav";
 import { SITE_URL } from "../../lib/site";
 import styles from "./google-ads.module.css";
 
 const pagePath = "/agencia-marketing-digital/google-ads";
 const baseUrl = SITE_URL;
-
-const heroBullets = [
-  "Campañas de búsqueda, remarketing y conversión",
-  "Revisión de cuenta, tracking y landing pages",
-  "Informes claros orientados a leads y coste por oportunidad",
-];
 
 const solutionBlocks = [
   {
@@ -269,10 +261,6 @@ export const metadata: Metadata = {
   },
 };
 
-function CheckIcon() {
-  return <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-blue-400" aria-hidden="true" strokeWidth={2} />;
-}
-
 export default function GoogleAdsPage() {
   return (
     <>
@@ -325,125 +313,61 @@ export default function GoogleAdsPage() {
           </nav>
         </header>
 
-        <PageLinksNav currentPath={pagePath} />
-
         <main>
           <section
-            className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24"
+            className={styles.hero}
             aria-labelledby="google-ads-hero-title"
           >
-            <div>
-              <nav className="mb-5 flex items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
-                <Link className="hover:text-blue-300" href="/">
+            <Image
+              src="/images/google-ads-hero-editorial.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              fetchPriority="high"
+              className={styles.heroImage}
+            />
+            <div className={styles.heroContent}>
+              <nav className={styles.heroBreadcrumbs} aria-label="Migas de pan">
+                <Link href="/">
                   Inicio
                 </Link>
                 <span aria-hidden="true">/</span>
-                <Link className="hover:text-blue-300" href="/agencia-marketing-digital">
+                <Link href="/agencia-marketing-digital">
                   Marketing digital
                 </Link>
                 <span aria-hidden="true">/</span>
                 <span>Google Ads</span>
               </nav>
 
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
+              <p className={styles.heroEyebrow}>
                 Agencia Google Ads y SEM
               </p>
               <h1
                 id="google-ads-hero-title"
-                className="marketing-hero-title mb-6 max-w-4xl font-black text-slate-900"
+                className={styles.heroTitle}
               >
-                Agencia Google Ads para captar leads con estrategia, medición y control
+                Agencia Google Ads para convertir búsquedas en oportunidades
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Somos una agencia SEM especializada en Google Ads para empresas de toda España. Creamos, auditamos y
-                optimizamos campañas conectando búsquedas, anuncios, landing pages y medición para convertir la inversión
-                en oportunidades comerciales con más control.
+              <p className={styles.heroDescription}>
+                Conectamos búsqueda, anuncios, landing pages y medición para que cada campaña tenga una función comercial
+                clara y puedas decidir con más criterio dónde invertir.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className={styles.heroActions}>
                 <a
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400"
+                  className={styles.heroPrimary}
                   href="#auditoria-google-ads"
                 >
                   Solicitar auditoría gratuita
                 </a>
                 <Link
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400"
+                  className={styles.heroSecondary}
                   href="/agencia-marketing-digital"
                 >
-                  Ver servicios de marketing digital
+                  Ver todos los servicios
                 </Link>
               </div>
-
-              <div className="mt-8 grid gap-3">
-                {heroBullets.map((bullet) => (
-                  <p className="flex gap-3 text-slate-200" key={bullet}>
-                    <CheckIcon />
-                    <span>{bullet}</span>
-                  </p>
-                ))}
-              </div>
             </div>
-
-            <aside className={styles.journeyPanel} aria-label="Recorrido de una campaña de Google Ads">
-              <div className={styles.journeyHeader}>
-                <div>
-                  <span className={styles.panelEyebrow}>Sistema Ads</span>
-                  <strong>De la búsqueda a una oportunidad comercial</strong>
-                </div>
-                <span className={styles.liveStatus}>
-                  <span aria-hidden="true" />
-                  Conectado
-                </span>
-              </div>
-
-              <div className={styles.searchIntent}>
-                <Search aria-hidden="true" strokeWidth={2} />
-                <div>
-                  <span>Consulta con intención</span>
-                  <strong>agencia Google Ads para empresas</strong>
-                </div>
-              </div>
-
-              <ol className={styles.journeyTrack}>
-                <li>
-                  <span className={styles.journeyIndex}>01</span>
-                  <div>
-                    <strong>Búsqueda</strong>
-                    <span>Demanda comercial</span>
-                  </div>
-                </li>
-                <li>
-                  <span className={styles.journeyIndex}>02</span>
-                  <div>
-                    <strong>Anuncio</strong>
-                    <span>Mensaje relevante</span>
-                  </div>
-                </li>
-                <li>
-                  <span className={styles.journeyIndex}>03</span>
-                  <div>
-                    <strong>Landing</strong>
-                    <span>Oferta y acción</span>
-                  </div>
-                </li>
-                <li>
-                  <span className={styles.journeyIndex}>04</span>
-                  <div>
-                    <strong>Lead</strong>
-                    <span>Contexto medible</span>
-                  </div>
-                </li>
-              </ol>
-
-              <div className={styles.journeyOutcome}>
-                <div>
-                  <span>Resultado que podemos interpretar</span>
-                  <strong>Una solicitud conectada con su búsqueda, campaña y landing</strong>
-                </div>
-                <CheckCircle2 aria-hidden="true" strokeWidth={2} />
-              </div>
-            </aside>
           </section>
 
           <section className={styles.problemSection} aria-labelledby="problem-title">
