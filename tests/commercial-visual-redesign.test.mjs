@@ -63,3 +63,13 @@ test("Landing Pages explains page anatomy and three moments without repeated pro
     assert.match(page, new RegExp(`id="${id}"`));
   }
 });
+
+test("Landing Pages audience, deliverables and process have distinct editorial layouts", () => {
+  const page = source("app/diseno-landing-pages/page.tsx");
+  const redesigned = page.split('id="para-quien"')[1]?.split('id="relacionados"')[0] ?? "";
+
+  assert.match(page, /styles\.audienceList/);
+  assert.match(page, /styles\.deliverablesGrid/);
+  assert.match(page, /styles\.processTrack/);
+  assert.doesNotMatch(redesigned, /rounded-lg border border-slate-200 bg-white p-6 shadow-sm/);
+});

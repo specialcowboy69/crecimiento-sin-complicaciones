@@ -9,7 +9,6 @@ import {
   MousePointerClick,
   Route,
   Sparkles,
-  Target,
 } from "lucide-react";
 
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
@@ -76,10 +75,10 @@ const solutionMoments = [
 ];
 
 const audience = [
-  "Empresas que invierten en campañas y quieren convertir más sin subir presupuesto.",
-  "Negocios B2B que necesitan explicar servicios complejos de forma sencilla.",
-  "Equipos comerciales que quieren recibir leads con más contexto y mejor intención.",
-  "Marcas que lanzan una oferta nueva y necesitan una página enfocada en respuesta.",
+  { title: "Campañas en marcha", text: "Empresas que invierten en campañas y quieren convertir mejor el tráfico que ya reciben." },
+  { title: "Servicios complejos", text: "Negocios B2B que necesitan explicar una propuesta con precisión y sin saturar la página." },
+  { title: "Ventas consultivas", text: "Equipos comerciales que necesitan leads con más contexto y mejor intención." },
+  { title: "Nuevos lanzamientos", text: "Marcas con una oferta nueva que necesitan una página enfocada en respuesta." },
 ];
 
 const includes = [
@@ -390,67 +389,59 @@ export default function DisenoLandingPagesPage() {
         </div>
       </section>
 
-      <section className="section-band border-y border-slate-200 bg-slate-100" id="para-quien">
-        <div className="mx-auto grid max-w-[1520px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1fr] lg:px-8 lg:py-24">
+      <section className={styles.audienceSection} id="para-quien">
+        <div className={styles.audienceGrid}>
           <div>
-            <p className="section-eyebrow mb-6">PARA QUIÉN</p>
-            <h2 className="marketing-section-title text-slate-900">
-              Para empresas que necesitan que el tráfico haga algo
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-slate-700">
-              Una landing page tiene sentido cuando quieres concentrar la
-              atención en una oferta concreta y medir si el tráfico se convierte
-              en oportunidades reales.
+            <p className={styles.eyebrow}>Para quién</p>
+            <h2>Cuando el tráfico necesita una dirección clara</h2>
+            <p>
+              Una landing page concentra la atención en una oferta concreta y permite saber si las visitas se convierten en oportunidades reales.
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {audience.map((item) => (
-              <div key={item} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                <Target className="mb-4 h-6 w-6 text-teal-700" aria-hidden="true" />
-                <p className="text-lg font-bold leading-7 text-slate-800">{item}</p>
-              </div>
+          <ol className={styles.audienceList}>
+            {audience.map((item, index) => (
+              <li key={item.title}>
+                <span>0{index + 1}</span>
+                <div><h3>{item.title}</h3><p>{item.text}</p></div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="bg-white" id="incluye">
-        <div className="mx-auto grid max-w-[1520px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.72fr_1fr] lg:px-8 lg:py-24">
+      <section className={styles.includesSection} id="incluye">
+        <div className={styles.includesGrid}>
           <div>
-            <p className="section-eyebrow mb-6">QUÉ TRABAJAMOS</p>
-            <h2 className="marketing-section-title text-slate-900">Entregables para ponerla en marcha</h2>
+            <p className={styles.eyebrow}>Qué trabajamos</p>
+            <h2>Entregables para ponerla en marcha</h2>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className={styles.deliverablesGrid}>
             {includes.map((item) => (
-              <article key={item.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                <ClipboardCheck className="mb-5 h-7 w-7 text-teal-700" aria-hidden="true" />
-                <h3 className="text-2xl font-black text-slate-900">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-700">{item.text}</p>
+              <article key={item.title}>
+                <ClipboardCheck size={24} strokeWidth={1.8} aria-hidden="true" />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-band border-y border-slate-200 bg-slate-100" id="proceso">
-        <div className="mx-auto max-w-[1520px] px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
-          <div className="max-w-5xl">
-            <p className="section-eyebrow mb-6">PROCESO</p>
-            <h2 className="marketing-section-title text-slate-900">
-              Cómo creamos tu landing page
-            </h2>
+      <section className={styles.processSection} id="proceso">
+        <div className={styles.sectionInner}>
+          <div className={styles.processIntro}>
+            <p className={styles.eyebrow}>Proceso</p>
+            <h2>Cómo creamos tu landing page</h2>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <ol className={styles.processTrack}>
             {process.map((step) => (
-              <article key={step.step} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 text-lg font-black text-white">
-                  {step.step}
-                </div>
-                <h3 className="text-2xl font-black text-slate-900">{step.title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-700">{step.text}</p>
-              </article>
+              <li key={step.step}>
+                <span className={styles.processIndex}>{step.step}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 

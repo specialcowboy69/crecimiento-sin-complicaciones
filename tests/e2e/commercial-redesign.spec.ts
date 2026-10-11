@@ -81,6 +81,9 @@ test("Landing Pages anatomy and solution remain legible on narrow and wide scree
     await expect(page.getByRole("heading", { level: 2, name: "Una landing bonita no siempre convierte" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "Una página que conecta mensaje, acción y aprendizaje" })).toBeVisible();
     await expect(page.locator("#problema figure")).toContainText("04 / Medición");
+    await expect(page.locator("#para-quien li")).toHaveCount(4);
+    await expect(page.locator("#incluye article")).toHaveCount(4);
+    await expect(page.locator("#proceso li")).toHaveCount(4);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   }
 });
@@ -163,6 +166,34 @@ test("all three commercial hero images load without horizontal overflow", async 
       const title = page.getByRole("heading", { level: 1 });
       await expect(title).toBeVisible();
       expect((await title.boundingBox())?.width).toBeLessThanOrEqual(width);
+    }
+  }
+});
+
+test("each commercial hero keeps its CTA and the next section in the first viewport", async ({ page }) => {
+  const routes = [
+    ["/agencia-marketing-digital/google-ads", "#auditoria-google-ads"],
+    ["/seo", "#auditoria-seo"],
+    ["/diseno-landing-pages", "#auditoria-landing-pages-form"],
+  ] as const;
+
+  for (const [width, height] of [[390, 844], [1440, 900]]) {
+    await page.setViewportSize({ width, height });
+    for (const [route, target] of routes) {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      const reject = page.getByRole("button", { name: "Rechazar" });
+      if (await reject.isVisible()) await reject.click();
+
+      const hero = page.locator("main > section").first();
+      const cta = hero.locator(`a[href="${target}"]`);
+      const next = page.locator("main > section").nth(1);
+      const ctaBox = await cta.boundingBox();
+      const nextBox = await next.boundingBox();
+      const bottomBar = width < 500 ? 80 : 0;
+      expect(ctaBox, `${route} CTA at ${width}px`).not.toBeNull();
+      expect(nextBox, `${route} next section at ${width}px`).not.toBeNull();
+      expect(ctaBox!.y + ctaBox!.height, `${route} CTA at ${width}px`).toBeLessThanOrEqual(height - bottomBar);
+      expect(nextBox!.y, `${route} next section at ${width}px`).toBeLessThanOrEqual(height - bottomBar - 12);
     }
   }
 });
