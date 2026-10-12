@@ -32,7 +32,7 @@ function store(leads) {
     async claim(id) {
       const lead = leads.find((item) => item.id === id);
       if (!lead || lead.adsExportBlockedAt || lead.adsExportClaimedAt || lead.adsExportSubmittedAt || lead.adsExportTerminalAt) return false;
-      lead.adsExportClaimedAt = "2026-10-11T12:30:00Z";
+      lead.adsExportClaimedAt = new Date().toISOString();
       return true;
     },
     async markSubmitted(id) {

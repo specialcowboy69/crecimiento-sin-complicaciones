@@ -3,13 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Gauge,
   LineChart,
-  Megaphone,
   MousePointerClick,
   Search,
-  Target,
-  Wrench,
+  SlidersHorizontal,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { LeadForm } from "../../components/LeadForm";
@@ -19,39 +16,6 @@ import styles from "./google-ads.module.css";
 
 const pagePath = "/agencia-marketing-digital/google-ads";
 const baseUrl = SITE_URL;
-
-const solutionBlocks = [
-  {
-    icon: Search,
-    title: "Intención y keywords comerciales",
-    text: "Separamos búsquedas informativas de consultas donde ya existe intención de contacto o presupuesto.",
-  },
-  {
-    icon: Target,
-    title: "Estructura por servicio",
-    text: "Ordenamos campañas por servicio, ciudad o tipo de cliente para que el presupuesto no se diluya.",
-  },
-  {
-    icon: Megaphone,
-    title: "Anuncios orientados a conversión",
-    text: "Redactamos mensajes que conectan búsqueda, problema, propuesta y siguiente paso.",
-  },
-  {
-    icon: Wrench,
-    title: "Conversiones bien configuradas",
-    text: "Revisamos formularios, llamadas, eventos y objetivos para decidir con datos fiables.",
-  },
-  {
-    icon: Gauge,
-    title: "Optimización de presupuesto",
-    text: "Ajustamos pujas, términos de búsqueda y distribución de inversión según calidad del lead.",
-  },
-  {
-    icon: MousePointerClick,
-    title: "Landing pages y formularios",
-    text: "Detectamos si la campaña pierde oportunidades por una página lenta, confusa o poco convincente.",
-  },
-];
 
 const processSteps = [
   {
@@ -370,7 +334,7 @@ export default function GoogleAdsPage() {
             </div>
           </section>
 
-          <section className={styles.problemSection} aria-labelledby="problem-title">
+          <section id="problema" className={styles.problemSection} aria-labelledby="problem-title">
             <div className={styles.problemGrid}>
               <div className={styles.problemCopy}>
                 <p className={styles.sectionEyebrow}>El problema</p>
@@ -381,90 +345,123 @@ export default function GoogleAdsPage() {
                 </p>
               </div>
 
-              <figure className={styles.problemVisual}>
-                <Image
-                  src="/images/google-ads-national-analysis.webp"
-                  alt="Especialista analizando el rendimiento y la medición de una campaña digital"
-                  width={1536}
-                  height={1024}
-                  quality={92}
-                  sizes="(min-width: 1024px) 52vw, 100vw"
-                />
-                <figcaption className={styles.problemSignals}>
-                  <span>
-                    <strong>01</strong>
-                    Búsquedas demasiado amplias
-                  </span>
-                  <span>
-                    <strong>02</strong>
-                    Medición incompleta
-                  </span>
-                  <span>
-                    <strong>03</strong>
-                    Landing desconectada
-                  </span>
-                </figcaption>
-              </figure>
+              <ul className={styles.problemSignals}>
+                <li className={styles.problemCard}>
+                  <Search className={styles.problemCardIcon} size={30} strokeWidth={1.7} aria-hidden="true" />
+                  <div>
+                    <h3>Búsquedas demasiado amplias</h3>
+                    <p>
+                      Tu anuncio aparece ante personas que buscan información o un servicio distinto. Sin revisar los
+                      términos de búsqueda y excluir consultas irrelevantes, pagas por clics con poca intención de contratar.
+                    </p>
+                  </div>
+                </li>
+                <li className={styles.problemCard}>
+                  <LineChart className={styles.problemCardIcon} size={30} strokeWidth={1.7} aria-hidden="true" />
+                  <div>
+                    <h3>Medición incompleta</h3>
+                    <p>
+                      Ves clics, pero no sabes qué campañas generan llamadas o formularios. Sin conversiones comprobadas,
+                      falta información para decidir dónde invertir.
+                    </p>
+                  </div>
+                </li>
+                <li className={styles.problemCard}>
+                  <MousePointerClick className={styles.problemCardIcon} size={30} strokeWidth={1.7} aria-hidden="true" />
+                  <div>
+                    <h3>Landing desconectada</h3>
+                    <p>
+                      El anuncio promete una solución y la página muestra una oferta genérica. Si el mensaje y el siguiente
+                      paso no están claros, la visita se pierde antes de contactar.
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </section>
 
           <section
             id="solucion"
-            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            className={styles.solutionSection}
             aria-labelledby="solution-title"
           >
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Solución</p>
-              <h2 id="solution-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Gestión de Google Ads conectada con estrategia, datos y conversión
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Trabajamos Google Ads como parte del sistema comercial: intención de búsqueda, propuesta de valor,
-                anuncios, página de destino, medición y seguimiento. Así cada decisión tiene una razón: captar mejores
-                clics, mejorar la conversión y reducir inversión desperdiciada.
-              </p>
-            </div>
+            <div className={styles.solutionContainer}>
+              <div className={styles.solutionIntro}>
+                <p className={styles.sectionEyebrow}>Solución</p>
+                <h2 id="solution-title">La campaña se decide antes y después del clic</h2>
+                <p>
+                  Conectamos intención, anuncio, página de destino y conversiones para saber qué merece presupuesto y qué
+                  conviene ajustar primero.
+                </p>
+              </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {solutionBlocks.map((item) => (
-                <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
-                    <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                  </span>
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">{item.text}</p>
-                </article>
-              ))}
+              <div className={styles.solutionLayout}>
+                <figure className={styles.solutionVisual}>
+                  <Image
+                    src="/images/google-ads-national-analysis.webp"
+                    alt="Una persona revisa gráficos en un monitor"
+                    fill
+                    sizes="(min-width: 768px) 48vw, 100vw"
+                  />
+                </figure>
+
+                <div className={styles.solutionDecisions}>
+                  <article>
+                    <Search size={28} strokeWidth={1.7} aria-hidden="true" />
+                    <div>
+                      <h3>Elegir dónde competir</h3>
+                      <p>
+                        Keywords comerciales y campañas por servicio para dirigir el presupuesto a búsquedas relevantes.
+                      </p>
+                    </div>
+                  </article>
+                  <article>
+                    <MousePointerClick size={28} strokeWidth={1.7} aria-hidden="true" />
+                    <div>
+                      <h3>Dar continuidad al clic</h3>
+                      <p>
+                        Anuncio, landing y formulario trabajan sobre la misma oferta y el mismo siguiente paso.
+                      </p>
+                    </div>
+                  </article>
+                  <article>
+                    <SlidersHorizontal size={36} strokeWidth={1.5} aria-hidden="true" />
+                    <div>
+                      <h3>Mover inversión con criterio</h3>
+                      <p>
+                        Conversiones comprobadas, términos de búsqueda y calidad del lead para decidir qué ajustar.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              </div>
             </div>
           </section>
 
           <section
             id="proceso"
-            className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+            className={styles.processSection}
             aria-labelledby="process-title"
           >
-            <div className="mx-auto max-w-7xl">
-              <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Método</p>
-                <h2 id="process-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+            <div className={styles.processContainer}>
+              <div className={styles.processIntro}>
+                <p className={styles.sectionEyebrow}>Método</p>
+                <h2 id="process-title">
                   Cómo trabajamos tus campañas de Google Ads
                 </h2>
               </div>
 
-              <div className="mt-10 grid gap-4">
+              <ol className={styles.processSteps}>
                 {processSteps.map((step) => (
-                  <article
-                    className="grid gap-4 rounded-lg bg-white/5 p-6 ring-1 ring-white/10 sm:grid-cols-[4rem_1fr]"
-                    key={step.step}
-                  >
-                    <span className="text-3xl font-black text-blue-400">{step.step}</span>
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                      <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
+                  <li className={styles.processStep} key={step.step}>
+                    <span className={styles.processStepNumber} aria-hidden="true">{step.step}</span>
+                    <div className={styles.processStepContent}>
+                      <h3>{step.title}</h3>
+                      <p>{step.text}</p>
                     </div>
-                  </article>
+                  </li>
                 ))}
-              </div>
+              </ol>
             </div>
           </section>
 
@@ -474,20 +471,15 @@ export default function GoogleAdsPage() {
             aria-labelledby="audience-title"
           >
             <div className={styles.audienceGrid}>
-              <figure className={styles.audiencePhoto}>
+              <div className={styles.audiencePhoto}>
                 <Image
                   src="/images/google-ads-national-audience.webp"
-                  alt="Responsable de negocio y especialista revisando juntos una campaña de captación"
+                  alt="Dos profesionales conversan frente a un portátil y toman notas"
                   width={1536}
                   height={1024}
-                  quality={92}
                   sizes="(min-width: 1024px) 46vw, 100vw"
                 />
-                <figcaption>
-                  <span>Trabajo conjunto</span>
-                  <strong>Decisiones de campaña conectadas con la realidad comercial</strong>
-                </figcaption>
-              </figure>
+              </div>
 
               <div className={styles.audienceContent}>
                 <p className={styles.sectionEyebrow}>Para quién es</p>

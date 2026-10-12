@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  ArrowUpRight,
   BarChart3,
   CheckCircle2,
+  ClipboardList,
+  FileText,
   GitBranch,
   MapPin,
+  Search,
   Settings2,
   Target,
+  Users,
 } from "lucide-react";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
@@ -16,95 +21,157 @@ import styles from "./seo.module.css";
 
 const systemStages = [
   {
-    icon: Settings2,
-    number: "01",
     title: "SEO técnico",
-    text: "Indexación, velocidad, estructura, rastreo y señales que ayudan a Google a entender bien tu web.",
+    text: "Revisamos rastreo, indexación, velocidad y estructura para que Google pueda entender tus páginas clave.",
+    image: "/images/blog/como-lanzar-una-web-nueva-sin-comprometer-seo/cover.webp",
+    alt: "Portátil con una página web abierta y bocetos de su estructura sobre la mesa",
+    sizes: "(min-width: 1280px) 720px, (min-width: 768px) 58vw, 100vw",
   },
   {
-    icon: GitBranch,
-    number: "02",
     title: "Arquitectura SEO",
-    text: "Páginas money, clusters de contenido y enlazado interno para ordenar la autoridad hacia las URLs que venden.",
+    text: "Ordenamos servicios, temas y enlaces internos para que cada página ayude a avanzar hacia una decisión.",
+    image: "/images/home-service-seo.webp",
+    alt: "Dos personas organizan páginas y enlaces en un mapa de sitio",
+    sizes: "(min-width: 1280px) 500px, (min-width: 768px) 41vw, 100vw",
   },
   {
-    icon: Target,
-    number: "03",
     title: "Contenido con intención",
-    text: "Keywords que atraen clientes potenciales, no solo visitas: servicios, problemas, comparativas y búsquedas locales.",
+    text: "Priorizamos búsquedas de servicios, problemas y comparativas que muestran una necesidad real.",
+    image: "/images/blog/como-ampliar-tematica-web-sin-perder-foco-seo/cover.webp",
+    alt: "Mapa visual de temas conectados sobre una mesa de trabajo",
+    sizes: "(min-width: 1280px) 500px, (min-width: 768px) 41vw, 100vw",
   },
   {
-    icon: BarChart3,
-    number: "04",
     title: "Medición",
-    text: "Rankings, leads, conversiones y prioridades mensuales para decidir qué hacer después con criterio.",
+    text: "Relacionamos visibilidad, formularios y llamadas para decidir qué mejorar a continuación.",
+    image: "/images/home-growth-collaboration.webp",
+    alt: "Dos profesionales revisan información en un portátil",
+    sizes: "(min-width: 1280px) 505px, (min-width: 768px) 40vw, 100vw",
   },
 ];
 
 const serviceItems = [
-  "Auditoría SEO inicial con prioridades por impacto y esfuerzo.",
-  "Keyword research y mapa de intención de búsqueda.",
-  "Optimización de páginas clave para servicios SEO y captación.",
-  "Creación de clusters de contenido conectados con páginas de decisión.",
-  "SEO local si tu empresa vende en una zona concreta.",
-  "Tracking, informes y prioridades mensuales para pymes y equipos internos.",
+  {
+    icon: ClipboardList,
+    title: "Auditoría y prioridades",
+    text: "Un diagnóstico inicial con acciones ordenadas por impacto y esfuerzo.",
+  },
+  {
+    icon: Search,
+    title: "Búsquedas con intención",
+    text: "Keyword research y un mapa de búsquedas conectado con lo que vende tu empresa.",
+  },
+  {
+    icon: Target,
+    title: "Páginas que ayudan a decidir",
+    text: "Optimización de tus páginas de servicio para convertir visitas en contactos.",
+  },
+  {
+    icon: GitBranch,
+    title: "Contenido conectado",
+    text: "Clusters y enlaces internos que llevan del contenido útil a las páginas de decisión.",
+  },
+  {
+    icon: MapPin,
+    title: "SEO para tu mercado local",
+    text: "Búsquedas y páginas locales cuando tu empresa vende en una zona concreta.",
+  },
+  {
+    icon: BarChart3,
+    title: "Seguimiento y mejora",
+    text: "Tracking, informes y prioridades mensuales para pymes y equipos internos.",
+  },
 ];
 
 const process = [
   {
     step: "01",
+    icon: Search,
     title: "Auditoría inicial",
-    text: "Revisamos indexación, arquitectura, contenidos, velocidad, intención de búsqueda y oportunidades comerciales.",
-    output: "Diagnóstico priorizado",
+    text: "Revisamos indexación, arquitectura, contenido y velocidad para localizar qué frena la captación.",
+    output: "Diagnóstico de tu web",
   },
   {
     step: "02",
+    icon: ClipboardList,
     title: "Mapa de oportunidades",
-    text: "Separamos quick wins, páginas money, clusters y mejoras técnicas para que sepas qué mueve la aguja.",
-    output: "Plan de acción",
+    text: "Ordenamos mejoras técnicas, páginas comerciales y temas de contenido por impacto y esfuerzo.",
+    output: "Hoja de ruta priorizada",
   },
   {
     step: "03",
+    icon: Settings2,
     title: "Correcciones técnicas y arquitectura",
-    text: "Priorizamos rastreo, enlazado interno, estructura de URLs, canibalizaciones y señales de confianza.",
-    output: "Base rastreable",
+    text: "Corregimos obstáculos de rastreo, estructura de URLs, enlazado interno y páginas que compiten entre sí.",
+    output: "Una base técnica ordenada",
   },
   {
     step: "04",
+    icon: FileText,
     title: "Contenido y enlazado interno",
-    text: "Creamos o mejoramos páginas pensadas para captar demanda real y llevarla hacia contacto comercial.",
-    output: "Páginas con intención",
+    text: "Creamos o mejoramos páginas que responden a búsquedas reales y facilitan el contacto comercial.",
+    output: "Páginas conectadas con la demanda",
   },
   {
     step: "05",
+    icon: BarChart3,
     title: "Medición y mejora continua",
-    text: "Convertimos datos de Google Search Console, analítica y leads en nuevas prioridades de trabajo.",
-    output: "Siguientes prioridades",
+    text: "Revisamos Search Console, analítica y leads para decidir qué mantener, corregir o ampliar.",
+    output: "Nuevas prioridades de trabajo",
   },
 ];
 
 const audiences = [
-  { label: "Sin tracción", text: "Una web que no aparece para las búsquedas que importan al negocio." },
-  { label: "Tráfico sin contactos", text: "Visitas orgánicas que no se convierten en solicitudes de presupuesto." },
-  { label: "Dependencia de Ads", text: "Una pyme que quiere construir un canal de captación orgánica estable." },
-  { label: "Equipo con poco margen", text: "Marketing interno que necesita apoyo técnico, contenidos y medición." },
+  {
+    icon: Search,
+    label: "Tienes páginas sin tracción",
+    text: "Tu web no aparece para las búsquedas que importan al negocio. Revisamos cómo la encuentra Google y qué responde cada página.",
+    focus: "Indexación, intención y páginas clave",
+  },
+  {
+    icon: Target,
+    label: "Tienes tráfico, pero no llegan contactos",
+    text: "Las visitas orgánicas no se convierten en solicitudes de presupuesto. Revisamos el recorrido desde la búsqueda hasta el formulario.",
+    focus: "Mensaje y conversión",
+  },
+  {
+    icon: GitBranch,
+    label: "Dependes demasiado de Ads",
+    text: "Quieres desarrollar la captación orgánica junto a tus campañas. Priorizamos las búsquedas y el contenido que encajan con tu oferta.",
+    focus: "Demanda y contenido",
+  },
+  {
+    icon: Users,
+    label: "Tu equipo necesita apoyo SEO",
+    text: "Marketing interno necesita ayuda con técnica, contenidos y medición. Aportamos especialización y prioridades para avanzar juntos.",
+    focus: "Consultoría y ejecución",
+  },
 ];
 
 const relatedSeoLinks = [
   {
     href: "/seo/local",
+    icon: MapPin,
+    category: "Captación en tu zona",
     title: "SEO local para negocios",
-    text: "Coordinamos tu perfil de Google, el contenido, las reseñas y el SEO de tu web para facilitar que te encuentren y contacten en tu zona.",
+    text: "Perfil de Empresa de Google, web y reseñas auténticas coordinados para que te encuentren y contacten en tu zona.",
+    action: "Explorar SEO local",
   },
   {
     href: "/seo-para-pymes",
+    icon: ClipboardList,
+    category: "Prioridades de negocio",
     title: "SEO para pymes",
-    text: "Una página específica para empresas pequeñas que necesitan priorizar captación, SEO local y acciones claras.",
+    text: "Un enfoque adaptado a empresas pequeñas que necesitan decidir dónde invertir su esfuerzo en posicionamiento y captación.",
+    action: "Explorar SEO para pymes",
   },
   {
     href: "/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
+    icon: Settings2,
+    category: "Base técnica y estructura",
     title: "SEO técnico y arquitectura",
-    text: "El enfoque técnico para ordenar rastreo, entidades, silos y estructura de contenidos.",
+    text: "Rastreo, indexación, entidades y arquitectura de contenidos para ordenar el sitio y facilitar que Google lo entienda.",
+    action: "Explorar SEO técnico",
   },
 ];
 
@@ -312,35 +379,26 @@ export default function SeoPage() {
           <section className={styles.diagnosis} aria-labelledby="problem-title">
             <div className={styles.sectionInner}>
               <div className={styles.diagnosisIntro}>
-                <div>
-                  <p className={styles.eyebrow}>El diagnóstico</p>
-                  <h2 id="problem-title">Tener tráfico no significa tener oportunidades</h2>
-                </div>
+                <p className={styles.eyebrow}>El diagnóstico</p>
+                <h2 id="problem-title">Tener tráfico no significa tener oportunidades</h2>
                 <p>
-                  Publicar más contenidos, cambiar títulos o comprar enlaces no corrige una estrategia dispersa.
-                  El problema suele estar en algún punto del recorrido entre lo que se busca y la decisión de contactar.
+                  Revisamos el recorrido desde la búsqueda hasta el contacto para encontrar dónde se pierde una oportunidad.
                 </p>
               </div>
               <ol className={styles.diagnosisFlow} aria-label="Puntos donde se pierde la oportunidad comercial">
                 <li>
-                  <span>01 / Demanda</span>
                   <h3>¿Te encuentran las personas adecuadas?</h3>
                   <p>Separamos búsquedas informativas de consultas con intención de contratar.</p>
                 </li>
                 <li>
-                  <span>02 / Recorrido</span>
                   <h3>¿La web les ayuda a decidir?</h3>
                   <p>Ordenamos páginas, enlaces y mensajes para evitar canibalizaciones y callejones sin salida.</p>
                 </li>
                 <li>
-                  <span>03 / Resultado</span>
                   <h3>¿Sabes qué acaba en contacto?</h3>
                   <p>Conectamos visibilidad y posiciones con formularios, llamadas y oportunidades reales.</p>
                 </li>
               </ol>
-              <p className={styles.diagnosisConclusion}>
-                No buscamos tráfico sin más. Cada prioridad SEO debe explicar qué mejora, para quién y cómo acerca una conversación comercial.
-              </p>
             </div>
           </section>
 
@@ -351,65 +409,97 @@ export default function SeoPage() {
                 <h2 id="solution-title">Cuatro piezas que trabajan juntas</h2>
                 <p>El posicionamiento mejora cuando técnica, estructura, contenido y medición responden a la misma intención comercial.</p>
               </div>
-              <ol className={styles.systemFlow}>
+              <div className={styles.systemGrid}>
                 {systemStages.map((stage) => (
-                  <li key={stage.title}>
-                    <div className={styles.systemMarker}>
-                      <span>{stage.number}</span>
-                      <stage.icon size={25} strokeWidth={1.8} aria-hidden="true" />
+                  <article className={styles.systemCard} key={stage.title}>
+                    <div className={styles.systemVisual}>
+                      <Image
+                        src={stage.image}
+                        alt={stage.alt}
+                        fill
+                        sizes={stage.sizes}
+                      />
                     </div>
-                    <h3>{stage.title}</h3>
-                    <p>{stage.text}</p>
-                  </li>
+                    <div className={styles.systemCopy}>
+                      <h3>{stage.title}</h3>
+                      <p>{stage.text}</p>
+                    </div>
+                  </article>
                 ))}
-              </ol>
+              </div>
             </div>
           </section>
 
-          <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="includes-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Qué incluye</p>
-                <h2 id="includes-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+          <section className={styles.includesSection} aria-labelledby="includes-title">
+            <div className={`${styles.sectionInner} ${styles.includesLayout}`}>
+              <div className={styles.includesIntro}>
+                <p className={styles.eyebrow}>Qué incluye</p>
+                <h2 id="includes-title">
                   Qué hacemos como agencia SEO
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={styles.includesDescription}>
                   Combinamos servicios SEO, consultoría SEO y ejecución técnica para que el plan avance sin convertirse
                   en un informe que nadie implementa.
                 </p>
-                <Link className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="/agencia-marketing-digital/seo-tecnico-arquitectura-entidades">
-                  Ver SEO técnico y arquitectura
+                <Link className={styles.includesLink} href="/agencia-marketing-digital/seo-tecnico-arquitectura-entidades">
+                  <span>Ver SEO técnico y arquitectura</span>
+                  <ArrowUpRight aria-hidden="true" strokeWidth={1.8} />
                 </Link>
               </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                {serviceItems.map((item) => (
-                  <p className="flex gap-3 rounded-lg bg-slate-950 p-5 text-base font-semibold leading-7 text-slate-300 ring-1 ring-slate-800" key={item}>
-                    <CheckIcon />
-                    <span>{item}</span>
-                  </p>
-                ))}
-              </div>
+              <ul className={styles.includesList}>
+                {serviceItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li className={styles.includesCard} key={item.title}>
+                      <span className={styles.includesIcon}>
+                        <Icon aria-hidden="true" strokeWidth={1.8} />
+                      </span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </section>
 
           <section id="proceso" className={styles.processSection} aria-labelledby="process-title">
-            <div className={styles.sectionInner}>
+            <div className={`${styles.sectionInner} ${styles.processLayout}`}>
               <div className={styles.processIntro}>
                 <p className={styles.eyebrow}>Proceso</p>
                 <h2 id="process-title">Del diagnóstico a la siguiente decisión</h2>
                 <p>Cada etapa deja un resultado que permite avanzar con criterio, no solo una lista de tareas completadas.</p>
               </div>
-              <ol className={styles.processTimeline}>
-                {process.map((step) => (
-                  <li key={step.step}>
-                    <span className={styles.processNumber}>{step.step}</span>
-                    <div>
-                      <h3>{step.title}</h3>
-                      <p>{step.text}</p>
-                    </div>
-                    <span className={styles.processOutput}>{step.output}</span>
-                  </li>
-                ))}
+              <ol className={styles.processGrid}>
+                {process.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <li className={styles.processCard} key={step.step}>
+                      {index === 0 && (
+                        <div className={styles.processVisual}>
+                          <Image
+                            src="/images/seo-local-collaboration-v2.webp"
+                            alt="Dos profesionales revisan una tablet y documentos en una mesa de trabajo"
+                            fill
+                            sizes="(min-width: 1280px) 340px, (min-width: 1024px) 27vw, (min-width: 768px) 42vw, 100vw"
+                          />
+                        </div>
+                      )}
+                      <div className={styles.processCopy}>
+                        <div className={styles.processCardTop}>
+                          <span className={styles.processNumber} aria-hidden="true">{step.step}</span>
+                          <Icon aria-hidden="true" strokeWidth={1.8} />
+                        </div>
+                        <h3>{step.title}</h3>
+                        <p>{step.text}</p>
+                        <p className={styles.processOutput}>
+                          <CheckCircle2 aria-hidden="true" strokeWidth={1.8} />
+                          <span>{step.output}</span>
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
               </ol>
             </div>
           </section>
@@ -419,55 +509,82 @@ export default function SeoPage() {
               <div className={styles.audienceIntro}>
                 <p className={styles.eyebrow}>Para quién es</p>
                 <h2 id="audience-title">Distintos puntos de partida. Un mismo criterio comercial.</h2>
+                <p className={styles.audienceDescription}>El plan se adapta a lo que necesita tu empresa ahora: visibilidad, contactos o apoyo para tu equipo.</p>
               </div>
               <div className={styles.audienceRoutes}>
-                {audiences.map((item, index) => (
-                  <article key={item.label}>
-                    <span aria-hidden="true">0{index + 1}</span>
-                    <div>
-                      <h3>{item.label}</h3>
-                      <p>{item.text}</p>
-                    </div>
-                  </article>
-                ))}
+                {audiences.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <article className={styles.audienceCard} key={item.label}>
+                      {index === 0 && (
+                        <div className={styles.audienceVisual}>
+                          <Image
+                            src="/images/google-ads-national-audience.webp"
+                            alt="Dos profesionales revisan un portátil y toman notas sobre su proyecto"
+                            fill
+                            sizes="(min-width: 1280px) 530px, (min-width: 768px) 42vw, 100vw"
+                          />
+                        </div>
+                      )}
+                      <div className={styles.audienceCopy}>
+                        <Icon className={styles.audienceIcon} aria-hidden="true" strokeWidth={1.8} />
+                        <h3>{item.label}</h3>
+                        <p>{item.text}</p>
+                        <p className={styles.audienceFocus}>{item.focus}</p>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </section>
 
-          <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="related-seo-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Recursos SEO</p>
-              <h2 id="related-seo-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Enfoques SEO según el punto de partida de tu empresa
-              </h2>
-            </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              {relatedSeoLinks.map((item) => (
-                <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href={item.href} key={item.href}>
-                  <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">{item.text}</p>
-                </Link>
-              ))}
+          <section className={styles.relatedSection} aria-labelledby="related-seo-title">
+            <div className={styles.sectionInner}>
+              <div className={styles.relatedIntro}>
+                <p className={styles.eyebrow}>Recursos SEO</p>
+                <h2 id="related-seo-title">Profundiza en el SEO que necesita tu empresa</h2>
+                <p className={styles.relatedDescription}>Consulta el alcance de cada especialidad y encuentra el enfoque que encaja con tu mercado y tu web.</p>
+              </div>
+              <div className={styles.relatedLinks}>
+                {relatedSeoLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link className={styles.relatedCard} href={item.href} key={item.href}>
+                      <div className={styles.relatedCardTop}>
+                        <Icon aria-hidden="true" strokeWidth={1.8} />
+                        <span>{item.category}</span>
+                      </div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                      <span className={styles.relatedAction}>
+                        {item.action}
+                        <ArrowUpRight aria-hidden="true" strokeWidth={1.8} />
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </section>
 
-          <section id="seo-local" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="local-title">
-            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <section id="seo-local" className={styles.localSection} aria-labelledby="local-title">
+            <div className={`${styles.sectionInner} ${styles.localLayout}`}>
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">SEO local</p>
-                <h2 id="local-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                <p className={styles.eyebrow}>SEO local</p>
+                <h2 id="local-title">
                   También trabajamos SEO local por ciudad
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={styles.localDescription}>
                   Si tu negocio vende en una zona concreta, podemos trabajar páginas locales, búsquedas por ciudad y
                   señales de confianza para captar clientes en mercados como Madrid, Barcelona, Valencia, Sevilla,
                   Alicante o Málaga.
                 </p>
               </div>
-              <div className="grid content-start gap-4 sm:grid-cols-2">
+              <div className={styles.cityLinks}>
                 {cityLinks.map((city) => (
-                  <Link className="flex min-h-20 items-center gap-4 rounded-lg bg-white/5 p-5 font-black text-slate-100 ring-1 ring-white/10 hover:bg-slate-900" href={city.href} key={city.href}>
-                    <MapPin className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
+                  <Link href={city.href} key={city.href}>
+                    <MapPin className={styles.cityIcon} aria-hidden="true" strokeWidth={1.8} />
                     <span>{city.label}</span>
                   </Link>
                 ))}
@@ -475,37 +592,37 @@ export default function SeoPage() {
             </div>
           </section>
 
-          <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="faq-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">FAQ</p>
-              <h2 id="faq-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Preguntas frecuentes sobre SEO para empresas
-              </h2>
-            </div>
-            <div className="mt-10 grid gap-4">
-              {faqs.map((faq) => (
-                <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
-                  <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
-                  <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
-                </details>
-              ))}
+          <section id="faq" className={styles.faqSection} aria-labelledby="faq-title">
+            <div className={`${styles.sectionInner} ${styles.faqInner}`}>
+              <div className={styles.faqIntro}>
+                <p className={styles.eyebrow}>FAQ</p>
+                <h2 id="faq-title">Preguntas frecuentes sobre SEO para empresas</h2>
+              </div>
+              <div className={styles.faqList}>
+                {faqs.map((faq) => (
+                  <details key={faq.question}>
+                    <summary>{faq.question}</summary>
+                    <p>{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
             </div>
           </section>
 
-          <section id="auditoria-seo" className={`${styles.auditSection} border-t border-slate-800 bg-slate-900 px-4 py-16 pb-28 sm:px-6 lg:px-8 lg:py-24`} aria-labelledby="cta-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <section id="auditoria-seo" className={styles.auditSection} aria-labelledby="cta-title">
+            <div className={`${styles.sectionInner} ${styles.auditLayout}`}>
               <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
-                <h2 id="cta-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
+                <p className={styles.eyebrow}>Auditoría gratuita</p>
+                <h2 id="cta-title">
                   Empieza con una auditoría SEO clara
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
+                <p className={styles.auditDescription}>
                   Revisamos tu web, detectamos oportunidades reales y te damos una hoja de ruta priorizada para mejorar
                   visibilidad, captación y conversión.
                 </p>
-                <div className="mt-8 grid gap-3">
-                  {["Revisión de indexación y SEO técnico", "Mapa de keywords con intención comercial", "Prioridades para los próximos 90 días"].map((item) => (
-                    <p className="flex gap-3 text-slate-200" key={item}>
+                <div className={styles.auditPoints}>
+                  {["Revisión de indexación y SEO técnico", "Mapa de keywords con intención comercial", "Prioridades para la siguiente fase de trabajo"].map((item) => (
+                    <p key={item}>
                       <CheckIcon />
                       <span>{item}</span>
                     </p>

@@ -61,7 +61,7 @@ test("national Google Ads page uses varied visual storytelling instead of repeat
 
   assert.match(styles, /\.hero/);
   assert.doesNotMatch(styles, /\.journeyPanel/);
-  assert.match(styles, /\.problemVisual/);
+  assert.match(styles, /\.solutionVisual/);
   assert.match(styles, /\.audienceList/);
   assert.doesNotMatch(styles, /\.semSection|\.semVisual/);
   assert.match(styles, /@media \(max-width: 767px\)/);

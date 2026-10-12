@@ -79,11 +79,23 @@ test("Landing Pages anatomy and solution remain legible on narrow and wide scree
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/diseno-landing-pages", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { level: 2, name: "Una landing bonita no siempre convierte" })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 2, name: "Una página que conecta mensaje, acción y aprendizaje" })).toBeVisible();
-    await expect(page.locator("#problema figure")).toContainText("04 / Medición");
+    await expect(page.getByRole("heading", { level: 2, name: "Una dirección clara para cada visita" })).toBeVisible();
+    const comparisonImage = page.locator('#problema img[alt*="Dos propuestas"]');
+    const audienceImage = page.locator('#para-quien img[alt*="Equipo revisando"]');
+    await expect(comparisonImage).toBeVisible();
+    await expect(audienceImage).toBeVisible();
+    await comparisonImage.scrollIntoViewIfNeeded();
+    await expect.poll(() => comparisonImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await audienceImage.scrollIntoViewIfNeeded();
+    await expect.poll(() => audienceImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator("#solucion article")).toHaveCount(3);
     await expect(page.locator("#para-quien li")).toHaveCount(4);
     await expect(page.locator("#incluye article")).toHaveCount(4);
     await expect(page.locator("#proceso li")).toHaveCount(4);
+    const form = page.locator("#auditoria-landing-pages-form form");
+    await expect(form).toBeVisible();
+    const formWidth = await form.evaluate((element) => element.getBoundingClientRect().width);
+    expect(formWidth).toBeGreaterThanOrEqual(width < 768 ? width - 80 : 420);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
   }
 });
@@ -195,5 +207,111 @@ test("each commercial hero keeps its CTA and the next section in the first viewp
       expect(ctaBox!.y + ctaBox!.height, `${route} CTA at ${width}px`).toBeLessThanOrEqual(height - bottomBar);
       expect(nextBox!.y, `${route} next section at ${width}px`).toBeLessThanOrEqual(height - bottomBar - 12);
     }
+  }
+});
+
+test("annotated section introductions are centered and the SEO description follows its title", async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/seo");
+    const title = page.locator("#problem-title");
+    const description = title.locator("..").locator("p").last();
+    expect(await title.evaluate((element) => getComputedStyle(element).textAlign)).toBe("center");
+    expect(await description.evaluate((element) => getComputedStyle(element).textAlign)).toBe("center");
+    const titleBox = await title.boundingBox();
+    const descriptionBox = await description.boundingBox();
+    expect(descriptionBox!.y).toBeGreaterThanOrEqual(titleBox!.y + titleBox!.height);
+
+    await page.goto("/diseno-landing-pages");
+    const audienceTitle = page.locator("#para-quien h2");
+    expect(await audienceTitle.evaluate((element) => getComputedStyle(element).textAlign)).toBe("center");
+    await expect(page.locator("#para-quien").getByText("Para quién", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("Más elementos no hacen más clara una oferta.", { exact: true })).toHaveCount(0);
+  }
+});
+
+test("Google Ads process explanations have a stronger reading weight and size", async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/agencia-marketing-digital/google-ads");
+    const descriptions = page.locator("#proceso li h3 + p");
+    await expect(descriptions).toHaveCount(5);
+    const styles = await descriptions.evaluateAll((elements) => elements.map((element) => {
+      const style = getComputedStyle(element);
+      return { size: parseFloat(style.fontSize), weight: parseInt(style.fontWeight, 10) };
+    }));
+    for (const style of styles) {
+      expect(style.size).toBeGreaterThanOrEqual(19);
+      expect(style.weight).toBeGreaterThanOrEqual(500);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+  }
+});
+
+test("redesigned problem, deliverable and process descriptions keep readable type and contrast", async ({ page }) => {
+  const checks = [
+    { route: "/diseno-landing-pages", selector: "#problema li p, #incluye article p", count: 7 },
+    { route: "/agencia-marketing-digital/google-ads", selector: "#problema li p, #proceso li h3 + p", count: 8 },
+    {
+      route: "/seo",
+      selector: "section[aria-labelledby='includes-title'] li h3 + p, #proceso li h3 + p, section[aria-labelledby='audience-title'] article h3 + p, section[aria-labelledby='related-seo-title'] a h3 + p",
+      count: 18,
+    },
+  ];
+
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const check of checks) {
+      await page.goto(check.route);
+      const descriptions = page.locator(check.selector);
+      await expect(descriptions).toHaveCount(check.count);
+      const values = await descriptions.evaluateAll((elements) => {
+        const luminance = (rgb: number[]) => rgb.map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        }).reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
+        const channels = (color: string) => color.match(/\d+(?:\.\d+)?/g)!.slice(0, 3).map(Number);
+        return elements.map((element) => {
+          const style = getComputedStyle(element);
+          let background = [255, 255, 255];
+          for (let node: Element | null = element; node; node = node.parentElement) {
+            const color = getComputedStyle(node).backgroundColor;
+            if (color !== "rgba(0, 0, 0, 0)" && color !== "transparent") {
+              background = channels(color);
+              break;
+            }
+          }
+          const brightness = [luminance(channels(style.color)), luminance(background)].sort((a, b) => b - a);
+          return {
+            text: element.textContent,
+            fontSize: parseFloat(style.fontSize),
+            lineHeight: parseFloat(style.lineHeight),
+            contrast: (brightness[0] + 0.05) / (brightness[1] + 0.05),
+          };
+        });
+      });
+      for (const value of values) {
+        expect(value.fontSize, `${check.route}: ${value.text}`).toBeGreaterThanOrEqual(17);
+        expect(value.lineHeight, `${check.route}: ${value.text}`).toBeGreaterThanOrEqual(24);
+        expect(value.contrast, `${check.route}: ${value.text}`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  }
+});
+
+test("SEO stage deliverables and audience copy stay inside their cards", async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/seo");
+    const cards = page.locator("#proceso li, section[aria-labelledby='audience-title'] article");
+    await expect(cards).toHaveCount(9);
+    const overflow = await cards.evaluateAll((elements) => elements.flatMap((card) => {
+      const bounds = card.getBoundingClientRect();
+      return Array.from(card.querySelectorAll("h3, p")).filter((text) => {
+        const box = text.getBoundingClientRect();
+        return box.bottom > bounds.bottom + 1 || box.right > bounds.right + 1 || box.left < bounds.left - 1;
+      }).map((text) => text.textContent);
+    }));
+    expect(overflow, `clipped card text at ${width}px`).toEqual([]);
   }
 });

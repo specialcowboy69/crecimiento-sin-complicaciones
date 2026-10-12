@@ -123,7 +123,7 @@ Las landings deben parecer parte de la misma familia visual que la home. Pueden 
 Reglas:
 
 - Usar la capa visual clara `landing-light` cuando una landing venga de un diseño oscuro.
-- Mantener una base de fondos claros y usar tarjetas solo para elementos que necesitan un marco propio; los procesos, recorridos y argumentos funcionan mejor como secciones editoriales sin cajas repetidas.
+- Mantener una base de fondos claros. Usar tarjetas para entregables, situaciones y etapas que necesitan un marco propio, combinando tamaños, imágenes y superficies para dar jerarquía. Los procesos también pueden usar una composición de tarjetas cuando facilite seguir el recorrido.
 - Reutilizar azul principal y verde acento.
 - Mantener el logo y la navegación alineados con la home.
 - Evitar bloques demasiado densos en móvil.
@@ -159,7 +159,11 @@ Evitar:
 
 Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
 
-En las tres páginas comerciales anteriores, el contenido posterior al hero evita repetir cuadrículas de tarjetas: Google Ads mantiene un recorrido de campaña, SEO presenta diagnóstico, sistema y proceso, y Landing Pages explica la anatomía de la página y el ciclo mensaje → acción → aprendizaje. Los esquemas deben seguir siendo comprensibles como texto HTML sin depender de una imagen ni prometer métricas o plazos no verificados.
+En las tres páginas comerciales anteriores, las cuadrículas bento combinan fotografía y módulos de tamaños distintos. Son un recurso reutilizable entre rutas; su composición se adapta al contenido de cada servicio. SEO presenta cuatro áreas de trabajo, Google Ads organiza tres decisiones de campaña y Landing Pages conecta mensaje, acción y medición. Alternar estas cuadrículas con bandas fotográficas, listas breves, procesos y enlaces abiertos para que las secciones tengan ritmos distintos. Los títulos y explicaciones siguen siendo HTML y no deben prometer métricas o plazos no verificados.
+
+En `/diseno-landing-pages`, el diagnóstico utiliza una fotografía comparativa en lugar de una maqueta hecha con texto. La auditoría utiliza el ancho completo del contenedor: `LeadForm` ya contiene su propia composición de introducción y formulario y no debe encerrarse en otra columna. El movimiento de las tarjetas se implementa en un componente cliente pequeño con Motion y respeta `prefers-reduced-motion`.
+
+Las referencias visuales elegidas por el usuario refuerzan las tarjetas con fotografía, las superficies teal oscuras, los acentos verde claro y las composiciones modulares. Los bloques de entregables y situaciones no deben quedar reducidos a pequeños iconos con texto sobre líneas separadoras. Mantener descripciones de al menos 17 px, títulos de tarjeta claramente mayores y contraste explícito sobre superficies oscuras; la capa global `landing-light` requiere comprobar los colores renderizados. La fotografía en blanco y negro puede aportar contraste en tarjetas secundarias. Las cifras y testimonios de las referencias no se trasladan al sitio.
 
 ## Formularios
 

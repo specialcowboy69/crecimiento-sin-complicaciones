@@ -29,13 +29,14 @@ test("national SEO uses an image hero and a light contact variant", () => {
   assert.ok(asset("seo-hero-editorial.webp").size > 10_000);
 });
 
-test("national SEO explains diagnosis, system, process and audiences without repeated card grids", () => {
+test("national SEO explains diagnosis, an image-led system, process and audiences", () => {
   const page = source("app/seo/page.tsx");
 
   assert.doesNotMatch(page, /systemBlocks|difference-title|FileSearch/);
   assert.match(page, /styles\.diagnosis/);
-  assert.match(page, /styles\.systemFlow/);
-  assert.match(page, /styles\.processTimeline/);
+  assert.match(page, /styles\.systemGrid/);
+  assert.match(page, /styles\.systemVisual/);
+  assert.match(page, /styles\.processGrid/);
   assert.match(page, /styles\.audienceRoutes/);
   assert.match(page, /\/agencia-marketing-digital\/seo-tecnico-arquitectura-entidades/);
   for (const id of ["servicio", "proceso", "seo-local", "faq", "auditoria-seo"]) {
@@ -52,13 +53,17 @@ test("Landing Pages uses a full-bleed image hero without duplicate navigation or
   assert.ok(asset("landing-pages-hero-editorial.webp").size > 10_000);
 });
 
-test("Landing Pages explains page anatomy and three moments without repeated problem or solution cards", () => {
+test("Landing Pages uses photography and an asymmetric solution instead of a text mockup", () => {
   const page = source("app/diseno-landing-pages/page.tsx");
 
-  assert.doesNotMatch(page, /problemPoints|solutionBlocks/);
+  assert.doesNotMatch(page, /anatomyBrowser|anatomyPage|solutionMoments|momentDetail/);
   assert.match(page, /styles\.landingAnatomy/);
-  assert.match(page, /styles\.solutionMoments/);
+  assert.match(page, /styles\.solutionBento/);
+  assert.match(page, /landing-page-comparison-editorial\.webp/);
+  assert.match(page, /landing-page-review-editorial\.webp/);
   assert.match(page, /Mensaje|Acción|Aprendizaje/);
+  assert.ok(asset("landing-page-comparison-editorial.webp").size > 10_000);
+  assert.ok(asset("landing-page-review-editorial.webp").size > 10_000);
   for (const id of ["problema", "solucion", "para-quien", "incluye"]) {
     assert.match(page, new RegExp(`id="${id}"`));
   }
@@ -70,6 +75,10 @@ test("Landing Pages audience, deliverables and process have distinct editorial l
 
   assert.match(page, /styles\.audienceList/);
   assert.match(page, /styles\.deliverablesGrid/);
+  assert.match(page, /styles\.deliverableCard/);
   assert.match(page, /styles\.processTrack/);
+  assert.match(page, /styles\.auditSectionInner/);
+  assert.doesNotMatch(page, /lg:grid-cols-\[0\.8fr_1fr\]/);
   assert.doesNotMatch(redesigned, /rounded-lg border border-slate-200 bg-white p-6 shadow-sm/);
+  assert.doesNotMatch(page, /Más elementos no hacen más clara una oferta/);
 });
