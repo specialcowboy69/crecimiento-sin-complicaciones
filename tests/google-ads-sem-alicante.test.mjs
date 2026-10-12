@@ -20,7 +20,7 @@ test("national Google Ads page visibly owns Google Ads and SEM intent", async ()
   assert.match(page, /title: "Agencia Google Ads y SEM para empresas"/);
   assert.match(page, /canonical: pagePath/);
   assert.match(page, /Agencia Google Ads y SEM/);
-  assert.match(page, /Somos una agencia SEM especializada en Google Ads/);
+  assert.match(page, /Agencia Google Ads para convertir búsquedas en oportunidades/);
   assert.match(page, /¿Es lo mismo una agencia SEM que una agencia Google Ads\?/);
   assert.doesNotMatch(page, /id="agencia-sem"/);
   assert.match(hub, /Google Ads y SEM/);
@@ -41,7 +41,8 @@ test("national Google Ads page uses varied visual storytelling instead of repeat
 
   assert.match(page, /import Image from "next\/image"/);
   assert.match(page, /import styles from "\.\/google-ads\.module\.css"/);
-  assert.match(page, /De la búsqueda a una oportunidad comercial/);
+  assert.match(page, /Agencia Google Ads para convertir búsquedas en oportunidades/);
+  assert.match(page, /src="\/images\/google-ads-hero-editorial\.webp"/);
   assert.match(page, /Búsquedas demasiado amplias/);
   assert.match(page, /Medición incompleta/);
   assert.match(page, /Landing desconectada/);
@@ -58,8 +59,9 @@ test("national Google Ads page uses varied visual storytelling instead of repeat
     assert.equal(existsSync(path.join(repoRoot, relativePath)), true, `missing ${relativePath}`);
   }
 
-  assert.match(styles, /\.journeyPanel/);
-  assert.match(styles, /\.problemVisual/);
+  assert.match(styles, /\.hero/);
+  assert.doesNotMatch(styles, /\.journeyPanel/);
+  assert.match(styles, /\.solutionVisual/);
   assert.match(styles, /\.audienceList/);
   assert.doesNotMatch(styles, /\.semSection|\.semVisual/);
   assert.match(styles, /@media \(max-width: 767px\)/);

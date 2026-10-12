@@ -75,15 +75,15 @@ Reglas:
 
 - No incluir `Auditoría gratuita` en el header de escritorio de la home.
 - La home usa `Auditoría gratuita` como oferta de conversión en hero, secciones y formulario; en el header móvil se muestra la CTA directa al formulario.
-- En móvil, el header de la home muestra logo + `Solicitar auditoría gratuita` enlazado al formulario de la propia página. El desplegable de servicios permanece en escritorio.
+- En móvil, el header de la home muestra logo, CTA de auditoría al formulario propio y desplegable de servicios compacto.
 - El CTA principal debe vivir en el hero y en secciones de conversión.
 - Los enlaces centrales deben tener peso visual suficiente.
-- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto. En páginas con formulario propio, la CTA de auditoría sustituye al desplegable; las páginas sin formulario conservan el desplegable.
+- En móvil, priorizar claridad y evitar que el header ocupe demasiado alto. Las páginas con formulario propio muestran CTA de auditoría y desplegable compacto; las páginas sin formulario conservan el desplegable sin CTA local.
 
 En landings de servicio:
 
 - Mantener `Auditoría gratuita` visible en el header de escritorio.
-- Usar `Más servicios` como desplegable secundario antes del CTA en escritorio. En móvil, usar la CTA directa al formulario propio en lugar del desplegable.
+- Usar `Más servicios` como desplegable secundario antes del CTA en escritorio. En móvil, mantener tanto la CTA directa al formulario propio como el desplegable `Servicios`.
 - Evitar una segunda barra de navegación encima del hero salvo que sea imprescindible.
 - Los enlaces internos de la landing deben quedarse en el header principal cuando haya espacio.
 - Donde ya existe una barra fija inferior de auditoría en móvil, su acción pasa a `Llamar` con el teléfono público verificado; el formulario sigue accesible desde el header.
@@ -123,7 +123,7 @@ Las landings deben parecer parte de la misma familia visual que la home. Pueden 
 Reglas:
 
 - Usar la capa visual clara `landing-light` cuando una landing venga de un diseño oscuro.
-- Mantener fondos claros, cards blancas y bordes suaves.
+- Mantener una base de fondos claros. Usar tarjetas para entregables, situaciones y etapas que necesitan un marco propio, combinando tamaños, imágenes y superficies para dar jerarquía. Los procesos también pueden usar una composición de tarjetas cuando facilite seguir el recorrido.
 - Reutilizar azul principal y verde acento.
 - Mantener el logo y la navegación alineados con la home.
 - Evitar bloques demasiado densos en móvil.
@@ -144,6 +144,7 @@ La fotografía debe mostrar el servicio, el contexto de trabajo o el mercado al 
 Patrones aprobados:
 
 - Hero de ancho completo con fotografía editorial, overlay suficiente y copy legible sobre la imagen.
+- En `/agencia-marketing-digital/google-ads`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
 - Composiciones de imagen y texto que alternen el ritmo de la página.
 - Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
 - Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
@@ -157,6 +158,12 @@ Evitar:
 - Recortes que oculten el producto, la persona o el lugar que la imagen pretende mostrar.
 
 Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
+
+En las tres páginas comerciales anteriores, las cuadrículas bento combinan fotografía y módulos de tamaños distintos. Son un recurso reutilizable entre rutas; su composición se adapta al contenido de cada servicio. SEO presenta cuatro áreas de trabajo, Google Ads organiza tres decisiones de campaña y Landing Pages conecta mensaje, acción y medición. Alternar estas cuadrículas con bandas fotográficas, listas breves, procesos y enlaces abiertos para que las secciones tengan ritmos distintos. Los títulos y explicaciones siguen siendo HTML y no deben prometer métricas o plazos no verificados.
+
+En `/diseno-landing-pages`, el diagnóstico utiliza una fotografía comparativa en lugar de una maqueta hecha con texto. La auditoría utiliza el ancho completo del contenedor: `LeadForm` ya contiene su propia composición de introducción y formulario y no debe encerrarse en otra columna. El movimiento de las tarjetas se implementa en un componente cliente pequeño con Motion y respeta `prefers-reduced-motion`.
+
+Las referencias visuales elegidas por el usuario refuerzan las tarjetas con fotografía, las superficies teal oscuras, los acentos verde claro y las composiciones modulares. Los bloques de entregables y situaciones no deben quedar reducidos a pequeños iconos con texto sobre líneas separadoras. Mantener descripciones de al menos 17 px, títulos de tarjeta claramente mayores y contraste explícito sobre superficies oscuras; la capa global `landing-light` requiere comprobar los colores renderizados. La fotografía en blanco y negro puede aportar contraste en tarjetas secundarias. Las cifras y testimonios de las referencias no se trasladan al sitio.
 
 ## Formularios
 
