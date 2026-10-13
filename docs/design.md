@@ -165,6 +165,19 @@ En `/diseno-landing-pages`, el diagnóstico utiliza una fotografía comparativa 
 
 Las referencias visuales elegidas por el usuario refuerzan las tarjetas con fotografía, las superficies teal oscuras, los acentos verde claro y las composiciones modulares. Los bloques de entregables y situaciones no deben quedar reducidos a pequeños iconos con texto sobre líneas separadoras. Mantener descripciones de al menos 17 px, títulos de tarjeta claramente mayores y contraste explícito sobre superficies oscuras; la capa global `landing-light` requiere comprobar los colores renderizados. La fotografía en blanco y negro puede aportar contraste en tarjetas secundarias. Las cifras y testimonios de las referencias no se trasladan al sitio.
 
+## Páginas SEO De Ciudad
+
+Las rutas `/seo/madrid`, `/seo/valencia`, `/seo/barcelona`, `/seo/sevilla`, `/seo/malaga` y `/seo/alicante` comparten un componente Server y un módulo CSS propio bajo `app/seo/_components/`. El sistema mantiene una composición común, pero la jerarquía, el contenido y los bloques territoriales responden al mercado de cada ciudad.
+
+- Hero fotográfico de ancho completo, H1 literal corto y CTA visible sin scroll. Las imágenes muestran el mercado atendido, no oficinas de la agencia; sus fuentes y licencias se registran en `docs/seo-city-image-sources.md` y los créditos se muestran en cada página.
+- Diagnóstico centrado, tarjetas con superficies distintas y descripciones de al menos 18 px.
+- Bento de servicio con fotografía, perfil del negocio, búsquedas, reseñas, páginas, técnica y medición. El bento del proceso usa otra composición y nombra los entregables sin confundir la auditoría gratuita con la ejecución contratada.
+- Sectores agrupados por necesidades, con ejemplos claramente identificados como ejemplos, no clientes o casos de éxito.
+- Madrid desarrolla especialidades profesionales y B2B; Valencia desarrolla proximidad, citas, presupuestos y la relación entre SEO y Ads. Barcelona separa mercado, idioma y arquitectura; Sevilla prioriza páginas de servicio y confianza; Málaga añade decisiones condicionales de cobertura en Costa del Sol; Alicante ordena ciudad, provincia y Google Ads local. No trasladar estas diferencias como afirmaciones estadísticas del mercado.
+- Barcelona, Málaga y Alicante pueden añadir una banda abierta de tres decisiones de mercado mediante `market`; Sevilla no añade una sección territorial vacía. Las comparativas SEO/Ads conservan sus destinos actuales y Alicante enlaza a su ruta local de Google Ads.
+- Preservar canonicals, metadatos, FAQs/schema y etiquetas de origen exactas `SEO {Ciudad}`. No modificar captura de leads ni activar el chatbot como parte del cambio visual.
+- El formulario utiliza contactos sobre fondo claro (`contactDark={false}`); las superficies oscuras de las tarjetas declaran explícitamente sus colores para evitar las sobrescrituras de `landing-light`.
+
 ## Formularios
 
 Los formularios deben reducir fricción. Pedir solo lo necesario para iniciar una conversación comercial.
