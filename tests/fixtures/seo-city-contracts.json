@@ -1,0 +1,974 @@
+{
+  "madrid": {
+    "metadata": {
+      "canonical": "/seo/madrid",
+      "title": "Agencia SEO para empresas de Madrid",
+      "description": "Servicios SEO para empresas de Madrid. Auditoría SEO gratuita, estrategia de contenidos, SEO técnico y posicionamiento local para captar más clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis solo con empresas que están físicamente en Madrid?",
+        "answer": "No. Podemos trabajar con empresas ubicadas en Madrid y también con negocios que venden servicios a clientes de Madrid. Lo importante es definir bien la intención local y no prometer presencia física si no existe."
+      },
+      {
+        "question": "¿Cuánto tarda el SEO en Madrid en dar resultados?",
+        "answer": "Depende del estado de la web, la competencia y el tipo de keywords. Normalmente las mejoras técnicas y de contenido empiezan a dar señales en semanas, pero una estrategia SEO seria suele medirse en ciclos de 3 a 6 meses."
+      },
+      {
+        "question": "¿Qué incluye una auditoría SEO para una empresa de Madrid?",
+        "answer": "Revisamos indexación, arquitectura, velocidad, páginas actuales, keywords, contenido, enlazado interno, conversión y oportunidades locales. La idea es salir con una hoja de ruta clara, no con una lista interminable de tareas."
+      },
+      {
+        "question": "¿Es mejor hacer SEO local o SEO nacional?",
+        "answer": "Depende del negocio. Si vendes principalmente en Madrid, el SEO local puede ser prioritario. Si puedes captar clientes en toda España, conviene combinar una página nacional como /seo/ con páginas locales como /seo/madrid/."
+      },
+      {
+        "question": "¿Necesito crear muchas páginas por barrios de Madrid?",
+        "answer": "No al principio. Antes de crear páginas por zonas como Chamberí, Salamanca, Chamartín o Alcobendas, conviene validar que existe demanda suficiente y que cada página tendrá contenido propio. Si no, es mejor concentrar la autoridad en una página fuerte de Madrid."
+      },
+      {
+        "question": "¿El SEO sustituye a Google Ads?",
+        "answer": "No necesariamente. El SEO construye captación orgánica a medio plazo; Google Ads puede generar demanda inmediata. Para muchas pymes, lo mejor es combinar ambos: Ads para aprender rápido y SEO para reducir dependencia a largo plazo."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Madrid",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/madrid"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Madrid",
+        "serviceType": [
+          "SEO local",
+          "Consultoría SEO",
+          "SEO técnico",
+          "Posicionamiento web"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Madrid"
+        },
+        "description": "Servicios SEO para empresas de Madrid con auditoría SEO gratuita, estrategia de contenidos, SEO técnico y posicionamiento local orientado a leads.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Madrid",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/madrid"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis solo con empresas que están físicamente en Madrid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Podemos trabajar con empresas ubicadas en Madrid y también con negocios que venden servicios a clientes de Madrid. Lo importante es definir bien la intención local y no prometer presencia física si no existe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el SEO en Madrid en dar resultados?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del estado de la web, la competencia y el tipo de keywords. Normalmente las mejoras técnicas y de contenido empiezan a dar señales en semanas, pero una estrategia SEO seria suele medirse en ciclos de 3 a 6 meses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué incluye una auditoría SEO para una empresa de Madrid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Revisamos indexación, arquitectura, velocidad, páginas actuales, keywords, contenido, enlazado interno, conversión y oportunidades locales. La idea es salir con una hoja de ruta clara, no con una lista interminable de tareas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es mejor hacer SEO local o SEO nacional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del negocio. Si vendes principalmente en Madrid, el SEO local puede ser prioritario. Si puedes captar clientes en toda España, conviene combinar una página nacional como /seo/ con páginas locales como /seo/madrid/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Necesito crear muchas páginas por barrios de Madrid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No al principio. Antes de crear páginas por zonas como Chamberí, Salamanca, Chamartín o Alcobendas, conviene validar que existe demanda suficiente y que cada página tendrá contenido propio. Si no, es mejor concentrar la autoridad en una página fuerte de Madrid."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El SEO sustituye a Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No necesariamente. El SEO construye captación orgánica a medio plazo; Google Ads puede generar demanda inmediata. Para muchas pymes, lo mejor es combinar ambos: Ads para aprender rápido y SEO para reducir dependencia a largo plazo."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Madrid",
+      "defaultService": "SEO Madrid"
+    },
+    "sectionIds": [
+      "audit-request",
+      "auditoria-madrid",
+      "estrategia",
+      "faq",
+      "metodo",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads",
+      "/diseno-pagina-web-profesional",
+      "/seo",
+      "/seo-para-pymes"
+    ]
+  },
+  "valencia": {
+    "metadata": {
+      "canonical": "/seo/valencia",
+      "title": "Agencia SEO para empresas de Valencia | Crecimiento sin complicaciones",
+      "description": "Servicios SEO para empresas de Valencia. Auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local para captar más clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis con empresas de Valencia aunque no tengáis oficina física allí?",
+        "answer": "Sí. Podemos trabajar con empresas ubicadas en Valencia y también con negocios que venden a clientes de Valencia. En ese caso, cuidamos el enfoque para hablar de servicios para empresas de Valencia sin afirmar presencia física si no existe."
+      },
+      {
+        "question": "¿Qué diferencia hay entre SEO local y SEO nacional?",
+        "answer": "El SEO nacional busca posicionar por servicios o temas sin una ubicación concreta. El SEO local añade intención geográfica: búsquedas con ciudad, páginas adaptadas al mercado local, sectores de la zona y señales que ayudan a Google a entender dónde quieres captar clientes."
+      },
+      {
+        "question": "¿Cuánto tarda el SEO para una empresa en Valencia?",
+        "answer": "Depende de la competencia, el estado técnico de la web y las keywords objetivo. Algunas mejoras pueden notarse en pocas semanas, pero una estrategia SEO realista suele medirse en ciclos de 3 a 6 meses."
+      },
+      {
+        "question": "¿Tiene sentido hacer SEO si ya invierto en Google Ads?",
+        "answer": "Sí. Google Ads puede darte visibilidad inmediata, pero el SEO construye captación orgánica a medio plazo. Además, lo aprendido en Ads puede ayudar a priorizar keywords, mensajes y páginas SEO con más intención comercial."
+      },
+      {
+        "question": "¿Qué páginas necesita una pyme valenciana para posicionar mejor?",
+        "answer": "Normalmente necesita una home clara, páginas de servicio, una estructura bien enlazada, contenido que responda dudas reales y, si vende en una zona concreta, páginas locales bien trabajadas. No se trata de crear muchas URLs, sino de crear las páginas correctas."
+      },
+      {
+        "question": "¿Podéis trabajar sobre mi web actual o hay que hacer una nueva?",
+        "answer": "Podemos empezar revisando la web actual. Si la base técnica, el mensaje y la estructura permiten mejorar, trabajamos sobre ella. Si la web limita la captación, planteamos una mejora o rediseño orientado a SEO y conversión."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Valencia",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/valencia"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Valencia",
+        "serviceType": [
+          "SEO Valencia",
+          "Consultoría SEO Valencia",
+          "SEO local Valencia",
+          "Posicionamiento web Valencia"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Valencia"
+        },
+        "description": "Servicios SEO para empresas de Valencia con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Valencia",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/valencia"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis con empresas de Valencia aunque no tengáis oficina física allí?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Podemos trabajar con empresas ubicadas en Valencia y también con negocios que venden a clientes de Valencia. En ese caso, cuidamos el enfoque para hablar de servicios para empresas de Valencia sin afirmar presencia física si no existe."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia hay entre SEO local y SEO nacional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El SEO nacional busca posicionar por servicios o temas sin una ubicación concreta. El SEO local añade intención geográfica: búsquedas con ciudad, páginas adaptadas al mercado local, sectores de la zona y señales que ayudan a Google a entender dónde quieres captar clientes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el SEO para una empresa en Valencia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende de la competencia, el estado técnico de la web y las keywords objetivo. Algunas mejoras pueden notarse en pocas semanas, pero una estrategia SEO realista suele medirse en ciclos de 3 a 6 meses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tiene sentido hacer SEO si ya invierto en Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Google Ads puede darte visibilidad inmediata, pero el SEO construye captación orgánica a medio plazo. Además, lo aprendido en Ads puede ayudar a priorizar keywords, mensajes y páginas SEO con más intención comercial."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué páginas necesita una pyme valenciana para posicionar mejor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Normalmente necesita una home clara, páginas de servicio, una estructura bien enlazada, contenido que responda dudas reales y, si vende en una zona concreta, páginas locales bien trabajadas. No se trata de crear muchas URLs, sino de crear las páginas correctas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Podéis trabajar sobre mi web actual o hay que hacer una nueva?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Podemos empezar revisando la web actual. Si la base técnica, el mensaje y la estructura permiten mejorar, trabajamos sobre ella. Si la web limita la captación, planteamos una mejora o rediseño orientado a SEO y conversión."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Valencia",
+      "defaultService": "SEO Valencia"
+    },
+    "sectionIds": [
+      "ads",
+      "audit-request",
+      "auditoria-valencia",
+      "estrategia",
+      "faq",
+      "metodo",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads",
+      "/seo",
+      "/seo-para-pymes",
+      "/seo/barcelona",
+      "/seo/madrid"
+    ]
+  },
+  "barcelona": {
+    "metadata": {
+      "canonical": "/seo/barcelona",
+      "title": "Agencia SEO para empresas de Barcelona | Crecimiento sin complicaciones",
+      "description": "Servicios SEO para empresas de Barcelona. Auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y posicionamiento local para captar clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis con empresas que venden en Barcelona aunque no tengan oficina allí?",
+        "answer": "Sí. Podemos trabajar con empresas ubicadas en Barcelona y también con negocios que venden a clientes de Barcelona. En ese caso, cuidamos el enfoque para no prometer presencia física si no existe y centramos la página en servicio, mercado e intención local."
+      },
+      {
+        "question": "¿Qué diferencia hay entre SEO en Barcelona y SEO nacional?",
+        "answer": "El SEO nacional busca posicionar servicios o temas sin una ubicación concreta. El SEO en Barcelona añade intención local: búsquedas con ciudad, competidores locales, sectores específicos y páginas pensadas para captar demanda en ese mercado."
+      },
+      {
+        "question": "¿Cuánto tarda en funcionar una estrategia SEO en Barcelona?",
+        "answer": "Depende del estado de la web, la competencia y las keywords. Una auditoría puede detectar mejoras rápidas, pero una estrategia SEO sólida suele necesitar entre 3 y 6 meses para mostrar señales consistentes."
+      },
+      {
+        "question": "¿Tiene sentido hacer SEO local si mi negocio es B2B?",
+        "answer": "Sí, especialmente si tus clientes buscan proveedores cercanos o con conocimiento del mercado. Muchas empresas B2B comparan agencias, consultores o proveedores usando búsquedas locales antes de pedir presupuesto."
+      },
+      {
+        "question": "¿Necesito contenido en catalán para posicionar en Barcelona?",
+        "answer": "No siempre. Depende de tu audiencia y de las búsquedas objetivo. Si tus clientes buscan principalmente en castellano, podemos empezar en castellano. Si hay demanda o una razón comercial clara, se puede valorar una versión o contenido específico en catalán más adelante."
+      },
+      {
+        "question": "¿Es mejor SEO o Google Ads para captar clientes en Barcelona?",
+        "answer": "No son excluyentes. Google Ads puede darte visibilidad inmediata y aprendizaje rápido. El SEO construye captación orgánica a medio plazo. Para muchas empresas, lo más eficiente es usar Ads para validar mensajes y SEO para consolidar demanda."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Barcelona",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/barcelona"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Barcelona",
+        "serviceType": [
+          "SEO Barcelona",
+          "Consultoría SEO Barcelona",
+          "SEO técnico",
+          "Posicionamiento web Barcelona"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Barcelona"
+        },
+        "description": "Servicios SEO para empresas de Barcelona con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y posicionamiento local orientado a leads.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Barcelona",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/barcelona"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis con empresas que venden en Barcelona aunque no tengan oficina allí?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Podemos trabajar con empresas ubicadas en Barcelona y también con negocios que venden a clientes de Barcelona. En ese caso, cuidamos el enfoque para no prometer presencia física si no existe y centramos la página en servicio, mercado e intención local."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia hay entre SEO en Barcelona y SEO nacional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El SEO nacional busca posicionar servicios o temas sin una ubicación concreta. El SEO en Barcelona añade intención local: búsquedas con ciudad, competidores locales, sectores específicos y páginas pensadas para captar demanda en ese mercado."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda en funcionar una estrategia SEO en Barcelona?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del estado de la web, la competencia y las keywords. Una auditoría puede detectar mejoras rápidas, pero una estrategia SEO sólida suele necesitar entre 3 y 6 meses para mostrar señales consistentes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tiene sentido hacer SEO local si mi negocio es B2B?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, especialmente si tus clientes buscan proveedores cercanos o con conocimiento del mercado. Muchas empresas B2B comparan agencias, consultores o proveedores usando búsquedas locales antes de pedir presupuesto."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Necesito contenido en catalán para posicionar en Barcelona?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No siempre. Depende de tu audiencia y de las búsquedas objetivo. Si tus clientes buscan principalmente en castellano, podemos empezar en castellano. Si hay demanda o una razón comercial clara, se puede valorar una versión o contenido específico en catalán más adelante."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es mejor SEO o Google Ads para captar clientes en Barcelona?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No son excluyentes. Google Ads puede darte visibilidad inmediata y aprendizaje rápido. El SEO construye captación orgánica a medio plazo. Para muchas empresas, lo más eficiente es usar Ads para validar mensajes y SEO para consolidar demanda."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Barcelona",
+      "defaultService": "SEO Barcelona"
+    },
+    "sectionIds": [
+      "audit-request",
+      "auditoria-barcelona",
+      "estrategia",
+      "faq",
+      "metodo",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads",
+      "/seo",
+      "/seo-para-pymes",
+      "/seo/madrid"
+    ]
+  },
+  "sevilla": {
+    "metadata": {
+      "canonical": "/seo/sevilla",
+      "title": "Agencia SEO para empresas de Sevilla | Crecimiento sin complicaciones",
+      "description": "Servicios SEO para empresas de Sevilla. Auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local para captar más clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis con empresas de Sevilla aunque no tengáis oficina física allí?",
+        "answer": "Sí. Podemos trabajar con empresas ubicadas en Sevilla y también con negocios que venden a clientes de Sevilla. Si no hay presencia física, cuidamos el mensaje para hablar de servicios para empresas de Sevilla sin afirmar una sede local."
+      },
+      {
+        "question": "¿Qué diferencia hay entre SEO local y SEO nacional?",
+        "answer": "El SEO nacional busca posicionar servicios sin depender de una ciudad concreta. El SEO local añade intención geográfica: búsquedas con ciudad, páginas adaptadas al mercado local y señales que ayudan a Google a entender dónde quieres captar clientes."
+      },
+      {
+        "question": "¿Cuánto tarda el SEO para una empresa en Sevilla?",
+        "answer": "Depende del estado de la web, la competencia y las keywords. Las mejoras técnicas pueden notarse antes, pero una estrategia SEO seria suele necesitar entre 3 y 6 meses para mostrar señales consistentes."
+      },
+      {
+        "question": "¿Necesito crear páginas por barrios o zonas de Sevilla?",
+        "answer": "No al principio. Antes de crear páginas por barrios o municipios cercanos, conviene validar demanda y asegurarse de que cada URL tendrá contenido propio. Primero es mejor construir una página fuerte para Sevilla."
+      },
+      {
+        "question": "¿Tiene sentido hacer SEO si ya tengo campañas de Google Ads?",
+        "answer": "Sí. Google Ads puede generar visibilidad inmediata, pero el SEO construye captación orgánica a medio plazo. Además, los datos de Ads pueden ayudar a decidir qué keywords y mensajes merece la pena trabajar en SEO."
+      },
+      {
+        "question": "¿Podéis mejorar mi web actual o hay que hacer una nueva?",
+        "answer": "Podemos empezar revisando la web actual. Si tiene buena base, trabajamos sobre ella. Si la estructura, el mensaje o la parte técnica limitan el crecimiento, planteamos mejoras o un rediseño orientado a SEO y conversión."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Sevilla",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/sevilla"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Sevilla",
+        "serviceType": [
+          "SEO Sevilla",
+          "Consultoría SEO Sevilla",
+          "SEO local Sevilla",
+          "Posicionamiento web Sevilla"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Sevilla"
+        },
+        "description": "Servicios SEO para empresas de Sevilla con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Sevilla",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/sevilla"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis con empresas de Sevilla aunque no tengáis oficina física allí?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Podemos trabajar con empresas ubicadas en Sevilla y también con negocios que venden a clientes de Sevilla. Si no hay presencia física, cuidamos el mensaje para hablar de servicios para empresas de Sevilla sin afirmar una sede local."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué diferencia hay entre SEO local y SEO nacional?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "El SEO nacional busca posicionar servicios sin depender de una ciudad concreta. El SEO local añade intención geográfica: búsquedas con ciudad, páginas adaptadas al mercado local y señales que ayudan a Google a entender dónde quieres captar clientes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el SEO para una empresa en Sevilla?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del estado de la web, la competencia y las keywords. Las mejoras técnicas pueden notarse antes, pero una estrategia SEO seria suele necesitar entre 3 y 6 meses para mostrar señales consistentes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Necesito crear páginas por barrios o zonas de Sevilla?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No al principio. Antes de crear páginas por barrios o municipios cercanos, conviene validar demanda y asegurarse de que cada URL tendrá contenido propio. Primero es mejor construir una página fuerte para Sevilla."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tiene sentido hacer SEO si ya tengo campañas de Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Google Ads puede generar visibilidad inmediata, pero el SEO construye captación orgánica a medio plazo. Además, los datos de Ads pueden ayudar a decidir qué keywords y mensajes merece la pena trabajar en SEO."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Podéis mejorar mi web actual o hay que hacer una nueva?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Podemos empezar revisando la web actual. Si tiene buena base, trabajamos sobre ella. Si la estructura, el mensaje o la parte técnica limitan el crecimiento, planteamos mejoras o un rediseño orientado a SEO y conversión."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Sevilla",
+      "defaultService": "SEO Sevilla"
+    },
+    "sectionIds": [
+      "ads",
+      "audit-request",
+      "auditoria-sevilla",
+      "estrategia",
+      "faq",
+      "metodo",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads",
+      "/diseno-pagina-web-profesional",
+      "/seo",
+      "/seo-para-pymes",
+      "/seo/barcelona",
+      "/seo/madrid",
+      "/seo/valencia"
+    ]
+  },
+  "malaga": {
+    "metadata": {
+      "canonical": "/seo/malaga",
+      "title": "Agencia SEO para empresas de Málaga | Crecimiento sin complicaciones",
+      "description": "Servicios SEO para empresas de Málaga. Auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local para captar clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis con empresas de Málaga aunque no tengáis oficina física allí?",
+        "answer": "Sí. Podemos trabajar con empresas ubicadas en Málaga y también con negocios que venden a clientes de Málaga o la Costa del Sol. Si no hay sede física, cuidamos el mensaje para hablar de servicios para empresas de Málaga sin afirmar una presencia local falsa."
+      },
+      {
+        "question": "¿Tiene sentido hacer SEO local en Málaga?",
+        "answer": "Sí, especialmente en sectores como turismo, inmobiliaria, salud, formación, reformas, servicios profesionales, hostelería y negocios premium. Muchas búsquedas tienen intención local y el usuario compara antes de contactar."
+      },
+      {
+        "question": "¿Puedo posicionar también en Marbella, Fuengirola o Torremolinos?",
+        "answer": "Sí, pero primero hay que validar demanda e intención. No conviene crear páginas por municipio si solo cambian el nombre de la localidad. Es mejor empezar con una página fuerte para Málaga y después ampliar a zonas con contenido propio."
+      },
+      {
+        "question": "¿Cuánto tarda el SEO para una empresa en Málaga?",
+        "answer": "Depende del estado de la web, la competencia y la estacionalidad del sector. Algunas mejoras técnicas pueden notarse antes, pero una estrategia SEO consistente suele necesitar entre 3 y 6 meses para mostrar señales claras."
+      },
+      {
+        "question": "¿Es mejor SEO o Google Ads para captar clientes en Málaga?",
+        "answer": "Depende del momento. Google Ads puede aportar visibilidad inmediata y datos rápidos. El SEO construye captación orgánica a medio plazo. En mercados competitivos o estacionales, combinarlos suele ser la vía más inteligente."
+      },
+      {
+        "question": "¿Podéis trabajar sobre mi web actual?",
+        "answer": "Sí. Primero revisamos si tu web actual tiene una base técnica y comercial suficiente. Si se puede mejorar, trabajamos sobre ella. Si limita la captación, planteamos ajustes de estructura, contenido o diseño orientados a SEO y conversión."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Málaga",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/malaga"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Málaga",
+        "serviceType": [
+          "SEO Málaga",
+          "Consultoría SEO Málaga",
+          "SEO local Málaga",
+          "Posicionamiento web Málaga"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Málaga"
+        },
+        "description": "Servicios SEO para empresas de Málaga con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Málaga",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/malaga"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis con empresas de Málaga aunque no tengáis oficina física allí?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Podemos trabajar con empresas ubicadas en Málaga y también con negocios que venden a clientes de Málaga o la Costa del Sol. Si no hay sede física, cuidamos el mensaje para hablar de servicios para empresas de Málaga sin afirmar una presencia local falsa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tiene sentido hacer SEO local en Málaga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, especialmente en sectores como turismo, inmobiliaria, salud, formación, reformas, servicios profesionales, hostelería y negocios premium. Muchas búsquedas tienen intención local y el usuario compara antes de contactar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Puedo posicionar también en Marbella, Fuengirola o Torremolinos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, pero primero hay que validar demanda e intención. No conviene crear páginas por municipio si solo cambian el nombre de la localidad. Es mejor empezar con una página fuerte para Málaga y después ampliar a zonas con contenido propio."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el SEO para una empresa en Málaga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del estado de la web, la competencia y la estacionalidad del sector. Algunas mejoras técnicas pueden notarse antes, pero una estrategia SEO consistente suele necesitar entre 3 y 6 meses para mostrar señales claras."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es mejor SEO o Google Ads para captar clientes en Málaga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del momento. Google Ads puede aportar visibilidad inmediata y datos rápidos. El SEO construye captación orgánica a medio plazo. En mercados competitivos o estacionales, combinarlos suele ser la vía más inteligente."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Podéis trabajar sobre mi web actual?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Primero revisamos si tu web actual tiene una base técnica y comercial suficiente. Si se puede mejorar, trabajamos sobre ella. Si limita la captación, planteamos ajustes de estructura, contenido o diseño orientados a SEO y conversión."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Málaga",
+      "defaultService": "SEO Málaga"
+    },
+    "sectionIds": [
+      "ads",
+      "audit-request",
+      "auditoria-malaga",
+      "costa-del-sol",
+      "estrategia",
+      "faq",
+      "metodo",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads",
+      "/seo",
+      "/seo-para-pymes",
+      "/seo/alicante",
+      "/seo/barcelona",
+      "/seo/madrid",
+      "/seo/sevilla",
+      "/seo/valencia"
+    ]
+  },
+  "alicante": {
+    "metadata": {
+      "canonical": "/seo/alicante",
+      "title": "Agencia SEO para empresas de Alicante | Crecimiento sin complicaciones",
+      "description": "Servicios SEO para empresas de Alicante. Auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local para captar clientes desde Google."
+    },
+    "faqs": [
+      {
+        "question": "¿Trabajáis con empresas de Alicante aunque no tengáis oficina física allí?",
+        "answer": "Sí. Podemos trabajar con empresas ubicadas en Alicante y también con negocios que venden a clientes de Alicante o su provincia. Si no hay sede física, cuidamos el mensaje para hablar de servicios para empresas de Alicante sin afirmar presencia local falsa."
+      },
+      {
+        "question": "¿Tiene sentido hacer SEO local en Alicante?",
+        "answer": "Sí, especialmente para negocios que dependen de búsquedas con intención local: inmobiliarias, clínicas, reformas, formación, hostelería, servicios profesionales y empresas B2B que quieren captar clientes en la zona."
+      },
+      {
+        "question": "¿Puedo posicionar también en otros municipios de Alicante?",
+        "answer": "Sí, pero no conviene crear páginas por municipio sin validar demanda. Primero revisamos si hay búsquedas reales y si cada página puede tener contenido propio. En muchos casos es mejor empezar con una página fuerte para Alicante y después ampliar a zonas concretas."
+      },
+      {
+        "question": "¿Cuánto tarda el SEO para una empresa en Alicante?",
+        "answer": "Depende del estado de la web y de la competencia. Algunas mejoras técnicas pueden notarse antes, pero una estrategia SEO consistente suele necesitar entre 3 y 6 meses para consolidar visibilidad y captar oportunidades."
+      },
+      {
+        "question": "¿Es mejor SEO o Google Ads para captar clientes en Alicante?",
+        "answer": "Depende del objetivo. Google Ads puede generar visibilidad inmediata. El SEO construye captación orgánica a medio plazo. Lo más sólido suele ser combinar ambos: Ads para aprender rápido y SEO para reducir dependencia del pago por clic."
+      },
+      {
+        "question": "¿Podéis trabajar sobre mi web actual?",
+        "answer": "Sí. Primero revisamos si tu web actual puede posicionar y convertir. Si la base es válida, la mejoramos. Si la estructura, el contenido o la parte técnica limitan mucho la captación, proponemos cambios más profundos."
+      }
+    ],
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.crecimientosincomplicaciones.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Agencia SEO",
+            "item": "https://www.crecimientosincomplicaciones.com/seo"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SEO Alicante",
+            "item": "https://www.crecimientosincomplicaciones.com/seo/alicante"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Agencia SEO para empresas de Alicante",
+        "serviceType": [
+          "SEO Alicante",
+          "Consultoría SEO Alicante",
+          "SEO local Alicante",
+          "Posicionamiento web Alicante"
+        ],
+        "provider": {
+          "@type": "Organization",
+          "name": "Crecimiento sin complicaciones",
+          "url": "https://www.crecimientosincomplicaciones.com"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Alicante"
+        },
+        "description": "Servicios SEO para empresas de Alicante con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
+        "makesOffer": {
+          "@type": "Offer",
+          "name": "Auditoría SEO gratuita para empresas de Alicante",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/alicante"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Trabajáis con empresas de Alicante aunque no tengáis oficina física allí?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Podemos trabajar con empresas ubicadas en Alicante y también con negocios que venden a clientes de Alicante o su provincia. Si no hay sede física, cuidamos el mensaje para hablar de servicios para empresas de Alicante sin afirmar presencia local falsa."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Tiene sentido hacer SEO local en Alicante?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, especialmente para negocios que dependen de búsquedas con intención local: inmobiliarias, clínicas, reformas, formación, hostelería, servicios profesionales y empresas B2B que quieren captar clientes en la zona."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Puedo posicionar también en otros municipios de Alicante?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, pero no conviene crear páginas por municipio sin validar demanda. Primero revisamos si hay búsquedas reales y si cada página puede tener contenido propio. En muchos casos es mejor empezar con una página fuerte para Alicante y después ampliar a zonas concretas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el SEO para una empresa en Alicante?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del estado de la web y de la competencia. Algunas mejoras técnicas pueden notarse antes, pero una estrategia SEO consistente suele necesitar entre 3 y 6 meses para consolidar visibilidad y captar oportunidades."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es mejor SEO o Google Ads para captar clientes en Alicante?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende del objetivo. Google Ads puede generar visibilidad inmediata. El SEO construye captación orgánica a medio plazo. Lo más sólido suele ser combinar ambos: Ads para aprender rápido y SEO para reducir dependencia del pago por clic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Podéis trabajar sobre mi web actual?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Primero revisamos si tu web actual puede posicionar y convertir. Si la base es válida, la mejoramos. Si la estructura, el contenido o la parte técnica limitan mucho la captación, proponemos cambios más profundos."
+            }
+          }
+        ]
+      }
+    ],
+    "auditForm": {
+      "sourcePage": "SEO Alicante",
+      "defaultService": "SEO Alicante"
+    },
+    "sectionIds": [
+      "ads",
+      "audit-request",
+      "auditoria-alicante",
+      "estrategia",
+      "faq",
+      "metodo",
+      "provincia",
+      "sectores"
+    ],
+    "internalHrefs": [
+      "/",
+      "/agencia-marketing-digital/google-ads/alicante",
+      "/diseno-pagina-web-profesional",
+      "/seo",
+      "/seo-para-pymes",
+      "/seo/barcelona",
+      "/seo/madrid",
+      "/seo/sevilla",
+      "/seo/valencia"
+    ]
+  }
+}

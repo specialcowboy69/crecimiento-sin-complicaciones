@@ -38,7 +38,7 @@ test("national SEO hero and contact details remain readable", async ({ page }) =
   await expect(page.locator('.contact-options a[href="mailto:info@crecimientosincomplicaciones.com"]')).toBeVisible();
 
   await page.goto("/seo/madrid", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".contact-options")).toHaveClass(/contact-options-dark/);
+  await expect(page.locator(".contact-options")).not.toHaveClass(/contact-options-dark/);
 });
 
 test("SEO editorial flow is responsive and links to the live technical service", async ({ page }) => {
