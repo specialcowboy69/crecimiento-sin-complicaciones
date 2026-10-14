@@ -289,6 +289,7 @@ export default function GoogleAdsAlicantePage() {
               src="/images/google-ads-alicante-hero-v2.webp"
               alt=""
               fill
+              loading="eager"
               fetchPriority="high"
               sizes="100vw"
               quality={92}
