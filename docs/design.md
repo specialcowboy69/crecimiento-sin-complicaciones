@@ -144,7 +144,7 @@ La fotografía debe mostrar el servicio, el contexto de trabajo o el mercado al 
 Patrones aprobados:
 
 - Hero de ancho completo con fotografía editorial, overlay suficiente y copy legible sobre la imagen.
-- En `/agencia-marketing-digital/google-ads`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
+- En `/agencia-marketing-digital/google-ads`, `/agencia-marketing-digital/google-ads/alicante`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
 - Composiciones de imagen y texto que alternen el ritmo de la página.
 - Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
 - Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
@@ -291,3 +291,5 @@ Checklist mínimo:
 - El scroll vertical sigue funcionando sobre los carruseles móviles y sus gestos horizontales y controles responden.
 - Se revisan como mínimo los breakpoints de `1440x900` y `390x844` cuando cambia la composición visual.
 - `npm run lint` y `npm run build` pasan si se ha tocado código.
+
+En `/seo/local`, los seis servicios y los factores locales usan tarjetas sin iconos en los servicios, con superficies blancas y azules. El color alterna por orden de lectura y conserva esa secuencia al apilarse en móvil. Los textos y números declaran colores explícitos para mantener contraste con la capa `landing-light`.

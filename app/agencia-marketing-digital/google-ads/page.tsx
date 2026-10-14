@@ -361,8 +361,7 @@ export default function GoogleAdsPage() {
                   <div>
                     <h3>Medición incompleta</h3>
                     <p>
-                      Ves clics, pero no sabes qué campañas generan llamadas o formularios. Sin conversiones comprobadas,
-                      falta información para decidir dónde invertir.
+                      Ves clics, pero no sabes qué campañas generan llamadas o formularios. Sin una configuración adecuada de los eventos de conversión, falta información para decidir dónde invertir.
                     </p>
                   </div>
                 </li>
@@ -371,7 +370,7 @@ export default function GoogleAdsPage() {
                   <div>
                     <h3>Landing desconectada</h3>
                     <p>
-                      El anuncio promete una solución y la página muestra una oferta genérica. Si el mensaje y el siguiente
+                      El anuncio promete una solución y la página muestra otra cosa. Si el mensaje y el siguiente
                       paso no están claros, la visita se pierde antes de contactar.
                     </p>
                   </div>
@@ -390,8 +389,7 @@ export default function GoogleAdsPage() {
                 <p className={styles.sectionEyebrow}>Solución</p>
                 <h2 id="solution-title">La campaña se decide antes y después del clic</h2>
                 <p>
-                  Conectamos intención, anuncio, página de destino y conversiones para saber qué merece presupuesto y qué
-                  conviene ajustar primero.
+                  Preparamos los anuncios y la página para que quien busca tu servicio pueda contactar contigo. Después revisamos qué campañas generan consultas para decidir dónde invertir.
                 </p>
               </div>
 
@@ -411,7 +409,7 @@ export default function GoogleAdsPage() {
                     <div>
                       <h3>Elegir dónde competir</h3>
                       <p>
-                        Keywords comerciales y campañas por servicio para dirigir el presupuesto a búsquedas relevantes.
+                        Mostramos tus anuncios a quienes buscan los servicios que ofreces.
                       </p>
                     </div>
                   </article>
@@ -429,7 +427,7 @@ export default function GoogleAdsPage() {
                     <div>
                       <h3>Mover inversión con criterio</h3>
                       <p>
-                        Conversiones comprobadas, términos de búsqueda y calidad del lead para decidir qué ajustar.
+                        Revisamos qué búsquedas generan consultas y si esas consultas encajan con tu negocio para mejorar las campañas.
                       </p>
                     </div>
                   </article>

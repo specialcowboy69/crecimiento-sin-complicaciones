@@ -1,33 +1,65 @@
-.heroVisual {
+.hero {
   position: relative;
-  min-height: 31rem;
+  isolation: isolate;
+  min-height: 34rem;
   overflow: hidden;
-  border: 1px solid #dbe5f1;
-  border-radius: 8px;
-  background: #dbeafe;
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.16);
+  background: #0f2a46;
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 25, 43, 0.96), rgba(8, 25, 43, 0.86) 48%, rgba(8, 25, 43, 0.3));
+  content: "";
+}
+
+.heroImage {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroContent {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 2rem);
+}
+
+:global(.landing-light) .hero h1 {
+  max-width: 54rem;
+  color: #ffffff !important;
+  font-size: clamp(2rem, 4.4vw, 3.7rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+:global(.landing-light) .hero nav,
+:global(.landing-light) .hero nav a,
+:global(.landing-light) .hero nav span,
+:global(.landing-light) .hero p {
+  color: #dbeafe !important;
+}
+
+:global(.landing-light) .hero a[href^="#"],
+:global(.landing-light) .hero a[href="/agencia-marketing-digital/google-ads"] {
+  color: #ffffff !important;
+}
+
+:global(.landing-light) .hero a[href="/agencia-marketing-digital/google-ads"] {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(8, 25, 43, 0.5);
 }
 
 .coverImage {
   object-fit: cover;
 }
 
-.heroCaption {
-  position: absolute;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.125rem;
-  border-left: 3px solid #10b981;
-  background: rgba(15, 23, 42, 0.9);
-  color: #ffffff !important;
-  font-size: 0.9375rem;
-  font-weight: 750;
-  line-height: 1.5;
-  backdrop-filter: blur(12px);
+@media (max-width: 639px) {
+  .hero { min-height: 0; }
+  .heroContent { padding-block: 2rem 2.5rem; }
+  .heroImage { object-position: 62% center; }
+  .hero::after { background: rgba(8, 25, 43, 0.84); }
 }
 
 .demandSection {
@@ -189,16 +221,6 @@
   background: #dbeafe;
 }
 
-.coverageVisual figcaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.88);
-  color: #ffffff !important;
-  font-size: 0.8125rem;
-  font-weight: 750;
-}
 
 .auditList {
   margin: 0;
@@ -232,9 +254,6 @@
 }
 
 @media (max-width: 1023px) {
-  .heroVisual {
-    min-height: 27rem;
-  }
 
   .editorialSplit,
   .coverageSection {
@@ -284,17 +303,7 @@
 }
 
 @media (max-width: 639px) {
-  .heroVisual {
-    min-height: 24rem;
-  }
 
-  .heroCaption {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    padding: 0.85rem 0.9rem;
-    font-size: 0.8125rem;
-  }
 
   .demandSection {
     padding: 4rem 1rem;
@@ -333,13 +342,6 @@
 
   .coverageVisual {
     min-height: 18rem;
-  }
-
-  .coverageVisual figcaption {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    padding: 0.7rem 0.85rem;
   }
 
   .auditList li {

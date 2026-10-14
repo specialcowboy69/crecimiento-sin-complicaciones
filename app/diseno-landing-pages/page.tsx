@@ -66,14 +66,14 @@ const includes = [
   },
   {
     title: "Diseño y desarrollo",
-    text: "Página adaptable a escritorio y móvil, con lectura y carga cuidadas.",
+    text: "Un diseño que ayuda a entender tu oferta y facilita el contacto.",
     icon: MousePointerClick,
     image: "/images/google-ads-national-audience.webp",
     imageAlt: "Dos profesionales revisan una propuesta en un portátil",
   },
   {
     title: "Captación configurada",
-    text: "Campos, validación y confirmación del envío preparados para recibir consultas.",
+    text: "Un formulario sencillo para que el visitante pueda pedir información.",
     icon: Send,
     image: null,
     imageAlt: "",
@@ -310,7 +310,7 @@ export default function DisenoLandingPagesPage() {
           </h1>
           <p className={styles.heroDescription}>
             Creamos páginas para campañas, servicios y lanzamientos que explican la oferta con claridad,
-            reducen fricción y convierten el tráfico en oportunidades medibles.
+            reducen fricción y convierten el tráfico en oportunidades.
           </p>
           <div className={styles.heroActions}>
             <a className={styles.heroPrimary} href="#auditoria-landing-pages-form">
@@ -360,7 +360,7 @@ export default function DisenoLandingPagesPage() {
           <div className={styles.solutionIntro}>
             <p className={styles.eyebrow}>La solución</p>
             <h2 id="landing-solution-title">Una dirección clara para cada visita</h2>
-            <p>Una oferta comprensible, un siguiente paso natural y señales para mejorar con criterio.</p>
+            <p>Explicamos tu oferta y facilitamos el contacto. Medimos las consultas para saber qué cambiar en la página y ayudar a que más visitantes te escriban.</p>
           </div>
           <div className={styles.solutionBento}>
             <LandingTile className={`${styles.solutionTile} ${styles.solutionFeature}`}>
@@ -393,7 +393,7 @@ export default function DisenoLandingPagesPage() {
               <div>
                 <span>03 / Aprendizaje</span>
                 <h3>Saber qué funciona</h3>
-                <p>Conectamos origen, eventos y contactos para orientar la siguiente mejora.</p>
+                <p>Comprobamos qué visitas terminan en una consulta para detectar dónde puede mejorar la página.</p>
               </div>
             </LandingTile>
           </div>
@@ -409,7 +409,7 @@ export default function DisenoLandingPagesPage() {
             sizes="100vw"
           />
           <div className={styles.audienceVisualCopy}>
-            <h2>Para convertir interés en conversaciones</h2>
+            <h2>¿Para quién es?</h2>
           </div>
         </div>
         <div className={styles.audienceGrid}>

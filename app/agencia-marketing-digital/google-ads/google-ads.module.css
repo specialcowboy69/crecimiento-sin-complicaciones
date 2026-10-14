@@ -318,12 +318,12 @@
   text-wrap: balance;
 }
 
-.solutionDecisions article p {
+:global(.landing-light) .solutionDecisions article p {
   max-width: 35rem;
   margin: 0.7rem 0 0;
-  color: #40536b !important;
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  color: #263b53 !important;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .processSection {
