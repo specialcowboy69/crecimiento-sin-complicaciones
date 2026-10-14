@@ -3298,6 +3298,10 @@ textarea {
   box-shadow: var(--shadow);
 }
 
+.cookie-consent[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
 .cookie-consent h2 {
   margin: 0;
   color: var(--foreground);
@@ -3339,6 +3343,18 @@ textarea {
   border-color: var(--primary);
   background: #eff6ff;
   color: var(--primary-dark);
+}
+
+.cookie-consent-accept {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.cookie-consent-accept:hover {
+  border-color: var(--primary-dark);
+  background: var(--primary-dark);
+  color: #ffffff;
 }
 
 .cookie-preferences {

@@ -171,7 +171,7 @@ test("cookie consent synchronizes its stored preference without effect state wri
   assert.match(consent, /useSyncExternalStore/);
   assert.match(consent, /useLayoutEffect/);
   assert.match(consent, /getCookieConsentSnapshot\(document\.cookie\)/);
-  assert.match(consent, /initialDialogActionRef\.current\?\.focus\(\)/);
+  assert.match(consent, /initialDialogRef\.current\?\.focus\(\{ preventScroll: true \}\)/);
   assert.match(consent, /preferencesAnalyticsRef\.current\?\.focus\(\)/);
   assert.match(consent, /const CONSENT_CHANGE_EVENT = "cookie-consent-change"/);
   assert.match(consent, /window\.addEventListener\(CONSENT_CHANGE_EVENT/);

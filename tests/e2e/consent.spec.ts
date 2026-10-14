@@ -122,10 +122,19 @@ test("fresh visit and rejection never request Google or create measurement cooki
   await page.goto("/seo/local");
   const banner = page.getByRole("dialog", { name: "Tu privacidad" });
   await expect(banner).toBeVisible();
-  await expect(banner.getByRole("button", { name: "Rechazar", exact: true })).toBeFocused();
+  await expect(banner).toBeFocused();
+  await expect(banner).toHaveCSS("outline-style", "none");
+  const reject = banner.getByRole("button", { name: "Rechazar", exact: true });
+  await expect(reject).not.toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(banner.getByRole("link", { name: "Política de cookies" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await expect(reject).toBeFocused();
+  await expect(reject).toHaveCSS("outline-style", "solid");
   expect(network.googleRequests).toEqual([]);
   expect((await context.cookies()).filter((cookie) => /^_(ga|gcl)/.test(cookie.name))).toEqual([]);
-  await banner.getByRole("button", { name: "Rechazar", exact: true }).click();
+  await reject.click();
   await page.reload();
   await expect(banner).toBeHidden();
   expect(network.googleRequests).toEqual([]);
@@ -179,12 +188,14 @@ test("unavailable session storage does not break consent or a lead", async ({ pa
   expect((await context.cookies()).find((cookie) => cookie.name === "cookie_consent")?.value).toBe(consentValue(true, false));
 });
 
-test("visitor notices explain click ID association and later qualified-lead measurement", async ({ page }) => {
+test("cookie notice is concise and links to the detailed measurement policies", async ({ page }) => {
   await harness(page);
   await page.goto("/seo/local");
   const banner = page.getByRole("dialog", { name: "Tu privacidad" });
-  await expect(banner).toContainText("identificador del clic");
-  await expect(banner).toContainText("cualificada");
+  await expect(banner).toContainText("cookie necesaria");
+  await expect(banner).toContainText("cookies de analítica y medición publicitaria");
+  await expect(banner.getByRole("button", { name: "Aceptar todas" })).toHaveCSS("background-color", "rgb(37, 99, 235)");
+  await expect(banner.getByRole("link", { name: "Política de cookies" })).toHaveAttribute("href", "/politica-de-cookies");
   await page.goto("/politica-de-privacidad");
   await expect(page.getByRole("main")).toContainText("identificador del clic");
   await expect(page.getByRole("main")).toContainText("cualificada");
