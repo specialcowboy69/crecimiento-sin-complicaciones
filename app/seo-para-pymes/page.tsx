@@ -1,117 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  BarChart3,
-  CheckCircle2,
-  ClipboardList,
-  FileSearch,
-  Gauge,
-  GitBranch,
-  MapPin,
-  Megaphone,
-  Search,
-  Target,
-  Wrench,
-} from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Check } from "lucide-react";
+import styles from "./seo-pymes.module.css";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { SeoAuditForm } from "../components/SeoAuditForm";
 
-const includes = [
-  {
-    icon: FileSearch,
-    title: "Auditoría SEO inicial",
-    text: "Revisamos tu punto de partida y separamos problemas críticos de mejoras secundarias.",
-  },
-  {
-    icon: Wrench,
-    title: "Revisión técnica",
-    text: "Indexación, velocidad, estructura, errores y bloqueos que pueden frenar el posicionamiento web para pymes.",
-  },
-  {
-    icon: Target,
-    title: "Keyword research de negocio",
-    text: "Elegimos búsquedas con intención comercial, no términos que solo llenan informes de tráfico.",
-  },
-  {
-    icon: Search,
-    title: "Optimización de páginas clave",
-    text: "Mejoramos servicios, categorías y landings para responder a búsquedas que pueden traer contactos.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Contenido para demanda real",
-    text: "Creamos páginas y respuestas útiles para clientes que ya están comparando opciones.",
-  },
-  {
-    icon: GitBranch,
-    title: "Enlazado interno",
-    text: "Conectamos servicios, ciudades y preguntas para reforzar las páginas con mayor potencial comercial.",
-  },
-  {
-    icon: BarChart3,
-    title: "Medición de leads",
-    text: "Seguimos formularios, llamadas y solicitudes, no solo posiciones aisladas.",
-  },
+const situations = [
+  { title: "Tu web apenas aparece", text: "Revisamos si Google puede encontrar tus páginas y si responden a lo que buscan tus posibles clientes." },
+  { title: "Te encuentran por tu nombre", text: "Trabajamos para que también puedan descubrirte quienes buscan tu servicio y todavía no conocen tu empresa." },
+  { title: "Llegan visitas, pero pocas consultas", text: "Comprobamos si estás llegando a las personas adecuadas y si tu página les ayuda a decidir." },
 ];
 
-const audiences = [
-  "Tienes web, pero no llegan contactos.",
-  "Dependías de recomendaciones y quieres captar desde Google.",
-  "Inviertes en Ads, pero quieres reducir dependencia.",
-  "Tu web habla de servicios, pero no posiciona por búsquedas comerciales.",
-  "Quieres SEO local en tu ciudad o provincia.",
-];
-
-const method = [
-  {
-    step: "01",
-    title: "Revisamos tu web y detectamos bloqueos",
-    text: "Analizamos técnica, contenidos, arquitectura, conversión y señales básicas de confianza.",
-  },
-  {
-    step: "02",
-    title: "Creamos un mapa de keywords por intención",
-    text: "Ordenamos búsquedas informativas, locales y comerciales para saber qué URL debe responder a cada demanda.",
-  },
-  {
-    step: "03",
-    title: "Priorizamos páginas con potencial de captación",
-    text: "Nos centramos primero en servicios, ciudades y problemas que pueden convertirse en contactos reales.",
-  },
-  {
-    step: "04",
-    title: "Mejoramos contenido, estructura y enlazado interno",
-    text: "Ajustamos títulos, copy, secciones, enlaces y señales técnicas para que cada página tenga una función clara.",
-  },
-  {
-    step: "05",
-    title: "Medimos tráfico, leads y siguientes acciones",
-    text: "Convertimos datos de Search Console, analítica y formularios en una lista de prioridades accionables.",
-  },
-];
-
-const comparisonRows = [
-  {
-    label: "Objetivo",
-    generic: "Tráfico amplio y rankings generales.",
-    pyme: "Contactos, llamadas y solicitudes de presupuesto.",
-  },
-  {
-    label: "Prioridad",
-    generic: "Muchas tareas sueltas a la vez.",
-    pyme: "Acciones claras según impacto, esfuerzo y urgencia.",
-  },
-  {
-    label: "Páginas",
-    generic: "Blog y contenidos informativos sin ruta comercial.",
-    pyme: "Páginas de servicios, zonas, problemas y decisión.",
-  },
-  {
-    label: "Medición",
-    generic: "Informes largos de posiciones y sesiones.",
-    pyme: "Leads, conversiones, visibilidad local y oportunidades.",
-  },
+const examples = [
+  { number: "01", title: "Hacer visible cada servicio", text: "Si una misma página mezcla todo lo que haces, ayudamos a que cada servicio tenga una explicación propia y fácil de encontrar.", example: "Por ejemplo: una asesoría puede explicar por separado su servicio para autónomos y su servicio para empresas." },
+  { number: "02", title: "Resolver las dudas antes del contacto", text: "Aclaramos qué incluye tu trabajo y cómo puede contratarte alguien que llega por primera vez.", example: "Por ejemplo: una empresa de reformas puede explicar qué necesita para preparar un presupuesto." },
+  { number: "03", title: "Corregir lo que impide aparecer", text: "Detectamos páginas que Google no puede leer o encontrar y planteamos los cambios necesarios.", example: "Por ejemplo: recuperar una página de servicio que ha quedado sin enlaces desde el resto de la web." },
 ];
 
 const cityLinks = [
@@ -124,36 +29,12 @@ const cityLinks = [
 ];
 
 const faqs = [
-  {
-    question: "¿Cuánto tarda el SEO para una pyme?",
-    answer:
-      "Depende de la competencia, autoridad del dominio, estado técnico y velocidad de implementación. Normalmente las primeras señales aparecen en 6-10 semanas y el impacto se consolida entre 3 y 6 meses.",
-  },
-  {
-    question: "¿Qué incluye una auditoría SEO?",
-    answer:
-      "Incluye revisión técnica, indexación, velocidad, arquitectura, contenidos, intención de búsqueda, oportunidades comerciales y una hoja de ruta priorizada.",
-  },
-  {
-    question: "¿Es mejor SEO o Google Ads para una pyme?",
-    answer:
-      "Google Ads puede acelerar captación y aprendizaje a corto plazo. El SEO construye visibilidad orgánica más estable. En muchas pymes conviene combinar ambos según presupuesto, urgencia y margen comercial.",
-  },
-  {
-    question: "¿Tiene sentido hacer SEO local?",
-    answer:
-      "Sí, especialmente si vendes en una ciudad, provincia o zona concreta. El SEO local para pymes ayuda a conectar servicios, ubicación e intención de compra.",
-  },
-  {
-    question: "¿Necesito publicar artículos todas las semanas?",
-    answer:
-      "No necesariamente. Antes de publicar por volumen, conviene asegurar que las páginas comerciales, la estructura y el enlazado interno están bien planteados.",
-  },
-  {
-    question: "¿Podéis trabajar sobre mi web actual?",
-    answer:
-      "Sí. Muchas veces podemos mejorar SEO técnico, contenidos y arquitectura sobre la web actual. Si la web bloquea conversión o rendimiento, proponemos mejoras más estructurales.",
-  },
+  { question: "¿Tiene sentido hacer SEO con un presupuesto pequeño?", answer: "Puede tenerlo si existe demanda para tus servicios y podemos concentrar el trabajo en unas prioridades claras. Revisamos tu punto de partida para proponer un alcance que puedas valorar antes de contratar." },
+  { question: "¿Cuánto tarda el SEO para una pyme?", answer: "El SEO necesita tiempo. La evolución depende de tu web, la competencia y los cambios que podamos llevar a cabo. Tras revisar el proyecto podremos hablar de expectativas razonables; no hay un plazo único válido para todos los negocios." },
+  { question: "¿Tengo que cambiar toda mi web?", answer: "No necesariamente. Primero revisamos la web actual. Si podemos mejorar las páginas que ya tienes, partimos de ellas. Si encontramos una limitación que requiere más trabajo, te explicamos las opciones antes de plantear un cambio." },
+  { question: "¿Necesito publicar artículos todas las semanas?", answer: "No. La frecuencia depende de lo que necesite tu web. Puede ser más útil mejorar una página de servicio que publicar nuevos artículos. Proponemos contenido cuando ayuda a responder una búsqueda o una duda de tus posibles clientes." },
+  { question: "¿Qué necesitaréis de mí?", answer: "Conocer tus servicios, a qué clientes atiendes y qué zonas cubres. Si aceptas la propuesta, acordamos los accesos y la información necesarios para ejecutar el trabajo. Tu conocimiento del negocio ayuda a que el contenido sea preciso." },
+  { question: "¿Cómo sabré si el trabajo está avanzando?", answer: "Revisamos qué páginas ganan visibilidad y qué búsquedas traen visitas. Cuando el seguimiento está disponible, también comprobamos las consultas recibidas. Compartimos los cambios realizados y las siguientes prioridades." },
 ];
 
 const jsonLd = [
@@ -212,7 +93,7 @@ const jsonLd = [
 export const metadata: Metadata = {
   title: "SEO para pymes | Agencia SEO para empresas pequeñas",
   description:
-    "SEO para pymes orientado a captar clientes. Auditoría SEO gratuita, estrategia de keywords, SEO técnico, contenido y posicionamiento local para empresas.",
+    "SEO para pymes que quieren recibir consultas desde Google. Revisamos tu web y te ayudamos a elegir las primeras mejoras. Auditoría gratuita.",
   keywords: [
     "seo para pymes",
     "agencia seo para pymes",
@@ -231,17 +112,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SEO para pymes que necesitan más clientes",
     description:
-      "Auditoría SEO, keywords comerciales, SEO técnico y posicionamiento local para convertir Google en un canal de captación.",
+      "Un plan de SEO adaptado a lo que necesita tu pequeña empresa. Empieza por saber qué mejorar en tu web con una auditoría gratuita.",
     url: "/seo-para-pymes",
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
     type: "website",
   },
 };
-
-function CheckIcon() {
-  return <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-blue-400" aria-hidden="true" strokeWidth={2} />;
-}
 
 export default function SeoForPymesPage() {
   return (
@@ -253,7 +130,7 @@ export default function SeoForPymesPage() {
         }}
       />
 
-      <div className="seo-pymes-page landing-light min-h-screen bg-slate-950 text-slate-50">
+      <div className={`seo-pymes-page landing-light ${styles.page}`}>
         <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
           <nav className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
             <Link className="logo-link text-slate-50" href="/" aria-label="Crecimiento sin complicaciones, inicio">
@@ -262,7 +139,7 @@ export default function SeoForPymesPage() {
             <div className="hidden items-center gap-2 text-sm font-semibold text-slate-300 lg:flex">
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#incluye">Incluye</a>
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#metodo">Método</a>
-              <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#comparativa">Comparativa</a>
+              <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#seo-local">SEO local</a>
               <a className="rounded-md px-3 py-2 hover:bg-slate-900 hover:text-white" href="#faq">FAQ</a>
             </div>
             <div className="mobile-header-links" aria-label="Enlaces rápidos">
@@ -280,317 +157,54 @@ export default function SeoForPymesPage() {
         </header>
 
         <main>
-          <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24" aria-labelledby="hero-title">
-            <div>
-              <nav className="mb-5 flex items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
-                <Link className="hover:text-blue-300" href="/">Inicio</Link>
-                <span aria-hidden="true">/</span>
-                <Link className="hover:text-blue-300" href="/seo">SEO</Link>
-                <span aria-hidden="true">/</span>
-                <span>Pymes</span>
-              </nav>
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
-                SEO PARA PYMES
-              </p>
-              <h1 id="hero-title" className="mb-6 max-w-4xl text-4xl font-black leading-[1.02] text-slate-900 sm:text-5xl lg:text-6xl">
-                SEO para pymes que necesitan más clientes, no más informes
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Te ayudamos a convertir tu web en un canal de captación: revisamos la parte técnica, ordenamos tus
-                páginas, elegimos keywords con intención comercial y priorizamos acciones que puedan traer contactos reales.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400" href="#auditoria-pymes">
-                  Solicitar auditoría SEO gratuita
-                </a>
-                <Link className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400" href="/seo">
-                  Ver servicios SEO
-                </Link>
-              </div>
-              <dl className="mt-10 grid gap-3 sm:grid-cols-3">
-                {[
-                  ["Prioridad", "Qué hacer primero"],
-                  ["Foco", "Leads y llamadas"],
-                  ["Alcance", "SEO técnico, local y contenido"],
-                ].map(([label, value]) => (
-                  <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10" key={label}>
-                    <dt className="text-sm font-black uppercase text-blue-300">{label}</dt>
-                    <dd className="mt-2 text-base font-bold leading-6 text-slate-100">{value}</dd>
-                  </div>
-                ))}
-              </dl>
+          <section className={styles.hero} aria-labelledby="hero-title"><div className={styles.heroInner}>
+            <div className={styles.heroCopy}>
+              <nav className={styles.breadcrumb} aria-label="Migas de pan"><Link href="/">Inicio</Link><span aria-hidden="true">/</span><Link href="/seo">SEO</Link><span aria-hidden="true">/</span><span>Pymes</span></nav>
+              <p className={styles.eyebrow}>Para pequeñas empresas</p><h1 id="hero-title">SEO para pymes.<br /><span>Haz que encuentren lo que haces.</span></h1>
+              <p className={styles.lead}>Tu próximo cliente puede estar buscando en Google. Te ayudamos a preparar tu web para que descubra tu negocio y pueda contactar.</p>
+              <a className={styles.primary} href="#auditoria-pymes">Solicitar auditoría SEO gratuita</a>
+              <p className={styles.heroFoot}>Empezamos por revisar tu web y explicarte qué conviene mejorar.</p>
             </div>
+            <div className={styles.heroVisual}><Image src="/images/home-service-seo.webp" alt="Revisión de búsquedas y estructura de páginas sobre una mesa de trabajo" fill sizes="(max-width: 767px) 100vw, 50vw" preload /><div className={styles.visualNote}><Check aria-hidden="true" size={20} /><span>Un plan que tenga sentido para tu negocio.</span></div></div>
+          </div></section>
 
-            <div className="seo-audit-panel rounded-lg bg-slate-900 p-6 shadow-2xl shadow-blue-950/30 ring-1 ring-slate-800" aria-label="Panel de prioridades SEO para pymes">
-              <div className="seo-audit-panel-head mb-7 flex items-center justify-between gap-4 pb-5">
-                <div className="seo-audit-panel-title">
-                  <p className="text-sm font-black uppercase tracking-normal text-blue-400">Mapa de prioridades</p>
-                  <strong className="mt-2 block text-2xl font-black text-white">Próximos 90 días</strong>
-                </div>
-                <Gauge className="seo-audit-panel-badge h-8 w-8 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-              </div>
-              <div className="seo-audit-step-grid grid gap-4">
-                {[
-                  ["01", "Arreglar bloqueos técnicos", "Indexación, errores, velocidad y estructura básica."],
-                  ["02", "Ordenar páginas comerciales", "Servicios, zonas y ofertas con intención de compra."],
-                  ["03", "Publicar con criterio", "Contenidos que resuelven dudas antes del contacto."],
-                  ["04", "Medir oportunidades", "Tráfico, formularios, llamadas y siguientes acciones."],
-                ].map(([step, title, text]) => (
-                  <article className="seo-audit-step grid gap-4 rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800 sm:grid-cols-[3rem_1fr]" key={step}>
-                    <span className="text-2xl font-black text-blue-300">{step}</span>
-                    <div>
-                      <h3 className="m-0 text-lg font-black text-white">{title}</h3>
-                      <p className="mt-2 text-sm leading-[1.6] text-slate-300">{text}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
+          <section className={styles.situations} aria-labelledby="situations-title"><div className={styles.container}>
+            <div className={styles.centerHeading}><p className={styles.eyebrow}>¿Te resulta familiar?</p><h2 id="situations-title">Tienes una web.<br />Quieres que también traiga oportunidades.</h2></div>
+            <div className={styles.situationGrid}>{situations.map((item, index) => <article key={item.title}><span className={styles.index}>0{index + 1}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+          </div></section>
 
-          <section className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="pain-title">
-            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.86fr_1.14fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">El problema</p>
-                <h2 id="pain-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  El problema no es “hacer SEO”, es saber qué hacer primero
-                </h2>
-              </div>
-              <p className="text-lg leading-8 text-slate-300 lg:pt-10">
-                Muchas pymes publican artículos, cambian textos o pagan campañas sin saber si su web está preparada
-                para posicionar. A veces falta estructura, otras veces las páginas no responden a búsquedas reales, y
-                otras el tráfico llega pero no convierte en formularios, llamadas o presupuestos.
-              </p>
+          <section id="incluye" className={styles.includes} aria-labelledby="includes-title"><div className={styles.container}>
+            <div className={styles.sectionHead}><div><p className={styles.eyebrow}>Qué hacemos en tu web</p><h2 id="includes-title">Mejoras que puedes entender.</h2></div><p>El trabajo se concreta según lo que encontremos. Estos ejemplos muestran cómo abordamos necesidades habituales de una pyme.</p></div>
+            <div className={styles.exampleGrid}>
+              <div className={styles.examplePhoto}><Image src="/images/home-growth-collaboration.webp" alt="Dos personas consultan un portátil y un cuaderno" fill sizes="(max-width: 767px) 100vw, 45vw" /><div><span>El negocio guía el trabajo</span><p>¿Qué necesita saber alguien antes de contratarte?</p></div></div>
+              {examples.map(item => <article className={styles.example} key={item.number}><span className={styles.index}>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p><p className={styles.exampleNote}>{item.example}</p></article>)}
             </div>
-          </section>
+          </div></section>
 
-          <section id="incluye" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="includes-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Qué hacemos</p>
-              <h2 id="includes-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Qué incluye nuestro SEO para pymes
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Servicios SEO para pymes, consultoría SEO para pymes y ejecución práctica para avanzar sin ruido.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {includes.map((item) => (
-                <article className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={item.title}>
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
-                    <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                  </span>
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">{item.text}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+          <section id="metodo" className={styles.method} aria-labelledby="method-title"><div className={styles.container}>
+            <div className={styles.methodIntro}><p className={styles.eyebrow}>Cómo empezamos</p><h2 id="method-title">Decide con una propuesta sobre la mesa.</h2><p>Antes de contratar, necesitas saber qué vamos a hacer y por qué. La auditoría gratuita es el primer paso.</p><Link className={styles.textLink} href="/seo">Conoce nuestro servicio de agencia SEO <ArrowUpRight aria-hidden="true" size={19} /></Link></div>
+            <ol className={styles.steps}><li><span>01</span><div><h3>Revisamos tu punto de partida</h3><p>Nos cuentas qué hace tu empresa y revisamos tu web para detectar las primeras oportunidades.</p><small>Recibes una revisión inicial gratuita.</small></div></li><li><span>02</span><div><h3>Acordamos qué abordar primero</h3><p>Te proponemos un alcance concreto según las necesidades de tu web y los recursos del proyecto.</p><small>Decides si la propuesta encaja contigo.</small></div></li><li><span>03</span><div><h3>Trabajamos y revisamos la evolución</h3><p>Tras aceptar la propuesta, aplicamos las mejoras acordadas y ajustamos las prioridades a lo que observamos.</p><small>Sabes qué se ha hecho y qué viene después.</small></div></li></ol>
+          </div></section>
 
-          <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="audience-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Para quién es</p>
-                <h2 id="audience-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Para pymes que quieren crecer con una base clara
-                </h2>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                {audiences.map((item) => (
-                  <p className="flex gap-3 rounded-lg bg-slate-950 p-5 text-base font-semibold leading-7 text-slate-300 ring-1 ring-slate-800" key={item}>
-                    <CheckIcon />
-                    <span>{item}</span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          </section>
+          <section id="seo-local" className={styles.local} aria-labelledby="local-title"><div className={styles.container}>
+            <div><p className={styles.eyebrow}>El lugar también importa</p><h2 id="local-title">Si tus clientes están cerca, el SEO debe tenerlo en cuenta.</h2><p>Una empresa que atiende en una zona concreta necesita explicar dónde trabaja. El <Link href="/seo/local">SEO local</Link> conecta tu web con las búsquedas de esa zona y con tu Perfil de Empresa de Google.</p></div>
+            <div className={styles.cityPanel}><h3>El trabajo, según tu mercado</h3><p>Consulta el enfoque de SEO para empresas que atienden en estas ciudades:</p><div className={styles.cityLinks}>{cityLinks.map(city => <Link href={city.href} key={city.href}>{city.label}<ArrowUpRight aria-hidden="true" size={17} /></Link>)}</div></div>
+          </div></section>
 
-          <section id="metodo" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="method-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Método</p>
-              <h2 id="method-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Cómo trabajamos el posicionamiento SEO para pymes
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Este proceso forma parte de nuestro{" "}
-                <Link className="font-black text-blue-600 hover:text-blue-700" href="/seo">
-                  servicio de agencia SEO
-                </Link>
-                , adaptado a empresas pequeñas que necesitan priorizar bien recursos y tiempos.
-              </p>
-            </div>
-            <div className="mt-10 grid gap-4">
-              {method.map((step) => (
-                <article className="grid gap-4 rounded-lg bg-white/5 p-6 ring-1 ring-white/10 sm:grid-cols-[4rem_1fr]" key={step.step}>
-                  <span className="text-3xl font-black text-blue-400">{step.step}</span>
-                  <div>
-                    <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                    <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          <section className={styles.decisions} aria-labelledby="decisions-title"><div className={styles.container}>
+            <div><p className={styles.eyebrow}>Elegir bien el momento</p><h2 id="decisions-title">¿El SEO es tu siguiente paso?</h2><p>Si necesitas empezar a anunciarte, puedes valorar <Link href="/agencia-marketing-digital/google-ads">Google Ads</Link>. Si tu web no permite explicar bien el servicio, puede convenir una mejora de <Link href="/diseno-pagina-web-profesional">diseño web</Link>. La revisión inicial nos ayuda a recomendarte por dónde empezar.</p></div>
+            <a className={styles.primary} href="#auditoria-pymes">Quiero mi auditoría gratuita <ArrowUpRight aria-hidden="true" size={20} /></a>
+          </div></section>
 
-          <section id="comparativa" className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="comparison-title">
-            <div className="mx-auto max-w-7xl">
-              <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Comparativa</p>
-                <h2 id="comparison-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  SEO para pymes frente a SEO genérico
-                </h2>
-              </div>
-              <div className="mt-10 grid gap-4 md:hidden">
-                {comparisonRows.map((row) => (
-                  <article className="rounded-lg bg-white p-5 shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200" key={row.label}>
-                    <h3 className="text-lg font-black text-slate-900">{row.label}</h3>
-                    <div className="mt-4 grid gap-3">
-                      <div>
-                        <p className="text-xs font-black uppercase text-slate-500">SEO genérico</p>
-                        <p className="mt-1 text-sm leading-6 text-slate-600">{row.generic}</p>
-                      </div>
-                      <div className="rounded-lg bg-blue-50 p-4">
-                        <p className="text-xs font-black uppercase text-blue-700">SEO para pymes</p>
-                        <p className="mt-1 text-sm font-bold leading-6 text-slate-700">{row.pyme}</p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <div className="mt-10 hidden overflow-x-auto rounded-lg bg-white shadow-[0_14px_36px_rgba(15,23,42,0.08)] ring-1 ring-slate-200 md:block">
-                <table className="w-full min-w-[760px] border-collapse text-left">
-                  <caption className="sr-only">Comparativa entre SEO genérico y SEO para pymes</caption>
-                  <thead>
-                    <tr>
-                      <th className="border-b border-slate-200 bg-slate-50 p-5 text-sm font-black text-slate-900">Criterio</th>
-                      <th className="border-b border-slate-200 bg-slate-50 p-5 text-sm font-black text-slate-900">SEO genérico</th>
-                      <th className="border-b border-slate-200 bg-blue-50 p-5 text-sm font-black text-slate-900">SEO para pymes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {comparisonRows.map((row) => (
-                      <tr key={row.label}>
-                        <th className="border-b border-slate-200 p-5 text-sm font-black text-slate-900">{row.label}</th>
-                        <td className="border-b border-slate-200 p-5 text-sm leading-6 text-slate-600">{row.generic}</td>
-                        <td className="border-b border-slate-200 bg-blue-50/50 p-5 text-sm font-bold leading-6 text-slate-700">{row.pyme}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
+          <section id="faq" className={styles.faq} aria-labelledby="faq-title"><div className={styles.container}>
+            <div className={styles.centerHeading}><p className={styles.eyebrow}>Tus dudas, antes de decidir</p><h2 id="faq-title">Preguntas frecuentes sobre SEO para pymes</h2></div>
+            <div className={styles.questions}>{faqs.map(faq => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+          </div></section>
 
-          <section id="seo-local" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="local-title">
-            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">SEO local</p>
-                <h2 id="local-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  SEO local para pymes que venden en una zona concreta
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Si tus clientes están en una ciudad o provincia concreta, trabajamos una{" "}
-                  <Link className="font-black text-blue-600 hover:text-blue-700" href="/seo/local">
-                    estrategia de SEO local
-                  </Link>{" "}
-                  con páginas, búsquedas por servicio, Perfil de Empresa y señales de confianza para que Google entienda dónde y para quién eres relevante.
-                </p>
-              </div>
-              <div className="grid content-start gap-4 sm:grid-cols-2">
-                {cityLinks.map((city) => (
-                  <Link className="flex min-h-20 items-center gap-4 rounded-lg bg-white/5 p-5 font-black text-slate-100 ring-1 ring-white/10 hover:bg-slate-900" href={city.href} key={city.href}>
-                    <MapPin className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                    <span>{city.label}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="ads-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.86fr_1.14fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">SEO o Ads</p>
-                <h2 id="ads-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  ¿SEO, Google Ads o mejorar primero la web?
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Si necesitas contactos ya, las campañas pueden acelerar aprendizaje. Si tu web no convierte, conviene
-                  reforzar mensaje, velocidad y formularios. La auditoría ayuda a elegir la siguiente acción.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                <Link className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 hover:bg-white/5" href="/agencia-marketing-digital/google-ads">
-                  <Megaphone className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">Google Ads para empresas</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">Campañas para captar antes y aprender qué mensajes convierten.</p>
-                </Link>
-                <Link className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 hover:bg-white/5" href="/diseno-pagina-web-profesional">
-                  <Gauge className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">Diseño web profesional</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">Webs más claras, rápidas y preparadas para convertir visitas en contactos.</p>
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="middle-cta-title">
-            <div className="rounded-lg bg-blue-600 p-8 text-white shadow-2xl shadow-blue-950/30 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-8">
-              <div>
-                <h2 id="middle-cta-title" className="text-3xl font-black text-white sm:text-4xl">
-                  ¿Quieres saber qué está frenando tu SEO?
-                </h2>
-                <p className="mt-4 max-w-3xl text-lg leading-8 text-blue-50">
-                  Te preparamos una revisión inicial con oportunidades técnicas, páginas prioritarias y próximos pasos.
-                </p>
-              </div>
-              <a className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-white px-6 py-3 font-black text-blue-700 hover:bg-blue-50 lg:mt-0" href="#auditoria-pymes">
-                Solicitar auditoría SEO gratuita
-              </a>
-            </div>
-          </section>
-
-          <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="faq-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">FAQ</p>
-              <h2 id="faq-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Preguntas frecuentes sobre SEO para pymes
-              </h2>
-            </div>
-            <div className="mt-10 grid gap-4">
-              {faqs.map((faq) => (
-                <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
-                  <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
-                  <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-
-          <section id="auditoria-pymes" className="border-t border-slate-800 bg-slate-900 px-4 py-16 pb-28 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="final-cta-title">
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Auditoría gratuita</p>
-                <h2 id="final-cta-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Empieza con una hoja de ruta SEO clara
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Analizamos tu web, tus servicios y tus oportunidades de búsqueda para decirte qué páginas, mejoras y
-                  acciones tienen más sentido ahora.
-                </p>
-                <div className="mt-8 grid gap-3">
-                  {["Bloqueos técnicos y de indexación", "Keywords con intención comercial", "Prioridades para captar más contactos"].map((item) => (
-                    <p className="flex gap-3 text-slate-200" key={item}>
-                      <CheckIcon />
-                      <span>{item}</span>
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <SeoAuditForm sourcePage="SEO para pymes" defaultService="SEO para pymes" />
-            </div>
-          </section>
+          <section id="auditoria-pymes" className={styles.audit} aria-labelledby="final-cta-title"><div className={styles.container}>
+            <div className={styles.auditIntro}><p className={styles.eyebrow}>Auditoría gratuita</p><h2 id="final-cta-title">Veamos qué puede mejorar en tu web.</h2><p>Comparte la web de tu empresa. La revisamos y te explicamos qué oportunidades encontramos para que puedas decidir el siguiente paso.</p><div className={styles.auditNote}><Check aria-hidden="true" size={22} /><p>La revisión inicial es gratuita. El trabajo posterior se define en una propuesta que tú decides si aceptar.</p></div></div>
+            <SeoAuditForm sourcePage="SEO para pymes" defaultService="SEO para pymes" contactDark={false} />
+          </div></section>
         </main>
 
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur md:hidden">

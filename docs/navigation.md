@@ -87,7 +87,7 @@ The direct anchors should be page-specific, for example:
 
 - National SEO page `/seo`: `Servicio`, `Proceso`, `SEO local`, `FAQ`.
 - Specialist SEO-local page `/seo/local`: `Qué incluye`, `Proceso`, `FAQ` on desktop; the mobile header prioritizes the in-page audit CTA.
-- SEO para pymes: `Incluye`, `Método`, `Comparativa`, `FAQ`.
+- SEO para pymes: `Incluye`, `Método`, `SEO local`, `FAQ`.
 - City SEO pages under `/seo/{city}`: `Estrategia`, `Sectores`, `Método`, `FAQ`.
 - Web design pages: `Incluye`, `Proceso`, `Precios`, `FAQ` only if those sections exist.
 - Landing pages: `Solución`, `Incluye`, `Proceso`, `FAQ`.
