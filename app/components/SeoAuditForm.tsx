@@ -5,12 +5,14 @@ import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { ContactOptions } from "./ContactOptions";
 import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
+import { validateContactFields } from "../lib/leadContact";
 
 type SeoGoal = "trafico" | "leads" | "tecnico" | "local" | "no-se";
 
 type FormState = {
   name: string;
-  contact: string;
+  phone: string;
+  email: string;
   company: string;
   website: string;
   goal: "" | SeoGoal;
@@ -27,7 +29,8 @@ type SeoAuditFormProps = {
 
 const initialState: FormState = {
   name: "",
-  contact: "",
+  phone: "",
+  email: "",
   company: "",
   website: "",
   goal: "",
@@ -41,15 +44,11 @@ function validate(values: FormState) {
     errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
-  if (values.contact.trim().length < 6) {
-    errors.contact = "Introduce un email o teléfono válido.";
-  }
-
   if (values.website.trim().length < 4) {
     errors.website = "Indica la web que quieres que revisemos.";
   }
 
-  return errors;
+  return { ...errors, ...validateContactFields(values) };
 }
 
 export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO", contactDark = true }: SeoAuditFormProps) {
@@ -83,7 +82,8 @@ export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO
         sourcePath: window.location.pathname,
         formType: "Auditoría gratuita",
         name: values.name,
-        contact: values.contact,
+        phone: values.phone,
+        email: values.email,
         company: values.company,
         interestedService: values.goal || defaultService,
         message: [
@@ -122,19 +122,39 @@ export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO
         {errors.name ? <span className="text-sm font-semibold text-red-300" id="seo-name-error">{errors.name}</span> : null}
       </label>
 
-      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="seo-contact">
-        Email o teléfono
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="seo-phone">
+        Móvil*
         <input
           className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
-          id="seo-contact"
-          name="contact"
-          value={values.contact}
-          onChange={(event) => updateField("contact", event.target.value)}
-          aria-invalid={Boolean(errors.contact)}
-          aria-describedby={errors.contact ? "seo-contact-error" : undefined}
+          id="seo-phone"
+          name="phone"
+          value={values.phone}
+          onChange={(event) => updateField("phone", event.target.value)}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "seo-phone-error" : undefined}
+          type="tel"
+          inputMode="tel"
+          required
+          aria-required="true"
+          autoComplete="tel"
+        />
+        {errors.phone ? <span className="text-sm font-semibold text-red-300" id="seo-phone-error">{errors.phone}</span> : null}
+      </label>
+
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="seo-email">
+        Email (opcional)
+        <input
+          className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
+          id="seo-email"
+          name="email"
+          value={values.email}
+          onChange={(event) => updateField("email", event.target.value)}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "seo-email-error" : undefined}
+          type="email"
           autoComplete="email"
         />
-        {errors.contact ? <span className="text-sm font-semibold text-red-300" id="seo-contact-error">{errors.contact}</span> : null}
+        {errors.email ? <span className="text-sm font-semibold text-red-300" id="seo-email-error">{errors.email}</span> : null}
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="seo-company">

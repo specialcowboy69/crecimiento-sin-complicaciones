@@ -13,8 +13,8 @@ export function ContactOptions({ dark = false }: { dark?: boolean }) {
           <span>604 990 651</span>
         </a>
         <a href={`mailto:${contactEmail}`}>
-          <Mail size={18} aria-hidden="true" />
-          <span>{contactEmail}</span>
+          <Mail className="shrink-0" size={18} aria-hidden="true" />
+          <span className="min-w-0 break-all">{contactEmail}</span>
         </a>
       </div>
     </div>

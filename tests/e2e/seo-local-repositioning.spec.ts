@@ -122,7 +122,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 
     const form = audit.locator("form.seo-audit-form");
     await expect(form).toBeVisible();
-    for (const label of ["Nombre*", "Email de contacto*", "Nombre del negocio*", "Localidad donde atiendes*"]) {
+    for (const label of ["Nombre*", "Móvil*", "Nombre del negocio*"]) {
       await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-required", "true");
       await expect(form.getByLabel(label, { exact: true })).toHaveValue("");
     }

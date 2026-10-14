@@ -5,12 +5,14 @@ import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { ContactOptions } from "./ContactOptions";
 import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
+import { validateContactFields } from "../lib/leadContact";
 
 type FocusNetwork = "instagram" | "tiktok" | "linkedin" | "facebook" | "youtube" | "no-se";
 
 type FormState = {
   name: string;
-  contact: string;
+  phone: string;
+  email: string;
   profile: string;
   focusNetwork: "" | FocusNetwork;
 };
@@ -19,7 +21,8 @@ type Errors = Partial<Record<keyof FormState, string>>;
 
 const initialState: FormState = {
   name: "",
-  contact: "",
+  phone: "",
+  email: "",
   profile: "",
   focusNetwork: "",
 };
@@ -31,15 +34,11 @@ function validate(values: FormState) {
     errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
-  if (values.contact.trim().length < 6) {
-    errors.contact = "Introduce un email o teléfono válido.";
-  }
-
   if (!values.focusNetwork) {
     errors.focusNetwork = "Selecciona la red social que quieres potenciar.";
   }
 
-  return errors;
+  return { ...errors, ...validateContactFields(values) };
 }
 
 export function SocialMediaForm() {
@@ -73,7 +72,8 @@ export function SocialMediaForm() {
         sourcePath: window.location.pathname,
         formType: "Auditoría gratuita",
         name: values.name,
-        contact: values.contact,
+        phone: values.phone,
+        email: values.email,
         company: values.profile,
         interestedService: values.focusNetwork,
         message: `Perfil o web actual: ${values.profile}\nRed prioritaria: ${values.focusNetwork}`,
@@ -106,18 +106,37 @@ export function SocialMediaForm() {
         {errors.name ? <span className="text-sm font-semibold text-red-300" id="social-name-error">{errors.name}</span> : null}
       </label>
 
-      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-contact">
-        Email o teléfono
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-phone">
+        Móvil*
         <input
-          id="social-contact"
-          name="contact"
-          value={values.contact}
-          onChange={(event) => updateField("contact", event.target.value)}
-          aria-invalid={Boolean(errors.contact)}
-          aria-describedby={errors.contact ? "social-contact-error" : undefined}
+          id="social-phone"
+          name="phone"
+          value={values.phone}
+          onChange={(event) => updateField("phone", event.target.value)}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "social-phone-error" : undefined}
+          type="tel"
+          inputMode="tel"
+          required
+          aria-required="true"
+          autoComplete="tel"
+        />
+        {errors.phone ? <span className="text-sm font-semibold text-red-300" id="social-phone-error">{errors.phone}</span> : null}
+      </label>
+
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-email">
+        Email (opcional)
+        <input
+          id="social-email"
+          name="email"
+          value={values.email}
+          onChange={(event) => updateField("email", event.target.value)}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "social-email-error" : undefined}
+          type="email"
           autoComplete="email"
         />
-        {errors.contact ? <span className="text-sm font-semibold text-red-300" id="social-contact-error">{errors.contact}</span> : null}
+        {errors.email ? <span className="text-sm font-semibold text-red-300" id="social-email-error">{errors.email}</span> : null}
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="social-profile">

@@ -1,6 +1,6 @@
 # Forms And Leads
 
-**Last updated:** 2026-10-11
+**Last updated:** 2026-10-15
 
 This document defines lead form behavior, naming and payload conventions for `pagina-agencia`.
 
@@ -16,11 +16,15 @@ Payload fields:
 | `sourcePath` | No | Usually `window.location.pathname`. |
 | `formType` | Yes | Use the approved taxonomy below. |
 | `name` | Yes | Minimum 2 characters after trimming. |
-| `contact` | Yes | Email or phone, minimum 6 characters. |
+| `phone` | Yes for current forms | Required mobile; Spain default, or explicit international prefix. Validated against numbering plans. |
+| `email` | No | Separate optional email; validated when supplied. |
+| `contact` | Legacy only | Accepted for older tabs without phone/email; existing records remain readable. |
 | `company` | No | Keep optional unless the form explicitly requires it. |
 | `message` | No | Free context assembled from form fields. |
 | `interestedService` | No | Service, goal or selected category. |
 | `adsClickType`, `adsClickId` | No | Only a consented `/seo/local` browser may supply a click ID. The server checks the v2 cookie, exact route and same-origin Referer before persisting it. Never infer campaign origin from `sourcePage`. |
+
+The API composes persisted `contact` as `Móvil: +... | Email: ...` (omitting the email segment when empty) without a database migration. Supplying either new contact field selects strict validation; invalid phone/email never falls back to legacy `contact`. Numbering-plan validation establishes plausibility, not ownership or availability. Letters, extensions, incomplete numbers and fixed lines are rejected; spaces, parentheses, dots, hyphens and international `00` prefixes are normalized.
 
 The API lives in `app/api/leads/route.ts`, stores through Firebase Data Connect and validates/sanitizes strings before writing.
 
@@ -56,7 +60,7 @@ If a new funnel genuinely needs a new `formType`, document it here before implem
 | Component | Primary Use | `formType` | Notes |
 | --- | --- | --- | --- |
 | `LeadForm` | Home `/` and generic commercial pages | `Auditoría gratuita` | Configurable `sourcePage`, `interestedService`, copy and anchor id. Defaults to `sourcePage: "Home"`. |
-| `LocalSeoAuditForm` | `/seo/local` | `Auditoría gratuita` | SEO-local specific form. Requires name, email, business and locality; accepts optional web, Google profile or social link. |
+| `LocalSeoAuditForm` | `/seo/local` | `Auditoría gratuita` | SEO-local specific form. Requires name, mobile and business; accepts optional email, web, Google profile or social link. |
 | `SeoAuditForm` | `/seo`, `/seo-para-pymes`, `/seo/{city}` | `Auditoría gratuita` | SEO-specific goals and `defaultService`. |
 | `WebProjectForm` | Web design money/cluster pages | `Auditoría gratuita` | Service interest comes from selected site type. |
 | `SocialMediaForm` | Social media management page | `Auditoría gratuita` | Service interest comes from selected network/focus. |
@@ -91,7 +95,7 @@ Common CTA labels:
 Commercial forms should usually ask only for:
 
 - Name.
-- Email or phone.
+- Required mobile and separate optional email.
 - Company when useful.
 - Website or relevant profile when useful.
 - Brief context.
@@ -152,7 +156,7 @@ Allowed event properties are:
 - `form_type`
 - `interested_service`, only when supplied
 
-Never include `name`, `contact`, `company`, `message`, website/profile URLs, or any other free-text or personal data in an analytics event. Keep the event after the successful response so failed submissions are not counted as leads. If the event name or its property inventory changes, update `docs/analytics-and-consent.md` in the same change.
+Never include `name`, `phone`, `email`, `contact`, `company`, `message`, website/profile URLs, or any other free-text or personal data in an analytics event. Keep the event after the successful response so failed submissions are not counted as leads. If the event name or its property inventory changes, update `docs/analytics-and-consent.md` in the same change.
 
 When both optional analytics and advertising-measurement consent are granted, a successful submission from exactly `/seo/local` also sends the GA4 event `lead_seo_local_submitted`. It has no event parameters and is the only lead event intended to be imported into Google Ads for the SEO-local campaign. Do not emit it from another route, on validation, on a button click, or after a failed API response.
 
@@ -166,7 +170,7 @@ Before closing form changes:
 
 - Submit invalid form and verify visible errors.
 - Submit path still calls `/api/leads`.
-- Payload includes correct `sourcePage`, `sourcePath`, `formType`, `name` and `contact`.
+- Payload includes correct `sourcePage`, `sourcePath`, `formType`, `name`, `phone` and optional `email`.
 - A successful submission emits only the documented non-personal `lead_form_submitted` properties; a failed submission does not emit it.
 - With both optional consents granted, a successful `/seo/local` lead emits one parameter-free `lead_seo_local_submitted` GA4 event; other forms do not.
 - Admin panel can still display `formType`, `company`, `interestedService` and `message`.

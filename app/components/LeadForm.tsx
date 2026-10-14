@@ -5,9 +5,11 @@ import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { ContactOptions } from "./ContactOptions";
 import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
+import { validateContactFields } from "../lib/leadContact";
 
 type FormState = {
   name: string;
+  phone: string;
   email: string;
   company: string;
   challenge: string;
@@ -27,6 +29,7 @@ type LeadFormProps = {
 
 const initialState: FormState = {
   name: "",
+  phone: "",
   email: "",
   company: "",
   challenge: "",
@@ -36,18 +39,14 @@ function validate(values: FormState) {
   const errors: Errors = {};
 
   if (values.name.trim().length < 2) {
-    errors.name = "Indica tu nombre para saber con quien hablamos.";
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = "Por favor, introduce un email corporativo válido.";
+    errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
   if (values.company.trim().length < 2) {
     errors.company = "Cuéntanos la empresa o proyecto que quieres hacer crecer.";
   }
 
-  return errors;
+  return { ...errors, ...validateContactFields(values) };
 }
 
 export function LeadForm({
@@ -88,7 +87,8 @@ export function LeadForm({
         sourcePath: window.location.pathname,
         formType: "Auditoría gratuita",
         name: values.name,
-        contact: values.email,
+        phone: values.phone,
+        email: values.email,
         company: values.company,
         interestedService,
         message: `Qué quiere mejorar:\n${values.challenge}`,
@@ -137,16 +137,32 @@ export function LeadForm({
         </div>
 
         <div className="field">
-          <label htmlFor="email">Email corporativo*</label>
+          <label htmlFor="phone">Móvil*</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            required
+            value={values.phone}
+            onChange={(event) => updateField("phone", event.target.value)}
+            aria-invalid={Boolean(errors.phone)}
+            aria-required="true"
+            aria-describedby={errors.phone ? "phone-error" : undefined}
+            autoComplete="tel"
+          />
+          {errors.phone ? <p id="phone-error" className="error">{errors.phone}</p> : null}
+        </div>
+
+        <div className="field">
+          <label htmlFor="email">Email (opcional)</label>
           <input
             id="email"
             name="email"
             type="email"
-            required
             value={values.email}
             onChange={(event) => updateField("email", event.target.value)}
             aria-invalid={Boolean(errors.email)}
-            aria-required="true"
             aria-describedby={errors.email ? "email-error" : undefined}
             autoComplete="email"
           />

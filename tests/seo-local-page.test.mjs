@@ -301,7 +301,7 @@ test("local seo form accepts businesses without a website field requirement", as
   assert.match(form, /sourcePage: "SEO local"/);
   assert.match(form, /interestedService: "SEO local"/);
   assert.match(form, /sourcePath: window\.location\.pathname/);
-  assert.match(form, /Localidad donde atiende/);
+  assert.doesNotMatch(form, /locality|Localidad donde atiende/);
   assert.doesNotMatch(form, /errors\.website/);
   assert.doesNotMatch(form, /Web a auditar/);
 });
