@@ -127,7 +127,7 @@ export function CookieConsent() {
   const [showPreferences, setShowPreferences] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const [advertisingEnabled, setAdvertisingEnabled] = useState(false);
-  const initialDialogActionRef = useRef<HTMLButtonElement>(null);
+  const initialDialogRef = useRef<HTMLElement>(null);
   const preferencesOpenerRef = useRef<HTMLButtonElement>(null);
   const preferencesAnalyticsRef = useRef<HTMLInputElement>(null);
   const shouldRestorePreferencesFocusRef = useRef(false);
@@ -226,7 +226,7 @@ export function CookieConsent() {
     }
 
     if (consent === null && !showPreferences) {
-      initialDialogActionRef.current?.focus();
+      initialDialogRef.current?.focus({ preventScroll: true });
       return;
     }
 
@@ -312,13 +312,11 @@ export function CookieConsent() {
   return (
     <>
       {consent === null && !showPreferences ? (
-        <section className="cookie-consent" role="dialog" aria-labelledby="cookie-consent-title">
+        <section className="cookie-consent" role="dialog" aria-labelledby="cookie-consent-title" ref={initialDialogRef} tabIndex={-1}>
           <h2 id="cookie-consent-title">Tu privacidad</h2>
           <p>
-            Usamos Vercel Analytics para medir visitas de forma agregada y sin cookies. Con tu permiso activamos Google
-            Analytics y la medición de conversiones de Google Ads. Si aceptas ambas categorías, podemos asociar el
-            identificador del clic de un anuncio a una solicitud de SEO local y comunicar a Google Ads si luego se marca
-            como cualificada, sin enviar los datos de contacto del formulario. Puedes cambiar tu elección cuando quieras.
+            Usamos una cookie necesaria para guardar tu elección. Con tu permiso, activamos cookies de analítica y
+            medición publicitaria. Puedes cambiar tus preferencias cuando quieras.
           </p>
           <p className="cookie-consent-legal">
             Consulta la <Link href="/politica-de-cookies">Política de cookies</Link> y la{" "}
@@ -326,14 +324,13 @@ export function CookieConsent() {
           </p>
           <div className="cookie-consent-actions">
             <button
-              ref={initialDialogActionRef}
               type="button"
               className="cookie-consent-button"
               onClick={rejectOptionalCookies}
             >
               Rechazar
             </button>
-            <button type="button" className="cookie-consent-button" onClick={acceptAll}>
+            <button type="button" className="cookie-consent-button cookie-consent-accept" onClick={acceptAll}>
               Aceptar todas
             </button>
             <button type="button" className="cookie-consent-link" onClick={openPreferences}>
