@@ -320,7 +320,7 @@ export default function GoogleAdsAlicantePage() {
                   Solicitar auditoría gratuita
                 </a>
                 <Link
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400"
+                  className={styles.heroSecondary}
                   href="/agencia-marketing-digital/google-ads"
                 >
                   Ver servicio nacional de Google Ads

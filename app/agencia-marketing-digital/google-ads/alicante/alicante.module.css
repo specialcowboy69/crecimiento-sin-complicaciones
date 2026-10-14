@@ -41,15 +41,29 @@
   color: #dbeafe !important;
 }
 
-:global(.landing-light) .hero a[href^="#"],
-:global(.landing-light) .hero a[href="/agencia-marketing-digital/google-ads"] {
+:global(.landing-light) .hero a[href^="#"] {
   color: #ffffff !important;
 }
 
-:global(.landing-light) .hero a[href="/agencia-marketing-digital/google-ads"] {
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(8, 25, 43, 0.5);
+:global(.landing-light) .hero .heroSecondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #ffffff !important;
+  border-radius: 8px;
+  background: #ffffff !important;
+  color: #1d4ed8 !important;
+  font-weight: 700;
+  text-align: center;
 }
+
+:global(.landing-light) .hero .heroSecondary:hover {
+  background: #dbeafe !important;
+}
+
+.heroSecondary:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
 
 .coverImage {
   object-fit: cover;
