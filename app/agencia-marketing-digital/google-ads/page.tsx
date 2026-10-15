@@ -6,7 +6,6 @@ import {
   LineChart,
   MousePointerClick,
   Search,
-  SlidersHorizontal,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { LeadForm } from "../../components/LeadForm";
@@ -399,39 +398,39 @@ export default function GoogleAdsPage() {
                     src="/images/google-ads-national-analysis.webp"
                     alt="Una persona revisa gráficos en un monitor"
                     fill
-                    sizes="(min-width: 768px) 48vw, 100vw"
+                    sizes="(min-width: 1280px) 520px, (min-width: 768px) 42vw, 100vw"
                   />
                 </figure>
 
-                <div className={styles.solutionDecisions}>
-                  <article>
-                    <Search size={28} strokeWidth={1.7} aria-hidden="true" />
+                <ol className={styles.solutionDecisions} role="list">
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">01</span>
                     <div>
                       <h3>Elegir dónde competir</h3>
                       <p>
                         Mostramos tus anuncios a quienes buscan los servicios que ofreces.
                       </p>
                     </div>
-                  </article>
-                  <article>
-                    <MousePointerClick size={28} strokeWidth={1.7} aria-hidden="true" />
+                  </li>
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">02</span>
                     <div>
                       <h3>Dar continuidad al clic</h3>
                       <p>
                         Anuncio, landing y formulario trabajan sobre la misma oferta y el mismo siguiente paso.
                       </p>
                     </div>
-                  </article>
-                  <article>
-                    <SlidersHorizontal size={36} strokeWidth={1.5} aria-hidden="true" />
+                  </li>
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">03</span>
                     <div>
                       <h3>Mover inversión con criterio</h3>
                       <p>
                         Revisamos qué búsquedas generan consultas y si esas consultas encajan con tu negocio para mejorar las campañas.
                       </p>
                     </div>
-                  </article>
-                </div>
+                  </li>
+                </ol>
               </div>
             </div>
           </section>
