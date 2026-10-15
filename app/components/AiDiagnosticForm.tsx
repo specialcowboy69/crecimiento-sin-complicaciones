@@ -5,6 +5,7 @@ import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { ContactOptions } from "./ContactOptions";
 import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
+import { validateContactFields } from "../lib/leadContact";
 
 type FormState = {
   name: string;
@@ -31,19 +32,11 @@ function validate(values: FormState) {
     errors.name = "Indica tu nombre para poder contactarte.";
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    errors.email = "Introduce un email corporativo válido.";
-  }
-
-  if (values.phone.trim().length < 6) {
-    errors.phone = "Indica un teléfono o WhatsApp válido.";
-  }
-
   if (values.company.trim().length < 2) {
     errors.company = "Indica tu empresa o sitio web.";
   }
 
-  return errors;
+  return { ...errors, ...validateContactFields(values) };
 }
 
 export function AiDiagnosticForm() {
@@ -77,7 +70,8 @@ export function AiDiagnosticForm() {
         sourcePath: window.location.pathname,
         formType: "Auditoría gratuita",
         name: values.name,
-        contact: `${values.email} / ${values.phone}`,
+        phone: values.phone,
+        email: values.email,
         company: values.company,
         interestedService: "Automatización con IA",
         message: values.process,
@@ -112,7 +106,7 @@ export function AiDiagnosticForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="ai-email">
-        Email corporativo
+        Email (opcional)
         <input
           className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
           id="ai-email"
@@ -128,12 +122,15 @@ export function AiDiagnosticForm() {
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="ai-phone">
-        Teléfono o WhatsApp
+        Móvil*
         <input
           className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
           id="ai-phone"
           name="phone"
           type="tel"
+          inputMode="tel"
+          required
+          aria-required="true"
           value={values.phone}
           onChange={(event) => updateField("phone", event.target.value)}
           aria-invalid={Boolean(errors.phone)}

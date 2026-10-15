@@ -240,11 +240,11 @@
   font-weight: 850;
 }
 
-.anatomyNotes p {
+:global(.landing-light) .anatomyNotes p {
   margin: 0.35rem 0 0;
-  color: #314957 !important;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  color: #263b53 !important;
+  font-size: 1.125rem;
+  line-height: 1.7;
 }
 
 .solutionSection {

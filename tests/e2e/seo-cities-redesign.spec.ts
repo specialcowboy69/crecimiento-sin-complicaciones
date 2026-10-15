@@ -71,7 +71,8 @@ async function noHorizontalOverflow(page: Page) {
 
 async function fillAudit(form: Locator) {
   await form.getByLabel("Nombre y apellidos", { exact: true }).fill("Persona de prueba");
-  await form.getByLabel("Email o teléfono", { exact: true }).fill("seo-city@example.com");
+  await form.getByLabel("Móvil*", { exact: true }).fill("604990651");
+  await form.getByLabel("Email (opcional)", { exact: true }).fill("seo-city@example.com");
   await form.getByLabel("Empresa", { exact: true }).fill("Empresa de prueba");
   await form.getByLabel("Web a auditar", { exact: true }).fill("https://example.com");
   await form.getByLabel("Contexto o problema principal", { exact: true }).fill("Prueba local de la auditoría por ciudad.");
@@ -258,7 +259,8 @@ for (const city of cities) {
           formType: "Auditoría gratuita",
           interestedService: city.source,
           name: "Persona de prueba",
-          contact: "seo-city@example.com",
+          phone: "604990651",
+          email: "seo-city@example.com",
           company: "Empresa de prueba",
           message: "Web a auditar: https://example.com\nContexto: Prueba local de la auditoría por ciudad.",
         });
@@ -373,7 +375,7 @@ for (const city of cities) {
       const form = audit.locator("form");
       const fields = [
         ["Nombre y apellidos", "seo-name", "seo-name-error", "Indica tu nombre para saber con quién hablamos."],
-        ["Email o teléfono", "seo-contact", "seo-contact-error", "Introduce un email o teléfono válido."],
+        ["Móvil*", "seo-phone", "seo-phone-error", "Introduce un móvil válido, con prefijo internacional si es de otro país."],
         ["Web a auditar", "seo-website", "seo-website-error", "Indica la web que quieres que revisemos."],
       ];
       for (const [label, fieldId] of fields) {
@@ -406,7 +408,7 @@ for (const city of cities) {
       await expect(form.getByRole("status")).toHaveText("No se pudo enviar. Inténtalo de nuevo en unos segundos.");
       await expect(form.getByRole("status")).toHaveAttribute("aria-live", "polite");
       await expect(form.getByLabel("Nombre y apellidos", { exact: true })).toHaveValue("Persona de prueba");
-      await expect(form.getByLabel("Email o teléfono", { exact: true })).toHaveValue("seo-city@example.com");
+      await expect(form.getByLabel("Email (opcional)", { exact: true })).toHaveValue("seo-city@example.com");
       await expect(form.getByLabel("Web a auditar", { exact: true })).toHaveValue("https://example.com");
       await expect(submit).toBeEnabled();
       await expect(audit.getByRole("heading", { name: "Solicitud enviada", exact: true })).toHaveCount(0);

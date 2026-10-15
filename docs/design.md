@@ -144,7 +144,7 @@ La fotografía debe mostrar el servicio, el contexto de trabajo o el mercado al 
 Patrones aprobados:
 
 - Hero de ancho completo con fotografía editorial, overlay suficiente y copy legible sobre la imagen.
-- En `/agencia-marketing-digital/google-ads`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
+- En `/agencia-marketing-digital/google-ads`, `/agencia-marketing-digital/google-ads/alicante`, `/seo` y `/diseno-landing-pages`, la fotografía ocupa el hero completo; breadcrumb, H1, explicación y CTA son HTML sobre la imagen. El hero deja ver el inicio de la siguiente sección también en móvil.
 - Composiciones de imagen y texto que alternen el ritmo de la página.
 - Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
 - Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
@@ -159,7 +159,7 @@ Evitar:
 
 Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
 
-En las tres páginas comerciales anteriores, las cuadrículas bento combinan fotografía y módulos de tamaños distintos. Son un recurso reutilizable entre rutas; su composición se adapta al contenido de cada servicio. SEO presenta cuatro áreas de trabajo, Google Ads organiza tres decisiones de campaña y Landing Pages conecta mensaje, acción y medición. Alternar estas cuadrículas con bandas fotográficas, listas breves, procesos y enlaces abiertos para que las secciones tengan ritmos distintos. Los títulos y explicaciones siguen siendo HTML y no deben prometer métricas o plazos no verificados.
+En las tres páginas comerciales anteriores, las cuadrículas bento combinan fotografía y módulos de tamaños distintos. Son un recurso reutilizable entre rutas; su composición se adapta al contenido de cada servicio. SEO presenta cuatro áreas de trabajo y Landing Pages conecta mensaje, acción y medición. En Google Ads, las tres decisiones de campaña se presentan como filas numeradas sin iconos ni fondos de tarjeta, con separadores y una fotografía al lado en escritorio; en móvil, la imagen precede a la lista. Esta sección cambia el ritmo respecto a las tarjetas de problemas anteriores. Alternar estas cuadrículas con bandas fotográficas, listas breves, procesos y enlaces abiertos para que las secciones tengan ritmos distintos. Los títulos y explicaciones siguen siendo HTML y no deben prometer métricas o plazos no verificados.
 
 En `/diseno-landing-pages`, el diagnóstico utiliza una fotografía comparativa en lugar de una maqueta hecha con texto. La auditoría utiliza el ancho completo del contenedor: `LeadForm` ya contiene su propia composición de introducción y formulario y no debe encerrarse en otra columna. El movimiento de las tarjetas se implementa en un componente cliente pequeño con Motion y respeta `prefers-reduced-motion`.
 
@@ -291,3 +291,5 @@ Checklist mínimo:
 - El scroll vertical sigue funcionando sobre los carruseles móviles y sus gestos horizontales y controles responden.
 - Se revisan como mínimo los breakpoints de `1440x900` y `390x844` cuando cambia la composición visual.
 - `npm run lint` y `npm run build` pasan si se ha tocado código.
+
+En `/seo/local`, los seis servicios y los factores locales usan tarjetas sin iconos en los servicios, con superficies blancas y azules. El color alterna por orden de lectura y conserva esa secuencia al apilarse en móvil. Los textos y números declaran colores explícitos para mantener contraste con la capa `landing-light`.

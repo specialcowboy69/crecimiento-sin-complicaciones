@@ -108,7 +108,7 @@ async function fillLocalForm(page: Page) {
   await page.locator("#local-seo-name").fill("Persona de prueba");
   await page.locator("#local-seo-email").fill("test@example.invalid");
   await page.locator("#local-seo-business").fill("Negocio de prueba");
-  await page.locator("#local-seo-locality").fill("Madrid");
+  await page.locator("#local-seo-phone").fill("604990651");
   await page.locator("#local-seo-link").fill("https://example.invalid/privado");
 }
 
@@ -363,6 +363,7 @@ for (const scenario of ["success", "failed", "rejected", "analytics-only", "no-c
     }
     if (scenario === "other-path") {
       await page.locator("#name").fill("Persona de prueba");
+      await page.locator("#phone").fill("604990651");
       await page.locator("#email").fill("test@example.invalid");
       await page.locator("#company").fill("Negocio de prueba");
       await page.locator("form.lead-form").getByRole("button", { name: "Quiero mi auditoría" }).click();

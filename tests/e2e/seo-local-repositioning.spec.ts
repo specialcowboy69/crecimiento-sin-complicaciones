@@ -12,12 +12,12 @@ const exampleRows = [
   "Búsquedas y zona",
   "Competencia local",
   "Perfil de Google",
-  "Sitio público y páginas clave",
+  "Página web y páginas clave",
   "Reseñas y referencias",
   "Medición",
 ];
-const auditScope = /revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave/i;
-const auditParagraph = "Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.";
+const auditScope = /revisamos el conjunto de la web y analizamos en detalle sus páginas clave/i;
+
 
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   test(`SEO local offer and existing conversion journey at ${viewport.width}x${viewport.height}`, async ({ page, baseURL }) => {
@@ -109,9 +109,11 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     await expect.poll(() => carousel.evaluate((element) => element.scrollLeft)).toBeLessThanOrEqual(initialScroll + 4);
 
     const audit = page.locator("#auditoria-seo-local");
-    await expect(audit.getByText(auditParagraph, { exact: true })).toBeVisible();
-    await expect(audit).toContainText(auditScope);
-    await expect(audit).toContainText("las prioridades de tu proyecto y los próximos pasos recomendados");
+    await expect(audit).toContainText("Revisión inicial del Perfil de Empresa y, si existe web, del conjunto de la web, con análisis detallado de sus páginas clave.");
+    await expect(audit).toContainText("Análisis de servicios, búsquedas, zona, competencia y señales locales visibles.");
+    await expect(audit).toContainText("Prioridades del proyecto y próximos pasos recomendados.");
+    await expect(audit).not.toContainText("Cuéntanos qué negocio tienes");
+    await expect(audit).not.toContainText("Usaremos estos datos");
     const auditFaq = page.locator("#faq details").filter({ has: page.locator("summary", { hasText: "¿Qué incluye la auditoría gratuita?" }) });
     await auditFaq.locator("summary").click();
     await expect(auditFaq.locator("p")).toBeVisible();
@@ -122,7 +124,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 
     const form = audit.locator("form.seo-audit-form");
     await expect(form).toBeVisible();
-    for (const label of ["Nombre*", "Email de contacto*", "Nombre del negocio*", "Localidad donde atiendes*"]) {
+    for (const label of ["Nombre*", "Móvil*", "Nombre del negocio*"]) {
       await expect(form.getByLabel(label, { exact: true })).toHaveAttribute("aria-required", "true");
       await expect(form.getByLabel(label, { exact: true })).toHaveValue("");
     }

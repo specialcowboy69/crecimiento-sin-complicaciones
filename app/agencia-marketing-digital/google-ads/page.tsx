@@ -6,7 +6,6 @@ import {
   LineChart,
   MousePointerClick,
   Search,
-  SlidersHorizontal,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { LeadForm } from "../../components/LeadForm";
@@ -361,8 +360,7 @@ export default function GoogleAdsPage() {
                   <div>
                     <h3>Medición incompleta</h3>
                     <p>
-                      Ves clics, pero no sabes qué campañas generan llamadas o formularios. Sin conversiones comprobadas,
-                      falta información para decidir dónde invertir.
+                      Ves clics, pero no sabes qué campañas generan llamadas o formularios. Sin una configuración adecuada de los eventos de conversión, falta información para decidir dónde invertir.
                     </p>
                   </div>
                 </li>
@@ -371,7 +369,7 @@ export default function GoogleAdsPage() {
                   <div>
                     <h3>Landing desconectada</h3>
                     <p>
-                      El anuncio promete una solución y la página muestra una oferta genérica. Si el mensaje y el siguiente
+                      El anuncio promete una solución y la página muestra otra cosa. Si el mensaje y el siguiente
                       paso no están claros, la visita se pierde antes de contactar.
                     </p>
                   </div>
@@ -390,8 +388,7 @@ export default function GoogleAdsPage() {
                 <p className={styles.sectionEyebrow}>Solución</p>
                 <h2 id="solution-title">La campaña se decide antes y después del clic</h2>
                 <p>
-                  Conectamos intención, anuncio, página de destino y conversiones para saber qué merece presupuesto y qué
-                  conviene ajustar primero.
+                  Preparamos los anuncios y la página para que quien busca tu servicio pueda contactar contigo. Después revisamos qué campañas generan consultas para decidir dónde invertir.
                 </p>
               </div>
 
@@ -401,39 +398,39 @@ export default function GoogleAdsPage() {
                     src="/images/google-ads-national-analysis.webp"
                     alt="Una persona revisa gráficos en un monitor"
                     fill
-                    sizes="(min-width: 768px) 48vw, 100vw"
+                    sizes="(min-width: 1280px) 520px, (min-width: 768px) 42vw, 100vw"
                   />
                 </figure>
 
-                <div className={styles.solutionDecisions}>
-                  <article>
-                    <Search size={28} strokeWidth={1.7} aria-hidden="true" />
+                <ol className={styles.solutionDecisions} role="list">
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">01</span>
                     <div>
                       <h3>Elegir dónde competir</h3>
                       <p>
-                        Keywords comerciales y campañas por servicio para dirigir el presupuesto a búsquedas relevantes.
+                        Mostramos tus anuncios a quienes buscan los servicios que ofreces.
                       </p>
                     </div>
-                  </article>
-                  <article>
-                    <MousePointerClick size={28} strokeWidth={1.7} aria-hidden="true" />
+                  </li>
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">02</span>
                     <div>
                       <h3>Dar continuidad al clic</h3>
                       <p>
                         Anuncio, landing y formulario trabajan sobre la misma oferta y el mismo siguiente paso.
                       </p>
                     </div>
-                  </article>
-                  <article>
-                    <SlidersHorizontal size={36} strokeWidth={1.5} aria-hidden="true" />
+                  </li>
+                  <li>
+                    <span className={styles.solutionNumber} aria-hidden="true">03</span>
                     <div>
                       <h3>Mover inversión con criterio</h3>
                       <p>
-                        Conversiones comprobadas, términos de búsqueda y calidad del lead para decidir qué ajustar.
+                        Revisamos qué búsquedas generan consultas y si esas consultas encajan con tu negocio para mejorar las campañas.
                       </p>
                     </div>
-                  </article>
-                </div>
+                  </li>
+                </ol>
               </div>
             </div>
           </section>

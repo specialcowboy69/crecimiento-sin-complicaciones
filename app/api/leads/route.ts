@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getLeadsDataConnect } from "@/app/lib/firebaseDataConnect";
 import { validateLeadAttribution } from "@/app/lib/leadAttribution";
 
+import { resolveLeadContact } from "@/app/lib/leadContact";
+
 export const runtime = "nodejs";
 
 type LeadPayload = {
@@ -10,6 +12,8 @@ type LeadPayload = {
   formType?: string;
   name?: string;
   contact?: string;
+  phone?: unknown;
+  email?: unknown;
   company?: string;
   message?: string;
   interestedService?: string;
@@ -26,12 +30,12 @@ function validate(payload: LeadPayload) {
   const sourcePath = clean(payload.sourcePath, 160);
   const formType = clean(payload.formType, 80);
   const name = clean(payload.name, 160);
-  const contact = clean(payload.contact, 220);
+  const contact = resolveLeadContact(payload);
   const company = clean(payload.company, 220);
   const message = clean(payload.message);
   const interestedService = clean(payload.interestedService, 140);
 
-  if (sourcePage.length < 2 || formType.length < 2 || name.length < 2 || contact.length < 6) {
+  if (sourcePage.length < 2 || formType.length < 2 || name.length < 2 || !contact) {
     return null;
   }
 

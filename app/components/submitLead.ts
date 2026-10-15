@@ -14,7 +14,9 @@ export type LeadSubmission = {
   sourcePath: string;
   formType: string;
   name: string;
-  contact: string;
+  contact?: string;
+  phone?: string;
+  email?: string;
   company?: string;
   message?: string;
   interestedService?: string;

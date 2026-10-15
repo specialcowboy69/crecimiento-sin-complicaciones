@@ -6,10 +6,7 @@ import {
   Building2,
   CheckCircle2,
   FileText,
-  Globe2,
-  Link2,
   MapPin,
-  MessageCircle,
   ShieldCheck,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
@@ -29,7 +26,7 @@ const pageUrl = absoluteUrl(pagePath);
 const buyingSituations = [
   {
     title: "Tus competidores aparecen y tu negocio no.",
-    text: "Buscan uno de tus servicios en tu zona y otras empresas ocupan los resultados de Maps o de Google.",
+    text: "Buscan uno de tus servicios en tu zona y otras empresas aparecen antes que tú en Maps o Google.",
     icon: MapPin,
   },
   {
@@ -100,32 +97,26 @@ const workItems = [
   {
     title: "Diagnóstico de búsquedas y competencia local",
     text: "Detectamos qué buscan, en qué zonas y qué negocios ocupan hoy los resultados locales.",
-    icon: FileText,
   },
   {
     title: "Perfil de Empresa de Google",
     text: "Ordenamos categorías, servicios, información, área de servicio, fotografías y posibles duplicados.",
-    icon: MapPin,
   },
   {
     title: "SEO local del sitio web",
     text: "Revisamos estructura, indexación, páginas prioritarias, enlaces internos y contacto desde el móvil.",
-    icon: Globe2,
   },
   {
     title: "Gestión de reseñas y respuestas",
     text: "Diseñamos un proceso para solicitar, responder y aprovechar opiniones reales de clientes.",
-    icon: MessageCircle,
   },
   {
     title: "Notoriedad y referencias del negocio",
     text: "Unificamos la información y revisamos menciones o enlaces legítimos en webs relevantes.",
-    icon: Link2,
   },
   {
     title: "Medición y prioridades",
-    text: "Separamos visibilidad, visitas y solicitudes para decidir la siguiente prioridad.",
-    icon: BarChart3,
+    text: "Medimos si tu negocio aparece mejor en Google y si recibe más consultas para decidir qué mejorar después.",
   },
 ];
 
@@ -146,8 +137,8 @@ const planRows = [
     value: "Mejorar la correspondencia entre el negocio y las búsquedas relevantes.",
   },
   {
-    work: "Sitio público y páginas clave",
-    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto del sitio público y analizar en detalle sus páginas clave; mejorar los servicios prioritarios y relacionarlos con las zonas atendidas.",
+    work: "Página web y páginas clave",
+    action: "Trabajar estructura, indexación y enlaces internos. Revisar el conjunto de la web y analizar en detalle sus páginas clave; mejorar los servicios prioritarios y relacionarlos con las zonas atendidas.",
     value: "Responder mejor a la búsqueda y facilitar una solicitud.",
   },
   {
@@ -166,7 +157,7 @@ const methodSteps = [
   {
     step: "01",
     title: "Analizar",
-    text: "Revisamos las búsquedas, tu Perfil de Empresa y, si tienes web, el conjunto del sitio público y sus páginas clave.",
+    text: "Revisamos las búsquedas, tu Perfil de Empresa y, si tienes web, el conjunto de la web y sus páginas clave.",
   },
   {
     step: "02",
@@ -181,7 +172,7 @@ const methodSteps = [
   {
     step: "04",
     title: "Medir",
-    text: "Con los accesos y el seguimiento disponibles, revisamos la evolución y decidimos la siguiente prioridad.",
+    text: "Con los accesos y el seguimiento disponibles, medimos si tu negocio aparece mejor en Google y recibe más consultas para decidir qué mejorar después.",
   },
 ];
 
@@ -199,15 +190,11 @@ const budgetItems = [
   {
     label: "03",
     title: "Gestión continua",
-    text: "La frecuencia de revisión, mantenimiento y medición queda definida por escrito y separada del trabajo inicial.",
+    text: "Seguimos trabajando en tu posicionamiento y ajustamos las acciones según evolucione tu negocio.",
   },
 ];
 
 const trustItems = [
-  {
-    title: "Tu negocio sigue bajo tu control",
-    text: "Mantienes la titularidad del perfil y de tus cuentas. Los accesos se gestionan mediante permisos.",
-  },
   {
     title: "Cada cambio tiene una explicación",
     text: "Recibes un resumen del trabajo realizado y de las decisiones pendientes.",
@@ -267,7 +254,7 @@ const faqs = [
   {
     question: "¿Qué incluye la auditoría gratuita?",
     answer:
-      "Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. También valoramos tus servicios, la zona, la competencia y las señales locales visibles. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados. No incluye acceso a datos privados ni la ejecución del plan.",
+      "Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto de la web y analizamos en detalle sus páginas clave. También valoramos tus servicios, la zona, la competencia y las señales locales visibles. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados. No incluye acceso a datos privados ni la ejecución del plan.",
   },
   {
     question: "¿Cuánto cuesta contrataros?",
@@ -474,13 +461,12 @@ export default function LocalSeoPage() {
                 />
               </figure>
 
-              <div className="grid px-5 py-3 sm:px-8 lg:px-9 lg:py-6">
+              <div className={styles.serviceCards}>
                 {workItems.map((item, index) => (
-                  <article className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-[#dbe3ef] py-5 last:border-b-0" key={item.title}>
+                  <article className={styles.serviceCard} key={item.title}>
                     <span className="font-mono text-sm font-black tabular-nums text-blue-600">0{index + 1}</span>
                     <div>
                       <div className="flex items-center gap-3">
-                        <item.icon className="h-5 w-5 flex-none text-teal-700" aria-hidden="true" strokeWidth={1.8} />
                         <h3 className="text-lg font-black leading-tight text-slate-900">{item.title}</h3>
                       </div>
                       <p className={`mt-3 text-slate-600 ${styles.body}`}>{item.text}</p>
@@ -523,25 +509,24 @@ export default function LocalSeoPage() {
                     placeholder="blur"
                     sizes="(min-width: 1024px) 56vw, 100vw"
                   />
-                  <figcaption className={styles.imageCaption}>Visibilidad local observada por servicio y zona.</figcaption>
                 </figure>
 
-                <div className="border-y border-[#cbd5e1]">
-                  <article className="grid grid-cols-[3rem_1fr] gap-5 border-b border-[#cbd5e1] py-7">
+                <div className={styles.factorCards}>
+                  <article className={styles.factorCard}>
                     <span className="font-mono text-sm font-black tabular-nums text-blue-600">01</span>
                     <div>
                       <h3 className="text-2xl font-black text-slate-900">Relevancia</h3>
                       <p className={`mt-3 text-slate-600 ${styles.body}`}>Información, categorías y páginas que explican con claridad qué ofreces.</p>
                     </div>
                   </article>
-                  <article className="grid grid-cols-[3rem_1fr] gap-5 border-b border-[#cbd5e1] py-7">
+                  <article className={styles.factorCard}>
                     <span className="font-mono text-sm font-black tabular-nums text-blue-600">02</span>
                     <div>
                       <h3 className="text-2xl font-black text-slate-900">Distancia</h3>
                       <p className={`mt-3 text-slate-600 ${styles.body}`}>Lectura de cómo cambia la visibilidad según dónde busca el usuario.</p>
                     </div>
                   </article>
-                  <article className="grid grid-cols-[3rem_1fr] gap-5 py-7">
+                  <article className={styles.factorCard}>
                     <span className="font-mono text-sm font-black tabular-nums text-blue-600">03</span>
                     <div>
                       <h3 className="text-2xl font-black text-slate-900">Prominencia</h3>
@@ -721,12 +706,9 @@ export default function LocalSeoPage() {
                 <h2 id="audit-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Descubre qué debe mejorar primero en tu SEO local
                 </h2>
-                <p className={`mt-5 text-lg leading-8 text-slate-300 ${styles.intro}`}>
-                  Cuéntanos qué negocio tienes. Revisamos tu Perfil de Empresa de Google. Si tienes web, revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave. Te comunicamos cuáles son las prioridades de tu proyecto y los próximos pasos recomendados para mejorar tu posicionamiento local.
-                </p>
                 <div className="mt-8 grid gap-3">
                   {[
-                    "Revisión inicial del Perfil de Empresa y, si existe web, del conjunto del sitio público, con análisis detallado de sus páginas clave.",
+                    "Revisión inicial del Perfil de Empresa y, si existe web, del conjunto de la web, con análisis detallado de sus páginas clave.",
                     "Análisis de servicios, búsquedas, zona, competencia y señales locales visibles.",
                     "Prioridades del proyecto y próximos pasos recomendados.",
                   ].map((item) => (
@@ -736,10 +718,6 @@ export default function LocalSeoPage() {
                     </p>
                   ))}
                 </div>
-                <p className={`mt-8 flex gap-3 rounded-lg bg-white/5 p-5 font-semibold text-slate-300 ring-1 ring-white/10 ${styles.emphasis}`}>
-                  <Link2 className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                  Usaremos estos datos para revisar tu negocio y responder a tu solicitud.
-                </p>
               </div>
               <LocalSeoAuditForm />
             </div>

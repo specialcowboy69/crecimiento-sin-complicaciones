@@ -19,7 +19,8 @@ test("Alicante Google Ads form sends the approved lead attribution", async ({ pa
   await page.getByRole("dialog", { name: "Tu privacidad" }).waitFor();
   await page.getByRole("button", { name: "Rechazar" }).click();
   await page.getByLabel("Nombre*").fill("Empresa de prueba");
-  await page.getByLabel("Email corporativo*").fill("equipo@example.com");
+  await page.getByLabel("Móvil*").fill("604990651");
+  await page.getByLabel("Email (opcional)").fill("equipo@example.com");
   await page.getByLabel("Empresa*").fill("Proyecto Alicante");
   await expect(
     page.locator("#auditoria-google-ads-alicante").getByRole("link", { name: /política de privacidad/i }),

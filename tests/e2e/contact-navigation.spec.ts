@@ -9,7 +9,8 @@ test("a successful home lead replaces the form with a visible confirmation", asy
 
   const contact = page.locator("#auditoria");
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
-  await contact.getByLabel("Email corporativo*").fill("ana@example.com");
+  await contact.getByLabel("Móvil*").fill("604990651");
+  await contact.getByLabel("Email (opcional)").fill("ana@example.com");
   await contact.getByLabel("Empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
@@ -27,7 +28,8 @@ test("the mobile confirmation remains in view after the tall form disappears", a
 
   const contact = page.locator("#auditoria");
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
-  await contact.getByLabel("Email corporativo*").fill("ana@example.com");
+  await contact.getByLabel("Móvil*").fill("604990651");
+  await contact.getByLabel("Email (opcional)").fill("ana@example.com");
   await contact.getByLabel("Empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
@@ -47,12 +49,13 @@ test("a failed home lead keeps the entered values and shows an error", async ({ 
 
   const contact = page.locator("#auditoria");
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
-  await contact.getByLabel("Email corporativo*").fill("ana@example.com");
+  await contact.getByLabel("Móvil*").fill("604990651");
+  await contact.getByLabel("Email (opcional)").fill("ana@example.com");
   await contact.getByLabel("Empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
   await expect(contact.locator("form")).toBeVisible();
-  await expect(contact.getByLabel("Email corporativo*")).toHaveValue("ana@example.com");
+  await expect(contact.getByLabel("Email (opcional)")).toHaveValue("ana@example.com");
   await expect(contact.getByRole("status")).toContainText("No se pudo enviar");
 });
 
@@ -70,23 +73,23 @@ const auditForms = [
   {
     path: "/seo",
     firstField: "seo-name",
-    fields: { "seo-name": "Ana Pérez", "seo-contact": "ana@example.com", "seo-website": "https://example.com" },
+    fields: { "seo-name": "Ana Pérez", "seo-phone": "604990651", "seo-email": "ana@example.com", "seo-website": "https://example.com" },
   },
   {
     path: "/seo/local",
     firstField: "local-seo-name",
-    fields: { "local-seo-name": "Ana Pérez", "local-seo-email": "ana@example.com", "local-seo-business": "Empresa de prueba", "local-seo-locality": "Madrid" },
+    fields: { "local-seo-name": "Ana Pérez", "local-seo-email": "ana@example.com", "local-seo-business": "Empresa de prueba", "local-seo-phone": "604990651" },
   },
   {
     path: "/diseno-pagina-web-profesional",
     firstField: "web-name",
-    fields: { "web-name": "Ana Pérez", "web-contact": "ana@example.com" },
+    fields: { "web-name": "Ana Pérez", "web-phone": "604990651", "web-email": "ana@example.com" },
     select: { id: "web-type", value: "corporativa" },
   },
   {
     path: "/gestion-redes-sociales-empresas",
     firstField: "social-name",
-    fields: { "social-name": "Ana Pérez", "social-contact": "ana@example.com" },
+    fields: { "social-name": "Ana Pérez", "social-phone": "604990651", "social-email": "ana@example.com" },
     select: { id: "social-network", value: "instagram" },
   },
   {
@@ -265,3 +268,49 @@ test("mobile audit header fits and scrolls to the form", async ({ page }) => {
     }
   }
 });
+// Behavior coverage for the shared contact contract; all requests are intercepted.
+for (const audit of auditForms) {
+  test(`${audit.path} requires a valid mobile, accepts optional email and preserves failed values`, async ({ page }) => {
+    const payloads: Record<string, unknown>[] = [];
+    await page.route("**/api/leads", async (route) => {
+      payloads.push(route.request().postDataJSON());
+      await route.fulfill({ status: 503, body: "{}" });
+    });
+    await page.goto(audit.path);
+    const form = page.locator(`form:has(#${audit.firstField})`);
+    for (const [id, value] of Object.entries(audit.fields)) await form.locator(`#${id}`).fill(value);
+    if (audit.select) await form.locator(`#${audit.select.id}`).selectOption(audit.select.value);
+    const mobile = form.locator('input[name="phone"]');
+    const email = form.locator('input[name="email"]');
+    await expect(mobile).toHaveAttribute("type", "tel");
+    await expect(mobile).toHaveAttribute("autocomplete", "tel");
+    await email.fill("");
+    for (const value of ["", "60499", "letters604990651"]) {
+      await mobile.fill(value);
+      await form.locator('button[type="submit"]').click();
+      await expect(mobile).toHaveAttribute("aria-invalid", "true");
+      expect(payloads).toHaveLength(0);
+    }
+    await mobile.fill("604 990 651");
+    await email.fill("invalid");
+    await form.locator('button[type="submit"]').click();
+    await expect(email).toHaveAttribute("aria-invalid", "true");
+    expect(payloads).toHaveLength(0);
+    for (const value of ["", "ana@example.com"]) {
+      await email.fill(value);
+      await form.locator('button[type="submit"]').click();
+      await expect(form.getByRole("status")).toContainText(/No (?:se pudo|hemos podido) enviar/);
+      await expect(mobile).toHaveValue("604 990 651");
+      await expect(email).toHaveValue(value);
+      await expect(form).toBeVisible();
+    }
+    expect(payloads).toHaveLength(2);
+    for (const payload of payloads) {
+      expect(payload.sourcePath).toBe(audit.path);
+      expect(payload.formType).toBe("Auditoría gratuita");
+      expect(payload.sourcePage).toBeTruthy();
+      expect(payload.phone).toBe("604 990 651");
+      expect(payload).not.toHaveProperty("contact");
+    }
+  });
+}

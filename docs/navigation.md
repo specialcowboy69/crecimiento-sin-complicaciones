@@ -87,7 +87,7 @@ The direct anchors should be page-specific, for example:
 
 - National SEO page `/seo`: `Servicio`, `Proceso`, `SEO local`, `FAQ`.
 - Specialist SEO-local page `/seo/local`: `Qué incluye`, `Proceso`, `FAQ` on desktop; the mobile header prioritizes the in-page audit CTA.
-- SEO para pymes: `Incluye`, `Método`, `Comparativa`, `FAQ`.
+- SEO para pymes: `Incluye`, `Método`, `SEO local`, `FAQ`.
 - City SEO pages under `/seo/{city}`: `Estrategia`, `Sectores`, `Método`, `FAQ`.
 - Web design pages: `Incluye`, `Proceso`, `Precios`, `FAQ` only if those sections exist.
 - Landing pages: `Solución`, `Incluye`, `Proceso`, `FAQ`.
@@ -134,7 +134,7 @@ When adding a new principal service:
 
 `PageLinksNav` is desktop-only and helps users move between main commercial pages. It is not a mobile header replacement.
 
-Do not render this secondary strip on `/agencia-marketing-digital/google-ads` or `/diseno-landing-pages`: both lead directly from the main header into a full-bleed service hero. Their breadcrumb and shared services dropdown remain the cross-page navigation. Other pages may keep the strip where it still adds useful navigation.
+Do not render this secondary strip on `/agencia-marketing-digital/google-ads`, `/agencia-marketing-digital/google-ads/alicante` or `/diseno-landing-pages`: both lead directly from the main header into a full-bleed service hero. Their breadcrumb and shared services dropdown remain the cross-page navigation. Other pages may keep the strip where it still adds useful navigation.
 
 Current main links:
 

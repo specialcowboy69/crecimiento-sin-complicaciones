@@ -4,12 +4,10 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  Compass,
 } from "lucide-react";
 import { LandingServicesMenu } from "../../../components/LandingServicesMenu";
 import { LeadForm } from "../../../components/LeadForm";
 import { Logo } from "../../../components/Logo";
-import { PageLinksNav } from "../../../components/PageLinksNav";
 import { absoluteUrl } from "../../../lib/site";
 import { ORGANIZATION_ID, breadcrumbJsonLd } from "../../../lib/structuredData";
 import styles from "./alicante.module.css";
@@ -39,7 +37,7 @@ const campaignStages = [
   {
     step: "01",
     title: "Búsqueda",
-    text: "Separamos intención comercial, servicios prioritarios, zonas y términos que conviene excluir.",
+    text: "Seleccionamos las búsquedas de personas que pueden necesitar tu servicio y excluimos las que buscan otra cosa.",
   },
   {
     step: "02",
@@ -49,7 +47,7 @@ const campaignStages = [
   {
     step: "03",
     title: "Landing",
-    text: "Mantenemos la continuidad entre anuncio, servicio, zona, argumentos y llamada a la acción.",
+    text: "La persona que hace clic debe encontrar en la página lo que le ha interesado del anuncio.",
   },
   {
     step: "04",
@@ -66,7 +64,7 @@ const campaignStages = [
 const sectors = [
   {
     title: "Inmobiliaria y servicios para vivienda",
-    text: "Oferta, radio de atención, tipo de inmueble y momento de decisión cambian la estructura de búsqueda.",
+    text: "Quien quiere comprar una vivienda y quien quiere venderla necesitan anuncios distintos. Adaptamos el mensaje a lo que cada persona busca.",
   },
   {
     title: "Turismo, hostelería y experiencias",
@@ -74,19 +72,19 @@ const sectors = [
   },
   {
     title: "Clínicas y servicios profesionales",
-    text: "La confianza, la especialidad y la proximidad pesan tanto como la keyword que activa el anuncio.",
+    text: "El anuncio ayuda a la persona a reconocer que el centro trata lo que necesita y a dar el paso de pedir una cita.",
   },
   {
     title: "Reformas y servicios locales",
-    text: "Conviene separar urgencia, tipo de trabajo, zona atendida y capacidad real para responder solicitudes.",
+    text: "Una avería urgente requiere una respuesta distinta de una reforma planificada. Orientamos los anuncios a consultas que el negocio puede atender.",
   },
   {
     title: "Formación y academias",
-    text: "Modalidad, calendario, nivel y ubicación ayudan a distinguir interés general de una matrícula posible.",
+    text: "Mostramos el curso a quien puede matricularse y explicamos lo que necesita saber para decidir si encaja con sus objetivos.",
   },
   {
     title: "Empresas B2B",
-    text: "Un contacto de valor suele exigir mensajes por solución, sector, rol decisor y ciclo comercial.",
+    text: "El anuncio muestra cómo tu servicio resuelve un problema concreto de la empresa y ayuda a iniciar una conversación sobre esa necesidad.",
   },
 ];
 
@@ -282,14 +280,22 @@ export default function GoogleAdsAlicantePage() {
           </nav>
         </header>
 
-        <PageLinksNav currentPath={pagePath} />
-
         <main>
           <section
-            className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.92fr] lg:px-8 lg:py-24"
+            className={styles.hero}
             aria-labelledby="google-ads-alicante-title"
           >
-            <div>
+            <Image
+              src="/images/google-ads-alicante-hero-v2.webp"
+              alt=""
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="100vw"
+              quality={92}
+              className={styles.heroImage}
+            />
+            <div className={styles.heroContent}>
               <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
                 <Link className="hover:text-blue-300" href="/">Inicio</Link>
                 <span aria-hidden="true">/</span>
@@ -306,11 +312,6 @@ export default function GoogleAdsAlicantePage() {
               <h1 id="google-ads-alicante-title" className="marketing-hero-title mb-6 max-w-4xl font-black text-slate-900">
                 Agencia SEM para empresas de Alicante que quieren captar demanda con Google Ads
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Planificamos y optimizamos campañas de Google Ads para pymes y empresas que venden en Alicante y su
-                provincia. Priorizamos búsquedas con intención comercial, conectamos anuncios y landing pages, y medimos
-                contactos para saber qué campañas merecen más atención y presupuesto.
-              </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
@@ -320,7 +321,7 @@ export default function GoogleAdsAlicantePage() {
                   Solicitar auditoría gratuita
                 </a>
                 <Link
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400"
+                  className={styles.heroSecondary}
                   href="/agencia-marketing-digital/google-ads"
                 >
                   Ver servicio nacional de Google Ads
@@ -328,21 +329,7 @@ export default function GoogleAdsAlicantePage() {
               </div>
             </div>
 
-            <figure className={styles.heroVisual}>
-              <Image
-                src="/images/google-ads-alicante-hero-v2.webp"
-                alt="Equipo revisando una campaña digital para el mercado de Alicante"
-                fill
-                priority
-                sizes="(min-width: 1024px) 44vw, (max-width: 639px) 125vw, 100vw"
-                quality={92}
-                className={styles.coverImage}
-              />
-              <figcaption className={styles.heroCaption}>
-                <Compass className="h-5 w-5" aria-hidden="true" strokeWidth={1.8} />
-                <span>Campañas conectadas con búsqueda, landing y oportunidad comercial</span>
-              </figcaption>
-            </figure>
+
           </section>
 
           <section className={styles.demandSection} aria-labelledby="demand-title">
@@ -353,8 +340,7 @@ export default function GoogleAdsAlicantePage() {
                   Una campaña local necesita separar servicio, zona e intención
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Una búsqueda informativa no vale lo mismo que una solicitud de presupuesto. Antes de ampliar tráfico,
-                  ordenamos qué servicios tienen prioridad, qué zonas puede atender el negocio y qué señales distinguen
+                  Ordenamos qué servicios tienen prioridad, qué zonas puede atender el negocio y qué señales distinguen
                   una oportunidad comercial real.
                 </p>
               </div>
@@ -390,10 +376,6 @@ export default function GoogleAdsAlicantePage() {
               <h2 id="service-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Una estrategia SEM en Alicante centrada en Google Ads
               </h2>
-              <p className="mt-5 text-lg leading-8 text-slate-300">
-                Entendemos SEM como captación pagada en buscadores. En esta página hablamos de Google Ads; Meta Ads es
-                publicidad social y se valora como un canal distinto cuando el negocio lo necesita.
-              </p>
             </div>
             <ol className={styles.campaignFlow} aria-label="Recorrido de una campaña de Google Ads">
               {campaignStages.map((item, index) => (
@@ -412,13 +394,12 @@ export default function GoogleAdsAlicantePage() {
           <section id="sectores" className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="sectors-title">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-4xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-emerald-500">Escenarios comerciales</p>
+                <p className="mb-3 text-sm font-black uppercase tracking-normal text-emerald-500">Ejemplos por sector</p>
                 <h2 id="sectors-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Sectores de Alicante donde la intención de búsqueda cambia la campaña
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Son escenarios de adaptación, no una lista de clientes ni resultados. Cada sector exige revisar cómo
-                  se expresa la demanda, qué información necesita el usuario y qué contacto puede atender el negocio.
+                  Así adaptamos las campañas a lo que busca el cliente en cada sector.
                 </p>
               </div>
               <div className="mt-10 grid gap-x-8 gap-y-7 md:grid-cols-2 lg:grid-cols-3">
@@ -453,7 +434,6 @@ export default function GoogleAdsAlicantePage() {
                 quality={92}
                 className={styles.coverImage}
               />
-              <figcaption>Alicante ciudad y provincia como mercado de captación</figcaption>
             </figure>
           </section>
 

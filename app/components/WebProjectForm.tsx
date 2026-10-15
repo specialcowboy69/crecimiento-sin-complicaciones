@@ -5,12 +5,14 @@ import { FormPrivacyNotice } from "./FormPrivacyNotice";
 import { ContactOptions } from "./ContactOptions";
 import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
+import { validateContactFields } from "../lib/leadContact";
 
 type SiteType = "corporativa" | "tienda" | "rediseno" | "no-se";
 
 type FormState = {
   name: string;
-  contact: string;
+  phone: string;
+  email: string;
   company: string;
   siteType: "" | SiteType;
 };
@@ -19,7 +21,8 @@ type Errors = Partial<Record<keyof FormState, string>>;
 
 const initialState: FormState = {
   name: "",
-  contact: "",
+  phone: "",
+  email: "",
   company: "",
   siteType: "",
 };
@@ -31,15 +34,11 @@ function validate(values: FormState) {
     errors.name = "Indica tu nombre para saber con quién hablamos.";
   }
 
-  if (values.contact.trim().length < 6) {
-    errors.contact = "Introduce un email o teléfono válido.";
-  }
-
   if (!values.siteType) {
     errors.siteType = "Selecciona el tipo de web que necesitas.";
   }
 
-  return errors;
+  return { ...errors, ...validateContactFields(values) };
 }
 
 export function WebProjectForm() {
@@ -73,7 +72,8 @@ export function WebProjectForm() {
         sourcePath: window.location.pathname,
         formType: "Auditoría gratuita",
         name: values.name,
-        contact: values.contact,
+        phone: values.phone,
+        email: values.email,
         company: values.company,
         interestedService: values.siteType,
         message: `Tipo de sitio web: ${values.siteType}`,
@@ -106,18 +106,37 @@ export function WebProjectForm() {
         {errors.name ? <span className="text-sm font-semibold text-red-300" id="web-name-error">{errors.name}</span> : null}
       </label>
 
-      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="web-contact">
-        Email o teléfono
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="web-phone">
+        Móvil*
         <input
-          id="web-contact"
-          name="contact"
-          value={values.contact}
-          onChange={(event) => updateField("contact", event.target.value)}
-          aria-invalid={Boolean(errors.contact)}
-          aria-describedby={errors.contact ? "web-contact-error" : undefined}
+          id="web-phone"
+          name="phone"
+          value={values.phone}
+          onChange={(event) => updateField("phone", event.target.value)}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "web-phone-error" : undefined}
+          type="tel"
+          inputMode="tel"
+          required
+          aria-required="true"
+          autoComplete="tel"
+        />
+        {errors.phone ? <span className="text-sm font-semibold text-red-300" id="web-phone-error">{errors.phone}</span> : null}
+      </label>
+
+      <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="web-email">
+        Email (opcional)
+        <input
+          id="web-email"
+          name="email"
+          value={values.email}
+          onChange={(event) => updateField("email", event.target.value)}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "web-email-error" : undefined}
+          type="email"
           autoComplete="email"
         />
-        {errors.contact ? <span className="text-sm font-semibold text-red-300" id="web-contact-error">{errors.contact}</span> : null}
+        {errors.email ? <span className="text-sm font-semibold text-red-300" id="web-email-error">{errors.email}</span> : null}
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200" htmlFor="web-company">

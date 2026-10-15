@@ -251,17 +251,15 @@
 
 .solutionLayout {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 4vw, 4rem);
   margin-top: 3rem;
 }
 
 .solutionVisual {
-  grid-column: span 7;
-  grid-row: span 2;
   position: relative;
   min-width: 0;
-  min-height: 29rem;
+  min-height: 30rem;
   overflow: hidden;
   margin: 0;
   border-radius: 8px;
@@ -277,39 +275,35 @@
 }
 
 .solutionDecisions {
-  display: contents;
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.solutionDecisions article {
-  grid-column: span 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.25rem;
-  padding: 2rem;
-  border-radius: 8px;
-  background: #e3efeb;
+.solutionDecisions li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid #c7d7df;
 }
 
-.solutionDecisions article:nth-child(2) {
-  background: #e9eef9;
+.solutionDecisions li:last-child {
+  border-bottom: 1px solid #c7d7df;
 }
 
-.solutionDecisions article:last-child {
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  background: #f0f4f2;
+:global(.landing-light) .solutionNumber {
+  color: #0f766e !important;
+  font-size: 2rem;
+  font-weight: 850;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
 }
 
-.solutionDecisions article svg {
-  flex: none;
-  color: #0b6c66;
-}
-
-.solutionDecisions article h3 {
+.solutionDecisions h3 {
   margin: 0;
   color: #17233a !important;
   font-size: 1.8rem;
@@ -318,12 +312,12 @@
   text-wrap: balance;
 }
 
-.solutionDecisions article p {
+:global(.landing-light) .solutionDecisions p {
   max-width: 35rem;
   margin: 0.7rem 0 0;
-  color: #40536b !important;
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  color: #263b53 !important;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 .processSection {
@@ -558,7 +552,7 @@
     font-size: 2.2rem;
   }
 
-  .solutionDecisions article h3 {
+  .solutionDecisions h3 {
     font-size: 1.5rem;
   }
 
@@ -618,21 +612,23 @@
 
   .solutionLayout {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
+    gap: 2rem;
     margin-top: 2.5rem;
   }
 
   .solutionVisual {
-    grid-column: 1;
-    grid-row: auto;
     min-height: 0;
     aspect-ratio: 3 / 2;
   }
 
-  .solutionDecisions article {
-    grid-column: 1;
-    gap: 1rem;
-    padding: 1.5rem;
+  .solutionDecisions li {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+  }
+
+  :global(.landing-light) .solutionNumber {
+    font-size: 1.75rem;
   }
 
   .audiencePhoto > img {

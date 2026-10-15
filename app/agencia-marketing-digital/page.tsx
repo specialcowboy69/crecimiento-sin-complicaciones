@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BarChart3,
-  Bot,
-  ClipboardList,
-  Gauge,
-  Globe2,
-  LineChart,
-  MapPin,
-  Megaphone,
-  MousePointerClick,
-  Network,
-  Search,
-  Share2,
-  Sparkles,
-  Target,
-} from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import styles from "./marketing-hub.module.css";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { LeadForm } from "../components/LeadForm";
 import { Logo } from "../components/Logo";
@@ -25,130 +11,27 @@ import { SITE_URL } from "../lib/site";
 const baseUrl = SITE_URL;
 
 const services = [
-  {
-    title: "SEO",
-    text: "Auditoría, arquitectura, contenido e intención de búsqueda para captar clientes desde Google.",
-    href: "/seo",
-    cta: "Ver agencia SEO",
-    icon: Search,
-  },
-  {
-    title: "SEO local y Google Maps",
-    text: "Perfil de Empresa, reseñas, web local y contenido coordinado para negocios que atienden en una zona concreta.",
-    href: "/seo/local",
-    cta: "Ver SEO local",
-    icon: MapPin,
-  },
-  {
-    title: "Diseño web profesional",
-    text: "Webs claras, rápidas y orientadas a convertir visitas en formularios, llamadas y presupuestos.",
-    href: "/diseno-pagina-web-profesional",
-    cta: "Ver diseño web",
-    icon: Globe2,
-  },
-  {
-    title: "Google Ads y SEM",
-    text: "Campañas conectadas con estrategia, medición y conversión para captar leads sin desperdiciar presupuesto.",
-    href: "/agencia-marketing-digital/google-ads",
-    cta: "Ver Google Ads y SEM",
-    icon: Megaphone,
-  },
-  {
-    title: "Redes sociales",
-    text: "Calendario, piezas visuales y vídeo corto para mantener presencia sin improvisar cada semana.",
-    href: "/gestion-redes-sociales-empresas",
-    cta: "Ver redes sociales",
-    icon: Share2,
-  },
-  {
-    title: "IA para empresas",
-    text: "Automatizaciones, agentes y flujos internos para reducir tareas manuales y ganar velocidad.",
-    href: "/soluciones-inteligencia-artificial-empresas",
-    cta: "Ver IA",
-    icon: Bot,
-  },
-  {
-    title: "Diseño de landing pages",
-    text: "Landing pages profesionales para campañas, servicios y captación de leads con medición clara.",
-    href: "/diseno-landing-pages",
-    cta: "Ver landing pages",
-    icon: MousePointerClick,
-  },
+  { title: "SEO", text: "Trabajamos tu web para que te encuentren al buscar los servicios que ofreces.", href: "/seo" },
+  { title: "SEO local y Google Maps", text: "Mejoramos tu presencia en las búsquedas de quienes necesitan un negocio en tu zona.", href: "/seo/local" },
+  { title: "Google Ads y SEM", text: "Mostramos tus anuncios a posibles clientes y revisamos qué consultas generan.", href: "/agencia-marketing-digital/google-ads" },
+  { title: "Diseño web profesional", text: "Creamos una web que explique tu negocio y facilite pedir información.", href: "/diseno-pagina-web-profesional" },
+  { title: "Diseño de landing pages", text: "Damos a cada campaña una página centrada en la oferta que anuncia.", href: "/diseno-landing-pages" },
+  { title: "Redes sociales", text: "Preparamos contenido que muestre lo que haces y mantenga tu negocio presente.", href: "/gestion-redes-sociales-empresas" },
+  { title: "IA para empresas", text: "Automatizamos tareas repetitivas para que puedas dedicar más tiempo a tus clientes.", href: "/soluciones-inteligencia-artificial-empresas" },
 ];
 
-const systemPieces = [
-  { title: "Atracción", text: "SEO, SEM, redes y contenidos con intención.", icon: Target },
-  { title: "Conversión", text: "Web, landing pages, copy y CTAs claros.", icon: MousePointerClick },
-  { title: "Medición", text: "Leads, CPL, oportunidades y calidad comercial.", icon: BarChart3 },
-  { title: "Automatización", text: "IA, CRM y procesos para avanzar con menos fricción.", icon: Sparkles },
-];
-
-const process = [
-  {
-    step: "01",
-    title: "Auditoría inicial",
-    text: "Revisamos web, captación, anuncios, SEO, medición y procesos para detectar qué está frenando el crecimiento.",
-  },
-  {
-    step: "02",
-    title: "Mapa de prioridades",
-    text: "Ordenamos oportunidades por impacto, esfuerzo, urgencia y relación con ventas, no por moda del canal.",
-  },
-  {
-    step: "03",
-    title: "Ejecución conectada",
-    text: "Activamos web, SEO, campañas, contenido, CRO e IA con un criterio común: generar oportunidades reales.",
-  },
-  {
-    step: "04",
-    title: "Medición y mejora",
-    text: "Convertimos datos de tráfico, leads y calidad comercial en siguientes acciones claras.",
-  },
-];
-
-const audiences = [
-  "Pymes locales que quieren captar clientes desde Google, redes o campañas sin perder claridad.",
-  "Startups que necesitan validar canales, oferta y mensajes antes de escalar inversión.",
-  "Servicios profesionales que dependen de formularios, llamadas, reuniones o presupuestos.",
-  "Equipos de marketing que necesitan apoyo técnico, creativo y analítico sin ampliar plantilla.",
-  "Negocios que ya invierten en Ads, pero quieren reducir dependencia y mejorar conversión.",
-  "Empresas con procesos manuales que pueden ganar velocidad con automatización e IA.",
-];
-
-const entryLinks = [
-  { href: "/seo", label: "Necesito posicionar en Google", icon: Search },
-  { href: "/diseno-pagina-web-profesional", label: "Necesito mejorar mi web", icon: Globe2 },
-  { href: "/agencia-marketing-digital/google-ads", label: "Necesito captar con Google Ads y SEM", icon: Megaphone },
-  { href: "/gestion-redes-sociales-empresas", label: "Necesito ordenar redes sociales", icon: Share2 },
-  { href: "/soluciones-inteligencia-artificial-empresas", label: "Necesito automatizar con IA", icon: Bot },
+const serviceGroups = [
+  { number: "01", title: "Que te encuentren", intro: "Para llegar a personas que ya buscan lo que vendes.", image: "home-service-seo.webp", alt: "Dos personas organizan páginas y búsquedas sobre una mesa de trabajo", services: services.slice(0, 3) },
+  { number: "02", title: "Que entiendan tu oferta", intro: "Para que visitar tu web sea el primer paso hacia una consulta.", image: "home-stage-explain.webp", alt: "Ilustración de la estructura de una página web con un bloque destacado", services: services.slice(3, 5) },
+  { number: "03", title: "Que el trabajo avance", intro: "Para cuidar tu presencia y reducir tareas que te quitan tiempo.", image: "home-service-ai-automation.webp", alt: "Ilustración de un flujo de contacto y seguimiento junto a un portátil", services: services.slice(5) },
 ];
 
 const faqs = [
-  {
-    question: "¿Qué hace una agencia de marketing digital?",
-    answer:
-      "Ayuda a ordenar la captación online combinando estrategia, canales, medición y ejecución. En nuestro caso conectamos web, SEO, Google Ads, redes sociales, CRO, analítica e IA para que cada acción apoye el mismo objetivo comercial.",
-  },
-  {
-    question: "¿Es mejor empezar por SEO, Google Ads o diseño web?",
-    answer:
-      "Depende de tu punto de partida. Si necesitas demanda inmediata, Ads puede acelerar aprendizaje. Si la web no convierte, conviene arreglarla antes de invertir más. Si buscas visibilidad estable, SEO suele ser una base importante.",
-  },
-  {
-    question: "¿Trabajáis con pymes y empresas pequeñas?",
-    answer:
-      "Sí. La página está pensada para marketing digital para empresas que necesitan prioridades claras, especialmente pymes, negocios locales, servicios profesionales y equipos pequeños que no quieren perderse en informes.",
-  },
-  {
-    question: "¿Puedo contratar solo un servicio concreto?",
-    answer:
-      "Sí. Puedes empezar por SEO, diseño web, SEM, redes sociales, CRO o IA. Si vemos que otro bloqueo impide resultados, lo señalamos en la auditoría para que puedas decidir con contexto.",
-  },
-  {
-    question: "¿Qué incluye la auditoría gratuita?",
-    answer:
-      "Una revisión inicial de tu web, captación, mensajes, medición y oportunidades. El objetivo es darte una hoja de ruta clara antes de plantear una propuesta.",
-  },
+  { question: "¿Qué hace una agencia de marketing digital?", answer: "Te ayuda a dar a conocer tu negocio y a convertir el interés en consultas. Revisamos cómo llegan tus posibles clientes, qué encuentran en tu web y qué necesitan para contactar. A partir de ahí proponemos el trabajo adecuado." },
+  { question: "¿Puedo contratar un solo servicio?", answer: "Sí. Podemos trabajar en un servicio concreto. Si detectamos que otra parte de tu web o de tu captación necesita atención, te explicamos por qué para que puedas decidir." },
+  { question: "¿Por dónde conviene empezar?", answer: "Depende de lo que quieras conseguir y del estado de tu negocio en internet. Una web que no explica bien el servicio necesita un trabajo distinto al de una empresa que quiere llegar a más personas. La auditoría gratuita ayuda a elegir la prioridad." },
+  { question: "¿Trabajáis con empresas pequeñas?", answer: "Sí. Adaptamos el alcance a las necesidades y recursos de cada proyecto. Antes de empezar acordamos qué vamos a hacer y qué información necesitamos de tu negocio." },
+  { question: "¿Qué recibiré con la auditoría gratuita?", answer: "Una revisión inicial de tu presencia digital, con los problemas y oportunidades que detectemos. Te explicamos qué recomendamos abordar primero y los siguientes pasos de una posible colaboración." },
 ];
 
 const jsonLd = [
@@ -190,7 +73,7 @@ const jsonLd = [
     },
     areaServed: "ES",
     description:
-      "Agencia de marketing digital para empresas con web, SEO, Google Ads, redes sociales, CRO, analítica e IA conectadas para captar más leads.",
+      "Servicios de marketing digital para ayudar a las empresas a llegar a posibles clientes y facilitar el contacto.",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Servicios de marketing digital",
@@ -225,9 +108,9 @@ const jsonLd = [
 ];
 
 export const metadata: Metadata = {
-  title: "Agencia de marketing digital para empresas | Crecimiento sin complicaciones",
+  title: "Agencia de marketing digital para empresas",
   description:
-    "Agencia de marketing digital para empresas que necesitan captar más leads con web, SEO, Google Ads, redes sociales, CRO, analítica e IA.",
+    "Agencia de marketing digital para empresas. Encuentra el servicio que necesita tu negocio y empieza con una auditoría gratuita.",
   keywords: [
     "agencia de marketing digital",
     "agencia marketing digital",
@@ -246,7 +129,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Agencia de marketing digital para empresas",
     description:
-      "Web, SEO, Google Ads, redes sociales, CRO, analítica e IA conectadas para captar más leads con claridad.",
+      "Te ayudamos a elegir qué mejorar para llegar a posibles clientes y recibir consultas. Empieza con una auditoría gratuita.",
     url: "/agencia-marketing-digital",
     siteName: "Crecimiento sin complicaciones",
     locale: "es_ES",
@@ -264,7 +147,7 @@ export default function DigitalMarketingAgencyPage() {
         }}
       />
 
-      <div className="landing-light min-h-screen bg-slate-950 text-slate-50">
+      <div className={`landing-light ${styles.page}`}>
         <header className="sticky top-0 z-20 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
           <nav
             className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8"
@@ -307,301 +190,48 @@ export default function DigitalMarketingAgencyPage() {
         </header>
 
         <main>
-          <section
-            className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8 lg:py-24"
-            aria-labelledby="marketing-hero-title"
-          >
-            <div>
-              <nav className="mb-5 flex items-center gap-2 text-sm font-bold text-slate-400" aria-label="Migas de pan">
-                <Link className="hover:text-blue-300" href="/">
-                  Inicio
-                </Link>
-                <span aria-hidden="true">/</span>
-                <span>Marketing digital</span>
-              </nav>
-              <p className="mb-4 text-sm font-black uppercase tracking-normal text-blue-400">
-                Agencia de marketing digital
-              </p>
-              <h1
-                id="marketing-hero-title"
-                className="marketing-hero-title mb-6 max-w-4xl font-black text-slate-900"
-              >
-                Agencia de marketing digital para empresas que quieren crecer con más claridad
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                Ayudamos a startups, pymes y negocios locales a ordenar su captación digital con una estrategia
-                conectada: web, SEO, Google Ads, redes sociales, CRO, analítica y automatización con IA trabajando hacia
-                el mismo objetivo.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-bold text-white shadow-xl shadow-blue-950/40 hover:bg-blue-500 focus-visible:ring-2 focus-visible:ring-blue-400"
-                  href="#auditoria-marketing-digital"
-                >
-                  Solicitar auditoría gratuita
-                </a>
-                <a
-                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-slate-700 px-6 py-3 font-bold text-slate-100 hover:bg-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400"
-                  href="#servicios-digitales"
-                >
-                  Ver servicios
-                </a>
-              </div>
+          <section className={styles.hero} aria-labelledby="marketing-hero-title">
+            <div className={styles.heroCopy}>
+              <nav className={styles.breadcrumb} aria-label="Migas de pan"><Link href="/">Inicio</Link><span aria-hidden="true">/</span><span>Marketing digital</span></nav>
+              <p className={styles.eyebrow}>Crecimiento sin complicaciones</p>
+              <h1 id="marketing-hero-title">Agencia de marketing digital <span>para tu empresa.</span></h1>
+              <p className={styles.lead}>Ayudamos a que más personas encuentren tu negocio, entiendan lo que ofreces y den el paso de contactar.</p>
+              <div className={styles.actions}><a className={styles.primary} href="#auditoria-marketing-digital">Solicitar auditoría gratuita</a><a className={styles.secondary} href="#servicios-digitales">Explorar los servicios <ArrowUpRight aria-hidden="true" size={18} /></a></div>
             </div>
+            <div className={styles.heroPhoto}><Image src="/images/home-growth-collaboration.webp" alt="Dos personas revisan un proyecto en un portátil" fill sizes="(max-width: 767px) 100vw, 45vw" preload /><div className={styles.photoNote}><span>Un buen punto de partida</span><p>Saber qué necesita tu negocio ahora.</p></div></div>
+          </section>
 
-            <div
-              className="seo-audit-panel rounded-lg bg-slate-900 p-6 shadow-2xl shadow-blue-950/30 ring-1 ring-slate-800"
-              aria-label="Sistema de crecimiento digital"
-            >
-              <div className="seo-audit-panel-head mb-7 flex items-center justify-between gap-4 pb-5">
-                <div className="seo-audit-panel-title">
-                  <p className="text-sm font-black uppercase tracking-normal text-blue-400">Sistema de crecimiento</p>
-                  <strong className="mt-2 block text-2xl font-black text-white">Canales conectados</strong>
-                </div>
-                <span className="seo-audit-panel-badge rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black uppercase text-emerald-300 ring-1 ring-emerald-300/20">
-                  360°
-                </span>
-              </div>
-              <div className="grid gap-4">
-                {systemPieces.map((piece) => (
-                  <article
-                    className="seo-audit-step grid gap-4 rounded-lg bg-slate-950 p-5 ring-1 ring-slate-800 sm:grid-cols-[3rem_1fr]"
-                    key={piece.title}
-                  >
-                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
-                      <piece.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                    </span>
-                    <div>
-                      <h3 className="m-0 text-lg font-black text-white">{piece.title}</h3>
-                      <p className="mt-2 text-sm leading-[1.6] text-slate-300">{piece.text}</p>
-                    </div>
-                  </article>
-                ))}
+          <section id="para-quien" className={styles.needs} aria-labelledby="needs-title">
+            <div className={styles.container}>
+              <div className={styles.sectionHead}><p className={styles.eyebrow}>Tu punto de partida</p><h2 id="needs-title">¿Qué quieres mejorar?</h2><p>La prioridad cambia según el momento de tu empresa. Empezamos por entender el tuyo.</p></div>
+              <div className={styles.needGrid}>
+                <a href="#servicios-digitales"><span>Necesito darme a conocer</span><h3>«Quiero que me encuentren más clientes.»</h3><p>Elegimos cómo llegar a las personas que pueden necesitar tu servicio.</p><ArrowUpRight aria-hidden="true" /></a>
+                <a href="#oferta"><span>Ya tengo visitas</span><h3>«Mi web recibe visitas, pero pocas consultas.»</h3><p>Revisamos qué entiende el visitante y qué le falta para dar el siguiente paso.</p><ArrowUpRight aria-hidden="true" /></a>
+                <a href="#trabajo"><span>Me falta tiempo</span><h3>«No llego a todo lo que necesita el negocio.»</h3><p>Te ayudamos a mantener la comunicación y a simplificar tareas repetitivas.</p><ArrowUpRight aria-hidden="true" /></a>
               </div>
             </div>
           </section>
 
-          <section
-            className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8"
-            aria-labelledby="problem-title"
-          >
-            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.86fr_1.14fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">El problema</p>
-                <h2 id="problem-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  El problema no suele ser hacer más marketing, sino hacerlo desconectado
-                </h2>
-              </div>
-              <div className="grid gap-4 text-lg leading-8 text-slate-300 lg:pt-10">
-                <p>
-                  Muchas empresas tienen una web, campañas activas, redes sociales, contenidos o herramientas de
-                  analítica, pero cada pieza va por su lado. El resultado suele ser inversión dispersa, mensajes
-                  inconsistentes y decisiones tomadas con datos incompletos.
-                </p>
-                <p>
-                  Una agencia de crecimiento debe ayudarte a ordenar el sistema completo: qué atrae demanda, qué
-                  convierte, qué mide ventas y qué puede automatizarse para crecer sin añadir complejidad.
-                </p>
-              </div>
+          <section id="servicios-digitales" className={styles.services} aria-labelledby="services-title">
+            <div className={styles.container}>
+              <div className={styles.sectionHead}><p className={styles.eyebrow}>Servicios de marketing digital</p><h2 id="services-title">El servicio adecuado para el siguiente paso.</h2><p>Puedes contratar una especialidad o combinar varias según lo que necesite tu empresa.</p></div>
+              <div className={styles.serviceGroups}>{serviceGroups.map((group, index) => <article className={styles.serviceGroup} id={index === 1 ? "oferta" : index === 2 ? "trabajo" : undefined} key={group.number}>
+                <div className={styles.serviceImage}><Image src={`/images/${group.image}`} alt={group.alt} fill sizes="(max-width: 767px) 100vw, 30vw" /></div>
+                <div className={styles.groupIntro}><span className={styles.number}>{group.number}</span><h3>{group.title}</h3><p>{group.intro}</p></div>
+                <div className={styles.serviceLinks}>{group.services.map(service => <Link href={service.href} key={service.href}><div><h4>{service.title}</h4><p>{service.text}</p></div><ArrowUpRight aria-hidden="true" size={22} /></Link>)}</div>
+              </article>)}</div>
             </div>
           </section>
 
-          <section
-            id="servicios-digitales"
-            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-            aria-labelledby="services-title"
-          >
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Servicios</p>
-              <h2 id="services-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Servicios de marketing digital conectados entre sí
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-300">
-                Puedes entrar por un servicio concreto, pero el criterio siempre es el mismo: captar más oportunidades
-                reales con menos ruido operativo.
-              </p>
-            </div>
+          <section id="metodo" className={styles.method} aria-labelledby="method-title"><div className={styles.container}>
+            <div className={styles.methodIntro}><p className={styles.eyebrow}>Cómo empezamos</p><h2 id="method-title">Primero, entender.<br />Después, ponerlo en marcha.</h2><p>Cuéntanos qué vendes y qué te gustaría mejorar. Con esa información revisamos tu presencia digital y te proponemos por dónde empezar.</p><a className={styles.lightButton} href="#auditoria-marketing-digital">Pedir mi auditoría gratuita <ArrowUpRight aria-hidden="true" size={20} /></a></div>
+            <ol className={styles.steps}><li><span>01</span><div><h3>Revisamos tu situación</h3><p>La auditoría gratuita nos permite detectar qué puede estar dificultando que recibas consultas.</p></div></li><li><span>02</span><div><h3>Te proponemos un trabajo concreto</h3><p>Explicamos las prioridades y el alcance para que puedas valorar la propuesta.</p></div></li><li><span>03</span><div><h3>Empezamos cuando tú decidas</h3><p>Tras aceptar la propuesta, ejecutamos el trabajo acordado y revisamos su evolución contigo.</p></div></li></ol>
+          </div></section>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <Link
-                  className="group flex h-full flex-col rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900"
-                  href={service.href}
-                  key={service.href}
-                >
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/20">
-                    <service.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                  </span>
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">{service.title}</h3>
-                  <p className="mt-3 text-sm leading-[1.65] text-slate-300">{service.text}</p>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-black text-blue-300">
-                    {service.cta}
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section
-            id="metodo"
-            className="bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-            aria-labelledby="method-title"
-          >
-            <div className="mx-auto max-w-7xl">
-              <div className="max-w-3xl">
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Método</p>
-                <h2 id="method-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Cómo trabajamos una estrategia digital sin complicarla
-                </h2>
-              </div>
-
-              <div className="mt-10 grid gap-4">
-                {process.map((step) => (
-                  <article
-                    className="grid gap-4 rounded-lg bg-white/5 p-6 ring-1 ring-white/10 sm:grid-cols-[4rem_1fr]"
-                    key={step.step}
-                  >
-                    <span className="text-3xl font-black text-blue-400">{step.step}</span>
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900">{step.title}</h3>
-                      <p className="mt-2 leading-7 text-slate-300">{step.text}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section
-            id="para-quien"
-            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-            aria-labelledby="audience-title"
-          >
-            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Para quién es</p>
-                <h2 id="audience-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Marketing digital para empresas que necesitan leads, no más piezas sueltas
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Tiene sentido si ya estás comparando proveedores y quieres una propuesta que conecte canal, mensaje,
-                  medición y ventas desde el principio.
-                </p>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                {audiences.map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item}>
-                    <ClipboardList className="mb-5 h-6 w-6 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                    <p className="text-base font-bold leading-7 text-slate-200">{item}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section
-            className="border-y border-slate-800 bg-slate-900 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-            aria-labelledby="difference-title"
-          >
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.86fr_1.14fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Diferenciación</p>
-                <h2 id="difference-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  No vendemos acciones sueltas, construimos un sistema de captación
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Una web bonita, una campaña aislada o un informe SEO no resuelven el crecimiento por sí solos. Lo que
-                  funciona es ordenar la oferta, captar demanda, convertirla, medirla y mejorar cada mes con datos.
-                </p>
-              </div>
-              <div className="grid gap-5 md:grid-cols-3">
-                {[
-                  {
-                    icon: Network,
-                    label: "Canales conectados",
-                    text: "Cada servicio sabe qué papel cumple dentro de la captación.",
-                  },
-                  {
-                    icon: Gauge,
-                    label: "Prioridades claras",
-                    text: "Impacto, esfuerzo y urgencia antes que listas interminables de tareas.",
-                  },
-                  {
-                    icon: LineChart,
-                    label: "Negocio medido",
-                    text: "Miramos leads, CPL, calidad comercial y siguientes acciones.",
-                  },
-                ].map((item) => (
-                  <article className="rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800" key={item.label}>
-                    <item.icon className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                    <h3 className="!mt-7 text-xl font-black text-slate-900">{item.label}</h3>
-                    <p className="mt-3 text-sm leading-[1.65] text-slate-300">{item.text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section
-            className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
-            aria-labelledby="entry-title"
-          >
-            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-              <div>
-                <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Punto de entrada</p>
-                <h2 id="entry-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                  Elige el punto de entrada que mejor encaja ahora
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Si no tienes claro por dónde empezar, la auditoría ordena el diagnóstico antes de convertirlo en
-                  propuesta.
-                </p>
-              </div>
-              <div className="grid content-start gap-4">
-                {entryLinks.map((entry) => (
-                  <Link
-                    className="group flex min-h-20 items-center justify-between gap-4 rounded-lg bg-white/5 p-5 font-black text-slate-100 ring-1 ring-white/10 hover:bg-slate-900"
-                    href={entry.href}
-                    key={entry.href}
-                  >
-                    <span className="flex min-w-0 items-center gap-4">
-                      <entry.icon className="h-5 w-5 flex-none text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                      <span>{entry.label}</span>
-                    </span>
-                    <ArrowRight className="h-5 w-5 flex-none text-blue-300 transition group-hover:translate-x-1" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="faq-title">
-            <div className="max-w-3xl">
-              <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">FAQ</p>
-              <h2 id="faq-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
-                Preguntas frecuentes sobre agencia de marketing digital
-              </h2>
-            </div>
-            <div className="mt-10 grid gap-4">
-              {faqs.map((faq) => (
-                <details className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10" key={faq.question}>
-                  <summary className="cursor-pointer text-lg font-black text-slate-900">{faq.question}</summary>
-                  <p className="mt-4 leading-7 text-slate-300">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-
-          <LeadForm
-            id="auditoria-marketing-digital"
-            sourcePage="Agencia de marketing digital"
-            interestedService="Marketing digital"
-            title="Ordena tu marketing antes de invertir más"
-            description="Revisamos tu web, canales, mensajes y medición para detectar oportunidades reales y preparar una hoja de ruta de crecimiento clara."
-            points={["Sistema de captación", "Canales prioritarios", "Hoja de ruta"]}
-            buttonLabel="Solicitar auditoría gratuita"
-          />
+          <section id="faq" className={styles.faq} aria-labelledby="faq-title"><div className={styles.container}><div><p className={styles.eyebrow}>Antes de empezar</p><h2 id="faq-title">Hablemos claro.</h2><p>Estas son algunas de las dudas que puedes tener al elegir una agencia.</p></div><div className={styles.questions}>{faqs.map(faq => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div></div></section>
+          <div className={styles.audit}>
+            <LeadForm id="auditoria-marketing-digital" sourcePage="Agencia de marketing digital" interestedService="Marketing digital" title="¿Por dónde debería empezar tu empresa?" description="Cuéntanos qué quieres mejorar. Revisamos tu presencia digital y te explicamos qué trabajo recomendamos para dar el siguiente paso." points={["Revisión inicial de tu negocio", "Prioridades explicadas con claridad", "Propuesta para que puedas decidir"]} buttonLabel="Solicitar auditoría gratuita" />
+          </div>
         </main>
 
         <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-800 bg-slate-950/95 p-3 backdrop-blur md:hidden">

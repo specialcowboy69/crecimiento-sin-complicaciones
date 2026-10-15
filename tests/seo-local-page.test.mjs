@@ -87,7 +87,7 @@ test("seo local example demonstrates diagnosis and the audit covers the full pub
     "Búsquedas y zona",
     "Competencia local",
     "Perfil de Google",
-    "Sitio público y páginas clave",
+    "Página web y páginas clave",
     "Reseñas y referencias",
     "Medición",
   ]) {
@@ -95,7 +95,7 @@ test("seo local example demonstrates diagnosis and the audit covers the full pub
   }
   assert.doesNotMatch(page, /No corresponde a un cliente ni demuestra resultados obtenidos/);
   assert.doesNotMatch(page, /Analizar → priorizar → ejecutar → medir/);
-  assert.match(page, /Revisamos el conjunto del sitio público y analizamos en detalle sus páginas clave/i);
+  assert.match(page, /Revisamos el conjunto de la web y analizamos en detalle sus páginas clave/i);
   assert.match(page, /prioridades de tu proyecto y los próximos pasos recomendados/);
   assert.doesNotMatch(page, /Te indicamos prioridades y próximos pasos/);
 
@@ -109,9 +109,10 @@ test("seo local example demonstrates diagnosis and the audit covers the full pub
   assert.match(planRows, /estructura[\s\S]*indexación[\s\S]*enlaces internos[\s\S]*servicios prioritarios/);
   assert.doesNotMatch(planRows, /reformas|baños/i);
   assert.doesNotMatch(plan, /reformas|baños/i);
-  assert.match(methodSteps, /conjunto del sitio público[\s\S]*páginas clave/);
-  assert.match(faqs, /conjunto del sitio público[\s\S]*páginas clave/);
-  assert.match(audit, /conjunto del sitio público[\s\S]*páginas clave/);
+  assert.match(methodSteps, /conjunto de la web[\s\S]*páginas clave/);
+  assert.match(faqs, /conjunto de la web[\s\S]*páginas clave/);
+  assert.match(audit, /conjunto de la web[\s\S]*páginas clave/);
+  assert.doesNotMatch(audit, /Cuéntanos qué negocio tienes|Usaremos estos datos/);
   assert.doesNotMatch(planRows, /redes/i);
   assert.doesNotMatch(plan, /redes/i);
   for (const scope of [methodSteps, faqs, audit]) {
@@ -301,7 +302,7 @@ test("local seo form accepts businesses without a website field requirement", as
   assert.match(form, /sourcePage: "SEO local"/);
   assert.match(form, /interestedService: "SEO local"/);
   assert.match(form, /sourcePath: window\.location\.pathname/);
-  assert.match(form, /Localidad donde atiende/);
+  assert.doesNotMatch(form, /locality|Localidad donde atiende/);
   assert.doesNotMatch(form, /errors\.website/);
   assert.doesNotMatch(form, /Web a auditar/);
 });
