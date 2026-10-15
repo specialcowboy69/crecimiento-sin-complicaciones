@@ -84,3 +84,20 @@ Las capturas locales de revisión se generan en `output/playwright/review/market
 | 43 | Formularios públicos | Móvil obligatorio y email separado opcional en los seis componentes activos; localidad eliminada. |
 | 44 | SEO local | Ayuda del enlace opcional y referencia ARIA obsoleta eliminadas. |
 | 45 | SEO local | Enlaces de teléfono/email azules sobre fondo claro y sin desbordamiento. |
+
+## Validación integrada y entrega local
+
+Código final verificado: `098f371`, rama `codex/commercial-annotations`, a partir de `8e1592b`. Worktree: `C:/Users/USUARIO/.codex/worktrees/commercial-annotations/pagina-agencia`.
+
+- `npm.cmd run lint`: correcto en la última corrección de código.
+- `npm.cmd test`: 153/153 pruebas correctas sobre el código final.
+- `npm.cmd run build -- --webpack`: correcto, TypeScript y 38 páginas estáticas generadas.
+- Seis suites E2E integradas: 74/74 correctas (contact-navigation, consent, google-ads-alicante, seo-local-repositioning, commercial-redesign, hub-pymes-redesign).
+- Tras la corrección final del límite de contacto, nuevo build y 10/10 comprobaciones seleccionadas de formularios y navegación móvil correctas.
+- Revisión independiente por tarea y revisión del conjunto completadas. Se corrigieron la prueba obsoleta del párrafo eliminado de SEO local, el contraste del CTA secundario de Alicante y el límite de almacenamiento del contacto. La revisión final de esa corrección no dejó hallazgos pendientes.
+- Los límites de 220 y 221 caracteres del contacto compuesto tienen pruebas del helper y del handler API: el exceso produce un error de email y no llega a persistencia. No se trunca el nuevo contacto ni se cambia el esquema.
+- Revisión visual en navegador de las seis páginas; los rediseños tienen comprobaciones a 320/390/768/1440 px. Se verificaron imagen de fondo/CTA de Alicante, tarjetas blancas y azules de SEO local, H1, legibilidad y contacto sin desbordamiento.
+
+La validación de envíos usa respuestas interceptadas o persistencia simulada en pruebas. No acredita escrituras reales en Firebase ni atribución en cuentas de medición. No se han publicado cambios.
+
+Servidor de producción local: `http://127.0.0.1:3002`. Comando desde el worktree: `npm.cmd run start -- --hostname 127.0.0.1 --port 3002`. Registro de ejecución y resultados disponibles como artefactos locales ignorados en `output/review/`; capturas en `output/playwright/review/`. El trabajo queda conservado para revisión local.
