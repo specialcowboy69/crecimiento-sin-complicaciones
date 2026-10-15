@@ -10,9 +10,14 @@ export function normalizeMobile(value: unknown): string | null {
   return phone.number;
 }
 
+function composeContact(mobile: string, email: string) {
+  return `Móvil: ${mobile}${email ? ` | Email: ${email}` : ""}`;
+}
+
 export function validateContactFields(values: { phone: unknown; email?: unknown }) {
   const errors: { phone?: string; email?: string } = {};
-  if (!normalizeMobile(values.phone)) {
+  const mobile = normalizeMobile(values.phone);
+  if (!mobile) {
     errors.phone = "Introduce un móvil válido, con prefijo internacional si es de otro país.";
   }
   if (values.email !== undefined) {
@@ -20,6 +25,10 @@ export function validateContactFields(values: { phone: unknown; email?: unknown 
     if (email === null || (email && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254))) {
       errors.email = "Introduce un email válido o deja este campo vacío.";
     }
+  }
+  const email = typeof values.email === "string" ? values.email.trim() : "";
+  if (mobile && !errors.email && composeContact(mobile, email).length > 220) {
+    errors.email = "El email es demasiado largo para guardarlo junto al móvil. Usa uno más corto o deja este campo vacío.";
   }
   return errors;
 }
@@ -30,7 +39,7 @@ export function resolveLeadContact(payload: { phone?: unknown; email?: unknown; 
     if (Object.keys(validateContactFields({ phone: payload.phone, email: payload.email })).length) return null;
     const mobile = normalizeMobile(payload.phone)!;
     const email = typeof payload.email === "string" ? payload.email.trim() : "";
-    return `Móvil: ${mobile}${email ? ` | Email: ${email}` : ""}`;
+    return composeContact(mobile, email);
   }
   const legacy = typeof payload.contact === "string" ? payload.contact.trim().slice(0, 220) : "";
   return legacy.length >= 6 ? legacy : null;

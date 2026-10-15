@@ -24,7 +24,7 @@ Payload fields:
 | `interestedService` | No | Service, goal or selected category. |
 | `adsClickType`, `adsClickId` | No | Only a consented `/seo/local` browser may supply a click ID. The server checks the v2 cookie, exact route and same-origin Referer before persisting it. Never infer campaign origin from `sourcePage`. |
 
-The API composes persisted `contact` as `Móvil: +... | Email: ...` (omitting the email segment when empty) without a database migration. Supplying either new contact field selects strict validation; invalid phone/email never falls back to legacy `contact`. Numbering-plan validation establishes plausibility, not ownership or availability. Letters, extensions, incomplete numbers and fixed lines are rejected; spaces, parentheses, dots, hyphens and international `00` prefixes are normalized.
+The API composes persisted `contact` as `Móvil: +... | Email: ...` (omitting the email segment when empty) without a database migration. The complete normalized contact, including labels and separators, must fit the existing `varchar(220)` column; an overlong contact is rejected with an inline email error before persistence, without truncating new contact data. Supplying either new contact field selects strict validation; invalid phone/email never falls back to legacy `contact`. Numbering-plan validation establishes plausibility, not ownership or availability. Letters, extensions, incomplete numbers and fixed lines are rejected; spaces, parentheses, dots, hyphens and international `00` prefixes are normalized.
 
 The API lives in `app/api/leads/route.ts`, stores through Firebase Data Connect and validates/sanitizes strings before writing.
 

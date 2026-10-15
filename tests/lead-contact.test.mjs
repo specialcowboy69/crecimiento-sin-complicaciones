@@ -15,3 +15,13 @@ test('storage identifies mobile and preserves optional email and legacy contact'
   assert.equal(contact.resolveLeadContact({contact:'old@example.com'}), 'old@example.com');
   for (const fields of [{phone:'',contact:'old@example.com'}, {phone:123456789,email:''}, {email:'old@example.com',contact:'legacy@example.com'}, {phone:'bad',contact:'old@example.com'}, {phone:'604990651',email:'bad'}]) assert.equal(contact.resolveLeadContact(fields), null);
 });
+
+
+test('complete normalized contact accepts 220 characters and rejects 221', () => {
+  const prefix = 'Móvil: +34604990651 | Email: ';
+  const email = `${'a'.repeat(220 - prefix.length - '@example.com'.length)}@example.com`;
+  assert.deepEqual(contact.validateContactFields({ phone: '604 990 651', email: ` ${email} ` }), {});
+  assert.equal(contact.resolveLeadContact({ phone: '604 990 651', email: ` ${email} ` }).length, 220);
+  assert.ok(contact.validateContactFields({ phone: '604990651', email: `a${email}` }).email);
+  assert.equal(contact.resolveLeadContact({ phone: '604990651', email: `a${email}`, contact: 'legacy@example.com' }), null);
+});
