@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { Building2, ChartNoAxesCombined, HeartPulse, LayoutTemplate, MapPin, Megaphone, MousePointer2, Search, Star, Store, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/valencia#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/valencia",
     name: "Agencia SEO para empresas de Valencia",
     serviceType: ["SEO Valencia", "Consultoría SEO Valencia", "SEO local Valencia", "Posicionamiento web Valencia"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Valencia",
     },
     description:
       "Servicios SEO para empresas de Valencia con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Valencia",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/valencia",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Valencia", "/seo/valencia"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

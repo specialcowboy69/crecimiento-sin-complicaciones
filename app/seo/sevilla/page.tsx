@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { BarChart3, Building2, ClipboardList, GraduationCap, HeartPulse, Home, MapPin, Megaphone, Search, ShieldCheck, Target, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/sevilla#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/sevilla",
     name: "Agencia SEO para empresas de Sevilla",
     serviceType: ["SEO Sevilla", "Consultoría SEO Sevilla", "SEO local Sevilla", "Posicionamiento web Sevilla"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Sevilla",
     },
     description:
       "Servicios SEO para empresas de Sevilla con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Sevilla",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/sevilla",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Sevilla", "/seo/sevilla"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

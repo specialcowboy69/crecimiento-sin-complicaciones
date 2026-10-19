@@ -67,20 +67,37 @@
           "Posicionamiento web"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Madrid"
         },
         "description": "Servicios SEO para empresas de Madrid con auditoría SEO gratuita, estrategia de contenidos, SEO técnico y posicionamiento local orientado a leads.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/madrid#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/madrid"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/madrid#audit",
+        "name": "Auditoría SEO gratuita para empresas de Madrid",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/madrid#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Madrid",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/madrid"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/madrid#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/madrid#audit"
+          }
         }
       },
       {
@@ -226,20 +243,37 @@
           "Posicionamiento web Valencia"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Valencia"
         },
         "description": "Servicios SEO para empresas de Valencia con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/valencia#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/valencia"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/valencia#audit",
+        "name": "Auditoría SEO gratuita para empresas de Valencia",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/valencia#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Valencia",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/valencia"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/valencia#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/valencia#audit"
+          }
         }
       },
       {
@@ -387,20 +421,37 @@
           "Posicionamiento web Barcelona"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Barcelona"
         },
         "description": "Servicios SEO para empresas de Barcelona con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y posicionamiento local orientado a leads.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/barcelona#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/barcelona"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/barcelona#audit",
+        "name": "Auditoría SEO gratuita para empresas de Barcelona",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/barcelona#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Barcelona",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/barcelona"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/barcelona#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/barcelona#audit"
+          }
         }
       },
       {
@@ -546,20 +597,37 @@
           "Posicionamiento web Sevilla"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Sevilla"
         },
         "description": "Servicios SEO para empresas de Sevilla con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/sevilla#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/sevilla"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/sevilla#audit",
+        "name": "Auditoría SEO gratuita para empresas de Sevilla",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/sevilla#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Sevilla",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/sevilla"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/sevilla#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/sevilla#audit"
+          }
         }
       },
       {
@@ -709,20 +777,37 @@
           "Posicionamiento web Málaga"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Málaga"
         },
         "description": "Servicios SEO para empresas de Málaga con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/malaga#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/malaga"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/malaga#audit",
+        "name": "Auditoría SEO gratuita para empresas de Málaga",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/malaga#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Málaga",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/malaga"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/malaga#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/malaga#audit"
+          }
         }
       },
       {
@@ -874,20 +959,37 @@
           "Posicionamiento web Alicante"
         ],
         "provider": {
-          "@type": "Organization",
-          "name": "Crecimiento sin complicaciones",
-          "url": "https://www.crecimientosincomplicaciones.com"
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
         },
         "areaServed": {
           "@type": "AdministrativeArea",
           "name": "Alicante"
         },
         "description": "Servicios SEO para empresas de Alicante con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-        "makesOffer": {
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/alicante#service",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/alicante"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.crecimientosincomplicaciones.com/seo/alicante#audit",
+        "name": "Auditoría SEO gratuita para empresas de Alicante",
+        "url": "https://www.crecimientosincomplicaciones.com/seo/alicante#audit-request",
+        "provider": {
+          "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+        },
+        "offers": {
           "@type": "Offer",
           "name": "Auditoría SEO gratuita para empresas de Alicante",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.crecimientosincomplicaciones.com/seo/alicante"
+          "price": 0,
+          "priceCurrency": "EUR",
+          "url": "https://www.crecimientosincomplicaciones.com/seo/alicante#audit-request",
+          "seller": {
+            "@id": "https://www.crecimientosincomplicaciones.com/#organization"
+          },
+          "itemOffered": {
+            "@id": "https://www.crecimientosincomplicaciones.com/seo/alicante#audit"
+          }
         }
       },
       {

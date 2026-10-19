@@ -101,17 +101,6 @@ const faqs = [
   },
 ];
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Crecimiento sin complicaciones",
-  url: "https://www.crecimientosincomplicaciones.com",
-  description:
-    "Agencia de crecimiento especializada en SEO, SEM, CRO, storytelling y analítica para startups y equipos de marketing.",
-  areaServed: "ES",
-  serviceType: ["SEO técnico", "SEM", "CRO", "Marketing de contenidos", "Analítica digital"],
-};
-
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -130,7 +119,7 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, faqSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
       />
       <header className="site-header home-header">
         <nav className="nav" aria-label="Navegación principal">

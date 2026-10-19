@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { BarChart3, Building2, ClipboardList, Globe2, MapPin, Search, ShoppingCart, Target, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/barcelona#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/barcelona",
     name: "Agencia SEO para empresas de Barcelona",
     serviceType: ["SEO Barcelona", "Consultoría SEO Barcelona", "SEO técnico", "Posicionamiento web Barcelona"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Barcelona",
     },
     description:
       "Servicios SEO para empresas de Barcelona con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y posicionamiento local orientado a leads.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Barcelona",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/barcelona",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Barcelona", "/seo/barcelona"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

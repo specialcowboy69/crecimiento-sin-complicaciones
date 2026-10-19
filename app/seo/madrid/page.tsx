@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { BriefcaseBusiness, Building2, ChartNoAxesCombined, HeartPulse, LayoutTemplate, MapPin, MousePointer2, Search, Star, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/madrid#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/madrid",
     name: "Agencia SEO para empresas de Madrid",
     serviceType: ["SEO local", "Consultoría SEO", "SEO técnico", "Posicionamiento web"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Madrid",
     },
     description:
       "Servicios SEO para empresas de Madrid con auditoría SEO gratuita, estrategia de contenidos, SEO técnico y posicionamiento local orientado a leads.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Madrid",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/madrid",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Madrid", "/seo/madrid"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { BarChart3, Building2, ClipboardList, HeartPulse, Home, Hotel, MapPin, MapPinned, Megaphone, Search, Target, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/alicante#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/alicante",
     name: "Agencia SEO para empresas de Alicante",
     serviceType: ["SEO Alicante", "Consultoría SEO Alicante", "SEO local Alicante", "Posicionamiento web Alicante"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Alicante",
     },
     description:
       "Servicios SEO para empresas de Alicante con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Alicante",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/alicante",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Alicante", "/seo/alicante"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

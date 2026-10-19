@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AiDiagnosticForm } from "../components/AiDiagnosticForm";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
-import { breadcrumbJsonLd } from "../lib/structuredData";
+import { breadcrumbJsonLd, ORGANIZATION_ID, freeAuditJsonLd } from "../lib/structuredData";
 
 const platforms = [
   "OpenAI",
@@ -136,24 +136,16 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/soluciones-inteligencia-artificial-empresas#service",
+    url: "https://www.crecimientosincomplicaciones.com/soluciones-inteligencia-artificial-empresas",
     name: "Agencia de Inteligencia Artificial y Automatización para Empresas",
     serviceType: ["Inteligencia Artificial", "Automatización de procesos", "Agentes IA"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Soluciones de inteligencia artificial y automatización para empresas: agentes IA, chatbots, integraciones CRM/ERP y automatización de procesos.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría gratuita",
-      category: "Automatización empresarial con IA",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/soluciones-inteligencia-artificial-empresas",
-    },
   },
+  freeAuditJsonLd("Auditoría gratuita", "/soluciones-inteligencia-artificial-empresas"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
