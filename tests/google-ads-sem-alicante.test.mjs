@@ -62,7 +62,7 @@ test("national Google Ads page uses varied visual storytelling instead of repeat
   assert.match(styles, /\.hero/);
   assert.doesNotMatch(styles, /\.journeyPanel/);
   assert.match(styles, /\.solutionVisual/);
-  assert.match(styles, /\.audienceList/);
+  assert.match(styles, /\.audiencePanels/);
   assert.doesNotMatch(styles, /\.semSection|\.semVisual/);
   assert.match(styles, /@media \(max-width: 767px\)/);
 });
@@ -81,7 +81,7 @@ test("Alicante is a distinct indexable Google Ads and SEM service page", async (
   assert.match(page, /Agencia SEM para empresas de Alicante que quieren captar demanda con Google Ads/);
   assert.match(page, /Una campaña local necesita separar servicio, zona e intención/);
   assert.match(page, /Segmentación enfocada en las zonas donde realmente trabajas/);
-  assert.match(page, /Trabajamos de forma remota con empresas de toda España/);
+  assert.match(page, /¿Podéis orientar las campañas a zonas concretas de Alicante/);
   assert.match(page, /"@type": "Service"/);
   assert.match(page, /breadcrumbJsonLd/);
   assert.match(page, /ORGANIZATION_ID/);
@@ -131,7 +131,10 @@ test("Alicante page uses direct copy and varied visual storytelling", async () =
   }
 
   const imageSources = page.match(/src="\/images\/google-ads-alicante-[^"]+\.webp"/g) || [];
-  assert.ok(imageSources.length >= 3, "expected at least three Alicante visual assets");
+  assert.ok(imageSources.length >= 2, "expected the hero and coverage assets");
+  assert.match(page, /import demandImage from .*google-ads-alicante-demand-v2\.webp/);
+  assert.match(page, /src=\{demandImage\}/);
+  assert.equal(existsSync(path.join(repoRoot, "public/images/google-ads-alicante-demand-v2.webp")), true);
   assert.match(
     page,
     /src="\/images\/google-ads-alicante-coverage\.webp"[\s\S]*?quality=\{92\}/,

@@ -103,11 +103,15 @@ for (const item of pages) {
     await form.locator('input[name="name"]').fill("Prueba local");
     await form.getByLabel("Móvil*", { exact: true }).fill("604990651");
     await expect(form.getByLabel("Email (opcional)", { exact: true })).toHaveValue("");
-    if (item.route === "/agencia-marketing-digital") await form.getByLabel("Empresa*", { exact: true }).fill("Empresa de prueba");
-    else await form.locator("#seo-website").fill("https://example.com");
+    if (item.route === "/agencia-marketing-digital") await form.getByLabel("Sitio web o nombre de la empresa*", { exact: true }).fill("https://example.com");
+    else {
+      await expect(form.locator("#seo-goal")).toHaveCount(0);
+      await form.locator("#seo-website").fill("https://example.com");
+    }
     await form.locator('button[type="submit"]').click();
     await expect(page.getByRole("status").filter({ hasText: "Solicitud enviada" })).toBeVisible();
     expect(payloads).toHaveLength(1);
+    if (item.route === "/agencia-marketing-digital") expect(payloads[0].company).toBe("https://example.com");
     expect(payloads[0]).toMatchObject({ sourcePage: item.source, sourcePath: item.route, formType: "Auditoría gratuita", interestedService: item.service, email: "" });
     await expect(page.locator("#audit-request form")).toHaveCount(0);
   });

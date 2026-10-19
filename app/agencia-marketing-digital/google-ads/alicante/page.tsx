@@ -11,6 +11,7 @@ import { Logo } from "../../../components/Logo";
 import { absoluteUrl } from "../../../lib/site";
 import { ORGANIZATION_ID, breadcrumbJsonLd } from "../../../lib/structuredData";
 import styles from "./alicante.module.css";
+import demandImage from "../../../../public/images/google-ads-alicante-demand-v2.webp";
 
 const pagePath = "/agencia-marketing-digital/google-ads/alicante";
 const pageUrl = absoluteUrl(pagePath);
@@ -88,31 +89,24 @@ const sectors = [
   },
 ];
 
-const processSteps = [
+const processPhases = [
   {
-    step: "01",
-    title: "Auditoría de cuenta y recorrido",
-    text: "Revisamos campañas, términos, anuncios, conversiones y el camino desde el clic hasta el contacto.",
+    title: "Preparación",
+    text: "Revisamos la cuenta, las búsquedas, los anuncios, las conversiones y el recorrido hasta el contacto.",
+    detail: "Acordamos qué servicios anunciar, qué zonas puedes atender y qué acciones mediremos como oportunidades.",
+    result: "Una cuenta revisada y un mapa de prioridades.",
   },
   {
-    step: "02",
-    title: "Mapa de servicios, zonas y conversiones",
-    text: "Acordamos qué se quiere vender, dónde puede prestarse y qué acciones indican una oportunidad real.",
+    title: "Puesta en marcha",
+    text: "Creamos o reorganizamos las campañas, los anuncios, sus recursos y las palabras clave negativas.",
+    detail: "Conectamos cada campaña con su página de destino y comprobamos la medición antes de empezar.",
+    result: "Campañas y páginas listas para recibir visitas.",
   },
   {
-    step: "03",
-    title: "Lanzamiento o reestructuración",
-    text: "Creamos o reorganizamos campañas, anuncios, extensiones, negativas y páginas de destino.",
-  },
-  {
-    step: "04",
-    title: "Aprendizaje con datos suficientes",
-    text: "Evitamos conclusiones precipitadas y damos tiempo a que búsquedas y conversiones formen una muestra útil.",
-  },
-  {
-    step: "05",
-    title: "Prioridades de optimización",
-    text: "Ordenamos los siguientes ajustes según impacto probable, evidencia y capacidad comercial.",
+    title: "Mejora continua",
+    text: "Reunimos datos suficientes de búsquedas y conversiones antes de sacar conclusiones.",
+    detail: "Priorizamos los ajustes según la evidencia, su posible impacto y la capacidad de tu negocio para atender contactos.",
+    result: "Próximos ajustes con un motivo claro.",
   },
 ];
 
@@ -125,9 +119,9 @@ const auditPoints = [
 
 const faqs = [
   {
-    question: "¿Trabajáis con empresas de Alicante aunque no tengáis oficina allí?",
+    question: "¿Podéis orientar las campañas a zonas concretas de Alicante?",
     answer:
-      "Sí. Trabajamos de forma remota con empresas de toda España. Podemos gestionar campañas para negocios ubicados en Alicante o que venden en Alicante y su provincia, con reuniones y seguimiento online.",
+      "Sí. Definimos la cobertura según las zonas donde puedes prestar el servicio: Alicante ciudad, municipios concretos o áreas de la provincia. Ajustamos la segmentación y los mensajes a esa cobertura y revisamos de dónde llegan las consultas.",
   },
   {
     question: "¿Es lo mismo una agencia SEM en Alicante que una agencia Google Ads en Alicante?",
@@ -320,12 +314,6 @@ export default function GoogleAdsAlicantePage() {
                 >
                   Solicitar auditoría gratuita
                 </a>
-                <Link
-                  className={styles.heroSecondary}
-                  href="/agencia-marketing-digital/google-ads"
-                >
-                  Ver servicio nacional de Google Ads
-                </Link>
               </div>
             </div>
 
@@ -347,11 +335,11 @@ export default function GoogleAdsAlicantePage() {
               <div className={styles.editorialSplit}>
                 <figure className={styles.demandVisual}>
                   <Image
-                    src="/images/google-ads-alicante-demand-v2.webp"
+                    src={demandImage}
                     alt="Equipo de un negocio de Alicante revisando su captación digital"
                     fill
-                    sizes="(min-width: 1024px) 56vw, (max-width: 639px) 125vw, 100vw"
-                    quality={92}
+                    sizes="(min-width: 1280px) 640px, (min-width: 1024px) 50vw, (max-width: 639px) calc(100vw - 32px), calc(100vw - 64px)"
+                    placeholder="blur"
                     className={styles.coverImage}
                   />
                 </figure>
@@ -370,7 +358,7 @@ export default function GoogleAdsAlicantePage() {
             </div>
           </section>
 
-          <section id="servicio" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="service-title">
+          <section id="servicio" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16" aria-labelledby="service-title">
             <div className="max-w-4xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Servicio</p>
               <h2 id="service-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
@@ -437,24 +425,23 @@ export default function GoogleAdsAlicantePage() {
             </figure>
           </section>
 
-          <section id="metodo" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24" aria-labelledby="method-title">
+          <section id="metodo" className={styles.methodSection} aria-labelledby="method-title">
             <div className="max-w-4xl">
               <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Método</p>
               <h2 id="method-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                 Cómo trabajamos una campaña de Google Ads para Alicante
               </h2>
             </div>
-            <ol className="mt-10 grid gap-4">
-              {processSteps.map((item) => (
-                <li className="grid gap-4 rounded-lg bg-white/5 p-6 ring-1 ring-white/10 sm:grid-cols-[4rem_1fr]" key={item.step}>
-                  <span className="text-3xl font-black text-blue-400">{item.step}</span>
-                  <div>
-                    <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                    <p className="mt-2 leading-7 text-slate-300">{item.text}</p>
-                  </div>
-                </li>
+            <div className={styles.processPhases}>
+              {processPhases.map((phase) => (
+                <article className={styles.processPhase} key={phase.title}>
+                  <h3>{phase.title}</h3>
+                  <p>{phase.text}</p>
+                  <p>{phase.detail}</p>
+                  <div className={styles.phaseResult}>{phase.result}</div>
+                </article>
               ))}
-            </ol>
+            </div>
           </section>
 
           <section className="bg-blue-600 px-4 py-16 text-white sm:px-6 lg:px-8" aria-labelledby="audit-expectations-title">

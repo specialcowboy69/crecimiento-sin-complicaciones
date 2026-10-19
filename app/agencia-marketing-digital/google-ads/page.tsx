@@ -46,22 +46,18 @@ const processSteps = [
 
 const audienceProfiles = [
   {
-    number: "01",
     title: "Ya inviertes, pero no tienes claridad",
     text: "Necesitas saber qué campañas generan oportunidades y cuáles solo consumen presupuesto.",
   },
   {
-    number: "02",
     title: "Quieres empezar con una estructura sólida",
     text: "Buscas lanzar Google Ads con prioridades, medición y una oferta clara desde el principio.",
   },
   {
-    number: "03",
     title: "Necesitas dirección especializada externa",
     text: "Tu equipo necesita criterio estratégico y ejecución sin incorporar otro perfil interno.",
   },
   {
-    number: "04",
     title: "Recibes tráfico, pero pocos contactos",
     text: "La campaña atrae visitas, aunque la landing o el seguimiento no convierten ese interés en leads.",
   },
@@ -474,7 +470,7 @@ export default function GoogleAdsPage() {
                   alt="Dos profesionales conversan frente a un portátil y toman notas"
                   width={1536}
                   height={1024}
-                  sizes="(min-width: 1024px) 46vw, 100vw"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
                 />
               </div>
 
@@ -486,17 +482,14 @@ export default function GoogleAdsPage() {
                   convertir búsquedas con intención en conversaciones comerciales.
                 </p>
 
-                <ol className={styles.audienceList}>
-                  {audienceProfiles.map((profile) => (
-                    <li key={profile.number}>
-                      <span>{profile.number}</span>
-                      <div>
-                        <h3>{profile.title}</h3>
-                        <p>{profile.text}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+              </div>
+              <div className={styles.audiencePanels}>
+                {audienceProfiles.map((profile) => (
+                  <article key={profile.title}>
+                    <h3>{profile.title}</h3>
+                    <p>{profile.text}</p>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
@@ -511,6 +504,7 @@ export default function GoogleAdsPage() {
                 <h2 id="alicante-title" className="text-3xl font-black text-slate-900 sm:text-4xl">
                   Campañas orientadas a mercados concretos
                 </h2>
+                <p className="mt-5 text-lg leading-8 text-slate-300">¿Tu ciudad no aparece aquí? También podemos trabajar contigo.</p>
               </div>
               <Link
                 className="group rounded-lg bg-slate-950 p-6 ring-1 ring-slate-800 hover:bg-white/5"

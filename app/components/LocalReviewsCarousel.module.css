@@ -9,5 +9,9 @@
 }
 
 .reviewAuthor {
-  padding: 1.25rem 0.75rem 0.25rem;
+  padding: 1rem 0 0;
+}
+
+:global(.landing-light) .reviewAuthor:global(.local-review-author) {
+  box-shadow: none !important;
 }

@@ -119,7 +119,7 @@ export function LocalReviewsCarousel({ items }: LocalReviewsCarouselProps) {
                 key={item.title}
                 data-review-card
                 data-featured-review={isFeatured ? "true" : undefined}
-                className={`relative flex min-h-[22rem] w-[min(19rem,calc(100vw-3rem))] flex-none snap-start flex-col overflow-hidden rounded-lg border p-6 shadow-[0_14px_36px_rgba(15,23,42,0.08)] sm:w-[23rem] ${isFeatured ? "border-blue-600 bg-blue-600" : "border-slate-200 bg-white"}`}
+                className={`relative flex w-[min(19rem,calc(100vw-3rem))] flex-none snap-start flex-col overflow-hidden rounded-lg border p-6 shadow-[0_14px_36px_rgba(15,23,42,0.08)] sm:w-[23rem] ${isFeatured ? "border-blue-600 bg-blue-600" : "border-slate-200 bg-white"}`}
                 aria-label={`${index + 1} de ${items.length}: ${item.title}`}
               >
                 <span className={`absolute right-5 top-0 font-serif text-8xl leading-none ${isFeatured ? "text-white/20" : "text-blue-100"}`} aria-hidden="true">“</span>
@@ -130,10 +130,10 @@ export function LocalReviewsCarousel({ items }: LocalReviewsCarouselProps) {
                 </div>
                 <h3 className={`relative mt-7 text-2xl font-black leading-tight ${isFeatured ? "text-white" : "text-slate-900"}`}>{item.title}</h3>
                 <p className={`relative mt-4 text-base leading-7 ${isFeatured ? "text-blue-50" : "text-slate-600"}`}>{item.text}</p>
-                <div className={`${styles.reviewAuthor} local-review-author mt-auto grid min-w-0 gap-1 border-t ${isFeatured ? "border-white/25" : "border-slate-200"}`}>
-                  <div className={`text-sm font-black leading-5 ${isFeatured ? "text-white" : "text-slate-900"}`}>{item.company}</div>
-                  <div className={`text-xs font-bold leading-5 ${isFeatured ? "text-blue-100" : "text-teal-700"}`}>{item.contactRole}</div>
-                  <div className={`text-xs font-semibold leading-5 ${isFeatured ? "text-blue-100" : "text-slate-500"}`}>{item.sector}</div>
+                <div className={`${styles.reviewAuthor} local-review-author mt-6 grid min-w-0 gap-1 border-t ${isFeatured ? "border-white/25" : "border-slate-200"}`}>
+                  <div className={`text-base font-black leading-6 ${isFeatured ? "text-white" : "text-slate-900"}`}>{item.company}</div>
+                  <div className={`text-sm font-bold leading-5 ${isFeatured ? "text-blue-100" : "text-teal-700"}`}>{item.contactRole}</div>
+                  <div className={`text-sm font-semibold leading-5 ${isFeatured ? "text-blue-100" : "text-slate-500"}`}>{item.sector}</div>
                 </div>
               </article>
             );

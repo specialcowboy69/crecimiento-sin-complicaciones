@@ -139,6 +139,9 @@ Approved route relationships for SEO pages:
 /seo/local
   -> /seo
   -> /diseno-pagina-web-profesional
+  -> /diseno-landing-pages
+  -> /agencia-marketing-digital/google-ads
+  -> /soluciones-inteligencia-artificial-empresas
 
 /seo-para-pymes
   -> /seo

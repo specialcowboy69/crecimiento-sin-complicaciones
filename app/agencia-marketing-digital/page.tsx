@@ -198,7 +198,7 @@ export default function DigitalMarketingAgencyPage() {
               <p className={styles.lead}>Ayudamos a que más personas encuentren tu negocio, entiendan lo que ofreces y den el paso de contactar.</p>
               <div className={styles.actions}><a className={styles.primary} href="#auditoria-marketing-digital">Solicitar auditoría gratuita</a><a className={styles.secondary} href="#servicios-digitales">Explorar los servicios <ArrowUpRight aria-hidden="true" size={18} /></a></div>
             </div>
-            <div className={styles.heroPhoto}><Image src="/images/home-growth-collaboration.webp" alt="Dos personas revisan un proyecto en un portátil" fill sizes="(max-width: 767px) 100vw, 45vw" preload /><div className={styles.photoNote}><span>Un buen punto de partida</span><p>Saber qué necesita tu negocio ahora.</p></div></div>
+            <Image className={styles.heroImage} src="/images/home-growth-collaboration.webp" alt="" fill sizes="100vw" preload />
           </section>
 
           <section id="para-quien" className={styles.needs} aria-labelledby="needs-title">

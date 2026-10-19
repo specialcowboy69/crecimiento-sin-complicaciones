@@ -223,7 +223,6 @@ test("seo local shows the six month refund guarantee after the hero", async () =
 test("seo local includes a verified reviews carousel after the includes section", async () => {
   const page = await read("app/seo/local/page.tsx");
   const carousel = await read("app/components/LocalReviewsCarousel.tsx");
-  const carouselStyles = await read("app/components/LocalReviewsCarousel.module.css");
   const includesIndex = page.indexOf('aria-labelledby="includes-title"');
   const reviewsIndex = page.indexOf('aria-labelledby="local-reviews-title"');
   const mapsIndex = page.indexOf('aria-labelledby="maps-web-title"');
@@ -257,7 +256,6 @@ test("seo local includes a verified reviews carousel after the includes section"
   assert.match(carousel, /scroll-px-4/);
   assert.match(carousel, /pr-4/);
   assert.match(carousel, /styles\.reviewAuthor/);
-  assert.match(carouselStyles, /\.reviewAuthor\s*\{[\s\S]*padding:\s*1\.25rem 0\.75rem 0\.25rem;/);
   assert.match(carousel, /disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/);
   assert.match(carousel, /\{item.contactRole\}/);
   assert.doesNotMatch(carousel, /Avatar ilustrativo|role="img"|item\.initials|h-16 w-16/);

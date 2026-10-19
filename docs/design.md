@@ -148,13 +148,13 @@ Patrones aprobados:
 - Composiciones de imagen y texto que alternen el ritmo de la página.
 - Imágenes de fondo en paneles de servicio cuando ayuden a reconocer el tema antes de leer.
 - Piezas visuales distintas para explicar problema, método, alcance y prueba; no repetir la misma cuadrícula de cards en todas las secciones.
-- Figcaption breve cuando la imagen necesite contexto comercial o geográfico.
+- Créditos de imagen, cuando sean necesarios, como HTML separado de la fotografía.
 
 Evitar:
 
 - Gráficos, dashboards o métricas ficticias que puedan interpretarse como resultados reales.
 - Collages decorativos, blobs y fondos abstractos sin función.
-- Texto incrustado en la propia imagen cuando pueda mantenerse como HTML accesible.
+- Texto incrustado en imágenes, cartelas y frases decorativas superpuestas a las fotografías. Regla del usuario: no añadir texto a las imágenes. Los heroes pueden usar una fotografía de fondo; breadcrumb, H1, explicación y CTA se mantienen como HTML accesible con contraste comprobado.
 - Recortes que oculten el producto, la persona o el lugar que la imagen pretende mostrar.
 
 Las imágenes principales deben declarar dimensiones o una relación de aspecto estable, usar `next/image` y conservar un encuadre útil en escritorio y móvil.
@@ -293,3 +293,7 @@ Checklist mínimo:
 - `npm run lint` y `npm run build` pasan si se ha tocado código.
 
 En `/seo/local`, los seis servicios y los factores locales usan tarjetas sin iconos en los servicios, con superficies blancas y azules. El color alterna por orden de lectura y conserva esa secuencia al apilarse en móvil. Los textos y números declaran colores explícitos para mantener contraste con la capa `landing-light`.
+
+## Ajustes comerciales de octubre de 2026
+
+El hub de marketing y SEO para pymes usan la fotografía como fondo del hero, sin cartelas. Google Ads presenta las situaciones de sus clientes en cuatro paneles, diferenciados de las filas del bloque de solución. En Alicante, el método agrupa toda la información en Preparación, Puesta en marcha y Mejora continua. Los heroes de Ads y Landing Pages parten de su contenido y evitan el espacio superior creado por una altura mínima y alineación al pie en móvil.
