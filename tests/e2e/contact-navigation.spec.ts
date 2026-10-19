@@ -11,7 +11,7 @@ test("a successful home lead replaces the form with a visible confirmation", asy
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
   await contact.getByLabel("Móvil*").fill("604990651");
   await contact.getByLabel("Email (opcional)").fill("ana@example.com");
-  await contact.getByLabel("Empresa*").fill("Empresa de prueba");
+  await contact.getByLabel("Sitio web o nombre de la empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
   await expect(contact.locator("form")).toHaveCount(0);
@@ -30,7 +30,7 @@ test("the mobile confirmation remains in view after the tall form disappears", a
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
   await contact.getByLabel("Móvil*").fill("604990651");
   await contact.getByLabel("Email (opcional)").fill("ana@example.com");
-  await contact.getByLabel("Empresa*").fill("Empresa de prueba");
+  await contact.getByLabel("Sitio web o nombre de la empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
   const confirmation = contact.getByRole("status").filter({ hasText: "Solicitud enviada" });
@@ -51,7 +51,7 @@ test("a failed home lead keeps the entered values and shows an error", async ({ 
   await contact.getByLabel("Nombre*").fill("Ana Pérez");
   await contact.getByLabel("Móvil*").fill("604990651");
   await contact.getByLabel("Email (opcional)").fill("ana@example.com");
-  await contact.getByLabel("Empresa*").fill("Empresa de prueba");
+  await contact.getByLabel("Sitio web o nombre de la empresa*").fill("Empresa de prueba");
   await contact.getByRole("button", { name: "Quiero mi auditoría" }).click();
 
   await expect(contact.locator("form")).toBeVisible();

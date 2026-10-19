@@ -201,32 +201,44 @@
 
 .diagnosisFlow li {
   min-width: 0;
-  padding: 1.4rem 1.25rem 0 0;
-  border-top: 3px solid #16766e;
+  padding: 1.75rem;
+  border: 1px solid #cbded9;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 65, 59, 0.06);
 }
 
 .diagnosisFlow li:nth-child(2) {
-  border-top-color: #2877a0;
+  border-color: #ccdef0;
+  background: #edf5ff;
 }
 
 .diagnosisFlow li:nth-child(3) {
-  border-top-color: #2563eb;
+  border-color: #2563eb;
+  background: #2563eb;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.14);
 }
 
-.diagnosisFlow h3 {
+:global(.seo-page.landing-light) .diagnosisFlow h3 {
   max-width: 19ch;
   margin: 0;
-  font-size: 1.45rem;
+  color: #172033 !important;
+  font-size: 1.5rem;
   font-weight: 850;
   line-height: 1.25;
 }
 
 :global(.seo-page.landing-light) .diagnosisFlow p {
   max-width: 24rem;
-  margin: 0.75rem 0 0;
+  margin: 1rem 0 0;
   color: #2f4a53 !important;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.65;
+}
+
+:global(.seo-page.landing-light) .diagnosisFlow li:nth-child(3) h3,
+:global(.seo-page.landing-light) .diagnosisFlow li:nth-child(3) p {
+  color: #ffffff !important;
 }
 
 .systemSection {
@@ -883,10 +895,6 @@
 }
 
 @media (min-width: 768px) {
-  .diagnosisFlow {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .systemGrid {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   }
@@ -991,6 +999,18 @@
 }
 
 @media (min-width: 1024px) {
+  .diagnosisFlow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .diagnosisFlow li {
+    padding: 2rem;
+  }
+
+  :global(.seo-page.landing-light) .diagnosisFlow h3 {
+    font-size: 1.625rem;
+  }
+
   .includesList,
   .audienceRoutes,
   .relatedLinks {
@@ -1094,9 +1114,45 @@
     aspect-ratio: 3 / 2;
   }
 
+  .processSection {
+    background: #f0f6f4;
+  }
+
+  :global(.seo-page.landing-light) .processIntro .eyebrow {
+    color: #0f766e !important;
+  }
+
+  :global(.seo-page.landing-light) .processIntro h2,
+  :global(.seo-page.landing-light) .processSection .processCard h3 {
+    color: #153d39 !important;
+  }
+
+  :global(.seo-page.landing-light) .processIntro > p:last-child,
+  :global(.seo-page.landing-light) .processSection .processCard p {
+    color: #314a50 !important;
+  }
+
+  .processGrid .processCard {
+    border-color: #d8e6df;
+    background: #ffffff;
+  }
+
+  .processGrid .processCard .processCardTop,
+  .processGrid .processCard .processOutput svg {
+    color: #0f766e;
+  }
+
   .processCopy {
     height: auto;
-    min-height: 18rem;
+    min-height: 0;
+  }
+
+  :global(.seo-page.landing-light) .processSection .processCopy .processOutput {
+    margin-top: 1.25rem;
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    background: #e8f3ed;
+    color: #153d39 !important;
   }
 
   .audienceCard:first-child .audienceCopy {

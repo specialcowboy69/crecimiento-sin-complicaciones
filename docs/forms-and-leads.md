@@ -59,9 +59,9 @@ If a new funnel genuinely needs a new `formType`, document it here before implem
 
 | Component | Primary Use | `formType` | Notes |
 | --- | --- | --- | --- |
-| `LeadForm` | Home `/` and generic commercial pages | `Auditoría gratuita` | Configurable `sourcePage`, `interestedService`, copy and anchor id. Defaults to `sourcePage: "Home"`. |
+| `LeadForm` | Home `/` and generic commercial pages | `Auditoría gratuita` | Configurable `sourcePage`, `interestedService`, copy and anchor id. Defaults to `sourcePage: "Home"`. The required field `Sitio web o nombre de la empresa` accepts either a website or a company name and uses the existing `company` payload field. |
 | `LocalSeoAuditForm` | `/seo/local` | `Auditoría gratuita` | SEO-local specific form. Requires name, mobile and business; accepts optional email, web, Google profile or social link. |
-| `SeoAuditForm` | `/seo`, `/seo-para-pymes`, `/seo/{city}` | `Auditoría gratuita` | SEO-specific goals and `defaultService`. |
+| `SeoAuditForm` | `/seo`, `/seo-para-pymes`, `/seo/{city}` | `Auditoría gratuita` | No goal selector. `interestedService` always comes from `defaultService`. |
 | `WebProjectForm` | Web design money/cluster pages | `Auditoría gratuita` | Service interest comes from selected site type. |
 | `SocialMediaForm` | Social media management page | `Auditoría gratuita` | Service interest comes from selected network/focus. |
 | `AiDiagnosticForm` | IA/automation page | `Auditoría gratuita` | Service interest is automation with IA. |
@@ -177,3 +177,7 @@ Before closing form changes:
 - Mobile fields do not overflow.
 - `npm run lint` passes.
 - Run `npm run build` when changing API routes, shared submit logic or form components used across multiple pages.
+
+## Website and profile inputs
+
+All six active forms offer a place to identify the business online. `LeadForm` accepts a website or business name in one text field (not URL-only); `SeoAuditForm` keeps its website field and optional company; `LocalSeoAuditForm` accepts an optional website, Google profile or social link. `WebProjectForm` and `AiDiagnosticForm` accept a company or website, and `SocialMediaForm` accepts a profile or website. Do not duplicate these fields. Removing the SEO goal selector does not change source labels, consent, analytics, validation of mobile/email or the lead pipeline.

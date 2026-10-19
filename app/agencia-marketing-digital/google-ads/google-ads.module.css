@@ -2,8 +2,7 @@
   position: relative;
   isolation: isolate;
   display: flex;
-  min-height: min(690px, calc(100svh - 72px));
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   background: #142638;
 }
@@ -26,7 +25,7 @@
   position: relative;
   width: min(100% - 2rem, 80rem);
   margin: 0 auto;
-  padding: 2.25rem 0 3rem;
+  padding: 1.5rem 0 3rem;
 }
 
 .heroBreadcrumbs {
@@ -47,7 +46,7 @@
 }
 
 :global(.landing-light) .heroEyebrow {
-  margin: 2.6rem 0 0.85rem;
+  margin: 1.5rem 0 0.85rem;
   color: #74e1d0 !important;
   font-size: 0.8rem;
   font-weight: 850;
@@ -440,8 +439,9 @@
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 30rem;
-  aspect-ratio: 4 / 5;
+  min-height: 20rem;
+  max-height: 27rem;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: 36% center;
 }
@@ -459,43 +459,20 @@
   line-height: 1.7;
 }
 
-.audienceList {
-  margin: 2rem 0 0;
-  padding: 0;
-  border-top: 1px solid #d7e2ed;
-  list-style: none;
-}
-
-.audienceList li {
+.audiencePanels {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid #d7e2ed;
 }
-
-.audienceList li > span {
-  padding-top: 0.18rem;
-  color: #0b6c66;
-  font-size: 0.9rem;
-  font-weight: 900;
-  font-variant-numeric: tabular-nums;
-}
-
-.audienceList li h3 {
-  margin: 0;
-  color: #17233a !important;
-  font-size: 1.2rem;
-  font-weight: 850;
-  line-height: 1.35;
-}
-
-.audienceList li p {
-  margin: 0.5rem 0 0;
-  color: #40536b !important;
-  font-size: 1.0625rem;
-  line-height: 1.65;
-}
+.audiencePanels article { padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: 8px; background: #eef5fb; }
+.audiencePanels article:nth-child(2), .audiencePanels article:nth-child(3) { background: #255cdd; }
+:global(.landing-light) .audiencePanels h3 { margin: 0; max-width: 24ch; color: #14283b !important; font-size: clamp(1.4rem, 2.3vw, 1.8rem); line-height: 1.25; font-weight: 850; }
+:global(.landing-light) .audiencePanels p { margin: 1rem 0 0; color: #40536b !important; font-size: 1.125rem; line-height: 1.7; }
+:global(.landing-light) .audiencePanels article:nth-child(2) h3,
+:global(.landing-light) .audiencePanels article:nth-child(3) h3 { color: #fff !important; }
+:global(.landing-light) .audiencePanels article:nth-child(2) p,
+:global(.landing-light) .audiencePanels article:nth-child(3) p { color: #eef5ff !important; }
 
 @media (min-width: 640px) {
   .problemSignals {
@@ -557,8 +534,8 @@
   }
 
   .hero {
-    min-height: min(640px, calc(100svh - 112px));
-    align-items: flex-end;
+    min-height: 0;
+    align-items: flex-start;
   }
 
   .hero::after {
@@ -574,7 +551,7 @@
   }
 
   :global(.landing-light) .heroEyebrow {
-    margin-top: 1.7rem;
+    margin-top: 1.25rem;
   }
 
   :global(.landing-light) .heroTitle {
@@ -637,9 +614,13 @@
     object-position: 42% center;
   }
 
-  .audienceList li {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-  }
+  .audiencePanels { grid-template-columns: minmax(0, 1fr); }
+  .audiencePanels article:nth-child(3) { background: #eef5fb; }
+  .audiencePanels article:nth-child(4) { background: #255cdd; }
+  :global(.landing-light) .audiencePanels article:nth-child(3) h3 { color: #14283b !important; }
+  :global(.landing-light) .audiencePanels article:nth-child(3) p { color: #40536b !important; }
+  :global(.landing-light) .audiencePanels article:nth-child(4) h3 { color: #fff !important; }
+  :global(.landing-light) .audiencePanels article:nth-child(4) p { color: #eef5ff !important; }
 }
 
 @media (max-width: 420px) {

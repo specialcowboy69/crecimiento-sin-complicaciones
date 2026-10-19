@@ -163,9 +163,8 @@ export default function SeoForPymesPage() {
               <p className={styles.eyebrow}>Para pequeñas empresas</p><h1 id="hero-title">SEO para pymes.<br /><span>Haz que encuentren lo que haces.</span></h1>
               <p className={styles.lead}>Tu próximo cliente puede estar buscando en Google. Te ayudamos a preparar tu web para que descubra tu negocio y pueda contactar.</p>
               <a className={styles.primary} href="#auditoria-pymes">Solicitar auditoría SEO gratuita</a>
-              <p className={styles.heroFoot}>Empezamos por revisar tu web y explicarte qué conviene mejorar.</p>
             </div>
-            <div className={styles.heroVisual}><Image src="/images/home-service-seo.webp" alt="Revisión de búsquedas y estructura de páginas sobre una mesa de trabajo" fill sizes="(max-width: 767px) 100vw, 50vw" preload /><div className={styles.visualNote}><Check aria-hidden="true" size={20} /><span>Un plan que tenga sentido para tu negocio.</span></div></div>
+            <Image className={styles.heroImage} src="/images/home-service-seo.webp" alt="" fill sizes="100vw" preload />
           </div></section>
 
           <section className={styles.situations} aria-labelledby="situations-title"><div className={styles.container}>
@@ -176,19 +175,19 @@ export default function SeoForPymesPage() {
           <section id="incluye" className={styles.includes} aria-labelledby="includes-title"><div className={styles.container}>
             <div className={styles.sectionHead}><div><p className={styles.eyebrow}>Qué hacemos en tu web</p><h2 id="includes-title">Mejoras que puedes entender.</h2></div><p>El trabajo se concreta según lo que encontremos. Estos ejemplos muestran cómo abordamos necesidades habituales de una pyme.</p></div>
             <div className={styles.exampleGrid}>
-              <div className={styles.examplePhoto}><Image src="/images/home-growth-collaboration.webp" alt="Dos personas consultan un portátil y un cuaderno" fill sizes="(max-width: 767px) 100vw, 45vw" /><div><span>El negocio guía el trabajo</span><p>¿Qué necesita saber alguien antes de contratarte?</p></div></div>
+              <div className={styles.examplePhoto}><Image src="/images/home-growth-collaboration.webp" alt="Dos personas consultan un portátil y un cuaderno" fill sizes="(max-width: 767px) 100vw, 45vw" /></div>
               {examples.map(item => <article className={styles.example} key={item.number}><span className={styles.index}>{item.number}</span><h3>{item.title}</h3><p>{item.text}</p><p className={styles.exampleNote}>{item.example}</p></article>)}
             </div>
           </div></section>
 
           <section id="metodo" className={styles.method} aria-labelledby="method-title"><div className={styles.container}>
-            <div className={styles.methodIntro}><p className={styles.eyebrow}>Cómo empezamos</p><h2 id="method-title">Decide con una propuesta sobre la mesa.</h2><p>Antes de contratar, necesitas saber qué vamos a hacer y por qué. La auditoría gratuita es el primer paso.</p><Link className={styles.textLink} href="/seo">Conoce nuestro servicio de agencia SEO <ArrowUpRight aria-hidden="true" size={19} /></Link></div>
+            <div className={styles.methodIntro}><p className={styles.eyebrow}>Cómo empezamos</p><h2 id="method-title">Decide con una propuesta sobre la mesa.</h2><p>Antes de contratar, necesitas saber qué vamos a hacer y por qué. La auditoría gratuita es el primer paso.</p></div>
             <ol className={styles.steps}><li><span>01</span><div><h3>Revisamos tu punto de partida</h3><p>Nos cuentas qué hace tu empresa y revisamos tu web para detectar las primeras oportunidades.</p><small>Recibes una revisión inicial gratuita.</small></div></li><li><span>02</span><div><h3>Acordamos qué abordar primero</h3><p>Te proponemos un alcance concreto según las necesidades de tu web y los recursos del proyecto.</p><small>Decides si la propuesta encaja contigo.</small></div></li><li><span>03</span><div><h3>Trabajamos y revisamos la evolución</h3><p>Tras aceptar la propuesta, aplicamos las mejoras acordadas y ajustamos las prioridades a lo que observamos.</p><small>Sabes qué se ha hecho y qué viene después.</small></div></li></ol>
           </div></section>
 
           <section id="seo-local" className={styles.local} aria-labelledby="local-title"><div className={styles.container}>
             <div><p className={styles.eyebrow}>El lugar también importa</p><h2 id="local-title">Si tus clientes están cerca, el SEO debe tenerlo en cuenta.</h2><p>Una empresa que atiende en una zona concreta necesita explicar dónde trabaja. El <Link href="/seo/local">SEO local</Link> conecta tu web con las búsquedas de esa zona y con tu Perfil de Empresa de Google.</p></div>
-            <div className={styles.cityPanel}><h3>El trabajo, según tu mercado</h3><p>Consulta el enfoque de SEO para empresas que atienden en estas ciudades:</p><div className={styles.cityLinks}>{cityLinks.map(city => <Link href={city.href} key={city.href}>{city.label}<ArrowUpRight aria-hidden="true" size={17} /></Link>)}</div></div>
+            <div className={styles.cityPanel}><h3>El trabajo, según tu mercado</h3><p>Consulta el enfoque de SEO para empresas que atienden en estas ciudades:</p><p>¿Tu ciudad no aparece aquí? También podemos trabajar contigo.</p><div className={styles.cityLinks}>{cityLinks.map(city => <Link href={city.href} key={city.href}>{city.label}<ArrowUpRight aria-hidden="true" size={17} /></Link>)}</div></div>
           </div></section>
 
           <section className={styles.decisions} aria-labelledby="decisions-title"><div className={styles.container}>

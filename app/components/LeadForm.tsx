@@ -43,7 +43,7 @@ function validate(values: FormState) {
   }
 
   if (values.company.trim().length < 2) {
-    errors.company = "Cuéntanos la empresa o proyecto que quieres hacer crecer.";
+    errors.company = "Indica tu sitio web o el nombre de tu empresa.";
   }
 
   return { ...errors, ...validateContactFields(values) };
@@ -170,7 +170,7 @@ export function LeadForm({
         </div>
 
         <div className="field full">
-          <label htmlFor="company">Empresa*</label>
+          <label htmlFor="company">Sitio web o nombre de la empresa*</label>
           <input
             id="company"
             name="company"
@@ -180,6 +180,7 @@ export function LeadForm({
             aria-invalid={Boolean(errors.company)}
             aria-required="true"
             aria-describedby={errors.company ? "company-error" : undefined}
+            placeholder="Ej.: tuempresa.es o el nombre de tu negocio"
             autoComplete="organization"
           />
           {errors.company ? <p id="company-error" className="error">{errors.company}</p> : null}

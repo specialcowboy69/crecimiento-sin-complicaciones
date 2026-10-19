@@ -7,15 +7,12 @@ import { LeadSuccess } from "./LeadSuccess";
 import { submitLead } from "./submitLead";
 import { validateContactFields } from "../lib/leadContact";
 
-type SeoGoal = "trafico" | "leads" | "tecnico" | "local" | "no-se";
-
 type FormState = {
   name: string;
   phone: string;
   email: string;
   company: string;
   website: string;
-  goal: "" | SeoGoal;
   context: string;
 };
 
@@ -33,7 +30,6 @@ const initialState: FormState = {
   email: "",
   company: "",
   website: "",
-  goal: "",
   context: "",
 };
 
@@ -85,7 +81,7 @@ export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO
         phone: values.phone,
         email: values.email,
         company: values.company,
-        interestedService: values.goal || defaultService,
+        interestedService: defaultService,
         message: [
           `Web a auditar: ${values.website}`,
           values.context ? `Contexto: ${values.context}` : "",
@@ -183,24 +179,6 @@ export function SeoAuditForm({ sourcePage = "Agencia SEO", defaultService = "SEO
           placeholder="https://..."
         />
         {errors.website ? <span className="text-sm font-semibold text-red-300" id="seo-website-error">{errors.website}</span> : null}
-      </label>
-
-      <label className="grid gap-2 text-sm font-bold text-slate-200 sm:col-span-2" htmlFor="seo-goal">
-        Qué quieres mejorar primero
-        <select
-          className="min-h-12 rounded-lg border border-slate-700 bg-slate-900 px-4 text-white focus-visible:ring-2 focus-visible:ring-blue-400"
-          id="seo-goal"
-          name="goal"
-          value={values.goal}
-          onChange={(event) => updateField("goal", event.target.value)}
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="leads">Más leads cualificados desde Google</option>
-          <option value="trafico">Más tráfico orgánico relevante</option>
-          <option value="tecnico">Revisar problemas de SEO técnico</option>
-          <option value="local">Trabajar SEO local por ciudad</option>
-          <option value="no-se">No lo sé todavía</option>
-        </select>
       </label>
 
       <label className="grid gap-2 text-sm font-bold text-slate-200 sm:col-span-2" htmlFor="seo-context">

@@ -76,7 +76,7 @@ async function fillAudit(form: Locator) {
   await form.getByLabel("Empresa", { exact: true }).fill("Empresa de prueba");
   await form.getByLabel("Web a auditar", { exact: true }).fill("https://example.com");
   await form.getByLabel("Contexto o problema principal", { exact: true }).fill("Prueba local de la auditoría por ciudad.");
-  await expect(form.locator("#seo-goal")).toHaveValue("");
+  await expect(form.locator("#seo-goal")).toHaveCount(0);
 }
 
 function localDestination(href: string, from: string, localOrigin: string) {

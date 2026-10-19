@@ -7,22 +7,15 @@
 .page :global(main) a:focus-visible { outline: 3px solid #2563eb; outline-offset: 5px; }
 .page :global(main) [id] { scroll-margin-top: 104px; }
 .container { width: min(1200px, calc(100% - 64px)); margin: auto; }
-.hero { max-width: 1360px; margin: auto; display: grid; grid-template-columns: 1.12fr 0.88fr; padding: 40px 48px 64px; gap: 54px; align-items: center; }
-.heroCopy { padding: 20px 0; }
 .breadcrumb { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: #526579; margin-bottom: 40px; }
 .page .eyebrow { color: #0f766e !important; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 15px; }
 .page .hero h1 { font-size: clamp(38px, 4.4vw, 62px); line-height: 1.08; font-weight: 850; }
-.hero h1 span { color: #0f766e; }
 .page .lead { font-size: 20px; max-width: 540px; margin: 24px 0 0; }
 .actions { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; margin-top: 30px; }
 .primary, .lightButton { display: inline-flex; justify-content: center; align-items: center; min-height: 52px; gap: 12px; border-radius: 7px; padding: 14px 22px; font-size: 15px; font-weight: 750; text-align: center; }
 .primary { background: #2563eb; color: #fff; }
 .primary:hover { background: #1d4ed8; }
 .secondary { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 750; padding-block: 14px; color: #16334b; }
-.heroPhoto { position: relative; min-height: 510px; border-radius: 8px; overflow: hidden; }
-.heroPhoto img { object-fit: cover; object-position: center 48%; }
-.photoNote { position: absolute; inset: auto 24px 24px; padding: 20px 24px; background: #fff; border-left: 4px solid #0f766e; border-radius: 4px; }
-.photoNote span { color: #0f766e; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .page .photoNote p { color: #102536 !important; font-size: 22px; line-height: 1.35; font-weight: 700; margin: 7px 0 0; }
 .needs { background: #edf5f5; padding: 76px 0; }
 .sectionHead { max-width: 710px; margin-bottom: 36px; }
@@ -74,8 +67,6 @@
 .audit :global(.contact-section) { background: transparent; }
 .audit :global(.contact-layout) { align-items: start; }
 @media (max-width: 1100px) {
-  .hero { gap: 32px; padding-inline: 32px; }
-  .heroPhoto { min-height: 480px; }
   .serviceGroup { grid-template-columns: .8fr 1.2fr; }
   .serviceImage { grid-row: span 2; min-height: 100%; }
   .groupIntro { padding: 0; }
@@ -84,17 +75,12 @@
 }
 @media (max-width: 767px) {
   .container { width: calc(100% - 40px); }
-  .hero { grid-template-columns: 1fr; padding: 24px 20px 36px; gap: 28px; }
-  .heroCopy { padding: 0; }
   .breadcrumb { margin-bottom: 24px; font-size: 12px; }
   .page .hero h1 { font-size: clamp(34px, 8.6vw, 48px); line-height: 1.12; }
   .page .lead { font-size: 18px; margin-top: 20px; }
   .actions { gap: 8px; margin-top: 24px; }
   .primary { width: 100%; padding-inline: 12px; }
   .secondary { justify-content: center; width: 100%; }
-  .heroPhoto { min-height: 300px; }
-  .heroPhoto img { object-position: center 43%; }
-  .photoNote { inset: auto 16px 16px; padding: 14px 17px; }
   .page .photoNote p { font-size: 19px; }
   .needs, .services, .method, .faq { padding: 54px 0; }
   .needGrid, .method > div, .faq > div { grid-template-columns: 1fr; gap: 20px; }
@@ -114,3 +100,20 @@
 }
 
 .page :global(form p.error) { color: #dc2626 !important; }
+
+.hero { position: relative; isolation: isolate; overflow: hidden; background: #102536; }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(8,26,40,.95), rgba(8,26,40,.85) 42%, rgba(8,26,40,.22)); }
+.heroImage { z-index: -2; object-fit: cover; object-position: center 25%; }
+.heroCopy { width: min(1200px, calc(100% - 64px)); margin: auto; padding: 28px 0 64px; }
+.page .hero h1 { max-width: 740px; color: #fff !important; }
+.page .hero h1 span { color: #a8eadb !important; }
+.page .hero .lead { max-width: 620px; color: #eef5fa !important; }
+.page .hero .eyebrow { color: #a8eadb !important; }
+.page .hero .breadcrumb, .page .hero .breadcrumb a, .page .hero .breadcrumb span { color: #e4eef5 !important; }
+.page .hero .secondary { color: #fff !important; }
+.page .hero a:focus-visible { outline-color: #a8eadb; }
+@media (max-width: 767px) {
+  .heroCopy { width: calc(100% - 40px); padding: 22px 0 36px; }
+  .hero::after { background: rgba(8,26,40,.84); }
+  .heroImage { object-position: 62% center; }
+}

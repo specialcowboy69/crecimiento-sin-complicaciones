@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   BarChart3,
-  Building2,
   CheckCircle2,
   FileText,
   MapPin,
@@ -414,7 +413,7 @@ export default function LocalSeoPage() {
             </div>
           </div>
 
-          <section className="border-y border-[#dbe3ef] bg-[#eef6ff] px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="situations-title">
+          <section className="border-y border-[#dbe3ef] bg-white px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="situations-title">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-2xl">
                 <p className="mb-3 text-sm font-black uppercase tracking-normal text-blue-400">Situaciones de compra</p>
@@ -422,16 +421,18 @@ export default function LocalSeoPage() {
                   ¿Qué está frenando tu visibilidad local?
                 </h2>
               </div>
-              <div className="mt-10 border-y border-[#cbd5e1]">
+              <div className={styles.situationGrid}>
                 {buyingSituations.map((item, index) => (
-                  <article className="grid gap-4 border-b border-[#cbd5e1] py-7 last:border-b-0 md:grid-cols-[3rem_3.5rem_minmax(0,1fr)] md:items-start" key={item.title}>
-                    <span className="font-mono text-sm font-black tabular-nums text-blue-600">0{index + 1}</span>
-                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white text-teal-700 shadow-sm ring-1 ring-[#dbe3ef]">
-                      <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
-                    </span>
+                  <article className={styles.situationCard} key={item.title}>
+                    <div className={styles.situationCardTop}>
+                      <span className={styles.situationNumber}>0{index + 1}</span>
+                      <span className={styles.situationIcon}>
+                        <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.8} />
+                      </span>
+                    </div>
                     <div className={styles.situationCopy}>
-                      <h3 className="text-xl font-black leading-tight text-slate-900">{item.title}</h3>
-                      <p className={`mt-3 max-w-3xl text-slate-600 ${styles.body}`}>{item.text}</p>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
                     </div>
                   </article>
                 ))}
@@ -667,16 +668,26 @@ export default function LocalSeoPage() {
                   La presencia local se apoya en varias piezas
                 </h2>
               </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/seo">
-                  <FileText className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">Agencia SEO</h3>
-                  <p className={`mt-3 text-slate-300 ${styles.body}`}>SEO nacional, técnico, arquitectura y contenidos para captar demanda desde Google.</p>
+              <div className={styles.relatedLinks}>
+                <Link href="/seo">
+                  <div><h3>Agencia SEO</h3><p>Para ampliar la captación orgánica a búsquedas de todo el país.</p></div>
+                  <span aria-hidden="true">↗</span>
                 </Link>
-                <Link className="rounded-lg bg-white/5 p-6 ring-1 ring-white/10 hover:bg-slate-900" href="/diseno-pagina-web-profesional">
-                  <Building2 className="h-7 w-7 text-blue-300" aria-hidden="true" strokeWidth={1.8} />
-                  <h3 className="!mt-7 text-xl font-black text-slate-900">Diseño web profesional</h3>
-                  <p className={`mt-3 text-slate-300 ${styles.body}`}>Si no tienes web, podemos crear las páginas de tus servicios y conectarlas con tu estrategia local.</p>
+                <Link href="/diseno-pagina-web-profesional">
+                  <div><h3>Diseño web profesional</h3><p>Si necesitas una web que explique tus servicios y las zonas donde trabajas.</p></div>
+                  <span aria-hidden="true">↗</span>
+                </Link>
+                <Link href="/diseno-landing-pages">
+                  <div><h3>Landing pages</h3><p>Para dar a cada campaña una página con una oferta clara y un contacto sencillo.</p></div>
+                  <span aria-hidden="true">↗</span>
+                </Link>
+                <Link href="/agencia-marketing-digital/google-ads">
+                  <div><h3>Google Ads</h3><p>Para anunciar tus servicios en las zonas que atiendes y complementar la captación orgánica.</p></div>
+                  <span aria-hidden="true">↗</span>
+                </Link>
+                <Link href="/soluciones-inteligencia-artificial-empresas">
+                  <div><h3>Automatizaciones con IA</h3><p>Para organizar las consultas que recibes y facilitar su seguimiento comercial.</p></div>
+                  <span aria-hidden="true">↗</span>
                 </Link>
               </div>
             </div>

@@ -21,7 +21,7 @@ test("Alicante Google Ads form sends the approved lead attribution", async ({ pa
   await page.getByLabel("Nombre*").fill("Empresa de prueba");
   await page.getByLabel("Móvil*").fill("604990651");
   await page.getByLabel("Email (opcional)").fill("equipo@example.com");
-  await page.getByLabel("Empresa*").fill("Proyecto Alicante");
+  await page.getByLabel("Sitio web o nombre de la empresa*").fill("Proyecto Alicante");
   await expect(
     page.locator("#auditoria-google-ads-alicante").getByRole("link", { name: /política de privacidad/i }),
   ).toBeVisible();
@@ -35,4 +35,19 @@ test("Alicante Google Ads form sends the approved lead attribution", async ({ pa
     interestedService: "Google Ads",
   });
   await expect(page.locator("#auditoria-google-ads-alicante form")).toHaveCount(0);
+});
+
+
+test("Alicante demand image decodes on mobile and desktop", async ({ page }) => {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/agencia-marketing-digital/google-ads/alicante");
+    const image = page.getByRole("img", { name: "Equipo de un negocio de Alicante revisando su captación digital" });
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+    const currentSrc = await image.evaluate((img: HTMLImageElement) => img.currentSrc);
+    const response = await page.request.get(currentSrc);
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toMatch(/^image\//);
+  }
 });
