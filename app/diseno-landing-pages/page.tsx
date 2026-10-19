@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID } from "../lib/structuredData";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -169,13 +170,10 @@ const faqs = [
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": `${pageUrl}#service`,
   name: "Diseño de landing pages",
   serviceType: "Diseño de landing pages para captar leads",
-  provider: {
-    "@type": "Organization",
-    name: "Crecimiento Sin Complicaciones",
-    url: SITE_URL,
-  },
+  provider: { "@id": ORGANIZATION_ID },
   areaServed: {
     "@type": "Country",
     name: "España",
@@ -233,15 +231,15 @@ export default function DisenoLandingPagesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
 
       <div className="landing-light min-h-screen bg-slate-950 text-slate-50">

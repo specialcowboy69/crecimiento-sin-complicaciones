@@ -1,7 +1,8 @@
 import { Mail, Phone } from "lucide-react";
 
-export const contactPhone = "+34604990651";
-export const contactEmail = "info@crecimientosincomplicaciones.com";
+import { contactPhone, contactEmail } from "../lib/contact";
+
+export { contactPhone, contactEmail } from "../lib/contact";
 
 export function ContactOptions({ dark = false }: { dark?: boolean }) {
   return (
