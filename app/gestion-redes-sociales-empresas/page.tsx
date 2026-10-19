@@ -18,7 +18,7 @@ import {
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { SocialMediaForm } from "../components/SocialMediaForm";
-import { breadcrumbJsonLd } from "../lib/structuredData";
+import { breadcrumbJsonLd, ORGANIZATION_ID } from "../lib/structuredData";
 
 const includes = [
   {
@@ -175,19 +175,20 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/gestion-redes-sociales-empresas#service",
+    url: "https://www.crecimientosincomplicaciones.com/gestion-redes-sociales-empresas",
     name: "Gestión de redes sociales para empresas",
     serviceType: ["SocialMediaManagement", "Creación de contenido", "Edición de vídeo"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Servicio de gestión de redes sociales, creación de contenido y edición de vídeo para empresas.",
-    makesOffer: plans.map((plan) => ({
+    offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
+      url: "https://www.crecimientosincomplicaciones.com/gestion-redes-sociales-empresas",
+      seller: { "@id": ORGANIZATION_ID },
+      itemOffered: { "@id": "https://www.crecimientosincomplicaciones.com/gestion-redes-sociales-empresas#service" },
       category: plan.subtitle,
       availability: "https://schema.org/InStock",
     })),

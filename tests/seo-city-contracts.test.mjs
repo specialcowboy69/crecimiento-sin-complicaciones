@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import ts from "typescript";
+import { freeAuditJsonLd, ORGANIZATION_ID } from "../app/lib/structuredData.ts";
 
 const slugs = ["madrid", "valencia", "barcelona", "sevilla", "malaga", "alicante"];
 const fixture = JSON.parse(
@@ -66,6 +67,7 @@ function evaluate(node, module, scope = Object.create(null), options = {}) {
 
   if (ts.isIdentifier(current)) {
     if (current.text === "undefined") return undefined;
+    if (current.text === "ORGANIZATION_ID") return ORGANIZATION_ID;
     if (Object.prototype.hasOwnProperty.call(scope, current.text)) return scope[current.text];
     const initializer = module.declarations.get(current.text);
     if (initializer) return evaluate(initializer, module, scope, options);
@@ -150,6 +152,10 @@ function evaluate(node, module, scope = Object.create(null), options = {}) {
     if (current.operatorToken.kind === ts.SyntaxKind.PlusToken) {
       return left + evaluate(current.right, module, scope, options);
     }
+  }
+
+  if (ts.isCallExpression(current) && ts.isIdentifier(current.expression) && current.expression.text === "freeAuditJsonLd") {
+    return freeAuditJsonLd(...current.arguments.map((argument) => evaluate(argument, module, scope, options)));
   }
 
   if (ts.isCallExpression(current) && ts.isPropertyAccessExpression(current.expression)) {

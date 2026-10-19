@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -158,26 +159,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/valencia#service",
+    url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/valencia",
     name: "Diseño web en Valencia para empresas",
     serviceType: ["Diseño web Valencia", "Diseño web para empresas en Valencia", "Páginas web Valencia"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Valencia",
     },
     description:
       "Diseño web para empresas de Valencia que necesitan una página clara, rápida y preparada para captar clientes con estrategia, SEO inicial, formularios y conversión.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría gratuita de diseño web para empresas de Valencia",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/valencia",
-    },
   },
+  freeAuditJsonLd("Auditoría gratuita de diseño web para empresas de Valencia", "/diseno-pagina-web-profesional/valencia"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LandingServicesMenu } from "../../components/LandingServicesMenu";
 import { Logo } from "../../components/Logo";
 import { PageLinksNav } from "../../components/PageLinksNav";
-import { breadcrumbJsonLd } from "../../lib/structuredData";
+import { breadcrumbJsonLd, ORGANIZATION_ID } from "../../lib/structuredData";
 
 const faqs = [
   {
@@ -50,28 +50,30 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades#service",
+    url: "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
     name: "SEO Técnico y Arquitectura de Contenidos por Entidades",
     serviceType: "Search Engine Optimization",
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Servicio de SEO técnico, arquitectura por entidades, silos transaccionales y clústeres editoriales para captar demanda orgánica con intención de compra.",
-    about: {
-      "@type": "Thing",
-      name: "Search Engine Optimization",
-      sameAs: "https://en.wikipedia.org/wiki/Search_engine_optimization",
-    },
-    sameAs: "https://en.wikipedia.org/wiki/Search_engine_optimization",
-    makesOffer: {
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades#audit",
+    name: "Auditoría de Arquitectura SEO",
+    url: "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades#auditoria-arquitectura",
+    provider: { "@id": ORGANIZATION_ID },
+    offers: {
       "@type": "Offer",
       name: "Auditoría de Arquitectura SEO",
       category: "SEO técnico",
       availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades",
+      url: "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades#auditoria-arquitectura",
+      seller: { "@id": ORGANIZATION_ID },
+      itemOffered: { "@id": "https://www.crecimientosincomplicaciones.com/agencia-marketing-digital/seo-tecnico-arquitectura-entidades#audit" },
     },
   },
   {

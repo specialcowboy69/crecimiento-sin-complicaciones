@@ -4,7 +4,7 @@ import { BarChart3, Search, TrendingUp, Zap } from "lucide-react";
 import { LandingServicesMenu } from "../components/LandingServicesMenu";
 import { Logo } from "../components/Logo";
 import { WebProjectForm } from "../components/WebProjectForm";
-import { breadcrumbJsonLd } from "../lib/structuredData";
+import { breadcrumbJsonLd, ORGANIZATION_ID } from "../lib/structuredData";
 
 const plans = [
   {
@@ -206,27 +206,19 @@ const faqs = [
 const jsonLd = [
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "Crecimiento sin complicaciones",
-    url: "https://www.crecimientosincomplicaciones.com",
-    areaServed: "ES",
-    description:
-      "Diseño de páginas web profesionales, rápidas y optimizadas para Google, orientadas a conseguir llamadas, mensajes y auditorías.",
-  },
-  {
-    "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional#service",
+    url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional",
     name: "Diseño de páginas web profesionales",
     serviceType: ["Diseño web", "Desarrollo web", "SEO On-Page"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
-    makesOffer: plans.map((plan) => ({
+    offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
+      url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional",
+      seller: { "@id": ORGANIZATION_ID },
+      itemOffered: { "@id": "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional#service" },
       category: plan.subtitle,
       availability: "https://schema.org/InStock",
     })),

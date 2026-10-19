@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import { BarChart3, Building2, CalendarDays, ClipboardList, Globe2, Home, Hotel, MapPin, Megaphone, Search, Target, Wrench } from "lucide-react";
 import { SeoCityLanding, type SeoCityContent } from "../_components/SeoCityLanding";
@@ -63,26 +64,19 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/seo/malaga#service",
+    url: "https://www.crecimientosincomplicaciones.com/seo/malaga",
     name: "Agencia SEO para empresas de Málaga",
     serviceType: ["SEO Málaga", "Consultoría SEO Málaga", "SEO local Málaga", "Posicionamiento web Málaga"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
       name: "Málaga",
     },
     description:
       "Servicios SEO para empresas de Málaga con auditoría SEO gratuita, SEO técnico, contenidos, arquitectura web y SEO local orientado a captar clientes.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita para empresas de Málaga",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo/malaga",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita para empresas de Málaga", "/seo/malaga"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

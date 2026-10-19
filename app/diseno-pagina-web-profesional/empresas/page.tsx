@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -165,23 +166,16 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/empresas#service",
+    url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/empresas",
     name: "Diseño web para empresas",
     serviceType: ["Diseño web empresas", "Diseño web para empresas", "Página web para empresas", "Web profesional para empresa"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Diseño web para empresas que necesitan una web clara, rápida y orientada a captar clientes con estrategia, estructura, SEO inicial y conversión.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría gratuita de diseño web para empresas",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/diseno-pagina-web-profesional/empresas",
-    },
   },
+  freeAuditJsonLd("Auditoría gratuita de diseño web para empresas", "/diseno-pagina-web-profesional/empresas"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
