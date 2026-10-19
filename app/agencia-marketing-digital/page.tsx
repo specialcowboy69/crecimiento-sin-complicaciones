@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../lib/structuredData";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -56,6 +57,8 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${baseUrl}/agencia-marketing-digital#service`,
+    url: `${baseUrl}/agencia-marketing-digital`,
     name: "Agencia de marketing digital para empresas",
     serviceType: [
       "Marketing digital",
@@ -66,11 +69,7 @@ const jsonLd = [
       "Conversion Rate Optimization",
       "Automatización con IA",
     ],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: baseUrl,
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Servicios de marketing digital para ayudar a las empresas a llegar a posibles clientes y facilitar el contacto.",
@@ -86,13 +85,8 @@ const jsonLd = [
         },
       })),
     },
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría gratuita de marketing digital",
-      availability: "https://schema.org/InStock",
-      url: `${baseUrl}/agencia-marketing-digital`,
-    },
   },
+  freeAuditJsonLd("Auditoría gratuita de marketing digital", "/agencia-marketing-digital"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

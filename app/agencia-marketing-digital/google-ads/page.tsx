@@ -1,3 +1,4 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../../lib/structuredData";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -152,6 +153,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${baseUrl}${pagePath}#service`,
     name: "Agencia Google Ads y SEM para empresas",
     serviceType: [
       "Agencia Google Ads",
@@ -160,22 +162,13 @@ const jsonLd = [
       "Publicidad en Google",
       "Agencia SEM",
     ],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: baseUrl,
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     url: `${baseUrl}${pagePath}`,
     description:
       "Agencia Google Ads y SEM para empresas que quieren captar leads, medir conversiones y controlar mejor el presupuesto.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría gratuita de Google Ads",
-      availability: "https://schema.org/InStock",
-      url: `${baseUrl}${pagePath}`,
-    },
   },
+  freeAuditJsonLd("Auditoría gratuita de Google Ads", "/agencia-marketing-digital/google-ads"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

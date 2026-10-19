@@ -1,3 +1,5 @@
+import { ORGANIZATION_ID, freeAuditJsonLd } from "../lib/structuredData";
+import { absoluteUrl } from "../lib/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -239,23 +241,16 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${absoluteUrl("/seo")}#service`,
+    url: absoluteUrl("/seo"),
     name: "Agencia SEO para empresas",
     serviceType: ["Search Engine Optimization", "Consultoría SEO", "SEO técnico", "SEO local"],
-    provider: {
-      "@type": "Organization",
-      name: "Crecimiento sin complicaciones",
-      url: "https://www.crecimientosincomplicaciones.com",
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "ES",
     description:
       "Agencia SEO para pymes y empresas con auditoría SEO, consultoría SEO, SEO técnico, arquitectura de contenidos y posicionamiento web orientado a leads.",
-    makesOffer: {
-      "@type": "Offer",
-      name: "Auditoría SEO gratuita",
-      availability: "https://schema.org/InStock",
-      url: "https://www.crecimientosincomplicaciones.com/seo",
-    },
   },
+  freeAuditJsonLd("Auditoría SEO gratuita", "/seo"),
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",

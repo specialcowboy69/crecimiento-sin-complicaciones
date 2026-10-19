@@ -1,3 +1,4 @@
+import { contactPhone, contactEmail } from "./contact";
 import { SITE_URL, absoluteUrl } from "./site";
 
 type BreadcrumbItem = {
@@ -15,6 +16,15 @@ export function organizationJsonLd() {
     "@id": ORGANIZATION_ID,
     name: "Crecimiento sin complicaciones",
     url: SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${SITE_URL}/#logo`,
+      url: absoluteUrl("/brand/logo.svg"),
+      width: 256,
+      height: 256,
+    },
+    telephone: contactPhone,
+    email: contactEmail,
     description:
       "Agencia de marketing digital para startups, pymes y negocios que combina SEO, diseño web, Google Ads, landing pages, redes sociales, analítica y automatizaciones con IA.",
     areaServed: {
@@ -66,5 +76,29 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
       name: item.name,
       item: absoluteUrl(item.path),
     })),
+  };
+}
+
+// The free audit is a separate service; it does not price the ongoing engagement.
+export function freeAuditJsonLd(name: string, path: string) {
+  const pageUrl = absoluteUrl(path);
+  const auditId = `${pageUrl}#audit`;
+
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "Service",
+    "@id": auditId,
+    name,
+    url: `${pageUrl}#audit-request`,
+    provider: { "@id": ORGANIZATION_ID },
+    offers: {
+      "@type": "Offer",
+      name,
+      price: 0,
+      priceCurrency: "EUR",
+      url: `${pageUrl}#audit-request`,
+      seller: { "@id": ORGANIZATION_ID },
+      itemOffered: { "@id": auditId },
+    },
   };
 }
