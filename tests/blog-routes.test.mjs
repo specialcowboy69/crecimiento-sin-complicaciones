@@ -41,6 +41,8 @@ test("blog home schema uses canonical entities and absolute post URLs", () => {
     "https://www.crecimientosincomplicaciones.com/blog/auditoria-seo",
   );
   assert.equal(schema["@graph"][1].publisher["@id"], "https://www.crecimientosincomplicaciones.com/#organization");
+  assert.equal(schema["@graph"][1].mainEntity["@id"], "https://www.crecimientosincomplicaciones.com/blog#articles");
+  assert.equal("blogPost" in schema["@graph"][1], false);
 });
 
 test("article schema omits an invented modified date and reuses the organization", () => {

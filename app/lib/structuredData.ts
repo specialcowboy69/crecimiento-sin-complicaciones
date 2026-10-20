@@ -23,6 +23,7 @@ export function organizationJsonLd() {
       width: 256,
       height: 256,
     },
+    image: absoluteUrl("/brand/logo.svg"),
     telephone: contactPhone,
     email: contactEmail,
     description:
