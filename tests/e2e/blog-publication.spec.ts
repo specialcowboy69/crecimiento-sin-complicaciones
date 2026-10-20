@@ -2,20 +2,33 @@ import { expect, test } from "@playwright/test";
 
 const articles = [
   {
+    slug: "como-actualizar-contenidos-seo-y-cuando-publicar-nuevo",
+    title: "Cómo actualizar contenidos SEO y cuándo publicar uno nuevo",
+    publishedAt: "2026-10-20",
+  },
+  {
+    slug: "seo-vs-aeo-busqueda-con-ia",
+    title: "SEO vs. AEO: qué cambia en la búsqueda con IA",
+    publishedAt: "2026-10-20",
+  },
+  {
     slug: "como-ampliar-tematica-web-sin-perder-foco-seo",
     title: "Cómo ampliar la temática de una web sin perder el foco SEO",
+    publishedAt: "2026-10-08",
   },
   {
     slug: "como-lanzar-una-web-nueva-sin-comprometer-seo",
     title: "Cómo lanzar una web nueva sin comprometer su SEO",
+    publishedAt: "2026-10-08",
   },
   {
     slug: "domain-rating-como-evaluar-backlinks",
     title: "Domain Rating: qué mide y cómo evaluar un backlink de verdad",
+    publishedAt: "2026-10-08",
   },
 ];
 
-test("blog and three articles are public, indexable, and display their covers", async ({ page }) => {
+test("blog and five articles are public, indexable, and display their covers", async ({ page }) => {
   const blog = await page.goto("/blog", { waitUntil: "domcontentloaded" });
   expect(blog?.status()).toBe(200);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -27,7 +40,7 @@ test("blog and three articles are public, indexable, and display their covers", 
     "https://www.crecimientosincomplicaciones.com/blog/feed.xml",
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index, follow/i);
-  expect(await page.locator('article h2 a[href^="/blog/"]').count()).toBeGreaterThanOrEqual(3);
+  await expect(page.locator('article h2 a[href^="/blog/"]')).toHaveCount(articles.length);
 
   for (const article of articles) {
     const response = await page.goto(`/blog/${article.slug}`, { waitUntil: "domcontentloaded" });
@@ -38,7 +51,7 @@ test("blog and three articles are public, indexable, and display their covers", 
       `https://www.crecimientosincomplicaciones.com/blog/${article.slug}`,
     );
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index, follow/i);
-    await expect(page.locator("article time").first()).toHaveAttribute("datetime", "2026-10-08");
+    await expect(page.locator("article time").first()).toHaveAttribute("datetime", article.publishedAt);
     const cover = page.locator("article img").first();
     await expect(cover).toBeVisible();
     await expect.poll(() => cover.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
@@ -76,7 +89,7 @@ test("SEO category is indexable and empty categories stay unpublished", async ({
     "https://www.crecimientosincomplicaciones.com/blog/categoria/seo",
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /index, follow/i);
-  await expect(page.locator('article h2 a[href^="/blog/"]')).toHaveCount(3);
+  await expect(page.locator('article h2 a[href^="/blog/"]')).toHaveCount(articles.length);
   await expect(page.getByRole("navigation", { name: "Categorías del blog" })
     .getByRole("link", { name: "Todos" })).toBeVisible();
 
@@ -112,7 +125,7 @@ test("navigation, sitemap and RSS expose only the published blog", async ({ page
   const feed = await request.get("/blog/feed.xml");
   expect(feed.status()).toBe(200);
   expect(feed.headers()["content-type"]).toContain("application/rss+xml");
-  expect((await feed.text()).match(/<item>/g)?.length ?? 0).toBeGreaterThanOrEqual(3);
+  expect((await feed.text()).match(/<item>/g)?.length ?? 0).toBeGreaterThanOrEqual(articles.length);
 });
 
 test("mobile blog header keeps the logo without a cramped audit CTA", async ({ page }) => {
