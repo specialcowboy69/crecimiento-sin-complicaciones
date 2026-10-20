@@ -35,9 +35,7 @@ export function blogHomeJsonLd(posts: BlogPost[]) {
         name: BLOG_NAME,
         inLanguage: "es-ES",
         publisher: { "@id": ORGANIZATION_ID },
-        blogPost: posts.map((post) => ({
-          "@id": `${absoluteUrl(`/blog/${post.slug}`)}#article`,
-        })),
+        mainEntity: { "@id": `${blogUrl}#articles` },
       },
       {
         "@type": "ItemList",
